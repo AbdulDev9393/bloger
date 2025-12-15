@@ -436,20 +436,7 @@
         margin-right: auto;
     }
 
-    /* Modal Styles */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-    }
-
+  
     .modal-content {
         background: white;
         border-radius: 12px;
@@ -604,11 +591,8 @@
     <div class="page-actions">
         <div class="filter-options">
             <button class="filter-btn active" data-filter="all">All (24)</button>
-            <button class="filter-btn" data-filter="published">Published (18)</button>
-            <button class="filter-btn" data-filter="draft">Drafts (4)</button>
-            <button class="filter-btn" data-filter="scheduled">Scheduled (2)</button>
         </div>
-        <button class="btn btn-primary" id="add-blog-btn">
+       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-blog-modal">
             <i class="fas fa-plus"></i> Add New Blog
         </button>
     </div>
@@ -653,501 +637,87 @@
         </div>
 
         <!-- Pagination -->
-        <div class="pagination">
-            <ul class="pagination-list">
-                <li class="page-item"><i class="fas fa-chevron-left"></i></li>
-                <li class="page-item active">1</li>
-                <li class="page-item">2</li>
-                <li class="page-item">3</li>
-                <li class="page-item">4</li>
-                <li class="page-item"><i class="fas fa-chevron-right"></i></li>
-            </ul>
-        </div>
+       
     </div>
 </div>
+
 
 <!-- Add Blog Modal -->
-<div class="modal" id="add-blog-modal">
+<div class="modal fade" id="add-blog-modal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl"> <!-- modal-xl for extra wide modal -->
     <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-plus"></i> Add New Blog Post</h3>
-            <button class="close-modal" id="close-add-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="add-blog-form">
-                <div class="form-group">
-                    <label for="blog-title">Blog Title</label>
-                    <input type="text" id="blog-title" class="form-control" placeholder="Enter blog title" required>
-                </div>
-                <div class="form-group">
-                    <label for="blog-category">Category</label>
-                    <select id="blog-category" class="form-control" required>
-                        <option value="">Select Category</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Lifestyle">Lifestyle</option>
-                        <option value="Business">Business</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Food">Food</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="blog-status">Status</label>
-                    <select id="blog-status" class="form-control" required>
-                        <option value="draft">Draft</option>
-                        <option value="published">Published</option>
-                        <option value="scheduled">Scheduled</option>
-                    </select>
-                </div>
-                <div class="form-group" id="schedule-date-group" style="display: none;">
-                    <label for="publish-date">Schedule Date & Time</label>
-                    <input type="datetime-local" id="publish-date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="blog-content">Short Description</label>
-                    <textarea id="blog-content" class="form-control" rows="4" placeholder="Enter a short description or excerpt" required></textarea>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" id="cancel-add-btn">Cancel</button>
-            <button class="btn btn-primary" id="save-blog-btn">Save Blog</button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="addBlogModalLabel"><i class="fas fa-plus"></i> Add New Blog Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<form id="add-blog-form" method="post" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data">
+@csrf
+    <div class="container-fluid">
+        <div class="row g-3">
+            <!-- Blog Title -->
+            <div class="col-md-6">
+                <label for="blog-title" class="form-label">Blog Title</label>
+                <input type="text" name="name" class="form-control" id="blog-title" placeholder="Enter blog title" required>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+                <label for="blog-category" class="form-label">Category</label>
+                <select class="form-select" name="category" id="blog-category" required>
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id }}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Status -->
+            <div class="col-md-6">
+                <label for="blog-status" class="form-label">Status</label>
+                <select class="form-select" name="Status" id="blog-status" required>
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="scheduled">Scheduled</option>
+                </select>
+            </div>
+
+            <!-- Short Description -->
+            <div class="col-md-12">
+                <label for="blog-content" class="form-label">Short Description</label>
+                <textarea class="form-control" name="Description" id="blog-content" rows="3" placeholder="Enter a short description" required></textarea>
+            </div>
+
+            <!-- Thumbnail Image -->
+            <div class="col-md-6">
+                <label class="form-label">Thumbnail Image</label>
+                <input type="file" name="Thumbnail_Image" class="form-control" id="blog-thumbnail" accept="image/*">
+            </div>
+
+            <!-- Banner Image -->
+            <div class="col-md-6">
+                <label class="form-label">Banner Image</label>
+                <input type="file" class="form-control" name="Banner_Image" id="blog-banner" accept="image/*">
+            </div>
         </div>
     </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Blog</button>
+    </div>
+</form>
+
+    </div>
+  </div>
 </div>
 
-<!-- Edit Blog Modal -->
-<div class="modal" id="edit-blog-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-edit"></i> Edit Blog Post</h3>
-            <button class="close-modal" id="close-edit-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="edit-blog-form">
-                <div class="form-group">
-                    <label for="edit-blog-title">Blog Title</label>
-                    <input type="text" id="edit-blog-title" class="form-control" value="The Future of Web Development" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit-blog-category">Category</label>
-                    <select id="edit-blog-category" class="form-control" required>
-                        <option value="Technology" selected>Technology</option>
-                        <option value="Lifestyle">Lifestyle</option>
-                        <option value="Business">Business</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Food">Food</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="edit-blog-status">Status</label>
-                    <select id="edit-blog-status" class="form-control" required>
-                        <option value="draft">Draft</option>
-                        <option value="published" selected>Published</option>
-                        <option value="scheduled">Scheduled</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="edit-blog-content">Content</label>
-                    <textarea id="edit-blog-content" class="form-control" rows="6" required>Web development is evolving rapidly with new frameworks and technologies emerging every day. In this post, we explore what the future holds for web developers.</textarea>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" id="cancel-edit-btn">Cancel</button>
-            <button class="btn btn-primary" id="update-blog-btn">Update Blog</button>
-        </div>
-    </div>
-</div>
 
 <script>
-    // Sample blog data
-    const blogs = [
-        {
-            id: 1,
-            title: "The Future of Web Development",
-            author: "John Doe",
-            category: "Technology",
-            date: "Oct 15, 2023",
-            status: "published",
-            views: 2847,
-            comments: 42
-        },
-        {
-            id: 2,
-            title: "10 Tips for Better Blogging",
-            author: "Jane Smith",
-            category: "Lifestyle",
-            date: "Oct 14, 2023",
-            status: "published",
-            views: 2145,
-            comments: 38
-        },
-        {
-            id: 3,
-            title: "Understanding JavaScript Closures",
-            author: "Mike Johnson",
-            category: "Technology",
-            date: "Oct 13, 2023",
-            status: "draft",
-            views: 0,
-            comments: 0
-        },
-        {
-            id: 4,
-            title: "SEO Best Practices for 2023",
-            author: "Sarah Williams",
-            category: "Business",
-            date: "Oct 12, 2023",
-            status: "published",
-            views: 1893,
-            comments: 29
-        },
-        {
-            id: 5,
-            title: "Interview with a Senior Developer",
-            author: "Robert Brown",
-            category: "Technology",
-            date: "Oct 10, 2023",
-            status: "draft",
-            views: 0,
-            comments: 0
-        },
-        {
-            id: 6,
-            title: "Travel Diaries: Exploring Japan",
-            author: "Emily Davis",
-            category: "Travel",
-            date: "Oct 8, 2023",
-            status: "published",
-            views: 1520,
-            comments: 18
-        },
-        {
-            id: 7,
-            title: "Healthy Breakfast Recipes",
-            author: "Lisa Miller",
-            category: "Food",
-            date: "Oct 5, 2023",
-            status: "published",
-            views: 1280,
-            comments: 24
-        },
-        {
-            id: 8,
-            title: "Starting Your Own Business",
-            author: "David Wilson",
-            category: "Business",
-            date: "Oct 20, 2023",
-            status: "scheduled",
-            views: 0,
-            comments: 0
-        }
-    ];
-
-    // DOM Elements
-    const blogsTableBody = document.getElementById('blogs-table-body');
-    const addBlogBtn = document.getElementById('add-blog-btn');
-    const addBlogModal = document.getElementById('add-blog-modal');
-    const editBlogModal = document.getElementById('edit-blog-modal');
-    const closeAddModal = document.getElementById('close-add-modal');
-    const closeEditModal = document.getElementById('close-edit-modal');
-    const cancelAddBtn = document.getElementById('cancel-add-btn');
-    const cancelEditBtn = document.getElementById('cancel-edit-btn');
-    const saveBlogBtn = document.getElementById('save-blog-btn');
-    const updateBlogBtn = document.getElementById('update-blog-btn');
-    const searchInput = document.getElementById('search-blogs');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const statusSelect = document.getElementById('blog-status');
-    const scheduleDateGroup = document.getElementById('schedule-date-group');
-    const selectAllHeader = document.getElementById('select-all-header');
-    const selectAll = document.getElementById('select-all');
-
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', function() {
-        renderBlogs(blogs);
-        setupEventListeners();
-    });
-
-    // Render blogs to the table
-    function renderBlogs(blogsToRender) {
-        blogsTableBody.innerHTML = '';
-        
-        if (blogsToRender.length === 0) {
-            blogsTableBody.innerHTML = `
-                <tr>
-                    <td colspan="7">
-                        <div class="empty-state">
-                            <i class="fas fa-newspaper"></i>
-                            <h3>No Blogs Found</h3>
-                            <p>No blog posts match your current filters. Try adjusting your search or filters.</p>
-                            <button class="btn btn-primary" id="add-blog-empty">
-                                <i class="fas fa-plus"></i> Add Your First Blog
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            document.getElementById('add-blog-empty').addEventListener('click', () => {
-                openAddBlogModal();
-            });
-            return;
-        }
-        
-        blogsToRender.forEach(blog => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>
-                    <div class="blog-item">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Blog thumbnail" class="blog-thumbnail">
-                        <div class="blog-info">
-                            <h4>${blog.title}</h4>
-                            <div class="blog-meta">
-                                <span><i class="far fa-eye"></i> ${blog.views}</span>
-                                <span><i class="far fa-comment"></i> ${blog.comments}</span>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>${blog.author}</td>
-                <td><span class="blog-category">${blog.category}</span></td>
-                <td>${blog.date}</td>
-                <td><span class="status-badge status-${blog.status}">${blog.status.charAt(0).toUpperCase() + blog.status.slice(1)}</span></td>
-                <td>
-                    <div class="blog-actions">
-                        <button class="action-btn edit-btn" data-id="${blog.id}"><i class="fas fa-edit"></i></button>
-                        <button class="action-btn view-btn" data-id="${blog.id}"><i class="fas fa-eye"></i></button>
-                        <button class="action-btn delete-btn" data-id="${blog.id}"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            `;
-            blogsTableBody.appendChild(row);
-        });
-        
-        // Add event listeners to action buttons
-        document.querySelectorAll('.edit-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const blogId = parseInt(this.getAttribute('data-id'));
-                openEditBlogModal(blogId);
-            });
-        });
-        
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const blogId = parseInt(this.getAttribute('data-id'));
-                alert(`Viewing blog with ID: ${blogId}`);
-            });
-        });
-        
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const blogId = parseInt(this.getAttribute('data-id'));
-                if (confirm('Are you sure you want to delete this blog post?')) {
-                    deleteBlog(blogId);
-                }
-            });
-        });
-        
-        // Add event listeners to checkboxes
-        document.querySelectorAll('.blog-select').forEach(checkbox => {
-            checkbox.addEventListener('change', updateSelectAllState);
-        });
-    }
-
-    // Set up event listeners
-    function setupEventListeners() {
-        // Add blog button
-        addBlogBtn.addEventListener('click', openAddBlogModal);
-        
-        // Close modal buttons
-        closeAddModal.addEventListener('click', closeAddBlogModal);
-        closeEditModal.addEventListener('click', closeEditBlogModal);
-        cancelAddBtn.addEventListener('click', closeAddBlogModal);
-        cancelEditBtn.addEventListener('click', closeEditBlogModal);
-        
-        // Save/Update blog buttons
-        saveBlogBtn.addEventListener('click', saveNewBlog);
-        updateBlogBtn.addEventListener('click', updateBlog);
-        
-        // Search functionality
-        searchInput.addEventListener('input', filterBlogs);
-        
-        // Filter buttons
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                filterBlogs();
-            });
-        });
-        
-        // Status select change
-        statusSelect.addEventListener('change', function() {
-            if (this.value === 'scheduled') {
-                scheduleDateGroup.style.display = 'block';
-            } else {
-                scheduleDateGroup.style.display = 'none';
-            }
-        });
-        
-        // Select all functionality
-        selectAllHeader.addEventListener('change', function() {
-            const isChecked = this.checked;
-            document.querySelectorAll('.blog-select').forEach(checkbox => {
-                checkbox.checked = isChecked;
-            });
-            selectAll.checked = isChecked;
-        });
-        
-        selectAll.addEventListener('change', function() {
-            const isChecked = this.checked;
-            document.querySelectorAll('.blog-select').forEach(checkbox => {
-                checkbox.checked = isChecked;
-            });
-            selectAllHeader.checked = isChecked;
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === addBlogModal) {
-                closeAddBlogModal();
-            }
-            if (event.target === editBlogModal) {
-                closeEditBlogModal();
-            }
-        });
-    }
-
-    // Filter blogs based on search and filter criteria
-    function filterBlogs() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
-        
-        const filteredBlogs = blogs.filter(blog => {
-            const matchesSearch = blog.title.toLowerCase().includes(searchTerm) || 
-                                 blog.author.toLowerCase().includes(searchTerm) ||
-                                 blog.category.toLowerCase().includes(searchTerm);
-            
-            const matchesFilter = activeFilter === 'all' || blog.status === activeFilter;
-            
-            return matchesSearch && matchesFilter;
-        });
-        
-        renderBlogs(filteredBlogs);
-    }
-
-    // Open add blog modal
-    function openAddBlogModal() {
-        addBlogModal.style.display = 'flex';
-        document.getElementById('blog-title').focus();
-    }
-
-    // Close add blog modal
-    function closeAddBlogModal() {
-        addBlogModal.style.display = 'none';
-        document.getElementById('add-blog-form').reset();
-        scheduleDateGroup.style.display = 'none';
-    }
-
-    // Open edit blog modal
-    function openEditBlogModal(blogId) {
-        const blog = blogs.find(b => b.id === blogId);
-        if (blog) {
-            document.getElementById('edit-blog-title').value = blog.title;
-            document.getElementById('edit-blog-category').value = blog.category;
-            document.getElementById('edit-blog-status').value = blog.status;
-            editBlogModal.style.display = 'flex';
-        }
-    }
-
-    // Close edit blog modal
-    function closeEditBlogModal() {
-        editBlogModal.style.display = 'none';
-    }
-
-    // Save new blog
-    function saveNewBlog() {
-        const title = document.getElementById('blog-title').value;
-        const category = document.getElementById('blog-category').value;
-        const status = document.getElementById('blog-status').value;
-        const content = document.getElementById('blog-content').value;
-        
-        if (!title || !category || !content) {
-            alert('Please fill in all required fields');
-            return;
-        }
-        
-        // Create new blog object
-        const newBlog = {
-            id: blogs.length + 1,
-            title: title,
-            author: "Admin User",
-            category: category,
-            date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-            status: status,
-            views: 0,
-            comments: 0
-        };
-        
-        // Add to blogs array
-        blogs.unshift(newBlog);
-        
-        // Re-render table
-        filterBlogs();
-        
-        // Close modal and show success message
-        closeAddBlogModal();
-        alert('Blog post saved successfully!');
-    }
-
-    // Update blog
-    function updateBlog() {
-        const title = document.getElementById('edit-blog-title').value;
-        const category = document.getElementById('edit-blog-category').value;
-        const status = document.getElementById('edit-blog-status').value;
-        const content = document.getElementById('edit-blog-content').value;
-        
-        if (!title || !category || !content) {
-            alert('Please fill in all required fields');
-            return;
-        }
-        
-        // In a real app, you would update the blog in your database
-        // For this demo, we'll just show an alert
-        closeEditBlogModal();
-        alert('Blog post updated successfully!');
-    }
-
-    // Delete blog
-    function deleteBlog(blogId) {
-        // Find index of blog to delete
-        const index = blogs.findIndex(blog => blog.id === blogId);
-        
-        if (index !== -1) {
-            // Remove from array
-            blogs.splice(index, 1);
-            
-            // Re-render table
-            filterBlogs();
-            
-            // Show success message
-            alert('Blog post deleted successfully!');
-        }
-    }
-
-    // Update select all state
-    function updateSelectAllState() {
-        const checkboxes = document.querySelectorAll('.blog-select');
-        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-        const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        
-        selectAllHeader.checked = allChecked;
-        selectAll.checked = allChecked;
-        
-        // Update bulk actions UI if needed
-        if (anyChecked) {
-            // Enable bulk actions
-        }
-    }
+document.getElementById('blog-status').addEventListener('change', function() {
+    document.getElementById('schedule-date-group').style.display = this.value === 'scheduled' ? 'block' : 'none';
+});
 </script>
+
 
 @endsection
