@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>daliyblogs</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 <link rel="icon" href="{{ asset('storage/sitelogo.png') }}" type="image/x-icon">
 <style>
   * {
@@ -471,10 +474,10 @@ header .logo img:hover {
   <nav>
     <ul id="nav-links">
       <li><a href="{{route('frontend.index')}}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#"><i class="fa-solid fa-info-circle"></i> About</a></li>
-      <li><a href="#"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+      <li><a href="{{route('frontend.Aboute')}}"><i class="fa-solid fa-info-circle"></i> About</a></li>
+      <li><a href="{{route('frontend.Services')}}"><i class="fa-solid fa-briefcase"></i> Services</a></li>
       <li><a href="{{route('frontend.contect')}}"><i class="fa-solid fa-phone"></i> Contact</a></li>
-      <li><a href="#"><i class="fa-solid fa-blog"></i> Blog</a></li>
+      <li><a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-blog"></i> Blog</a></li>
     </ul>
   </nav>
 
@@ -506,10 +509,10 @@ header .logo img:hover {
   <div class="mobile-nav">
     <ul>
       <li><a href="{{route('frontend.index')}}" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#"><i class="fa-solid fa-info-circle"></i> About</a></li>
-      <li><a href="#"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+      <li><a href="{{route('frontend.Aboute')}}"><i class="fa-solid fa-info-circle"></i> About</a></li>
+      <li><a href="{{route('frontend.Services')}}"><i class="fa-solid fa-briefcase"></i> Services</a></li>
       <li><a href="{{route('frontend.contect')}}"><i class="fa-solid fa-phone"></i> Contact</a></li>
-      <li><a href="#"><i class="fa-solid fa-blog"></i> Blog</a></li>
+      <li><a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-blog"></i> Blog</a></li>
       <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
       <li><a href="#"><i class="fa-solid fa-question-circle"></i> Help</a></li>
     </ul>
