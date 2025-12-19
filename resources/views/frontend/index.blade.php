@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Str;
+@endphp
+
 @include('frontend.header')
 <section class="hero">
   <div class="hero-container">
@@ -6,12 +10,12 @@
       <h1>How to Boost Your Tech Skills in 2025</h1>
       <p>Learn the latest tricks, tips, and tutorials to improve your knowledge in laptops, mobiles, and other tech gadgets. Stay ahead with our daily blogs!</p>
       <p>Learn the latest tricks, tips, and tutorials to improve your knowledge in laptops, mobiles, and other tech gadgets. Stay ahead with our daily blogs!</p>
-      <a href="/blog/boost-tech-skills" class="btn-readmore">Read More</a>
+      <a href="{{route('admin.blogs.view',$latestBlog->id)}}" class="btn-readmore">Read More</a>
     </div>
 
     <!-- Right: Image -->
     <div class="hero-image">
-      <img src="{{ asset('storage/hero_section.png') }}" alt="Blog Featured Image">
+      <img src="{{ asset($latestBlog->Thumbnail_Image) }}" alt="Blog Featured Image">
     </div>
   </div>
 </section>
@@ -21,99 +25,21 @@
 
     <div class="blogs-grid">
       <!-- Blog Card -->
+      @foreach ($latestBlogs as $Blog)
       <div class="blog-card">
         <div class="blog-image">
-          <img src="{{ asset('storage/—Pngtree—spacex starship rocket launch_21118429.png') }}" alt="Blog">
+             <img src="{{ asset($Blog->Thumbnail_Image) }}" alt="Blog">
         </div>
         <div class="blog-content">
-          <span class="category">Tech</span>
-          <h3>Best Laptops in 2025</h3>
-          <p>Discover the top laptops with best performance and battery life.</p>
-          <a href="#" class="read-more">Read More →</a>
+          <span class="category">{{$Blog->Category->name}}</span>
+          <a href="{{route('admin.blogs.view',$Blog->id)}}"><h3>{{ Str::limit($Blog->name, 50) }}</h3></a>
+          <p>{{ Str::limit($Blog->Description, 100) }}</p>
+          <a href="{{route('admin.blogs.view',$Blog->id)}}" class="read-more">Read More →</a>
         </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/—Pngtree—spacex starship rocket launch_21118429.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Tech</span>
-          <h3>Best Laptops in 2025</h3>
-          <p>Discover the top laptops with best performance and battery life.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
+      </div>        
+      @endforeach
 
-      <!-- Blog Card -->
-      <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/WhatsApp_Image_2025-11-21_at_18.17.58-removebg-preview.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Mobile</span>
-          <h3>Top Mobile Phones</h3>
-          <p>Latest smartphones with powerful cameras and fast processors.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/WhatsApp_Image_2025-11-21_at_18.17.58-removebg-preview.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Mobile</span>
-          <h3>Top Mobile Phones</h3>
-          <p>Latest smartphones with powerful cameras and fast processors.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-            <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/WhatsApp_Image_2025-11-21_at_18.17.58-removebg-preview.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Mobile</span>
-          <h3>Top Mobile Phones</h3>
-          <p>Latest smartphones with powerful cameras and fast processors.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-            <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/WhatsApp_Image_2025-11-21_at_18.17.58-removebg-preview.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Mobile</span>
-          <h3>Top Mobile Phones</h3>
-          <p>Latest smartphones with powerful cameras and fast processors.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-            <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/WhatsApp_Image_2025-11-21_at_18.17.58-removebg-preview.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">Mobile</span>
-          <h3>Top Mobile Phones</h3>
-          <p>Latest smartphones with powerful cameras and fast processors.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-      
-      <!-- Blog Card -->
-      <div class="blog-card">
-        <div class="blog-image">
-          <img src="{{ asset('storage/—Pngtree—spacex starship rocket launch_21118429.png') }}" alt="Blog">
-        </div>
-        <div class="blog-content">
-          <span class="category">AI</span>
-          <h3>AI Trends in 2025</h3>
-          <p>How artificial intelligence is changing the tech world.</p>
-          <a href="#" class="read-more">Read More →</a>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </section>
 <section class="categories-section">
@@ -123,149 +49,22 @@
 
     <!-- Category: Entertainment -->
     <div class="category-block">
-      <h3 class="category-title">Entertainment</h3>
+     
       <div class="blogs-grid">
-        <!-- Blog Card 1 -->
+    @foreach ($blogs as $blog)
         <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 1">
-          <h4>Entertainment Blog 1</h4>
-          <p>This is a short description of the blog post. Keep it catchy and interesting!</p>
-          <a href="#" class="read-more">Read More</a>
+            <img src="{{ asset($blog->Thumbnail_Image) }}" alt="Blog">
+            
+           <a href="{{route('admin.blogs.view',$blog->id)}}"> <h4>{{ Str::limit($blog->name, 50) }}</h4></a> <!-- limits title to 50 chars -->
+            <p>{{ Str::limit($blog->Description, 100) }}</p> <!-- limits description to 100 chars -->
+            
+            <a href="{{route('admin.blogs.view',$blog->id)}}" class="read-more">Read More →</a>
         </div>
-
-        <!-- Blog Card 2 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 2">
-          <h4>Entertainment Blog 2</h4>
-          <p>Another short description to attract readers to click and read full blog.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 3 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 3">
-          <h4>Entertainment Blog 3</h4>
-          <p>Highlight the main point of your blog in a short, appealing description.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 4 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 4">
-          <h4>Entertainment Blog 4</h4>
-          <p>Give a teaser to the content to encourage clicks and engagement.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
+    @endforeach
+      
       </div>
     </div>
-    <div class="category-block">
-      <h3 class="category-title">Tech</h3>
-      <div class="blogs-grid">
-        <!-- Blog Card 1 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 1">
-          <h4>Entertainment Blog 1</h4>
-          <p>This is a short description of the blog post. Keep it catchy and interesting!</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 2 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 2">
-          <h4>Entertainment Blog 2</h4>
-          <p>Another short description to attract readers to click and read full blog.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 3 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 3">
-          <h4>Entertainment Blog 3</h4>
-          <p>Highlight the main point of your blog in a short, appealing description.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 4 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 4">
-          <h4>Entertainment Blog 4</h4>
-          <p>Give a teaser to the content to encourage clicks and engagement.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-    </div>
-    <div class="category-block">
-      <h3 class="category-title">Digital Culture</h3>
-      <div class="blogs-grid">
-        <!-- Blog Card 1 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 1">
-          <h4>Entertainment Blog 1</h4>
-          <p>This is a short description of the blog post. Keep it catchy and interesting!</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 2 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 2">
-          <h4>Entertainment Blog 2</h4>
-          <p>Another short description to attract readers to click and read full blog.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 3 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 3">
-          <h4>Entertainment Blog 3</h4>
-          <p>Highlight the main point of your blog in a short, appealing description.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 4 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 4">
-          <h4>Entertainment Blog 4</h4>
-          <p>Give a teaser to the content to encourage clicks and engagement.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-    </div>
-    <div class="category-block">
-      <h3 class="category-title">SCIENCE</h3>
-      <div class="blogs-grid">
-        <!-- Blog Card 1 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 1">
-          <h4>Entertainment Blog 1</h4>
-          <p>This is a short description of the blog post. Keep it catchy and interesting!</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 2 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 2">
-          <h4>Entertainment Blog 2</h4>
-          <p>Another short description to attract readers to click and read full blog.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 3 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 3">
-          <h4>Entertainment Blog 3</h4>
-          <p>Highlight the main point of your blog in a short, appealing description.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-
-        <!-- Blog Card 4 -->
-        <div class="blog-card">
-          <img src="{{ asset('storage/sitelogo.png') }}" alt="Entertainment Blog 4">
-          <h4>Entertainment Blog 4</h4>
-          <p>Give a teaser to the content to encourage clicks and engagement.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-    </div>
+   
   </div>
 </section>
 <!-- Daily Blog Reviews Section with Images -->

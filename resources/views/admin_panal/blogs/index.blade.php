@@ -582,6 +582,14 @@
             font-size: 14px;
         }
     }
+      .modal{
+      margin-left: 250px;
+      }
+    @media (min-width: 400px) {
+    #add-blog-modal .modal-dialog {
+        margin-left: 0px  !important;
+    }
+}
 </style>
 
 
@@ -589,8 +597,15 @@
 <div class="page-content">
     <!-- Page Actions -->
     <div class="page-actions">
+        <div class="user-info d-flex align-items-center gap-3">
+            <form action="{{ route('admin.blogs.search') }}" method="GET" class="search-box position-relative d-flex align-items-center gap-2">
+                <i class="fas fa-search position-absolute top-50 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" name="query" class="form-control ps-5" placeholder="Search blogs..." value="{{ request('query') }}">
+                <a href="{{ route('admin.blogs') }}" class="btn btn-secondary btn-sm">Reset</a>
+            </form>
+        </div>
         <div class="filter-options">
-            <button class="filter-btn active" data-filter="all">All (24)</button>
+            <button class="filter-btn active" data-filter="all">All ({{$allblogs}})</button>
         </div>
        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-blog-modal">
             <i class="fas fa-plus"></i> Add New Blog
@@ -602,19 +617,7 @@
         <div class="table-header">
             <h3>All Blog Posts</h3>
             <div class="table-actions">
-                <div class="bulk-actions">
-                    <div class="select-all">
-                        <input type="checkbox" id="select-all">
-                        <label for="select-all">Select All</label>
-                    </div>
-                    <select class="form-control" style="width: auto; padding: 8px 15px;">
-                        <option>Bulk Actions</option>
-                        <option>Publish</option>
-                        <option>Move to Draft</option>
-                        <option>Delete</option>
-                    </select>
-                    <button class="btn btn-primary" style="padding: 8px 15px;">Apply</button>
-                </div>
+               
             </div>
         </div>
         
@@ -630,20 +633,72 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="blogs-table-body">
-                    <!-- Blog rows will be populated here -->
-                </tbody>
-            </table>
+<tbody id="blogs-table-body">
+@foreach($blogs as $blog)
+<tr>
+    <!-- Thumbnail -->
+    <td>
+      <div class="blog-item">
+            @if($blog->Thumbnail_Image)
+                <img src="{{ asset( $blog->Thumbnail_Image) }}" alt="Thumbnail" class="blog-thumbnail">
+            @else
+                <img src="https://via.placeholder.com/60x50?text=No+Image" alt="No Image" class="blog-thumbnail">
+            @endif
+            <span>{{ $blog->name }}</span>
         </div>
 
-        <!-- Pagination -->
-       
+    </td>
+
+    <!-- Author -->
+    <td>{{ $blog->author ?? 'Admin' }}</td>
+
+    <!-- Category -->
+    <td>{{ $blog->Category?->name ?? 'N/A' }}</td>
+
+    <!-- Date -->
+    <td>{{ $blog->created_at->format('d M Y') }}</td>
+
+    <!-- Status -->
+    <td>{{ ucfirst($blog->Status) }}</td>
+
+   
+    <td>
+        <a href="{{route('admin.blogs.eid',$blog->id)}}" class="btn btn-sm btn-primary">Edit</a>
+        <form action="{{route('admin.blog.delete',$blog->id)}}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+@if($blog->seo)
+    <a href="{{ route('admin.blogs.seo', $blog->id) }}" class="btn btn-sm btn-warning">
+        <i class="fas fa-search"></i> Already SEO
+    </a>
+@else
+    <a href="{{ route('admin.blogs.seo', $blog->id) }}" class="btn btn-sm btn-warning">
+        <i class="fas fa-search"></i> SEO
+    </a>
+@endif
+
+
+        
+    </td>
+
+</tr>
+@endforeach
+</tbody>
+
+
+            </table>
+        </div>
+ <div class="pagination">
+       {{ $blogs->links('vendor.pagination.bootstrap-5') }}
+    </div>
     </div>
 </div>
 
 
 <!-- Add Blog Modal -->
-<div class="modal fade" id="add-blog-modal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-blog-modal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true" style="margin-left: 250px">
   <div class="modal-dialog modal-xl"> <!-- modal-xl for extra wide modal -->
     <div class="modal-content">
       <div class="modal-header">
@@ -651,8 +706,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-<form id="add-blog-form" method="post" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data">
-@csrf
+     <form id="add-blog-form" method="post" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data">
+      @csrf
     <div class="container-fluid">
         <div class="row g-3">
             <!-- Blog Title -->

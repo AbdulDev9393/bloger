@@ -33,7 +33,7 @@
           <p>Fill out the form below and we'll respond as soon as possible</p>
         </div>
         
-        <form action="" method="POST" class="contact-form" id="contactForm">
+        <form action="{{route('admin.Comments.store')}}" method="POST" class="contact-form" id="contactForm">
           @csrf
           
           <div class="form-group">
@@ -56,7 +56,7 @@
             <label for="subject">Subject</label>
             <div class="input-with-icon">
               <i class="fas fa-tag"></i>
-              <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+              <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
             </div>
           </div>
           
@@ -570,79 +570,5 @@ body {
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Character counter for message textarea
-  const messageTextarea = document.getElementById('message');
-  const charCount = document.getElementById('charCount');
-  
-  if (messageTextarea && charCount) {
-    messageTextarea.addEventListener('input', function() {
-      charCount.textContent = this.value.length;
-      
-      // Add warning if approaching limit
-      if (this.value.length > 450) {
-        charCount.style.color = '#e53e3e';
-      } else {
-        charCount.style.color = '';
-      }
-      
-      // Enforce max length
-      if (this.value.length > 500) {
-        this.value = this.value.substring(0, 500);
-        charCount.textContent = 500;
-      }
-    });
-    
-    // Initialize count
-    charCount.textContent = messageTextarea.value.length;
-  }
-  
-  // Form submission animation
-  const contactForm = document.getElementById('contactForm');
-  const submitBtn = document.querySelector('.submit-btn');
-  const btnText = document.querySelector('.btn-text');
-  
-  if (contactForm && submitBtn) {
-    contactForm.addEventListener('submit', function(e) {
-      // Prevent actual submission for demo
-      e.preventDefault();
-      
-      // Show loading state
-      btnText.textContent = 'Sending...';
-      submitBtn.disabled = true;
-      
-      // Simulate API call
-      setTimeout(() => {
-        // Show success message
-        btnText.textContent = 'Message Sent!';
-        submitBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-        
-        // Reset after 3 seconds
-        setTimeout(() => {
-          btnText.textContent = 'Send Message';
-          submitBtn.style.background = 'linear-gradient(135deg, #ff6b00, #ff4500)';
-          submitBtn.disabled = false;
-          contactForm.reset();
-          charCount.textContent = 0;
-        }, 3000);
-      }, 1500);
-    });
-  }
-  
-  // Add focus effects to form inputs
-  const formInputs = document.querySelectorAll('.input-with-icon input, .textarea-with-icon textarea');
-  
-  formInputs.forEach(input => {
-    input.addEventListener('focus', function() {
-      this.parentElement.querySelector('i').style.color = '#ff6b00';
-    });
-    
-    input.addEventListener('blur', function() {
-      this.parentElement.querySelector('i').style.color = '#6c757d';
-    });
-  });
-});
-</script>
-
+<
 @include('frontend.footer')

@@ -51,16 +51,18 @@
 
 .icon i{
     font-size:22px;
-    color:#fff;
+    color:#ff5500;
 }
 </style>
 
 <section class="search_system">
     <div class="search-box">
-        <input type="text" class="seach_engin" placeholder="Search here...">
-        <div class="icon">
-            <i class="fas fa-search"></i>
-        </div>
+        <form action="{{ route('frontend.search') }}" method="GET" style="display: flex; width: 100%;">
+            <input type="text" name="query" class="seach_engin" placeholder="Search here..." value="{{ request('query') }}">
+            <button type="submit" class="icon" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
     </div>
 </section>
 

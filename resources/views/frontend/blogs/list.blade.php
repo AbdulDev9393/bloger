@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Str;
+@endphp
+
 <style>
 .blog-section{
     width:100%;
@@ -78,57 +82,49 @@
 .read-more:hover{
     text-decoration:underline;
 }
+
+.blog-empty {
+    grid-column: 1 / -1; /* Span full width */
+    text-align: center;
+    padding: 60px 20px;
+    color: #555;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.blog-empty i {
+    font-size: 50px;
+    color: #ff5500;
+    margin-bottom: 15px;
+    display: block;
+}
 </style>
 <section class="blog-section">
     <div class="blog-container">
 
         <!-- Blog Card -->
-        <div class="blog-card">
-            <div class="blog-img">
-                <img src="{{ asset('storage/sitelogo.png') }}" alt="blog">
-            </div>
-            <div class="blog-content">
-                <h3>Laravel Search System</h3>
-                <p>Laravel me advanced search system kaise banayein with filters aur pagination.</p>
-
-                <div class="blog-footer">
-                    <span class="blog-date">12 Dec 2025</span>
-                    <a href="{{route('frontend.bogs-view')}}" class="read-more">Read More</a>
+        @forelse ($getBlogs as $blog)
+            <div class="blog-card">
+                <div class="blog-img">
+                    <img src="{{ asset($blog->Thumbnail_Image) }}" alt="blog">
                 </div>
-            </div>
-        </div>
+                <div class="blog-content">
+                    <h3>{{ Str::limit($blog->name, 50) }}</h3>
+                    <p>{{ Str::limit(strip_tags($blog->Description), 100) }}</p>
 
-        <!-- Blog Card -->
-        <div class="blog-card">
-            <div class="blog-img">
-                <img src="{{ asset('storage/sitelogo.png') }}" alt="blog">
-            </div>
-            <div class="blog-content">
-                <h3>SEO Friendly Blog Design</h3>
-                <p>SEO optimized blog layout jo Google ranking improve kare.</p>
-
-                <div class="blog-footer">
-                    <span class="blog-date">10 Dec 2025</span>
-                    <a href="{{route('frontend.bogs-view')}}" class="read-more">Read More</a>
+                    <div class="blog-footer">
+                        <!-- <span class="blog-date">{{ $blog->created_at->diffForHumans() }}</span> -->
+                        <a href="{{ route('admin.blogs.view', $blog->id) }}" class="read-more">Read More</a>
+                    </div>
                 </div>
+            </div>  
+        @empty
+             <div class="blog-empty">
+                <i class="fas fa-exclamation-circle"></i>
+                No blogs found.
             </div>
-        </div>
-
-        <!-- Blog Card -->
-        <div class="blog-card">
-            <div class="blog-img">
-                <img src="{{ asset('storage/sitelogo.png') }}" alt="blog">
-            </div>
-            <div class="blog-content">
-                <h3>AdSense Approval Tips</h3>
-                <p>AdSense approve karwane ke liye best practices aur common mistakes.</p>
-
-                <div class="blog-footer">
-                    <span class="blog-date">08 Dec 2025</span>
-                    <a href="{{route('frontend.bogs-view')}}" class="read-more">Read More</a>
-                </div>
-            </div>
-        </div>
+        @endforelse
 
     </div>
 </section>
+

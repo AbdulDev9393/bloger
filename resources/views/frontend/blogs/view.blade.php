@@ -93,47 +93,30 @@
 <section class="blog-detail">
     <div class="blog-detail-container">
 
-        <h1>Laravel Advanced Search System</h1>
+        <h1>{{$Blog_info->name}}</h1>
 
         <div class="blog-meta">
-            By Admin | 14 Dec 2025
+           {{$Blog_info->created_at}}
         </div>
 
         <!-- Main Image -->
         <div class="blog-main-img">
-            <img src="{{ asset('storage/sitelogo.png') }}" alt="blog">
+            <img src="{{ asset($Blog_info->Thumbnail_Image) }}" alt="blog">
         </div>
 
         <!-- Blog Content -->
         <div class="blog-content">
-            <p>
-                Laravel me advanced search system banana har developer ke liye bohat important hota hai.
-                Is article me hum step by step complete system explain karain ge.
-            </p>
-
-            <p>
-                Search system user experience ko improve karta hai aur website ki usability ko strong banata hai.
-            </p>
-
-            <h2>Why Search System is Important?</h2>
-
-            <p>
-                Acha search system users ko quickly content tak pohanchata hai aur bounce rate kam karta hai.
-            </p>
+         {!! $Blog_info->Description !!}
 
             <!-- Multiple Images -->
             <div class="blog-gallery">
-                <img src="{{ asset('storage/sitelogo.png') }}">
-                <img src="{{ asset('storage/sitelogo.png') }}">
-                <img src="{{ asset('storage/sitelogo.png') }}">
+                <img src="{{ asset($Blog_info->Thumbnail_Image) }}">
+                @if($Blog_info->Banner_mage)
+                <img src="{{ asset($Blog_info->Banner_mage) }}">
+                @endif
             </div>
 
-            <h2>Conclusion</h2>
-
-            <p>
-                Agar aap Laravel blog ya job portal bana rahe ho to advanced search system must hai.
-                Is se user engagement aur revenue dono increase hotay hain.
-            </p>
+         
         </div>
 
         <a href="{{route('frontend.blogs')}}" class="back-btn">← Back to Blogs</a>

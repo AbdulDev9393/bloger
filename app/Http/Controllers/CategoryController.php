@@ -8,7 +8,8 @@ class CategoryController extends Controller
 {
     //
     function index(){
-        $categories=Category::latest();
+        $categories = Category::latest()->get();
+      
         $totalCategories = Category::count();
         return view('admin_panal.Categories.index',compact('categories','totalCategories'));
     }

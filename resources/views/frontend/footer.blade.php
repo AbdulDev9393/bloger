@@ -432,11 +432,11 @@
         <div class="footer-section">
           <h3>Quick Links</h3>
           <div class="footer-links">
-            <a href="#"><i class="fa-solid fa-chevron-right"></i> Home</a>
-            <a href="#"><i class="fa-solid fa-chevron-right"></i> About Us</a>
-            <a href="#"><i class="fa-solid fa-chevron-right"></i> Services</a>
-            <a href="#"><i class="fa-solid fa-chevron-right"></i> Blog</a>
-            <a href="#"><i class="fa-solid fa-chevron-right"></i> Contact</a>
+            <a href="{{route('frontend.index')}}"><i class="fa-solid fa-chevron-right"></i> Home</a>
+            <a href="{{route('frontend.Aboute')}}"><i class="fa-solid fa-chevron-right"></i> About Us</a>
+            <a href="{{route('frontend.Services')}}"><i class="fa-solid fa-chevron-right"></i> Services</a>
+            <a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-chevron-right"></i> Blog</a>
+            <a href="{{route('frontend.contect')}}"><i class="fa-solid fa-chevron-right"></i> Contact</a>
           </div>
         </div>
 
@@ -446,20 +446,18 @@
           <div class="contact-info">
             <div class="contact-item">
               <i class="fa-solid fa-location-dot"></i>
-              <span>123 Blog Street, City, Country</span>
+              <span>Pakistan  , Layyah</span>
             </div>
             <div class="contact-item">
               <i class="fa-solid fa-phone"></i>
-              <span>+1 234 567 890</span>
+              <span><a href="tel:+923140699386">+92 314 0699386</a></span>
             </div>
             <div class="contact-item">
-              <i class="fa-solid fa-envelope"></i>
-              <span>info@daliyblogs.com</span>
+                <i class="fa-solid fa-envelope"></i>
+                <span><a href="mailto:abdulprofessionaldeveloper@gmail.com">abdulprofessionaldeveloper@gmail.com</a></span>
             </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-clock"></i>
-              <span>Mon - Fri: 9:00 - 18:00</span>
-            </div>
+
+           
           </div>
         </div>
 
@@ -469,9 +467,13 @@
           <div class="newsletter-form">
             <p>Subscribe to our newsletter to get updates on new blogs and special offers.</p>
             <div class="newsletter-input">
-              <input type="email" placeholder="Your email address" id="newsletterEmail">
-              <button type="button" id="subscribeBtn">Subscribe</button>
+              <form action="{{route('admin.emails.store')}}" method="POST">
+                @csrf
+              <input type="email" name="email" placeholder="Your email address" id="newsletterEmail">
+              <button type="submit">Subscribe</button>
+              </form>
             </div>
+
             <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
           </div>
         </div>
@@ -491,11 +493,7 @@
           <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
         
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
-        </div>
+    
       </div>
     </div>
   </footer>
@@ -526,49 +524,6 @@
     backToTopBtn.style.opacity = '0';
     backToTopBtn.style.visibility = 'hidden';
     
-    // Newsletter subscription
-    const subscribeBtn = document.getElementById('subscribeBtn');
-    const newsletterEmail = document.getElementById('newsletterEmail');
-    
-    subscribeBtn.addEventListener('click', () => {
-      const email = newsletterEmail.value.trim();
-      
-      if (!email) {
-        alert('Please enter your email address.');
-        newsletterEmail.focus();
-        return;
-      }
-      
-      if (!isValidEmail(email)) {
-        alert('Please enter a valid email address.');
-        newsletterEmail.focus();
-        return;
-      }
-      
-      // In a real application, you would send this to a server
-      alert(`Thank you for subscribing with: ${email}`);
-      newsletterEmail.value = '';
-      
-      // Visual feedback
-      subscribeBtn.innerHTML = '<i class="fa-solid fa-check"></i> Subscribed!';
-      subscribeBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-      
-      setTimeout(() => {
-        subscribeBtn.innerHTML = 'Subscribe';
-        subscribeBtn.style.background = 'linear-gradient(135deg, #ff7700, #ff5500)';
-      }, 2000);
-    });
-    
-    // Email validation
-    function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-    
-    // Make newsletter submit on Enter key
-    newsletterEmail.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        subscribeBtn.click();
-      }
-    });
+
+ 
   </script>

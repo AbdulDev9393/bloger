@@ -913,25 +913,7 @@
 
 
 
-    <!-- Page Actions -->
-    <div class="page-actions">
-        <div class="search-filter-section">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-subscribers" placeholder="Search by email, name, or location...">
-            </div>
-         
-        </div>
-        <div class="action-buttons">
-            <button class="btn btn-primary" id="send-email-btn">
-                <i class="fas fa-paper-plane"></i> Send Email
-            </button>
-            <button class="btn btn-success" id="add-subscriber-btn">
-                <i class="fas fa-plus"></i> Add Subscriber
-            </button>
-        </div>
-    </div>
-
+   
     <!-- Subscribers Table -->
     <div class="table-container">
         <div class="table-header">
@@ -947,19 +929,21 @@
         
         <div class="table-responsive">
             <table class="subscribers-table">
-                <thead>
+               <thead>
+                <tr>
+                      <th width="50%">#</th>
+                      <th width="50%">Email</th>
+                </tr>
+            </thead>
+            <tbody id="subscribers-table-body">
+                @foreach ($emails as $index => $email)
                     <tr>
-                        <th>Subscriber</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Source</th>
-                        <th>Join Date</th>
-                        <th>Actions</th>
+                        <td>{{ $index + 1 }}</td> <!-- Serial number -->
+                        <td>{{ $email->email }}</td>
                     </tr>
-                </thead>
-                <tbody id="subscribers-table-body">
-                    <!-- Subscriber rows will be populated here -->
-                </tbody>
+                @endforeach
+            </tbody>
+
             </table>
         </div>
 

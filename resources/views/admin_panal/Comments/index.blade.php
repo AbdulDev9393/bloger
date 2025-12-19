@@ -860,13 +860,7 @@
 <!-- Top Header -->
 <div class="top-header">
     <h1 class="page-title"><i class="fas fa-comments"></i> Comments & Messages</h1>
-    <div class="user-info">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Search comments and messages...">
-        </div>
-     
-    </div>
+    
 </div>
 
 <!-- Page Content -->
@@ -878,41 +872,16 @@
                 <i class="fas fa-comment-alt"></i>
             </div>
             <div class="stat-info">
-                <h3 id="total-comments">156</h3>
+                <h3 id="total-comments">{{$totalComents}}</h3>
                 <p>Total Comments</p>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-icon messages">
-                <i class="fas fa-envelope"></i>
-            </div>
-            <div class="stat-info">
-                <h3 id="total-messages">42</h3>
-                <p>Contact Messages</p>
-            </div>
-        </div>
+ 
       
       
     </div>
 
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <ul class="tabs-list">
-            <li class="tab-item active" data-tab="all">
-                <i class="fas fa-list"></i> All
-                <span class="tab-badge" id="all-count">198</span>
-            </li>
-            <li class="tab-item" data-tab="comments">
-                <i class="fas fa-comment"></i> Unread
-                <span class="tab-badge" id="comments-count">156</span>
-            </li>
-            <li class="tab-item" data-tab="messages">
-                <i class="fas fa-envelope"></i> readed
-                <span class="tab-badge" id="messages-count">42</span>
-            </li>
-           
-        </ul>
-    </div>
+  
 
     <!-- All Items Tab -->
     <div class="tab-content active" id="all-tab">
@@ -929,30 +898,28 @@
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="select-all-header"></th>
-                            <th>User / Message</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                           
+                            <th>User / email</th>
+                            <th>Message</th>
+                            <th>Date Time</th>
+                           
                         </tr>
                     </thead>
                     <tbody id="all-items-table">
-                        <!-- Example record -->
-                        <tr>
-                            <td><input type="checkbox" class="select-item"></td>
+                        @foreach ($getComents as $getComent)
+                            <tr>
+                      
                             <td>
-                                <strong>John Doe</strong><br>
-                                Hi, I need help with my account.
+                                <strong>{{$getComent->Name}}</strong><br>
+                               {{$getComent->Email}}
                             </td>
-                            <td>Support</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td>2025-12-15</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary">View</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
+                           <td>{{$getComent->Message}}</td>
+                            <td>{{ $getComent->created_at->format('d M Y, h:i A') }}</td>
+
+                           
                         </tr>
+                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>
@@ -964,158 +931,13 @@
         </div>
     </div>
 
-    <!-- Comments Tab -->
-    <div class="tab-content" id="comments-tab">
-        <div class="table-container">
-            <div class="table-header">
-                <h3>Blog Comments</h3>
-                <div class="table-actions">
-                    <div class="filter-options">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="approved">Approved</button>
-                        <button class="filter-btn" data-filter="pending">Pending</button>
-                        <button class="filter-btn" data-filter="spam">Spam</button>
-                    </div>
-                    <button class="btn btn-success btn-sm" id="approve-selected-btn">
-                        <i class="fas fa-check"></i> Approve Selected
-                    </button>
-                </div>
-            </div>
-            
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" id="select-comments-header"></th>
-                            <th>Comment</th>
-                            <th>Post</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="comments-table">
-                        <!-- Comments will be populated here -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="pagination">
-              
-            </div>
-        </div>
-    </div>
-
-  
+    
 
     <!-- Pending Tab -->
-    <div class="tab-content" id="pending-tab">
-        <div class="table-container">
-            <div class="table-header">
-                <h3>Pending Approval</h3>
-                <div class="table-actions">
-                    <div class="quick-actions">
-                        <button class="btn btn-success btn-sm" id="approve-all-pending">
-                            <i class="fas fa-check-double"></i> Approve All
-                        </button>
-                        <button class="btn btn-danger btn-sm" id="spam-all-pending">
-                            <i class="fas fa-ban"></i> Mark All as Spam
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" id="select-pending-header"></th>
-                            <th>Content</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="pending-table">
-                        <!-- Pending items will be populated here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
  
 </div>
 
-<!-- View Details Modal -->
-<div class="modal" id="view-details-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-eye"></i> Message Details</h3>
-            <button class="close-modal" id="close-details-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="message-details">
-                <div class="message-header-details">
-                    <h4 id="detail-subject">Contact Form Submission</h4>
-                    <div class="message-meta-details">
-                        <div><strong>From:</strong> <span id="detail-name">John Doe</span> (<span id="detail-email">john@example.com</span>)</div>
-                        <div><strong>Date:</strong> <span id="detail-date">October 18, 2023 - 2:30 PM</span></div>
-                        <div><strong>Type:</strong> <span class="type-badge type-contact" id="detail-type">Contact Message</span></div>
-                        <div><strong>Status:</strong> <span class="status-badge status-unread" id="detail-status">Unread</span></div>
-                    </div>
-                </div>
-                <div class="message-body">
-                    <p id="detail-message">Hello, I would like to inquire about your services. I'm interested in collaborating on a project and would like to know more about your pricing and availability. Please let me know when you have time for a call.</p>
-                </div>
-            </div>
-            
-            <div class="reply-section" id="reply-section">
-                <h4>Reply to Message</h4>
-                <div class="form-group">
-                    <label for="reply-subject">Subject</label>
-                    <input type="text" id="reply-subject" class="form-control" value="Re: Contact Form Submission">
-                </div>
-                <div class="form-group">
-                    <label for="reply-message">Your Response</label>
-                    <textarea id="reply-message" class="form-control" rows="6" placeholder="Type your response here..."></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" id="cancel-details-btn">Close</button>
-            <button class="btn btn-primary" id="send-reply-btn"><i class="fas fa-paper-plane"></i> Send Reply</button>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Reply Modal -->
-<div class="modal" id="quick-reply-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-reply"></i> Quick Reply</h3>
-            <button class="close-modal" id="close-reply-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="quick-reply-to">To</label>
-                <input type="text" id="quick-reply-to" class="form-control" value="john@example.com" readonly>
-            </div>
-            <div class="form-group">
-                <label for="quick-reply-subject">Subject</label>
-                <input type="text" id="quick-reply-subject" class="form-control" value="Re: Your Comment on Our Blog">
-            </div>
-            <div class="form-group">
-                <label for="quick-reply-message">Message</label>
-                <textarea id="quick-reply-message" class="form-control" rows="8" placeholder="Type your reply here...">Thank you for your comment on our blog post. We appreciate your feedback!</textarea>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" id="cancel-reply-btn">Cancel</button>
-            <button class="btn btn-primary" id="send-quick-reply-btn"><i class="fas fa-paper-plane"></i> Send Reply</button>
-        </div>
-    </div>
-</div>
 
 
 @endsection
