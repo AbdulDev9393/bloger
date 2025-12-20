@@ -15,10 +15,13 @@ use App\Http\Middleware\AdminAuth;
 
 //////////    login admin
 Route::get('/login',[AuthController::class,'login'])->name('frontend.login');
+Route::get('/error/{text}', [AuthController::class, 'error_message'])
+     ->name('frontend.error.message');
 Route::get('/Registar',[AuthController::class,'Registar'])->name('admin.Registar');
 Route::post('/Registar',[AuthController::class,'Registar_add'])->name('admin.Registar.store');
 Route::get('/admin/put/key',[AuthController::class,'verifyOtp'])->name('admin.otp.verify');
 Route::post('/admin/login/post',[AuthController::class,'login_post'])->name('admin.login.post');
+Route::post('/admin/login/passcode',[AuthController::class,'login_passcode'])->name('admin.login.passcode');
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout')->middleware(AdminAuth::class);
 
 
@@ -71,7 +74,7 @@ Route::get('/emailsS',[EmailsController::class,'index'])->name('admin.emails');
 Route::post('/emailsS_store',[EmailsController::class,'index_store'])->name('admin.emails.store');
 
 ///////////// dashboard ///////////////////
-Route::get('/admin_dashboar',[AdminController::class,'index'])->name('admin.dashboard');
+Route::get('/admin_dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 
 
 Route::get('/sitting',[SittingController::class,'index'])->name('admin.sitting');

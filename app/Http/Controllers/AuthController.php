@@ -79,7 +79,7 @@ public function verifyOtp(Request $request)
         'otp' => 'required|digits:6',
         'email' => 'required|email'
     ]);
-
+   
     $admin = Admin::where('email', $request->email)->first();
 
     if (!$admin) {
@@ -111,24 +111,38 @@ public function verifyOtp(Request $request)
 
 public function login_post(Request $request)
 {
-    // Validate input
-    $credentials = $request->validate([
+    $email = 'ahmadfullstackdeveloper@gmail.com';
+
+    if ($request->email !== $email) {
+        return back()->with('error', 'You are not admin Muhammad Abdul. Please enter the original email.');
+    }
+
+    $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    // Use Auth::attempt() to login
-    if (Auth::attempt($credentials)) {
-        // Regenerate session to prevent fixation
-        $request->session()->regenerate();
-
-        return redirect()->route('admin.dashboard')
-                         ->with('success', 'Welcome back, ' . Auth::user()->fname . '!');
+    $user = User::where('email', $request->email)->first();
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return back()->with('error', 'Invalid email or password.');
     }
 
-    // If login fails
-    return back()->with('error', 'Invalid email or password.');
+    // Generate OTP
+    $otp = rand(100000, 999999);
+
+    // Send OTP email
+    Mail::raw(
+        "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
+        function ($message) use ($email) {
+            $message->to($email)
+                    ->subject('Admin OTP Verification');
+        }
+    );
+
+    // Show OTP page and pass OTP as hidden input
+    return view('login_passcode', compact('otp','email'));
 }
+
   public function logout(Request $request)
     {
         // Session clear کریں
@@ -140,5 +154,33 @@ public function login_post(Request $request)
         // Redirect login page پر
         return redirect()->route('frontend.login')->with('success', 'You have logged out successfully.');
     }
+public function login_passcode(Request $request)
+{
+    
+   
+    
+    // OTP check
+    if ($request->otp !== $request->otp_privice) {
+         $text = 'Invalid Key';
+        return redirect()->route('frontend.error.message', compact('text'));
+    }
+   
+    // Find user by email
+    $user = User::where('email', $request->email)->first();
 
+        if (!$user) {
+            $text = 'Invalid User';
+        return redirect()->route('frontend.error.message', compact('text'));
+
+        }
+    // Login the user
+    Auth::login($user);
+
+    return redirect()->route('admin.dashboard')
+        ->with('success','Welcome Muhammad Abdul');
+}
+public function error_message($text)
+{
+    return view('error_page', compact('text'));
+}
 }
