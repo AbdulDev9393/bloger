@@ -283,7 +283,7 @@ public function blogView($id)
 
         $apiKey = $keys[array_rand($keys)];
 
-        dd($apiKey);
+       
         $client = OpenAI::client($key);
          
         // Prepare blog prompt
