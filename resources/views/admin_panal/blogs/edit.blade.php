@@ -53,10 +53,7 @@
             @method('PUT')
             
             <!-- Blog Title -->
-            <div class="form-group">
-                <label class="form-label" for="blog-title">Blog Title</label>
-                <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
-            </div>
+          
             <div class="form-group" style="display:flex; align-items:center; gap:10px;">
                 <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
                 <button type="button" id="generate-content" class="btn btn-primary">Auto Generate</button>
