@@ -285,11 +285,7 @@ public function blogView($id)
         
        
         $client = OpenAI::client($apiKey);
-          return response()->json([
-                'success' => false,
-                'message' => 'API did not return content',
-                'content' => $client
-            ]);
+        dd($client);
         // Prepare blog prompt
         $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
         if ($oldDescription && strlen($oldDescription) > 50) {
