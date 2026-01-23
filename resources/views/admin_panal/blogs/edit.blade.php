@@ -100,13 +100,10 @@
             <!-- Blog Title -->
           
             <div class="form-group" style="display:flex; align-items:center; gap:10px;">
-                <form action="{{route('admin.blogs.generate_content')}}" method="POST">
+              <input type="text" name="title" id="blog-title" value="{{ $blog->name }}">
+<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
+<button type="button" id="generate-content">Auto Generate</button>
 
-            
-                <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
-                <input type="hidden" name="old_description" value="{!! $blog->Description !!}" required>
-                <button type="submit"  class="btn btn-primary">Auto Generate</button>
-               </form>
             </div>
             <!-- Category -->
             <div class="form-group">
@@ -181,5 +178,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
    
 });
+
+document.getElementById('generate-content').addEventListener('click', function() {
+    const title = document.getElementById('blog-title').value;
+    const oldDesc = document.getElementById('old_description').value;
+
+    fetch('{{ route("admin.blogs.generate_content") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ title: title, old_description: oldDesc })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+});
+
 </script>
 @endsection
