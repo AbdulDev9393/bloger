@@ -165,7 +165,7 @@
     </div>
 </div>
 
-script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
 
