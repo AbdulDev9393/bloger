@@ -38,8 +38,19 @@
 .form-label { font-weight:500; margin-bottom:5px; display:block; }
 .form-control, .form-select { width:100%; padding:10px 15px; border:1px solid var(--border-color); border-radius:8px; }
 .form-control:focus, .form-select:focus { outline:none; border-color:var(--primary-color); box-shadow:0 0 0 3px rgba(78,115,223,0.1); }
-/* Auto Generate Button Styles */
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#blog-title {
+    flex: 1; /* title input expand kare puri available space */
+}
+
 #generate-content {
+    flex-shrink: 0; /* button shrink na ho */
+    margin-left: auto; /* push button to right */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
     color: white;
@@ -48,42 +59,20 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
 }
 
 #generate-content:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
 }
 
 #generate-content:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
 }
 
-#generate-content i {
-    font-size: 16px;
-}
-
-/* For the title input and button container */
-#blog-title {
-    flex: 1;
-    padding: 12px 15px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-#blog-title:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.1);
-}
 </style>
 
 <div class="main-content">
@@ -150,7 +139,7 @@
                     <img src="{{ asset($blog->Banner_mage) }}" alt="Banner" style="margin-top:10px; width:200px; height:auto;">
                 @endif
             </div>
-<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
+             <input type="hidden" id="old_description" value="{!! $blog->Description !!}">
             <!-- Resizeable Image -->
             <div class="form-group">
                 <label class="form-label">Resizeable Image</label>
@@ -163,16 +152,15 @@
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
         </form>
     </div>
-<div class="form-group">
+<div class="form-group" style="display:flex; align-items:center; gap:10px;">
+    <input type="text" name="title" id="blog-title" value="{{ $blog->name }}">
     <button type="button" id="generate-content" class="btn btn-primary">
         <i class="fas fa-robot"></i> Auto Generate
     </button>
 </div>
-
 </form>
       
 <script>
-
 
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
@@ -180,7 +168,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize CKEditor
     ClassicEditor
         .create(document.querySelector('#editor'))
-        .then(editor => { editorInstance = editor; })
+        .then(editor => { 
+            editorInstance = editor;
+
+            // Word count function
+            const wordCountEl = document.getElementById('word-count');
+
+            const updateWordCount = () => {
+                const text = editor.getData().replace(/<[^>]*>/g, '').trim(); // remove HTML tags
+                const words = text.length > 0 ? text.split(/\s+/).length : 0;
+                wordCountEl.textContent = 'Word Count: ' + words;
+            };
+
+            // Initial count
+            updateWordCount();
+
+            // Track changes
+            editor.model.document.on('change:data', updateWordCount);
+        })
         .catch(error => { console.error(error); });
 
     // Auto Generate button
@@ -210,7 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
             generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
 
             if (data.success) {
-                // Set content in CKEditor
                 editorInstance.setData(data.content);
                 alert("Content generated successfully!");
             } else {
@@ -225,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 </script>
 
 
