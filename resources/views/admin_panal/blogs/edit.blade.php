@@ -173,76 +173,76 @@
       
 <script>
 
-document.addEventListener('DOMContentLoaded', function () {
-    let editorInstance;
+// document.addEventListener('DOMContentLoaded', function () {
+//     let editorInstance;
 
-    // Initialize CKEditor
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => { 
-            editorInstance = editor;
+//     // Initialize CKEditor
+//     ClassicEditor
+//         .create(document.querySelector('#editor'))
+//         .then(editor => { 
+//             editorInstance = editor;
 
-            // Word count function
-            const wordCountEl = document.getElementById('word-count');
+//             // Word count function
+//             const wordCountEl = document.getElementById('word-count');
 
-            const updateWordCount = () => {
-                const text = editor.getData().replace(/<[^>]*>/g, '').trim();
-                const words = text.length > 0 ? text.split(/\s+/).length : 0;
-                wordCountEl.textContent = 'Word Count: ' + words;
-            };
+//             const updateWordCount = () => {
+//                 const text = editor.getData().replace(/<[^>]*>/g, '').trim();
+//                 const words = text.length > 0 ? text.split(/\s+/).length : 0;
+//                 wordCountEl.textContent = 'Word Count: ' + words;
+//             };
 
-            updateWordCount();
-            editor.model.document.on('change:data', updateWordCount);
+//             updateWordCount();
+//             editor.model.document.on('change:data', updateWordCount);
 
-            // Attach form submit AFTER editor is ready
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function() {
-                editorInstance.updateSourceElement(); // copy content to textarea
-            });
+//             // Attach form submit AFTER editor is ready
+//             const form = document.querySelector('form');
+//             form.addEventListener('submit', function() {
+//                 editorInstance.updateSourceElement(); // copy content to textarea
+//             });
 
-        })
-        .catch(error => { console.error(error); });
+//         })
+//         .catch(error => { console.error(error); });
 
-    // Auto Generate button
-    const generateBtn = document.getElementById('generate-content');
-    generateBtn.addEventListener('click', function () {
-        const title = document.getElementById('blog-title').value;
-        const oldDescription = document.getElementById('old_description').value;
+//     // Auto Generate button
+//     const generateBtn = document.getElementById('generate-content');
+//     generateBtn.addEventListener('click', function () {
+//         const title = document.getElementById('blog-title').value;
+//         const oldDescription = document.getElementById('old_description').value;
 
-        generateBtn.disabled = true;
-        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+//         generateBtn.disabled = true;
+//         generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
-        fetch("{{ route('admin.blogs.generate_content') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({
-                title: title,
-                old_description: oldDescription
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
+//         fetch("{{ route('admin.blogs.generate_content') }}", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "X-CSRF-TOKEN": "{{ csrf_token() }}"
+//             },
+//             body: JSON.stringify({
+//                 title: title,
+//                 old_description: oldDescription
+//             })
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             generateBtn.disabled = false;
+//             generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
 
-            if (data.success) {
-                editorInstance.setData(data.content);
-                alert("Content generated successfully!");
-            } else {
-                alert("Error: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
-            alert("Something went wrong!");
-        });
-    });
-});
+//             if (data.success) {
+//                 editorInstance.setData(data.content);
+//                 alert("Content generated successfully!");
+//             } else {
+//                 alert("Error: " + data.message);
+//             }
+//         })
+//         .catch(error => {
+//             console.error(error);
+//             generateBtn.disabled = false;
+//             generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
+//             alert("Something went wrong!");
+//         });
+//     });
+// });
 
 </script>
 
