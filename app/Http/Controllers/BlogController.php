@@ -20,7 +20,7 @@ function index() {
     $blogs = Blog::latest()->paginate(30);
       $allblogs=blog::count();
     $seo=BlogSeo::all();
-    dd($seo);
+   
     return view('admin_panal.blogs.index', compact('categories', 'blogs','allblogs'));
 }
 public function store(Request $request)
