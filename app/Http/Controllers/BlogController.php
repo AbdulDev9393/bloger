@@ -281,8 +281,9 @@ public function blogView($id)
             env('OPENAI_KEY5')
         ];
         $key = $keys[array_rand($keys)]; // Random key
+        dd($keys);
         $client = OpenAI::client($key);
-
+         
         // Prepare blog prompt
         $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
         if ($oldDescription && strlen($oldDescription) > 50) {
