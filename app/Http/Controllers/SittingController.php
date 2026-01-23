@@ -20,10 +20,6 @@ class SittingController extends Controller
     'medium'    => 'nullable|url',
     'youtube'   => 'nullable|url',
 ]);
-
-
-
-
         // agar sirf ek hi row rakhni ho
         $social = SocialMedia::first() ?? new SocialMedia();
 
