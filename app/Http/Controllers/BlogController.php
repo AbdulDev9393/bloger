@@ -262,86 +262,81 @@ public function blogView($id)
     $seo->save();
 
     return back()->with('success', 'SEO updated successfully for this blog');
-}public function generateContent(Request $request)
-{
-   
-        $request->validate([
-            'title' => 'required|string|max:255'
-        ]);
-
-        $title = $request->title;
-        $oldDescription = $request->old_description ?? '';
-
-        // OpenAI keys array
-        $keys = [
-            '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',
-            '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',
-            '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',
-            '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',
-            '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'
-        ];
-
-        $apiKey = $keys[array_rand($keys)];
-        
-       
-      
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey,
-            'Content-Type'  => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-4o-mini',
-            'messages' => [
-                ['role' => 'user', 'content' => 'Hello world!'],
-            ],
-        ]);
-       $result = $response->json();
-
-dd($result);
-        // Prepare blog prompt
-        $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
-        if ($oldDescription && strlen($oldDescription) > 50) {
-            $prompt .= "Continue writing based on this existing content:\n\n";
-            $prompt .= strip_tags($oldDescription) . "\n\n";
-            $prompt .= "Add more valuable content naturally.";
-        } else {
-            $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
-        }
-        $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
-
-        // Call OpenAI
-        $response = $client->chat()->create([
-            'model' => 'gpt-4o-mini', // یا gpt-3.5-turbo
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' => 'You are a professional blog writer. Write in simple English.'
-                ],
-                [
-                    'role' => 'user',
-                    'content' => $prompt
-                ]
-            ],
-            'temperature' => 0.7,
-            'max_tokens' => 1500,
-            'top_p' => 0.9
-        ]);
-        $generatedContent = $response->choices[0]->message->content ?? '';
-    
-        if (!$generatedContent) {
-            return response()->json([
-                'success' => false,
-                'message' => 'API did not return content',
-                'content' => $this->getFallbackContent($title)
-            ]);
-        }
-
-        $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
-
-        return response()->json([
-            'success' => true,
-            'content' => $formattedContent,
-            'message' => 'Blog content generated successfully!'
-        ]);
-
 }
+public function generateContent(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string|max:255'
+    ]);
+
+    $title = $request->title;
+    $oldDescription = $request->old_description ?? '';
+
+    // OpenAI keys
+    $keys = [
+        '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',
+        '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',
+        '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',
+        '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',
+        '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'
+    ];
+
+    $apiKey = $keys[array_rand($keys)]; // pick random key
+
+    // Prepare prompt
+    $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
+    if ($oldDescription && strlen($oldDescription) > 50) {
+        $prompt .= "Continue writing based on this existing content:\n\n";
+        $prompt .= strip_tags($oldDescription) . "\n\n";
+        $prompt .= "Add more valuable content naturally.";
+    } else {
+        $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
+    }
+    $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
+
+    // Call OpenAI via Http::post (bina package ke)
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . $apiKey,
+        'Content-Type'  => 'application/json',
+    ])->post('https://api.openai.com/v1/chat/completions', [
+        'model' => 'gpt-4o-mini',
+        'messages' => [
+            ['role' => 'system', 'content' => 'You are a professional blog writer. Write in simple English.'],
+            ['role' => 'user', 'content' => $prompt]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 1500,
+        'top_p' => 0.9
+    ]);
+
+    if ($response->failed()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'OpenAI API request failed: ' . $response->body(),
+            'content' => $this->getFallbackContent($title)
+        ]);
+    }
+
+    $data = $response->json();
+
+    // Extract content
+    $generatedContent = $data['choices'][0]['message']['content'] ?? null;
+
+    if (!$generatedContent) {
+        return response()->json([
+            'success' => false,
+            'message' => 'API did not return content',
+            'content' => $this->getFallbackContent($title)
+        ]);
+    }
+
+    $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
+
+    return response()->json([
+        'success' => true,
+        'content' => $formattedContent,
+        'message' => 'Blog content generated successfully!'
+    ]);
+}
+
 }
