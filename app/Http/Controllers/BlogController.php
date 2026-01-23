@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use OpenAI;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Category;
@@ -262,8 +262,7 @@ public function blogView($id)
     $seo->save();
 
     return back()->with('success', 'SEO updated successfully for this blog');
-}
-public function generateContent(Request $request)
+}public function generateContent(Request $request)
 {
     try {
         $request->validate([
@@ -273,68 +272,63 @@ public function generateContent(Request $request)
         $title = $request->title;
         $oldDescription = $request->old_description ?? '';
 
-        // Prepare prompt
-        $prompt = "Write a comprehensive blog post about: \"$title\".\n\n";
+        // OpenAI keys array
+        $keys = [
+            env('OPENAI_KEY1'),
+            env('OPENAI_KEY2'),
+            env('OPENAI_KEY3'),
+            env('OPENAI_KEY4'),
+            env('OPENAI_KEY5')
+        ];
+        $key = $keys[array_rand($keys)]; // Random key
+        $client = OpenAI::client($key);
+
+        // Prepare blog prompt
+        $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
         if ($oldDescription && strlen($oldDescription) > 50) {
             $prompt .= "Continue writing based on this existing content:\n\n";
             $prompt .= strip_tags($oldDescription) . "\n\n";
             $prompt .= "Add more valuable content naturally.";
         } else {
-            $prompt .= "Include:\n1. Introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
+            $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
         }
-        $prompt .= "Use HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
+        $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
 
-        // Use OpenAI key
-        $apiKey = env('OPENAI_KEY1'); // تم چاہو تو random key بھی use کر سکتے ہو
-        if (!$apiKey) {
-            return response()->json([
-                'success' => false,
-                'message' => 'OpenAI API key not configured in .env',
-                'content' => $this->getFallbackContent($title)
-            ]);
-        }
-
-        // Call OpenAI Chat API
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey,
-            'Content-Type' => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo', // یا gpt-4 اگر key support کرتی ہو
+        // Call OpenAI
+        $response = $client->chat()->create([
+            'model' => 'gpt-4o-mini', // یا gpt-3.5-turbo
             'messages' => [
-                ['role' => 'system', 'content' => 'You are a professional blog writer. Write in English.'],
-                ['role' => 'user', 'content' => $prompt],
+                [
+                    'role' => 'system',
+                    'content' => 'You are a professional blog writer. Write in simple English.'
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt
+                ]
             ],
             'temperature' => 0.7,
             'max_tokens' => 1500,
             'top_p' => 0.9
         ]);
 
-        if ($response->successful()) {
-            $data = $response->json();
+        $generatedContent = $response->choices[0]->message->content ?? '';
 
-            if (isset($data['choices'][0]['message']['content'])) {
-                $generatedContent = $data['choices'][0]['message']['content'];
-                $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
-
-                return response()->json([
-                    'success' => true,
-                    'content' => $formattedContent,
-                    'message' => 'Content generated successfully!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Unexpected API response format',
-                    'content' => $this->getFallbackContent($title)
-                ]);
-            }
-        } else {
+        if (!$generatedContent) {
             return response()->json([
                 'success' => false,
-                'message' => 'API request failed. Status: ' . $response->status(),
+                'message' => 'API did not return content',
                 'content' => $this->getFallbackContent($title)
             ]);
         }
+
+        $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
+
+        return response()->json([
+            'success' => true,
+            'content' => $formattedContent,
+            'message' => 'Blog content generated successfully!'
+        ]);
 
     } catch (\Exception $e) {
         return response()->json([
@@ -344,7 +338,4 @@ public function generateContent(Request $request)
         ]);
     }
 }
-
-// formatGeneratedContent اور getFallbackContent functions وہی رہیں گے جو تمہارے previous code میں ہیں
-
 }
