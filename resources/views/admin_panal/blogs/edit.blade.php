@@ -165,33 +165,7 @@
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            const wordCountDisplay = document.getElementById('word-count');
 
-            function countWords(text) {
-                text = text.replace(/<[^>]*>/g, ''); // remove HTML
-                text = text.replace(/\s+/g, ' ').trim();
-                return text ? text.split(' ').length : 0;
-            }
-
-            // Initial count
-            wordCountDisplay.textContent = `Word Count: ${countWords(editor.getData())}`;
-
-            editor.model.document.on('change:data', () => {
-                const data = editor.getData();
-                const count = countWords(data);
-                wordCountDisplay.textContent = `Word Count: ${count}`;
-            });
-        })
-        .catch(error => {
-            console.error(error);
-        });
-});
-</script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
