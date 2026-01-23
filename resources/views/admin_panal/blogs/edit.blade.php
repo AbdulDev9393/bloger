@@ -165,51 +165,31 @@
     </div>
 </div>
 
-
-<script>
+script>
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
 
+    // Initialize CKEditor
     ClassicEditor
         .create(document.querySelector('#editor'))
-        .then(editor => {
-            editorInstance = editor;
-            const wordCountDisplay = document.getElementById('word-count');
-
-            function countWords(text) {
-                text = text.replace(/<[^>]*>/g, '');
-                text = text.replace(/\s+/g, ' ').trim();
-                return text ? text.split(' ').length : 0;
-            }
-
-            // Initial count
-            wordCountDisplay.textContent = `Word Count: ${countWords(editor.getData())}`;
-
-            editor.model.document.on('change:data', () => {
-                const data = editor.getData();
-                const count = countWords(data);
-                wordCountDisplay.textContent = `Word Count: ${count}`;
-            });
-        })
+        .then(editor => { editorInstance = editor; })
         .catch(error => { console.error(error); });
 
     // Auto Generate Button Click
     document.getElementById('generate-content').addEventListener('click', function () {
         const title = document.getElementById('blog-title').value;
-        const oldDescription = document.querySelector('input[name="old_description"]').value;
-        
-        if(!title || title.trim() === '') {
+        if (!title || title.trim() === '') {
             alert('Please enter a title first!');
             return;
         }
 
         const button = this;
         const originalText = button.innerHTML;
-        
+
         // Show loading
         button.disabled = true;
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-        
+
         // AJAX request
         fetch('{{ route("admin.blogs.generate_content") }}', {
             method: 'POST',
@@ -218,79 +198,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             body: JSON.stringify({ 
-                title: title,
-                old_description: oldDescription 
+                title: title 
             })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if(data.success) {
-                // Append or replace content
-                if (oldDescription && oldDescription.length > 100) {
-                    // Append to existing content
-                    const currentContent = editorInstance.getData();
-                    const newContent = currentContent + "\n\n<hr>\n\n" + data.content;
-                    editorInstance.setData(newContent);
-                } else {
-                    // Set new content
-                    editorInstance.setData(data.content);
-                }
-                
-                // Show success message
-                showAlert('Content generated successfully!', 'success');
+            if (data.success && data.content) {
+                // Directly set content in CKEditor
+                editorInstance.setData(data.content);
             } else {
-                // Use fallback content if provided
-                if (data.content) {
-                    editorInstance.setData(data.content);
-                    showAlert('Used fallback content. ' + data.message, 'warning');
-                } else {
-                    showAlert(data.message || 'Failed to generate content!', 'error');
-                }
+                alert(data.message || 'Failed to generate content.');
             }
         })
         .catch(error => {
             console.error('Fetch error:', error);
-            showAlert('Network error. Please check your connection.', 'error');
+            alert('Network error. Please check your connection.');
         })
         .finally(() => {
-            // Reset button
             button.disabled = false;
             button.innerHTML = originalText;
         });
     });
-    
-    // Helper function to show alerts
-    function showAlert(message, type = 'info') {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-        alertDiv.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            min-width: 300px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        `;
-        
-        alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-        
-        document.body.appendChild(alertDiv);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            if (alertDiv.parentNode) {
-                alertDiv.remove();
-            }
-        }, 5000);
-    }
 });
 </script>
 @endsection
