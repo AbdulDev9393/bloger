@@ -263,6 +263,7 @@ public function blogView($id)
 
     return back()->with('success', 'SEO updated successfully for this blog');
 }
+
 public function generateContent(Request $request)
 {
     $request->validate([
@@ -270,7 +271,6 @@ public function generateContent(Request $request)
     ]);
 
     $title = $request->title;
-    $oldDescription = $request->old_description ?? '';
 
     // OpenAI keys
     $keys = [
@@ -285,70 +285,64 @@ public function generateContent(Request $request)
 
     // Prepare prompt
     $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
-    if ($oldDescription && strlen($oldDescription) > 50) {
-        $prompt .= "Continue writing based on this existing content:\n\n";
-        $prompt .= strip_tags($oldDescription) . "\n\n";
-        $prompt .= "Add more valuable content naturally.";
-    } else {
-        $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
-    }
-    $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
+    $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
 
-    // Call OpenAI via Http::post (bina package ke)
-   $response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $apiKey,
-    'Content-Type'  => 'application/json',
-])
-->timeout(120) // 2 minute wait
-->post('https://api.openai.com/v1/chat/completions', [
-    'model' => 'gpt-4o-mini',
-    'messages' => [
-        ['role' => 'system', 'content' => 
-        '1 You are a professional blog writer. Write in simple English.
-         2 and Does it feel like I’m talking to someone?.
-         3 Feels like I’m talking to a real person.
-         4 not a use a tag ok ,
-         5 moust be 800 words
-         
-        
-        
-        '],
-        ['role' => 'user', 'content' => $prompt]
-    ],
-    'temperature' => 0.7,
-    'max_tokens' => 1500,
-    'top_p' => 0.9
-]);
+    // OpenAI API call
+    try {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Content-Type'  => 'application/json',
+        ])
+        ->timeout(180) // 3 minutes for long blog
+        ->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4o-mini',
+            'messages' => [
+                [
+                    'role' => 'system', 
+                    'content' => 
+                    "You are a professional blog writer. Write in simple, clear English that feels like a natural conversation.
+                    - Make it engaging and easy to read, as if the reader is talking to a real person.
+                    - Do not use any HTML tags.
+                    - The tone should feel friendly and human-like.
+                    - The blog must be around 800 words.
+                    - Include an introduction, detailed main sections with subheadings, examples or tips, and a conclusion.
+                    - Keep sentences natural and avoid overly formal language."
+                ],
+                [
+                    'role' => 'user', 
+                    'content' => $prompt
+                ]
+            ],
+            'temperature' => 0.7,
+            'max_tokens' => 3000, // long blog
+            'top_p' => 0.9
+        ]);
 
-    if ($response->failed()) {
+        if ($response->failed()) {
+            throw new \Exception('OpenAI API request failed: ' . $response->body());
+        }
+
+        $data = $response->json();
+        $generatedContent = $data['choices'][0]['message']['content'] ?? null;
+
+        if (!$generatedContent) {
+            throw new \Exception('API did not return any content.');
+        }
+
+        return response()->json([
+            'success' => true,
+            'content' => $generatedContent,
+            'message' => 'Blog content generated successfully!'
+        ]);
+
+    } catch (\Exception $e) {
         return response()->json([
             'success' => false,
-            'message' => 'OpenAI API request failed: ' . $response->body(),
+            'message' => $e->getMessage(),
             'content' => $this->getFallbackContent($title)
         ]);
     }
-
-    $data = $response->json();
-
-    // Extract content
-    $generatedContent = $data['choices'][0]['message']['content'] ?? null;
-
-    if (!$generatedContent) {
-        return response()->json([
-            'success' => false,
-            'message' => 'API did not return content',
-            'content' => $this->getFallbackContent($title)
-        ]);
-    }
-
-   
-$formattedContent = $generatedContent;
-   return response()->json([
-    'success' => true,
-    'content' => $formattedContent,
-    'message' => 'Blog content generated successfully!'
-]);
-
 }
+
 
 }
