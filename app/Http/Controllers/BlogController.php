@@ -315,6 +315,7 @@ public function blogView($id)
             'top_p' => 0.9
         ]);
 
+        
         $generatedContent = $response->choices[0]->message->content ?? '';
     
         if (!$generatedContent) {
