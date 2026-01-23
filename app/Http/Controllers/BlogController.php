@@ -304,6 +304,9 @@ public function generateContent(Request $request)
     - Make the blog **fully unique and original**, do not copy any existing content.
     - Use your own words, examples, tips, and ideas.
     - Blog must be at least 800 words.
+    - Make it fully original and unique; do not copy from any source.
+    - Use your own examples, daily-life stories, tips, and human-like conversational tone.
+    - Avoid generic sentences and repetitive phrases.
     - Include: <h1>Title</h1>, <h2>Main sections</h2>, <h3>Subheadings</h3>, <p>Paragraphs</p>, <ul><li>Lists</li></ul>.
     - Make it conversational, human-like, and engaging.
     - Avoid generic or repetitive phrases."
