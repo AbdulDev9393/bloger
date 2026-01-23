@@ -308,7 +308,7 @@ public function generateContent(Request $request)
          2 and Does it feel like I’m talking to someone?.
          3 Feels like I’m talking to a real person.
          4 not a use a tag ok ,
-         
+         5 moust be 800 words
          
         
         
