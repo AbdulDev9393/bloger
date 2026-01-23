@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-
+use Illuminate\Support\Facades\Http;
 class BlogController extends Controller
 {
     //
@@ -261,7 +261,60 @@ public function blogView($id)
 }
 
 
-function generateContent(Request $request){
 
-}
+    public function generateContent(Request $request)
+    {
+        $title = $request->input('title');
+        $oldDescription = $request->input('old_description');
+
+        if (!$title) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Title is required'
+            ]);
+        }
+
+        // Prepare prompt for API
+        if ($oldDescription) {
+            // Agar old description exist karti hai → continue writing
+            $prompt = "Continue writing a blog in English using the following content:\n\n";
+            $prompt .= "Title: $title\n";
+            $prompt .= "Current Content: $oldDescription\n\n";
+            $prompt .= "Write the next section in HTML format using <p>, <h1>, <h2> tags.";
+        } else {
+            // Agar old description nahi → new blog generate karna
+            $prompt = "Write a high-quality blog in English based on the title: $title\n\n";
+            $prompt .= "Use HTML format with <h1>, <h2>, and <p> tags.";
+        }
+
+        // Example API request (replace URL and API key with your actual DeepSeek/OpenAI)
+        try {
+            $apiResponse = Http::withHeaders([
+                'Authorization' => 'Bearer YOUR_API_KEY',
+                'Content-Type' => 'application/json',
+            ])->post('https://api.deepseek.com/generate', [
+                'prompt' => $prompt,
+                'max_tokens' => 500, // adjust as needed
+            ]);
+
+            $data = $apiResponse->json();
+
+            if (isset($data['content'])) {
+                $generatedContent = $data['content'];
+            } else {
+                $generatedContent = 'Failed to generate content.';
+            }
+
+            return response()->json([
+                'success' => true,
+                'content' => $generatedContent
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ]);
+        }
+    }
 }
