@@ -263,198 +263,88 @@ public function blogView($id)
 
     return back()->with('success', 'SEO updated successfully for this blog');
 }
+public function generateContent(Request $request)
+{
+    try {
+        $request->validate([
+            'title' => 'required|string|max:255'
+        ]);
 
-    public function generateContent(Request $request)
-    {
-        try {
-            $request->validate([
-                'title' => 'required|string|max:255'
-            ]);
-            
-            $title = $request->title;
-            $oldDescription = $request->old_description ?? '';
-            
-            // Debug log
-            Log::info('Content Generation Request', [
-                'title' => $title,
-                'has_old_desc' => !empty($oldDescription),
-                'api_key_exists' => !empty(env('DEEPSEEK_API_KEY'))
-            ]);
-            
-            // Prepare the prompt
-            $prompt = "Write a comprehensive blog post about: \"$title\"\n\n";
-            
-            if ($oldDescription && strlen($oldDescription) > 50) {
-                $prompt .= "Continue writing based on this existing content:\n\n";
-                $prompt .= strip_tags($oldDescription) . "\n\n";
-                $prompt .= "Continue this blog naturally, adding more valuable content.";
-            } else {
-                $prompt .= "Write a complete blog post with:\n";
-                $prompt .= "1. Engaging introduction\n";
-                $prompt .= "2. Detailed main sections with subheadings\n";
-                $prompt .= "3. Practical examples/tips\n";
-                $prompt .= "4. Conclusion\n\n";
-            }
-            
-            $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags where appropriate.";
-            
-            // Check if API key exists
-            $apiKey = env('DEEPSEEK_API_KEY');
-            if (!$apiKey || $apiKey === 'your_deepseek_api_key_here') {
-                Log::error('DeepSeek API Key not configured');
-                return response()->json([
-                    'success' => false,
-                    'message' => 'API key not configured. Please check your .env file.',
-                    'content' => $this->getFallbackContent($title)
-                ]);
-            }
-            
-            // Make API request with timeout
-            $response = Http::timeout(30)->withHeaders([
-                'Authorization' => 'Bearer ' . $apiKey,
-                'Content-Type' => 'application/json',
-            ])->post('https://api.deepseek.com/chat/completions', [
-                'model' => 'deepseek-chat',
-                'messages' => [
-                    [
-                        'role' => 'system',
-                        'content' => 'You are a professional blog writer. Write in English.'
-                    ],
-                    [
-                        'role' => 'user',
-                        'content' => $prompt
-                    ]
-                ],
-                'max_tokens' => 1500,
-                'temperature' => 0.7,
-                'top_p' => 0.9
-            ]);
-            
-            // Log the response for debugging
-            Log::info('DeepSeek API Response', [
-                'status' => $response->status(),
-                'success' => $response->successful()
-            ]);
-            
-            if ($response->successful()) {
-                $data = $response->json();
-                
-                // Check response structure
-                if (isset($data['choices'][0]['message']['content'])) {
-                    $generatedContent = $data['choices'][0]['message']['content'];
-                    
-                    // Format the content
-                    $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
-                    
-                    return response()->json([
-                        'success' => true,
-                        'content' => $formattedContent,
-                        'message' => 'Content generated successfully!'
-                    ]);
-                } else {
-                    Log::error('Unexpected API response structure', $data);
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Unexpected API response format.',
-                        'content' => $this->getFallbackContent($title)
-                    ]);
-                }
-            } else {
-                $error = $response->body();
-                Log::error('API Request Failed', [
-                    'status' => $response->status(),
-                    'error' => $error
-                ]);
-                
-                return response()->json([
-                    'success' => false,
-                    'message' => 'API request failed. ' . $response->status(),
-                    'content' => $this->getFallbackContent($title)
-                ]);
-            }
-            
-        } catch (\Exception $e) {
-            Log::error('Content Generation Exception: ' . $e->getMessage(), [
-                'trace' => $e->getTraceAsString()
-            ]);
-            
+        $title = $request->title;
+        $oldDescription = $request->old_description ?? '';
+
+        // Prepare prompt
+        $prompt = "Write a comprehensive blog post about: \"$title\".\n\n";
+        if ($oldDescription && strlen($oldDescription) > 50) {
+            $prompt .= "Continue writing based on this existing content:\n\n";
+            $prompt .= strip_tags($oldDescription) . "\n\n";
+            $prompt .= "Add more valuable content naturally.";
+        } else {
+            $prompt .= "Include:\n1. Introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
+        }
+        $prompt .= "Use HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
+
+        // Use OpenAI key
+        $apiKey = env('OPENAI_KEY1'); // تم چاہو تو random key بھی use کر سکتے ہو
+        if (!$apiKey) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error: ' . $e->getMessage(),
-                'content' => $this->getFallbackContent($request->title ?? '')
+                'message' => 'OpenAI API key not configured in .env',
+                'content' => $this->getFallbackContent($title)
             ]);
         }
-    }
-    
-    private function formatGeneratedContent($content, $oldDescription = '')
-    {
-        // Remove any markdown formatting
-        $content = str_replace(['**', '__', '*', '_'], '', $content);
-        
-        // Convert markdown headers to HTML
-        $content = preg_replace('/^# (.*)$/m', '<h1>$1</h1>', $content);
-        $content = preg_replace('/^## (.*)$/m', '<h2>$1</h2>', $content);
-        $content = preg_replace('/^### (.*)$/m', '<h3>$1</h3>', $content);
-        
-        // Wrap paragraphs in <p> tags
-        $lines = explode("\n", $content);
-        $formattedLines = [];
-        
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (empty($line)) continue;
-            
-            // If line already has HTML tags, keep it
-            if (preg_match('/^<[^>]+>/', $line) || preg_match('/<\/[^>]+>$/', $line)) {
-                $formattedLines[] = $line;
-            } 
-            // If line looks like a header, keep as is
-            elseif (preg_match('/^<h[1-6]>/', $line)) {
-                $formattedLines[] = $line;
+
+        // Call OpenAI Chat API
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-3.5-turbo', // یا gpt-4 اگر key support کرتی ہو
+            'messages' => [
+                ['role' => 'system', 'content' => 'You are a professional blog writer. Write in English.'],
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'temperature' => 0.7,
+            'max_tokens' => 1500,
+            'top_p' => 0.9
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+
+            if (isset($data['choices'][0]['message']['content'])) {
+                $generatedContent = $data['choices'][0]['message']['content'];
+                $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
+
+                return response()->json([
+                    'success' => true,
+                    'content' => $formattedContent,
+                    'message' => 'Content generated successfully!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unexpected API response format',
+                    'content' => $this->getFallbackContent($title)
+                ]);
             }
-            // Otherwise wrap in paragraph
-            else {
-                $formattedLines[] = "<p>$line</p>";
-            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'API request failed. Status: ' . $response->status(),
+                'content' => $this->getFallbackContent($title)
+            ]);
         }
-        
-        $content = implode("\n", $formattedLines);
-        
-        // If there's old description, append to it
-        if (!empty($oldDescription) && strlen($oldDescription) > 50) {
-            $content = $oldDescription . "\n\n<hr>\n\n" . $content;
-        }
-        
-        return $content;
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage(),
+            'content' => $this->getFallbackContent($request->title ?? '')
+        ]);
     }
-    
-    private function getFallbackContent($title)
-    {
-        // Return a basic template if API fails
-        return "
-            <h1>$title</h1>
-            
-            <h2>Introduction</h2>
-            <p>Welcome to our comprehensive guide on $title. In this article, we'll explore everything you need to know about this topic.</p>
-            
-            <h2>Why $title Matters</h2>
-            <p>Understanding $title is crucial in today's world. Here are some key reasons:</p>
-            <ul>
-                <li>Benefit 1 of $title</li>
-                <li>Benefit 2 of $title</li>
-                <li>Benefit 3 of $title</li>
-            </ul>
-            
-            <h2>Getting Started</h2>
-            <p>To begin with $title, you should consider the following steps:</p>
-            <ol>
-                <li>Step 1: Research and planning</li>
-                <li>Step 2: Implementation</li>
-                <li>Step 3: Evaluation and improvement</li>
-            </ol>
-            
-            <h2>Conclusion</h2>
-            <p>$title offers numerous benefits and opportunities. By following the guidelines in this article, you can successfully implement $title in your projects.</p>
-        ";
-    }
+}
+
+// formatGeneratedContent اور getFallbackContent functions وہی رہیں گے جو تمہارے previous code میں ہیں
+
 }
