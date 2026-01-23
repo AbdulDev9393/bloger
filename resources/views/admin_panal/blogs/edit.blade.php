@@ -164,6 +164,7 @@
         </form>
     </div>
     <form action="{{route('admin.blogs.generate_content')}}" method="POST">
+        @csrf
             <input type="hidden" name="title" id="blog-title" value="{{ $blog->name }}">
 <input type="hidden" id="old_description" value="{!! $blog->Description !!}">
 <button type="submit" >Auto Generate</button>
