@@ -264,7 +264,7 @@ public function blogView($id)
     return back()->with('success', 'SEO updated successfully for this blog');
 }public function generateContent(Request $request)
 {
-    return "good";
+   
         $request->validate([
             'title' => 'required|string|max:255'
         ]);
@@ -282,7 +282,7 @@ public function blogView($id)
         ];
         
         $key = $keys[array_rand($keys)]; // Random key
-      
+        dd($keys);
         $client = OpenAI::client($key);
          
         // Prepare blog prompt
