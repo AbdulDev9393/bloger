@@ -100,7 +100,7 @@
             <!-- Blog Title -->
           
             <div class="form-group" style="display:flex; align-items:center; gap:10px;">
-                <form action="{{route('admin.blogs.generate_conten')}}" method="POST">
+                <form action="{{route('admin.blogs.generate_content')}}" method="POST">
 
             
                 <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
