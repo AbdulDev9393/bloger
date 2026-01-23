@@ -12,6 +12,10 @@ use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Log;
+
 class BlogController extends Controller
 {
     //
@@ -260,103 +264,197 @@ public function blogView($id)
     return back()->with('success', 'SEO updated successfully for this blog');
 }
 
-
-public function generateContent(Request $request)
-{
-    $title = $request->input('title');
-    $oldDescription = $request->input('old_description');
-
-    if (!$title) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Title is required'
-        ]);
-    }
-
-    // Prepare prompt
-    if ($oldDescription) {
-        // Continue writing using old description
-        $prompt = "Continue writing a high-quality blog in English using the following content:\n\n";
-        $prompt .= "Title: $title\n";
-        $prompt .= "Current Content: $oldDescription\n\n";
-        $prompt .= "Ensure the content is engaging, SEO-friendly, and in HTML format using <h1>, <h2>, <p> tags.";
-    } else {
-        // Generate new blog
-        $prompt = "Write a high-quality blog in English based on the title: $title\n\n";
-        $prompt .= "Use HTML format with <h1>, <h2>, and <p> tags.";
-    }
-
-    try {
-        // API request
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('DEEPSEEK_API_KEY'),
-            'Content-Type' => 'application/json',
-        ])->post('https://api.deepseek.com/chat/completions', [
-            'model' => 'deepseek-chat',
-            'messages' => [
-                ['role' => 'system', 'content' => 'You are a professional content writer specializing in detailed blogs.'],
-                ['role' => 'user', 'content' => $prompt],
-            ],
-            'max_tokens' => 2000,
-            'temperature' => 0.8
-        ]);
-$data = $response->json();
-
-if (isset($data['choices'][0]['message']['content'])) {
-    $generatedContent = $data['choices'][0]['message']['content'];
-} else {
-    return response()->json([
-        'success' => false,
-        'message' => 'Failed to generate content from API.'
-    ]);
-}
-        $data = $response->json();
-
-        // DeepSeek returns content under choices[0]['message']['content']
-        if (isset($data['choices'][0]['message']['content'])) {
-            $generatedContent = $data['choices'][0]['message']['content'];
-
-            // Optional: format content (ensure <p>, <h1>, <h2> etc.)
-            $generatedContent = $this->formatGeneratedContent($generatedContent);
-
-            return response()->json([
-                'success' => true,
-                'content' => $generatedContent
+    public function generateContent(Request $request)
+    {
+        try {
+            $request->validate([
+                'title' => 'required|string|max:255'
             ]);
-        } else {
+            
+            $title = $request->title;
+            $oldDescription = $request->old_description ?? '';
+            
+            // Debug log
+            Log::info('Content Generation Request', [
+                'title' => $title,
+                'has_old_desc' => !empty($oldDescription),
+                'api_key_exists' => !empty(env('DEEPSEEK_API_KEY'))
+            ]);
+            
+            // Prepare the prompt
+            $prompt = "Write a comprehensive blog post about: \"$title\"\n\n";
+            
+            if ($oldDescription && strlen($oldDescription) > 50) {
+                $prompt .= "Continue writing based on this existing content:\n\n";
+                $prompt .= strip_tags($oldDescription) . "\n\n";
+                $prompt .= "Continue this blog naturally, adding more valuable content.";
+            } else {
+                $prompt .= "Write a complete blog post with:\n";
+                $prompt .= "1. Engaging introduction\n";
+                $prompt .= "2. Detailed main sections with subheadings\n";
+                $prompt .= "3. Practical examples/tips\n";
+                $prompt .= "4. Conclusion\n\n";
+            }
+            
+            $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags where appropriate.";
+            
+            // Check if API key exists
+            $apiKey = env('DEEPSEEK_API_KEY');
+            if (!$apiKey || $apiKey === 'your_deepseek_api_key_here') {
+                Log::error('DeepSeek API Key not configured');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'API key not configured. Please check your .env file.',
+                    'content' => $this->getFallbackContent($title)
+                ]);
+            }
+            
+            // Make API request with timeout
+            $response = Http::timeout(30)->withHeaders([
+                'Authorization' => 'Bearer ' . $apiKey,
+                'Content-Type' => 'application/json',
+            ])->post('https://api.deepseek.com/chat/completions', [
+                'model' => 'deepseek-chat',
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => 'You are a professional blog writer. Write in English.'
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $prompt
+                    ]
+                ],
+                'max_tokens' => 1500,
+                'temperature' => 0.7,
+                'top_p' => 0.9
+            ]);
+            
+            // Log the response for debugging
+            Log::info('DeepSeek API Response', [
+                'status' => $response->status(),
+                'success' => $response->successful()
+            ]);
+            
+            if ($response->successful()) {
+                $data = $response->json();
+                
+                // Check response structure
+                if (isset($data['choices'][0]['message']['content'])) {
+                    $generatedContent = $data['choices'][0]['message']['content'];
+                    
+                    // Format the content
+                    $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
+                    
+                    return response()->json([
+                        'success' => true,
+                        'content' => $formattedContent,
+                        'message' => 'Content generated successfully!'
+                    ]);
+                } else {
+                    Log::error('Unexpected API response structure', $data);
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Unexpected API response format.',
+                        'content' => $this->getFallbackContent($title)
+                    ]);
+                }
+            } else {
+                $error = $response->body();
+                Log::error('API Request Failed', [
+                    'status' => $response->status(),
+                    'error' => $error
+                ]);
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'API request failed. ' . $response->status(),
+                    'content' => $this->getFallbackContent($title)
+                ]);
+            }
+            
+        } catch (\Exception $e) {
+            Log::error('Content Generation Exception: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString()
+            ]);
+            
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to generate content from API.'
+                'message' => 'Error: ' . $e->getMessage(),
+                'content' => $this->getFallbackContent($request->title ?? '')
             ]);
         }
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Error: ' . $e->getMessage()
-        ]);
     }
-}
-
-private function formatGeneratedContent($content)
-{
-    // Convert Markdown headers to HTML if needed
-    $content = preg_replace('/^# (.*?)$/m', '<h1>$1</h1>', $content);
-    $content = preg_replace('/^## (.*?)$/m', '<h2>$1</h2>', $content);
-    $content = preg_replace('/^### (.*?)$/m', '<h3>$1</h3>', $content);
-
-    // Ensure paragraphs
-    $lines = explode("\n", $content);
-    $newContent = '';
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if ($line && !preg_match('/<h[1-3]>/', $line)) {
-            $newContent .= "<p>$line</p>";
-        } else {
-            $newContent .= $line;
+    
+    private function formatGeneratedContent($content, $oldDescription = '')
+    {
+        // Remove any markdown formatting
+        $content = str_replace(['**', '__', '*', '_'], '', $content);
+        
+        // Convert markdown headers to HTML
+        $content = preg_replace('/^# (.*)$/m', '<h1>$1</h1>', $content);
+        $content = preg_replace('/^## (.*)$/m', '<h2>$1</h2>', $content);
+        $content = preg_replace('/^### (.*)$/m', '<h3>$1</h3>', $content);
+        
+        // Wrap paragraphs in <p> tags
+        $lines = explode("\n", $content);
+        $formattedLines = [];
+        
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (empty($line)) continue;
+            
+            // If line already has HTML tags, keep it
+            if (preg_match('/^<[^>]+>/', $line) || preg_match('/<\/[^>]+>$/', $line)) {
+                $formattedLines[] = $line;
+            } 
+            // If line looks like a header, keep as is
+            elseif (preg_match('/^<h[1-6]>/', $line)) {
+                $formattedLines[] = $line;
+            }
+            // Otherwise wrap in paragraph
+            else {
+                $formattedLines[] = "<p>$line</p>";
+            }
         }
+        
+        $content = implode("\n", $formattedLines);
+        
+        // If there's old description, append to it
+        if (!empty($oldDescription) && strlen($oldDescription) > 50) {
+            $content = $oldDescription . "\n\n<hr>\n\n" . $content;
+        }
+        
+        return $content;
     }
-
-    return $newContent;
-}
+    
+    private function getFallbackContent($title)
+    {
+        // Return a basic template if API fails
+        return "
+            <h1>$title</h1>
+            
+            <h2>Introduction</h2>
+            <p>Welcome to our comprehensive guide on $title. In this article, we'll explore everything you need to know about this topic.</p>
+            
+            <h2>Why $title Matters</h2>
+            <p>Understanding $title is crucial in today's world. Here are some key reasons:</p>
+            <ul>
+                <li>Benefit 1 of $title</li>
+                <li>Benefit 2 of $title</li>
+                <li>Benefit 3 of $title</li>
+            </ul>
+            
+            <h2>Getting Started</h2>
+            <p>To begin with $title, you should consider the following steps:</p>
+            <ol>
+                <li>Step 1: Research and planning</li>
+                <li>Step 2: Implementation</li>
+                <li>Step 3: Evaluation and improvement</li>
+            </ol>
+            
+            <h2>Conclusion</h2>
+            <p>$title offers numerous benefits and opportunities. By following the guidelines in this article, you can successfully implement $title in your projects.</p>
+        ";
+    }
 }
