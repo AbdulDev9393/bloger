@@ -289,53 +289,44 @@ public function generateContent(Request $request)
 
     // OpenAI API call
     try {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey,
-            'Content-Type'  => 'application/json',
-        ])
-        ->timeout(180) // 3 minutes for long blog
-        ->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-4o-mini',
-            'messages' => [
-                [
-                    'role' => 'system', 
-                    'content' => 
-                    "You are a professional blog writer. Write in simple, clear English that feels like a natural conversation.
-                    - Make it engaging and easy to read, as if the reader is talking to a real person.
-                    - Do not use any HTML tags.
-                    - The tone should feel friendly and human-like.
-                    - The blog must be around 800 words.
-                    - Include an introduction, detailed main sections with subheadings, examples or tips, and a conclusion.
-                    - Keep sentences natural and avoid overly formal language.
-                    - give me the all content in <h1><h2><h3><p> form ok 
-                    "
-                ],
-                [
-                    'role' => 'user', 
-                    'content' => $prompt
-                ]
-            ],
-            'temperature' => 0.7,
-            'max_tokens' => 3000, // long blog
-            'top_p' => 0.9
-        ]);
+    $response = Http::withHeaders([
+    'Authorization' => 'Bearer ' . $apiKey,
+    'Content-Type' => 'application/json',
+])
+->timeout(180)
+->post('https://api.openai.com/v1/chat/completions', [
+    'model' => 'gpt-4o-mini',
+    'messages' => [
+        [
+            'role' => 'system',
+            'content' =>
+            "You are a professional blog writer. Write in simple, clear English in **HTML format**.
+            - Use proper HTML tags: <h1>, <h2>, <h3>, <p>, <ul>, <li>.
+            - The blog must be around 800 words.
+            - Make it engaging and readable, as if the reader is talking to a real person.
+            - Include: <h1>Title</h1>, <h2>Sections with subheadings</h2>, <h3>Optional sub-subheadings</h3>, <p>for paragraphs</p>, and lists using <ul><li>.
+            - Include examples or tips where relevant.
+            - Do not add any CSS or external scripts."
+        ],
+        [
+            'role' => 'user',
+            'content' => "Write a comprehensive blog post about \"$title\"."
+        ]
+    ],
+    'temperature' => 0.7,
+    'max_tokens' => 3000,
+    'top_p' => 0.9
+]);
 
-        if ($response->failed()) {
-            throw new \Exception('OpenAI API request failed: ' . $response->body());
-        }
+$data = $response->json();
+$generatedContent = $data['choices'][0]['message']['content'] ?? null;
 
-        $data = $response->json();
-        $generatedContent = $data['choices'][0]['message']['content'] ?? null;
+return response()->json([
+    'success' => true,
+    'content' => $generatedContent, // now contains proper HTML
+    'message' => 'Blog content generated successfully!'
+]);
 
-        if (!$generatedContent) {
-            throw new \Exception('API did not return any content.');
-        }
-
-        return response()->json([
-            'success' => true,
-            'content' => $generatedContent,
-            'message' => 'Blog content generated successfully!'
-        ]);
 
     } catch (\Exception $e) {
         return response()->json([
