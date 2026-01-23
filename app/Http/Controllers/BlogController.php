@@ -280,6 +280,7 @@ public function blogView($id)
             env('OPENAI_KEY4'),
             env('OPENAI_KEY5')
         ];
+        dd($keys);
         $key = $keys[array_rand($keys)]; // Random key
         dd($keys);
         $client = OpenAI::client($key);
@@ -314,7 +315,7 @@ public function blogView($id)
         ]);
 
         $generatedContent = $response->choices[0]->message->content ?? '';
-     dd($generatedContent);
+    
         if (!$generatedContent) {
             return response()->json([
                 'success' => false,
