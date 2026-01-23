@@ -105,7 +105,7 @@
             
                 <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
                 <input type="hidden" name="old_description" value="{!! $blog->Description !!}" required>
-                <button type="button"  class="btn btn-primary">Auto Generate</button>
+                <button type="submit"  class="btn btn-primary">Auto Generate</button>
                </form>
             </div>
             <!-- Category -->
