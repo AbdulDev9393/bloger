@@ -295,19 +295,21 @@ public function generateContent(Request $request)
     $prompt .= "Use proper HTML formatting with <h2>, <h3>, <p>, <ul>, <li> tags.";
 
     // Call OpenAI via Http::post (bina package ke)
-    $response = Http::withHeaders([
-        'Authorization' => 'Bearer ' . $apiKey,
-        'Content-Type'  => 'application/json',
-    ])->post('https://api.openai.com/v1/chat/completions', [
-        'model' => 'gpt-4o-mini',
-        'messages' => [
-            ['role' => 'system', 'content' => 'You are a professional blog writer. Write in simple English.'],
-            ['role' => 'user', 'content' => $prompt]
-        ],
-        'temperature' => 0.7,
-        'max_tokens' => 1500,
-        'top_p' => 0.9
-    ]);
+   $response = Http::withHeaders([
+    'Authorization' => 'Bearer ' . $apiKey,
+    'Content-Type'  => 'application/json',
+])
+->timeout(120) // 2 minute wait
+->post('https://api.openai.com/v1/chat/completions', [
+    'model' => 'gpt-4o-mini',
+    'messages' => [
+        ['role' => 'system', 'content' => 'You are a professional blog writer. Write in simple English.'],
+        ['role' => 'user', 'content' => $prompt]
+    ],
+    'temperature' => 0.7,
+    'max_tokens' => 1500,
+    'top_p' => 0.9
+]);
 
     if ($response->failed()) {
         return response()->json([
