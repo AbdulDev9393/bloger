@@ -285,7 +285,16 @@ public function blogView($id)
         
        
         $client = OpenAI::client($apiKey);
-        dd($client);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Content-Type'  => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4o-mini',
+            'messages' => [
+                ['role' => 'user', 'content' => 'Hello world!'],
+            ],
+        ]);
+        dd($response);
         // Prepare blog prompt
         $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
         if ($oldDescription && strlen($oldDescription) > 50) {
