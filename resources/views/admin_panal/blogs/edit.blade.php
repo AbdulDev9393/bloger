@@ -163,12 +163,10 @@
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
         </form>
     </div>
-    <form action="{{route('admin.blogs.generate_content')}}" method="POST">
-        @csrf
-            <input type="hidden" name="title" id="blog-title" value="{{ $blog->name }}">
-<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
-<button type="submit" >Auto Generate</button>
-
+<div class="form-group">
+    <button type="button" id="generate-content" class="btn btn-primary">
+        <i class="fas fa-robot"></i> Auto Generate
+    </button>
 </div>
 
 </form>
@@ -186,6 +184,59 @@ document.addEventListener('DOMContentLoaded', function () {
    
 });
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let editorInstance;
+
+    // Initialize CKEditor
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => { editorInstance = editor; })
+        .catch(error => { console.error(error); });
+
+    // Auto Generate button
+    const generateBtn = document.getElementById('generate-content');
+
+    generateBtn.addEventListener('click', function () {
+        const title = document.getElementById('blog-title').value;
+        const oldDescription = document.getElementById('old_description').value;
+
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+        fetch("{{ route('admin.blogs.generate_content') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({
+                title: title,
+                old_description: oldDescription
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
+
+            if (data.success) {
+                // Set content in CKEditor
+                editorInstance.setData(data.content);
+                alert("Content generated successfully!");
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
+            alert("Something went wrong!");
+        });
+    });
+});
+</script>
 
 
 </script>
