@@ -39,11 +39,11 @@ JSON;
     <link rel="canonical" href="{{ url()->current() }}" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ $Blog_info->Title ?? 'daliyblogs' }}" />
-    <meta property="og:description" content="{{ $Blog_info->Meta_Description ?? 'Read latest blogs on daliyblogs' }}" />
+    <meta property="og:title" content='daliyblogs' />
+    <meta property="og:description" content='Read latest blogs on daliyblogs'/>
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="{{ asset($Blog_info->Thumbnail_Image ?? 'storage/default.png') }}" />
+    <meta property="og:image" content="https://techblogs.site/storage/blogs/favicon.ico" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -52,7 +52,7 @@ JSON;
     <meta name="twitter:image" content="{{ asset($Blog_info->Thumbnail_Image ?? 'storage/default.png') }}" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('storage/sitelogo.png') }}" type="image/x-icon">
+    <link rel="icon" href="https://techblogs.site/storage/sitelogo.png" type="image/x-icon">
 
     <!-- Bootstrap & Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

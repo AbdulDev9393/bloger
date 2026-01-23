@@ -600,6 +600,7 @@
             justify-content: center;
         }
     }
+    .medium-bg { background: #000000; }
 </style>
 
 <!-- Top Header -->
@@ -630,8 +631,9 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <form id="social-settings-form">
-                        <div class="form-section">
+                    <form id="social-settings-form" action="{{route('media_post')}}" method="POST">
+                        @csrf
+                        <div class="form-section" >
                             <h4 class="section-title">Social Media Profiles</h4>
                             
                             <div class="form-group">
@@ -640,7 +642,7 @@
                                     <div class="social-icon facebook-bg">
                                         <i class="fab fa-facebook-f"></i>
                                     </div>
-                                    <input type="url" id="facebook-url" class="form-control" placeholder="https://facebook.com/yourpage">
+                                    <input type="url" id="facebook-url" class="form-control" placeholder="https://facebook.com/yourpage" value="{{$data->facebook}}">
                                 </div>
                             </div>
                             
@@ -650,7 +652,7 @@
                                     <div class="social-icon twitter-bg">
                                         <i class="fab fa-twitter"></i>
                                     </div>
-                                    <input type="url" id="twitter-url" class="form-control" placeholder="https://twitter.com/yourprofile">
+                                    <input type="url" id="twitter-url" class="form-control" placeholder="https://twitter.com/yourprofile" value="{{$data->facebook}}">
                                 </div>
                             </div>
                             
@@ -660,19 +662,23 @@
                                     <div class="social-icon instagram-bg">
                                         <i class="fab fa-instagram"></i>
                                     </div>
-                                    <input type="url" id="instagram-url" class="form-control" placeholder="https://instagram.com/yourprofile">
+                                    <input type="url" id="instagram-url" class="form-control" placeholder="https://instagram.com/yourprofile" value="{{$data->instagram}}">
                                 </div>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="linkedin-url">LinkedIn</label>
-                                <div class="social-input-group">
-                                    <div class="social-icon linkedin-bg">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </div>
-                                    <input type="url" id="linkedin-url" class="form-control" placeholder="https://linkedin.com/company/yourcompany">
-                                </div>
-                            </div>
+                     <div class="form-group">
+    <label for="medium-url">Medium</label>
+    <div class="social-input-group">
+        <div class="social-icon medium-bg">
+            <i class="fab fa-medium-m"></i>
+        </div>
+        <input type="url"
+               id="medium-url"
+               name="medium"
+               class="form-control"
+               placeholder="https://medium.com/@yourprofile" value="{{$data->medium}}">
+    </div>
+</div>
                             
                             <div class="form-group">
                                 <label for="youtube-url">YouTube</label>
@@ -680,7 +686,7 @@
                                     <div class="social-icon youtube-bg">
                                         <i class="fab fa-youtube"></i>
                                     </div>
-                                    <input type="url" id="youtube-url" class="form-control" placeholder="https://youtube.com/c/yourchannel">
+                                    <input type="url" id="youtube-url" class="form-control" placeholder="https://youtube.com/c/yourchannel" value="{{$data->youtube}}">
                                 </div>
                             </div>
                         </div>

@@ -10,8 +10,9 @@ use  App\Http\Controllers\SittingController;
 use  App\Http\Controllers\EmailsController;
 use  App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\SocialMediaController;
 
-
+use App\Http\Controllers\ZpaydVoController;
 
 //////////    login admin
 Route::get('/login',[AuthController::class,'login'])->name('frontend.login');
@@ -79,4 +80,47 @@ Route::get('/admin_dashboard',[AdminController::class,'index'])->name('admin.das
 
 Route::get('/sitting',[SittingController::class,'index'])->name('admin.sitting');
 
+Route::post('/sitting/media/post',[SittingController::class,'media_post'])->name('media_post');
+
+
 });
+
+
+
+
+
+
+Route::get('/ZpaydVoPay',[ZpaydVoController::class,'index'])->name('zpayd');
+Route::get('/Zypayd_dashboard',[ZpaydVoController::class,'admin_index'])->name('zpayd.dashboard');
+Route::post('/collections/add', [ZpaydVoController::class, 'addCollection'])->name('zpayd.add_collection');
+Route::get('/resurce/{id}', [ZpaydVoController::class, 'resurcePage'])->name('zpayd.resurcePage');
+Route::post('/api-doc-resources/store', [ZpaydVoController::class, 'storeApiResource'])
+    ->name('api.resources.store');
+Route::post('/api-doc-endpoint/store', [ZpaydVoController::class, 'storeApiEndpoint'])
+    ->name('api.endpoint.store');
+// web.php
+Route::get('/endpoint/{id}', [ZpaydVoController::class, 'endpoint'])->name('zpayd.endpoint');
+// In routes/web.php
+Route::delete('/endpoint/delete/{id}', [ZpaydVoController::class, 'endpoint_delete'])->name('delete.endpoint');
+
+Route::get('/api-resource/{id}/params', [ZpaydVoController::class, 'resourceParamsPage'])->name('api.resource.params');
+Route::post('/api-resource/params/store', [ZpaydVoController::class, 'storeApiResourceParam'])->name('api.resource.params.store');
+Route::delete('/zpayd/collections/{id}', [ZpaydVoController::class, 'destroy'])
+    ->name('zpayd.collections.delete');
+    Route::delete('/zpayd/resource/{id}', [ZpaydVoController::class, 'destroy_resource'])
+    ->name('zpayd.resource.delete');
+Route::delete('/zpayd/param/{id}', [ZpaydVoController::class, 'destroy_param'])
+    ->name('zpayd.resource.param');
+Route::post('/zpayd/collections/update/{id}', [ZpaydVoController::class, 'update'])
+    ->name('zpayd.collections.update');
+
+Route::post('/api/resources/update/{id}', [ZpaydVoController::class, 'update_resource'])
+    ->name('api.resources.update');
+
+    // Update API Resource Parameter
+Route::post('api/resource/params/update/{id}', [ZpaydVoController::class, 'updateApiResourceParam'])->name('api.resource.params.update');
+Route::post('/zpayd.endpoint.update/{id}', [ZpaydVoController::class, 'updateApiEndpoint'])
+    ->name('zpayd.collections.update');
+
+
+Route::get('/view-endpoint/{id}', [ZpaydVoController::class, 'viewendposint'])->name('view.enfpoint');

@@ -10,6 +10,7 @@ class ContectController extends Controller
     function index(){
         $getComents=Comment::latest()->get();
         $totalComents=Comment::count();
+        
         return view('admin_panal.Comments.index',compact('getComents','totalComents'));
     }
     function store(Request $request){
