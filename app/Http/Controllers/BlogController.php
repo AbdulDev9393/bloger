@@ -331,12 +331,13 @@ public function generateContent(Request $request)
     }
 
     $formattedContent = $this->formatGeneratedContent($generatedContent, $oldDescription);
+$formattedContent = $generatedContent;
+   return response()->json([
+    'success' => true,
+    'content' => $formattedContent,
+    'message' => 'Blog content generated successfully!'
+]);
 
-    return response()->json([
-        'success' => true,
-        'content' => $formattedContent,
-        'message' => 'Blog content generated successfully!'
-    ]);
 }
 
 }
