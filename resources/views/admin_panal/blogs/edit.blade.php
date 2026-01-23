@@ -38,7 +38,52 @@
 .form-label { font-weight:500; margin-bottom:5px; display:block; }
 .form-control, .form-select { width:100%; padding:10px 15px; border:1px solid var(--border-color); border-radius:8px; }
 .form-control:focus, .form-select:focus { outline:none; border-color:var(--primary-color); box-shadow:0 0 0 3px rgba(78,115,223,0.1); }
+/* Auto Generate Button Styles */
+#generate-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+}
 
+#generate-content:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+}
+
+#generate-content:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
+}
+
+#generate-content i {
+    font-size: 16px;
+}
+
+/* For the title input and button container */
+#blog-title {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#blog-title:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.1);
+}
 </style>
 
 <div class="main-content">
