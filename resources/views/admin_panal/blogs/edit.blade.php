@@ -172,19 +172,8 @@
 </form>
       
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    let editorInstance;
 
-    // Initialize CKEditor
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => { editorInstance = editor; })
-        .catch(error => { console.error(error); });
 
-   
-});
-
-<script>
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
 
@@ -239,5 +228,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-</script>
 @endsection
