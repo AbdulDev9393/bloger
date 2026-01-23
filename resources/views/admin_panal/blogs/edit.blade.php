@@ -240,7 +240,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
+const form = document.querySelector('form');
+form.addEventListener('submit', function() {
+    editorInstance.updateSourceElement(); // <-- yahi line add karo
+});
 </script>
 
 
