@@ -163,11 +163,12 @@
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
         </form>
     </div>
-</div>
-<form action="{{route('admin.blogs.generate_content')}}" method="POST">
+    <form action="{{route('admin.blogs.generate_content')}}" method="POST">
             <input type="hidden" name="title" id="blog-title" value="{{ $blog->name }}">
 <input type="hidden" id="old_description" value="{!! $blog->Description !!}">
 <button type="submit" >Auto Generate</button>
+
+</div>
 
 </form>
       
