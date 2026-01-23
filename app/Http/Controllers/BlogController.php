@@ -297,17 +297,18 @@ public function generateContent(Request $request)
 ->post('https://api.openai.com/v1/chat/completions', [
     'model' => 'gpt-4o-mini',
     'messages' => [
-        [
-            'role' => 'system',
-            'content' =>
-            "You are a professional blog writer. Write in simple, clear English in **HTML format**.
-            - Use proper HTML tags: <h1>, <h2>, <h3>, <p>, <ul>, <li>.
-            - The blog must be around 800 words.
-            - Make it engaging and readable, as if the reader is talking to a real person.
-            - Include: <h1>Title</h1>, <h2>Sections with subheadings</h2>, <h3>Optional sub-subheadings</h3>, <p>for paragraphs</p>, and lists using <ul><li>.
-            - Include examples or tips where relevant.
-            - Do not add any CSS or external scripts."
-        ],
+   [
+    'role' => 'system',
+    'content' =>
+    "You are a professional blog writer. Write in simple, clear English in HTML format (<h1>, <h2>, <h3>, <p>, <ul>, <li>).
+    - Make the blog **fully unique and original**, do not copy any existing content.
+    - Use your own words, examples, tips, and ideas.
+    - Blog must be at least 800 words.
+    - Include: <h1>Title</h1>, <h2>Main sections</h2>, <h3>Subheadings</h3>, <p>Paragraphs</p>, <ul><li>Lists</li></ul>.
+    - Make it conversational, human-like, and engaging.
+    - Avoid generic or repetitive phrases."
+],
+
         [
             'role' => 'user',
             'content' => "Write a comprehensive blog post about \"$title\"."
