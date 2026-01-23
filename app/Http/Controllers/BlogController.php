@@ -282,7 +282,11 @@ public function blogView($id)
         ];
 
         $apiKey = $keys[array_rand($keys)];
-
+         return response()->json([
+                'success' => false,
+                'message' => 'API did not return content',
+                'content' => $apiKey
+            ]);
        
         $client = OpenAI::client($key);
          
