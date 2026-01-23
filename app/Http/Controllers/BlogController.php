@@ -303,7 +303,16 @@ public function generateContent(Request $request)
 ->post('https://api.openai.com/v1/chat/completions', [
     'model' => 'gpt-4o-mini',
     'messages' => [
-        ['role' => 'system', 'content' => 'You are a professional blog writer. Write in simple English.'],
+        ['role' => 'system', 'content' => 
+        '1 You are a professional blog writer. Write in simple English.
+         2 and Does it feel like I’m talking to someone?.
+         3 Feels like I’m talking to a real person.
+         4 not a use a tag ok ,
+         
+         
+        
+        
+        '],
         ['role' => 'user', 'content' => $prompt]
     ],
     'temperature' => 0.7,
