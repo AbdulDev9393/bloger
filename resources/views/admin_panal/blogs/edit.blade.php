@@ -179,50 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(editor => { editorInstance = editor; })
         .catch(error => { console.error(error); });
 
-    // Auto Generate Button Click
-    document.getElementById('generate-content').addEventListener('click', function () {
-        const title = document.getElementById('blog-title').value;
-        if (!title || title.trim() === '') {
-            alert('Please enter a title first!');
-            return;
-        }
-
-        const button = this;
-        const originalText = button.innerHTML;
-
-        // Show loading
-        button.disabled = true;
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-
-        // AJAX request
-        fetch('{{ route("admin.blogs.generate_content") }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ 
-                title: title 
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.content) {
-                // Directly set content in CKEditor
-                editorInstance.setData(data.content);
-            } else {
-                alert(data.message || 'Failed to generate content.');
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            alert('Network error. Please check your connection.');
-        })
-        .finally(() => {
-            button.disabled = false;
-            button.innerHTML = originalText;
-        });
-    });
+   
 });
 </script>
 @endsection
