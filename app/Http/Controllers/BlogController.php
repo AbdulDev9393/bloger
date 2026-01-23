@@ -300,7 +300,16 @@ public function generateContent(Request $request)
             'max_tokens' => 2000,
             'temperature' => 0.8
         ]);
+$data = $response->json();
 
+if (isset($data['choices'][0]['message']['content'])) {
+    $generatedContent = $data['choices'][0]['message']['content'];
+} else {
+    return response()->json([
+        'success' => false,
+        'message' => 'Failed to generate content from API.'
+    ]);
+}
         $data = $response->json();
 
         // DeepSeek returns content under choices[0]['message']['content']
