@@ -150,7 +150,7 @@
                     <img src="{{ asset($blog->Banner_mage) }}" alt="Banner" style="margin-top:10px; width:200px; height:auto;">
                 @endif
             </div>
-
+<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
             <!-- Resizeable Image -->
             <div class="form-group">
                 <label class="form-label">Resizeable Image</label>
