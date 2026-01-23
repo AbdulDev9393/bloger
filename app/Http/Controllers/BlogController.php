@@ -274,15 +274,16 @@ public function blogView($id)
 
         // OpenAI keys array
         $keys = [
-            env('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'),
-            env('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'),
-            env('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'),
-            env('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'),
-            env('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')
+            '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',
+            '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',
+            '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',
+            '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',
+            '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'
         ];
-        
-        $key = $keys[array_rand($keys)]; // Random key
-        dd($keys);
+
+        $apiKey = $keys[array_rand($keys)];
+
+        dd($apiKey);
         $client = OpenAI::client($key);
          
         // Prepare blog prompt
