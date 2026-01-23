@@ -259,4 +259,9 @@ public function blogView($id)
 
     return back()->with('success', 'SEO updated successfully for this blog');
 }
+
+
+function generateContent(Request $request){
+
+}
 }
