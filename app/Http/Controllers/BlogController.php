@@ -284,7 +284,7 @@ public function blogView($id)
         $apiKey = $keys[array_rand($keys)];
         
        
-        $client = OpenAI::client($apiKey);
+      
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $apiKey,
             'Content-Type'  => 'application/json',
