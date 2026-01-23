@@ -294,7 +294,9 @@ public function blogView($id)
                 ['role' => 'user', 'content' => 'Hello world!'],
             ],
         ]);
-        dd($response);
+       $result = $response->json();
+
+dd($result);
         // Prepare blog prompt
         $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
         if ($oldDescription && strlen($oldDescription) > 50) {
