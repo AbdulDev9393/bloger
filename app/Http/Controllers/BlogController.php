@@ -261,60 +261,93 @@ public function blogView($id)
 }
 
 
+public function generateContent(Request $request)
+{
+    $title = $request->input('title');
+    $oldDescription = $request->input('old_description');
 
-    public function generateContent(Request $request)
-    {
-        $title = $request->input('title');
-        $oldDescription = $request->input('old_description');
+    if (!$title) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Title is required'
+        ]);
+    }
 
-        if (!$title) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Title is required'
-            ]);
-        }
+    // Prepare prompt
+    if ($oldDescription) {
+        // Continue writing using old description
+        $prompt = "Continue writing a high-quality blog in English using the following content:\n\n";
+        $prompt .= "Title: $title\n";
+        $prompt .= "Current Content: $oldDescription\n\n";
+        $prompt .= "Ensure the content is engaging, SEO-friendly, and in HTML format using <h1>, <h2>, <p> tags.";
+    } else {
+        // Generate new blog
+        $prompt = "Write a high-quality blog in English based on the title: $title\n\n";
+        $prompt .= "Use HTML format with <h1>, <h2>, and <p> tags.";
+    }
 
-        // Prepare prompt for API
-        if ($oldDescription) {
-            // Agar old description exist karti hai → continue writing
-            $prompt = "Continue writing a blog in English using the following content:\n\n";
-            $prompt .= "Title: $title\n";
-            $prompt .= "Current Content: $oldDescription\n\n";
-            $prompt .= "Write the next section in HTML format using <p>, <h1>, <h2> tags.";
-        } else {
-            // Agar old description nahi → new blog generate karna
-            $prompt = "Write a high-quality blog in English based on the title: $title\n\n";
-            $prompt .= "Use HTML format with <h1>, <h2>, and <p> tags.";
-        }
+    try {
+        // API request
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('DEEPSEEK_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.deepseek.com/chat/completions', [
+            'model' => 'deepseek-chat',
+            'messages' => [
+                ['role' => 'system', 'content' => 'You are a professional content writer specializing in detailed blogs.'],
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'max_tokens' => 2000,
+            'temperature' => 0.8
+        ]);
 
-        // Example API request (replace URL and API key with your actual DeepSeek/OpenAI)
-        try {
-            $apiResponse = Http::withHeaders([
-                'Authorization' => 'Bearer YOUR_API_KEY',
-                'Content-Type' => 'application/json',
-            ])->post('https://api.deepseek.com/generate', [
-                'prompt' => $prompt,
-                'max_tokens' => 500, // adjust as needed
-            ]);
+        $data = $response->json();
 
-            $data = $apiResponse->json();
+        // DeepSeek returns content under choices[0]['message']['content']
+        if (isset($data['choices'][0]['message']['content'])) {
+            $generatedContent = $data['choices'][0]['message']['content'];
 
-            if (isset($data['content'])) {
-                $generatedContent = $data['content'];
-            } else {
-                $generatedContent = 'Failed to generate content.';
-            }
+            // Optional: format content (ensure <p>, <h1>, <h2> etc.)
+            $generatedContent = $this->formatGeneratedContent($generatedContent);
 
             return response()->json([
                 'success' => true,
                 'content' => $generatedContent
             ]);
-
-        } catch (\Exception $e) {
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Error: ' . $e->getMessage()
+                'message' => 'Failed to generate content from API.'
             ]);
         }
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ]);
     }
+}
+
+private function formatGeneratedContent($content)
+{
+    // Convert Markdown headers to HTML if needed
+    $content = preg_replace('/^# (.*?)$/m', '<h1>$1</h1>', $content);
+    $content = preg_replace('/^## (.*?)$/m', '<h2>$1</h2>', $content);
+    $content = preg_replace('/^### (.*?)$/m', '<h3>$1</h3>', $content);
+
+    // Ensure paragraphs
+    $lines = explode("\n", $content);
+    $newContent = '';
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line && !preg_match('/<h[1-3]>/', $line)) {
+            $newContent .= "<p>$line</p>";
+        } else {
+            $newContent .= $line;
+        }
+    }
+
+    return $newContent;
+}
 }
