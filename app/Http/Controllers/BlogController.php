@@ -264,7 +264,7 @@ public function blogView($id)
     return back()->with('success', 'SEO updated successfully for this blog');
 }public function generateContent(Request $request)
 {
-    try {
+   
         $request->validate([
             'title' => 'required|string|max:255'
         ]);
@@ -280,7 +280,7 @@ public function blogView($id)
             env('OPENAI_KEY4'),
             env('OPENAI_KEY5')
         ];
-        dd($keys);
+        
         $key = $keys[array_rand($keys)]; // Random key
         dd($keys);
         $client = OpenAI::client($key);
@@ -332,12 +332,5 @@ public function blogView($id)
             'message' => 'Blog content generated successfully!'
         ]);
 
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Error: ' . $e->getMessage(),
-            'content' => $this->getFallbackContent($request->title ?? '')
-        ]);
-    }
 }
 }
