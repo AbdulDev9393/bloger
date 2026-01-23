@@ -306,7 +306,9 @@ public function generateContent(Request $request)
                     - The tone should feel friendly and human-like.
                     - The blog must be around 800 words.
                     - Include an introduction, detailed main sections with subheadings, examples or tips, and a conclusion.
-                    - Keep sentences natural and avoid overly formal language."
+                    - Keep sentences natural and avoid overly formal language.
+                    - give me the all content in <h1><h2><h3><p> form ok 
+                    "
                 ],
                 [
                     'role' => 'user', 
