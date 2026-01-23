@@ -314,7 +314,7 @@ public function blogView($id)
         ]);
 
         $generatedContent = $response->choices[0]->message->content ?? '';
-
+     dd($generatedContent);
         if (!$generatedContent) {
             return response()->json([
                 'success' => false,
