@@ -101,8 +101,7 @@
           
             <div class="form-group" style="display:flex; align-items:center; gap:10px;">
               <input type="text" name="title" id="blog-title" value="{{ $blog->name }}">
-<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
-<button type="button" id="generate-content">Auto Generate</button>
+
 
             </div>
             <!-- Category -->
@@ -165,7 +164,13 @@
         </form>
     </div>
 </div>
+<form action="{{route('admin.blogs.generate_content')}}" method="POST">
+            <input type="text" name="title" id="blog-title" value="{{ $blog->name }}">
+<input type="hidden" id="old_description" value="{!! $blog->Description !!}">
+<button type="submit" >Auto Generate</button>
 
+</form>
+      
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     let editorInstance;
