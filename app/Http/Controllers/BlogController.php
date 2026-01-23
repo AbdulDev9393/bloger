@@ -314,8 +314,6 @@ public function blogView($id)
             'max_tokens' => 1500,
             'top_p' => 0.9
         ]);
-
-        
         $generatedContent = $response->choices[0]->message->content ?? '';
     
         if (!$generatedContent) {
