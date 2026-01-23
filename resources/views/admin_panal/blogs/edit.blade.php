@@ -57,7 +57,10 @@
                 <label class="form-label" for="blog-title">Blog Title</label>
                 <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
             </div>
-
+            <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+                <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
+                <button type="button" id="generate-content" class="btn btn-primary">Auto Generate</button>
+            </div>
             <!-- Category -->
             <div class="form-group">
                 <label class="form-label" for="blog-category">Category</label>
@@ -146,5 +149,64 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let editorInstance;
 
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            editorInstance = editor;
+            const wordCountDisplay = document.getElementById('word-count');
+
+            function countWords(text) {
+                text = text.replace(/<[^>]*>/g, ''); // remove HTML
+                text = text.replace(/\s+/g, ' ').trim();
+                return text ? text.split(' ').length : 0;
+            }
+
+            // Initial count
+            wordCountDisplay.textContent = `Word Count: ${countWords(editor.getData())}`;
+
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const count = countWords(data);
+                wordCountDisplay.textContent = `Word Count: ${count}`;
+            });
+        })
+        .catch(error => { console.error(error); });
+
+    // Auto Generate Button Click
+    document.getElementById('generate-content').addEventListener('click', function () {
+        const title = document.getElementById('blog-title').value;
+        if(!title) {
+            alert('Please enter a title first!');
+            return;
+        }
+
+        // AJAX request
+        fetch('{{ route("admin.blogs.generate_content") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ title: title })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                // Set CKEditor content with <h1>
+                editorInstance.setData(`<h1>${data.content}</h1>`);
+            } else {
+                alert('Failed to generate content!');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Something went wrong!');
+        });
+    });
+});
+</script>
 @endsection

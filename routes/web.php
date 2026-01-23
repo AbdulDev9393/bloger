@@ -63,6 +63,9 @@ Route::get('/manage_eid/{id}',[BlogController::class,'eid'])->name('admin.blogs.
    Route::put('/blogs/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
    Route::delete('/blog/delete/{id}', [BlogController::class, 'delete'])->name('admin.blog.delete');
 Route::get('/admin/blogs/search', [BlogController::class, 'search'])->name('admin.blogs.search');
+
+Route::post('/admin/blogs/generate-content', [BlogController::class, 'generateContent'])
+    ->name('admin.blogs.generate_content');
  /////////////////////////        //////////////////////
 Route::get('/manage_blogs_seo/{id}',[BlogController::class,'blog_seo'])->name('admin.blogs.seo');
 Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_update'])->name('admin.blogs.update.seo');
