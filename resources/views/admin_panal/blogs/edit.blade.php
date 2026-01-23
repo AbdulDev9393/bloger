@@ -186,22 +186,25 @@ document.addEventListener('DOMContentLoaded', function () {
             const wordCountEl = document.getElementById('word-count');
 
             const updateWordCount = () => {
-                const text = editor.getData().replace(/<[^>]*>/g, '').trim(); // remove HTML tags
+                const text = editor.getData().replace(/<[^>]*>/g, '').trim();
                 const words = text.length > 0 ? text.split(/\s+/).length : 0;
                 wordCountEl.textContent = 'Word Count: ' + words;
             };
 
-            // Initial count
             updateWordCount();
-
-            // Track changes
             editor.model.document.on('change:data', updateWordCount);
+
+            // Attach form submit AFTER editor is ready
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function() {
+                editorInstance.updateSourceElement(); // copy content to textarea
+            });
+
         })
         .catch(error => { console.error(error); });
 
     // Auto Generate button
     const generateBtn = document.getElementById('generate-content');
-
     generateBtn.addEventListener('click', function () {
         const title = document.getElementById('blog-title').value;
         const oldDescription = document.getElementById('old_description').value;
@@ -240,10 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-const form = document.querySelector('form');
-form.addEventListener('submit', function() {
-    editorInstance.updateSourceElement(); // <-- yahi line add karo
-});
+
 </script>
 
 
