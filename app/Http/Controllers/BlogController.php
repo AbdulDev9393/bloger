@@ -94,8 +94,8 @@ public function update(Request $request, $id)
 {
     $request->validate([
         'name' => 'required|string|max:255',
-        'category' => 'required|exists:categories,id',
-        'Status' => 'required|in:draft,published,scheduled',
+        'category' => 'required|string|max:255',
+        'Status' => 'required|string',
         'Description' => 'required|string',
         'Thumbnail_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
         'Banner_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:4096',
@@ -112,8 +112,8 @@ public function update(Request $request, $id)
     $manager = new ImageManager(new Driver());
     
     // Base path for public_html storage
-    $storagePath = public_path('storage/blogs');
-    $webpPath = public_path('storage/blogs/webp');
+    $storagePath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs';
+    $webpPath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs/webp';
 
     // Create directories if they don't exist
     if (!file_exists($storagePath)) {
@@ -126,7 +126,7 @@ public function update(Request $request, $id)
     /**
      * Process and save image with resizing and WebP conversion
      */
-    $processImage = function($file, $type, $maxWidth, $maxHeight, $quality = 80) use ($manager, $webpPath) {
+    $processImage = function($file, $type, $maxWidth, $maxHeight, $quality = 80) use ($manager, $storagePath, $webpPath) {
         // Generate unique filename
         $filename = time().'_'.$type.'_'.uniqid().'.webp';
         $webpFilePath = $webpPath.'/'.$filename;
@@ -146,9 +146,9 @@ public function update(Request $request, $id)
 
     // Thumbnail Image Processing (Small size for thumbnails)
     if ($request->hasFile('Thumbnail_Image') && $request->file('Thumbnail_Image')->isValid()) {
-        // Delete old image if exists
-        if ($blog->Thumbnail_Image && file_exists(public_path($blog->Thumbnail_Image))) {
-            unlink(public_path($blog->Thumbnail_Image));
+        // Delete old images
+        if ($blog->Thumbnail_Image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image)) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image);
         }
         
         // Process new image - Thumbnail size: 400x300
@@ -158,9 +158,9 @@ public function update(Request $request, $id)
 
     // Resizeable Image Processing (Medium size for content)
     if ($request->hasFile('Resizeable_Image') && $request->file('Resizeable_Image')->isValid()) {
-        // Delete old image if exists
-        if ($blog->resize_image && file_exists(public_path($blog->resize_image))) {
-            unlink(public_path($blog->resize_image));
+        // Delete old images
+        if ($blog->resize_image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image)) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image);
         }
         
         // Process new image - Medium size: 800x600
@@ -170,9 +170,9 @@ public function update(Request $request, $id)
 
     // Banner Image Processing (Large size for banners)
     if ($request->hasFile('Banner_Image') && $request->file('Banner_Image')->isValid()) {
-        // Delete old image if exists
-        if ($blog->Banner_mage && file_exists(public_path($blog->Banner_mage))) {
-            unlink(public_path($blog->Banner_mage));
+        // Delete old images
+        if ($blog->Banner_mage && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage)) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage);
         }
         
         // Process new image - Banner size: 1200x400
@@ -183,7 +183,7 @@ public function update(Request $request, $id)
     $blog->save();
 
     return redirect()->route('admin.blogs')->with('success', 'Blog updated successfully!');
-}
+}   // JSON-LD schema as array
 public function blogView($id)
 {
     $seo = BlogSeo::where('blog_id', $id)->first();
