@@ -100,9 +100,13 @@
             <!-- Blog Title -->
           
             <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+                <form action="{{route('admin.blogs.generate_conten')}}" method="POST">
+
+            
                 <input type="text" name="name" id="blog-title" class="form-control" value="{{ $blog->name }}" required>
                 <input type="hidden" name="old_description" value="{!! $blog->Description !!}" required>
-                <button type="button" id="generate-content" class="btn btn-primary">Auto Generate</button>
+                <button type="button"  class="btn btn-primary">Auto Generate</button>
+               </form>
             </div>
             <!-- Category -->
             <div class="form-group">
