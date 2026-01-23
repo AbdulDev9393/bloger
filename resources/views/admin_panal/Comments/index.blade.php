@@ -855,6 +855,11 @@
             font-size: 13px;
         }
     }
+    .delete-btn:hover {
+    background: var(--danger-color);
+    color: white;
+}
+
 </style>
 
 <!-- Top Header -->
@@ -889,7 +894,15 @@
             <div class="table-header">
                 <h3>All Comments & Messages</h3>
                 <div class="table-actions">
-                    
+                    <form action="{{ route('admin.comments.deleteAll') }}" 
+      method="get" 
+      onsubmit="return confirm('Are you sure you want to delete ALL comments?')">
+   
+
+    <button type="submit" class="btn btn-danger btn-sm">
+        <i class="fas fa-trash-alt"></i> Delete All
+    </button>
+</form>
                    
                 </div>
             </div>
@@ -902,6 +915,7 @@
                             <th>User / email</th>
                             <th>Message</th>
                             <th>Date Time</th>
+                            <th>Action</th>
                            
                         </tr>
                     </thead>
@@ -915,7 +929,18 @@
                             </td>
                            <td>{{$getComent->Message}}</td>
                             <td>{{ $getComent->created_at->format('d M Y, h:i A') }}</td>
-
+            <td>
+                <form action="{{ route('admin.comments.delete', $getComent->id) }}" 
+                      method="POST" 
+                      onsubmit="return confirm('Are you sure you want to delete this comment?')">
+                    @csrf
+                    @method('DELETE')
+            
+                    <button type="submit" class="action-btn delete-btn" title="Delete Comment">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
                            
                         </tr>
                         @endforeach

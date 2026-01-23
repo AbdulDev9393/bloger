@@ -433,7 +433,7 @@
     <div class="registration-container">
         <!-- Website Logo -->
         <div class="logo-container">
-            <img src="{{ asset('storage/sitelogo.png') }}" alt="Website Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/90?text=LOGO'">
+            <img src="https://techblogs.site/storage/blogs/favicon.ico" alt="Website Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/90?text=LOGO'">
         </div>
 
         <h2>Admin Registration</h2>

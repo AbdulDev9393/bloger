@@ -4,8 +4,9 @@
 
 @section('main-section')
 
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 <style>
-/* Reset & Variables */
 :root {
     --primary-color: #4e73df;
     --primary-hover: #3a5ccc;
@@ -16,25 +17,17 @@
     --border-color: #e3e6f0;
 }
 
-/* Main Content */
 .main-content {
-    
     padding: 30px;
     transition: all 0.3s;
     margin-left: 110px;
 }
-    @media (min-width: 600px) {
-    #add-blog-modal .modal-dialog {
-        margin-left: 0px  !important;
-    }
-}
-/* Page Header */
+
 .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
 .page-header h2 { font-size:24px; font-weight:700; color:var(--dark-color); }
 .btn-primary { background-color: var(--primary-color); color:white; padding:10px 18px; border-radius:8px; border:none; }
 .btn-primary:hover { background-color: var(--primary-hover); }
 
-/* Form Styles */
 .form-container {
     background: white;
     padding: 30px;
@@ -45,6 +38,7 @@
 .form-label { font-weight:500; margin-bottom:5px; display:block; }
 .form-control, .form-select { width:100%; padding:10px 15px; border:1px solid var(--border-color); border-radius:8px; }
 .form-control:focus, .form-select:focus { outline:none; border-color:var(--primary-color); box-shadow:0 0 0 3px rgba(78,115,223,0.1); }
+
 </style>
 
 <div class="main-content">
@@ -67,11 +61,12 @@
             <!-- Category -->
             <div class="form-group">
                 <label class="form-label" for="blog-category">Category</label>
-                <select name="category" id="blog-category" class="form-select" required>
-          <option value="{{$blog->Category->id }}" {{ $blog->Category->id == $blog->Category->id ? 'selected' : '' }}>
-    {{ $blog->Category->name }}
-</option>
-
+                <select name="category" class="form-control">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $blog->Category->id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -85,35 +80,71 @@
                 </select>
             </div>
 
-            <!-- Short Description -->
+            <!-- Short Description with CKEditor -->
             <div class="form-group">
                 <label class="form-label" for="blog-description">Short Description</label>
-                <textarea name="Description" id="blog-description" class="form-control" rows="5" required>{{ $blog->Description }}</textarea>
+                <textarea name="Description" id="editor" class="form-control" rows="5" required>{!! $blog->Description !!}</textarea>
+                <div class="mt-2"><span id="word-count">Word Count: 0</span></div>
             </div>
 
             <!-- Thumbnail Image -->
             <div class="form-group">
                 <label class="form-label">Thumbnail Image</label>
                 <input type="file" name="Thumbnail_Image" class="form-control" accept="image/*">
-@if($blog->Thumbnail_Image)
-    <img src="{{ asset($blog->Thumbnail_Image) }}" alt="Thumbnail" style="margin-top:10px; width:100px; height:auto;">
-@endif
+                @if($blog->Thumbnail_Image)
+                    <img src="{{ asset($blog->Thumbnail_Image) }}" alt="Thumbnail" style="margin-top:10px; width:100px; height:auto;">
+                @endif
             </div>
 
             <!-- Banner Image -->
             <div class="form-group">
                 <label class="form-label">Banner Image</label>
                 <input type="file" name="Banner_Image" class="form-control" accept="image/*">
-
                 @if($blog->Banner_mage)
                     <img src="{{ asset($blog->Banner_mage) }}" alt="Banner" style="margin-top:10px; width:200px; height:auto;">
                 @endif
+            </div>
 
+            <!-- Resizeable Image -->
+            <div class="form-group">
+                <label class="form-label">Resizeable Image</label>
+                <input type="file" name="Resizeable_Image" class="form-control" accept="image/*">
+                @if($blog->resize_image)
+                    <img src="{{ asset($blog->resize_image) }}" alt="Banner" style="margin-top:10px; width:200px; height:auto;">
+                @endif
             </div>
 
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            const wordCountDisplay = document.getElementById('word-count');
+
+            function countWords(text) {
+                text = text.replace(/<[^>]*>/g, ''); // remove HTML
+                text = text.replace(/\s+/g, ' ').trim();
+                return text ? text.split(' ').length : 0;
+            }
+
+            // Initial count
+            wordCountDisplay.textContent = `Word Count: ${countWords(editor.getData())}`;
+
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const count = countWords(data);
+                wordCountDisplay.textContent = `Word Count: ${count}`;
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+</script>
 
 @endsection

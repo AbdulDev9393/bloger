@@ -50,7 +50,7 @@
 
 <aside class="admin-sidebar">
   <div class="sidebar-header">
-    <img src="{{ asset('storage/sitelogo.png') }}" alt="Admin Logo" class="logo">
+    <img src="https://techblogs.site//favicon.ico" alt="Admin Logo" class="logo">
     <h2>Blog Admin</h2>
   </div>
   <ul class="sidebar-menu">

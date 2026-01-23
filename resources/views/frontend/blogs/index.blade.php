@@ -22,11 +22,11 @@
 
 /* Hover Effect */
 .search-box:hover{
-    border:2px solid #ff5500;
-    box-shadow:0 0 12px rgba(255,85,0,0.6);
+    border:2px solid #1450fb;
+    box-shadow:0 0 8px #1450fb;
 }
 .search-box:focus-within{
-    border:2px solid #ff5500;
+    border:2px solid #1450fb;
     box-shadow:0 0 12px rgba(255,85,0,0.6);
 }
 .seach_engin{
@@ -51,7 +51,7 @@
 
 .icon i{
     font-size:22px;
-    color:#ff5500;
+    color:#0480ff;
 }
 </style>
 

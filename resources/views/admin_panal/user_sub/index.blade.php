@@ -933,6 +933,7 @@
                 <tr>
                       <th width="50%">#</th>
                       <th width="50%">Email</th>
+                       <th>Actions</th> 
                 </tr>
             </thead>
             <tbody id="subscribers-table-body">
@@ -940,6 +941,17 @@
                     <tr>
                         <td>{{ $index + 1 }}</td> <!-- Serial number -->
                         <td>{{ $email->email }}</td>
+                        <td>
+                            <div class="subscriber-actions">
+                                <form action="{{ route('subscribers.destroy', $email->id) }}" method="POST" class="delete-subscriber-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="action-btn delete-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

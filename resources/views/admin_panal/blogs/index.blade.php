@@ -3,6 +3,7 @@
 @section('title', 'blogs')
 
 @section('main-section')
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 
 <style>
     * {
@@ -438,9 +439,10 @@
 
   
     .modal-content {
+        padding: 30px;
         background: white;
         border-radius: 12px;
-        width: 500px;
+         max-width: 100%;
         max-width: 90%;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     }
@@ -644,7 +646,8 @@
             @else
                 <img src="https://via.placeholder.com/60x50?text=No+Image" alt="No Image" class="blog-thumbnail">
             @endif
-            <span>{{ $blog->name }}</span>
+          <span>{{ Str::limit(strip_tags($blog->name), 10, '...') }}</span>
+             
         </div>
 
     </td>
@@ -698,81 +701,106 @@
 
 
 <!-- Add Blog Modal -->
-<div class="modal fade" id="add-blog-modal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true" style="margin-left: 250px">
-  <div class="modal-dialog modal-xl"> <!-- modal-xl for extra wide modal -->
+<div class="modal fade" id="add-blog-modal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addBlogModalLabel"><i class="fas fa-plus"></i> Add New Blog Post</h5>
+        <h5 class="modal-title"><i class="fas fa-plus"></i> Add New Blog Post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form id="add-blog-form" method="post" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data">
-      @csrf
-    <div class="container-fluid">
-        <div class="row g-3">
-            <!-- Blog Title -->
-            <div class="col-md-6">
-                <label for="blog-title" class="form-label">Blog Title</label>
-                <input type="text" name="name" class="form-control" id="blog-title" placeholder="Enter blog title" required>
+         <form id="add-blog-form" method="post" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data">
+            @csrf
+            <div class="container-fluid">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="blog-title" class="form-label">Blog Title</label>
+                        <input type="text" name="name" class="form-control" id="blog-title" placeholder="Enter blog title" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="blog-category" class="form-label">Category</label>
+                        <select class="form-select" name="category" id="blog-category" required>
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id }}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="blog-status" class="form-label">Status</label>
+                        <select class="form-select" name="Status" id="blog-status" required>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                            <option value="scheduled">Scheduled</option>
+                        </select>
+                    </div>
+
+                    <!-- Schedule Date -->
+                    <div class="col-md-6" id="schedule-date-group" style="display:none;">
+                        <label for="schedule-date" class="form-label">Schedule Date</label>
+                        <input type="datetime-local" class="form-control" name="schedule_date" id="schedule-date">
+                    </div>
+                    <div class="mt-2">
+                        <span id="word-count">Word Count: 0</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="blog-content" class="form-label">Description</label>
+                   <textarea name="description" id="editor"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Thumbnail Image</label>
+                        <input type="file" name="Thumbnail_Image" class="form-control" id="blog-thumbnail" accept="image/*">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Banner Image</label>
+                        <input type="file" class="form-control" name="Banner_Image" id="blog-banner" accept="image/*">
+                    </div>
+                     <div class="col-md-6">
+                        <label class="form-label">Resizeable Image</label>
+                        <input type="file" class="form-control" name="Resizeable_Image" id="blog-banner" accept="image/*">
+                    </div>
+                </div>
             </div>
 
-            <!-- Category -->
-            <div class="col-md-6">
-                <label for="blog-category" class="form-label">Category</label>
-                <select class="form-select" name="category" id="blog-category" required>
-                    <option value="">Select Category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{$category->id }}">{{$category->name}}</option>
-                    @endforeach
-                </select>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Blog</button>
             </div>
-
-            <!-- Status -->
-            <div class="col-md-6">
-                <label for="blog-status" class="form-label">Status</label>
-                <select class="form-select" name="Status" id="blog-status" required>
-                    <option value="draft">Draft</option>
-                    <option value="published">Published</option>
-                    <option value="scheduled">Scheduled</option>
-                </select>
-            </div>
-
-            <!-- Short Description -->
-            <div class="col-md-12">
-                <label for="blog-content" class="form-label">Short Description</label>
-                <textarea class="form-control" name="Description" id="blog-content" rows="3" placeholder="Enter a short description" required></textarea>
-            </div>
-
-            <!-- Thumbnail Image -->
-            <div class="col-md-6">
-                <label class="form-label">Thumbnail Image</label>
-                <input type="file" name="Thumbnail_Image" class="form-control" id="blog-thumbnail" accept="image/*">
-            </div>
-
-            <!-- Banner Image -->
-            <div class="col-md-6">
-                <label class="form-label">Banner Image</label>
-                <input type="file" class="form-control" name="Banner_Image" id="blog-banner" accept="image/*">
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save Blog</button>
-    </div>
-</form>
-
+        </form>
+      </div>
     </div>
   </div>
 </div>
+<!-- Add Blog Modal -->
+
+
 
 
 <script>
-document.getElementById('blog-status').addEventListener('change', function() {
-    document.getElementById('schedule-date-group').style.display = this.value === 'scheduled' ? 'block' : 'none';
+document.addEventListener('DOMContentLoaded', function () {
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            const wordCountDisplay = document.getElementById('word-count');
+
+            function countWords(text) {
+                text = text.replace(/<[^>]*>/g, '');
+                text = text.replace(/\s+/g, ' ').trim();
+                return text ? text.split(' ').length : 0;
+            }
+
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const count = countWords(data);
+                wordCountDisplay.textContent = `Word Count: ${count}`;
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
 });
 </script>
-
-
 @endsection

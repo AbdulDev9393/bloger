@@ -20,7 +20,7 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #ff7700, #ff5500);
+    background: linear-gradient(90deg, #0014ff, #10ff00);
   }
 
   /* Footer container */
@@ -66,9 +66,10 @@
   }
 
   .footer-logo span {
+          font-family: 'Orbitron', sans-serif; /* Stylish futuristic font */
     font-size: 26px;
     font-weight: 800;
-    background: linear-gradient(to right, #ff7700, #ff9900);
+    background: linear-gradient(to right, #115ae1, #1ff539);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -97,7 +98,7 @@
     bottom: 0;
     width: 40px;
     height: 3px;
-    background: #ff7700;
+    background: #004eff;
   }
 
   .footer-links {
@@ -116,14 +117,14 @@
   }
 
   .footer-links a:hover {
-    color: #ff7700;
+    color: rgb(13 110 253);
     transform: translateX(5px);
   }
 
   .footer-links a i {
     width: 20px;
     text-align: center;
-    color: #ff7700;
+    color: #0196ff;
   }
 
   /* Contact info */
@@ -187,7 +188,7 @@
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background: linear-gradient(135deg, #ff7700, #ff5500);
+   background: linear-gradient(135deg, #0037ff, #10ff00);
     color: white;
     font-weight: 600;
     cursor: pointer;
@@ -230,7 +231,7 @@
   }
 
   .footer-social a:hover {
-    background: linear-gradient(135deg, #ff7700, #ff5500);
+    background: linear-gradient(90deg, #0014ff, #10ff00);
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(255, 119, 0, 0.4);
   }
@@ -257,29 +258,31 @@
   }
 
   /* Back to top button */
-  .back-to-top {
-    position: absolute;
-    right: 20px;
-    top: -25px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff7700, #ff5500);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
+.back-to-top {
+  position: fixed;  /* Change from absolute to fixed */
+  right: 20px;
+  bottom: 30px;     /* bottom instead of top */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+     background: linear-gradient(135deg, #2255b1, #33ff00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.4s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  opacity: 0;      /* initially hidden */
+  visibility: hidden;
+  z-index: 9999;   /* ensure above all elements */
+}
 
-  .back-to-top:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  }
-
+.back-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
   /* Responsive adjustments */
   @media (max-width: 1024px) {
     .footer-grid {
@@ -370,7 +373,7 @@
   height: 120px;
   border-radius: 50%;
   object-fit: contain;
-  background: linear-gradient(135deg, #ff7700, #ff5500);
+  background: linear-gradient(135deg, #0072ff, #00ff1f);
   padding: 5px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
@@ -406,22 +409,33 @@
 }
 </style>
 
-
+@php
+   use App\Models\SocialMedia;
+   $data=SocialMedia::first();
+   @endphp
   <!-- Footer -->
   <footer>
     <div class="footer-container">
       <!-- Back to top button -->
-      <div class="back-to-top" id="backToTop">
-        <i class="fa-solid fa-arrow-up"></i>
-      </div>
+     <div class="back-to-top" id="backToTop">
+  <i class="fa-solid fa-arrow-up"></i>
+</div>
+
 
       <!-- Footer grid -->
       <div class="footer-grid">
         <!-- Brand section -->
 <div class="footer-brand">
   <div class="footer-logo">
-    <img src="{{ asset('storage/sitelogo.png') }}" alt="Daily Blogs Logo">
-    <span>daliyblogs</span>
+   <img 
+    src="https://techblogs.site/favicon.ico" 
+    alt="Daily Blogs Logo"
+    title="Daily Blogs"
+    width="32"
+    height="32"
+    loading="lazy"
+>
+    <span>Techblogs</span>
   </div>
   <p class="footer-desc">
     Explore latest blogs, tips, and tutorials. Stay updated with daily content crafted for you. Join our community of passionate readers and writers.
@@ -434,32 +448,16 @@
           <div class="footer-links">
             <a href="{{route('frontend.index')}}"><i class="fa-solid fa-chevron-right"></i> Home</a>
             <a href="{{route('frontend.Aboute')}}"><i class="fa-solid fa-chevron-right"></i> About Us</a>
-            <a href="{{route('frontend.Services')}}"><i class="fa-solid fa-chevron-right"></i> Services</a>
+            <a href="{{route('frontend.terms-conditions')}}"><i class="fa-solid fa-chevron-right"></i> Terms Condition</a>
+             <a href="{{route('frontend.praivacy-policy')}}"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a>
             <a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-chevron-right"></i> Blog</a>
             <a href="{{route('frontend.contect')}}"><i class="fa-solid fa-chevron-right"></i> Contact</a>
+              <a href="https://www.sigmatraffic.com">Buy traffic for your website</a>
+              <a href="https://mondiad.com?refid=27739" target="_blank" title="Mondiad.com">Mondiad.com</a>
           </div>
         </div>
 
-        <!-- Contact info -->
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <div class="contact-info">
-            <div class="contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Pakistan  , Layyah</span>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-phone"></i>
-              <span><a href="tel:+923140699386">+92 314 0699386</a></span>
-            </div>
-            <div class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <span><a href="mailto:abdulprofessionaldeveloper@gmail.com">abdulprofessionaldeveloper@gmail.com</a></span>
-            </div>
-
-           
-          </div>
-        </div>
+      
 
         <!-- Newsletter -->
         <div class="footer-section">
@@ -482,48 +480,84 @@
       <!-- Footer bottom -->
       <div class="footer-bottom">
         <div class="footer-copy">
-          © 2025 daliyblogs. All rights reserved.
+          © 2025 techblogs.site. All rights reserved.
         </div>
         
         <div class="footer-social">
-          <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="{{ optional($data)->instagram ?? '#' }}" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+         <a href="{{ optional($data)->medium ?? '#' }}" title="Medium"><i class="fa-brands fa-medium"></i></a>
+
+          <a href="{{ optional($data)->youtube ?? '#' }}" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
         
     
       </div>
     </div>
   </footer>
+<!-- Multiple MrMND Ads -->
+<script async src="https://ss.mrmnd.com/dynamic.js" data-mnddynid="c4155129-ba8a-4d97-96c3-20175a691a87"></script>
+
+<!-- MrMND Ads -->
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    // Dynamic Ad (page load)
+    const dynamicAd = document.createElement('script');
+    dynamicAd.src = "https://ss.mrmnd.com/dynamic.js";
+    dynamicAd.setAttribute("data-mnddynid","c4155129-ba8a-4d97-96c3-20175a691a87");
+    document.body.appendChild(dynamicAd);
+
+    // Interstitial Ad (after 10 seconds)
+    setTimeout(() => {
+        const interstitialAd = document.createElement('script');
+        interstitialAd.src = "https://ss.mrmnd.com/interstitial.js";
+        interstitialAd.setAttribute("data-mndintid","50e41062-b554-43b1-b372-ba8fae762ca2");
+        document.body.appendChild(interstitialAd);
+    }, 10000);
+
+    // Static Ads (on first scroll)
+    let staticAdsLoaded = false;
+    window.addEventListener('scroll', function onFirstScroll() {
+        if(!staticAdsLoaded){
+            staticAdsLoaded = true;
+
+            const staticAd1 = document.createElement('script');
+            staticAd1.src = "https://ss.mrmnd.com/static/90b2bdb2-1797-4ede-8bd3-d5cda150260d.js";
+            document.body.appendChild(staticAd1);
+
+            const staticAd2 = document.createElement('script');
+            staticAd2.src = "https://ss.mrmnd.com/static/another-static-ad.js"; // example
+            document.body.appendChild(staticAd2);
+
+            window.removeEventListener('scroll', onFirstScroll);
+        }
+    });
+});
+</script>
+
 
   <script>
-    // Back to top functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Show/hide back to top button based on scroll position
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.opacity = '1';
-        backToTopBtn.style.visibility = 'visible';
-      } else {
-        backToTopBtn.style.opacity = '0';
-        backToTopBtn.style.visibility = 'hidden';
-      }
-    });
-    
-    // Initialize back to top button as hidden
+const backToTopBtn = document.getElementById('backToTop');
+
+// Show/hide button on scroll
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 150) {
+    backToTopBtn.style.opacity = '1';
+    backToTopBtn.style.visibility = 'visible';
+  } else {
     backToTopBtn.style.opacity = '0';
     backToTopBtn.style.visibility = 'hidden';
-    
+  }
+});
 
+// Scroll to top on click
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
  
   </script>

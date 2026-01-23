@@ -60,7 +60,7 @@
                                            name="meta_title" 
                                            value="{{ old('meta_title', $blog_seo->title ?? '') }}"
                                            placeholder="Enter a compelling title for search results"
-                                           maxlength="60"
+                                          
                                            data-preview="title">
                                     <div class="form-text">
                                         The title tag is displayed in search engine results. Keep it under 60 characters.
@@ -74,13 +74,13 @@
                                             <span id="descCounter">0</span>/160 characters
                                         </span>
                                     </label>
-<textarea class="form-control border-primary-subtle" 
-          id="meta_description" 
-          name="meta_description" 
-          rows="4" 
-          placeholder="Write a brief and engaging description that encourages clicks"
-          maxlength="160"
-          data-preview="description">{{ old('meta_description', $blog_seo->Description ?? '') }}</textarea>
+                                    <textarea class="form-control border-primary-subtle" 
+                                              id="meta_description" 
+                                              name="meta_description" 
+                                              rows="4" 
+                                              placeholder="Write a brief and engaging description that encourages clicks"
+                                             
+                                              data-preview="description">{{ old('meta_description', $blog_seo->Description ?? '') }}</textarea>
 
                                     <div class="form-text">
                                         This description appears in search results. Aim for 150-160 characters.

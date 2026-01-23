@@ -273,7 +273,7 @@
 <body>
     <div class="otp-container">
         <div class="logo-container">
-            <img src="{{ asset('storage/sitelogo.png') }}" alt="Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/70?text=LOGO'">
+            <img src="https://techblogs.site/storage/blogs/favicon.ico" alt="Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/70?text=LOGO'">
         </div>
 
         <h2>OTP Verification</h2>

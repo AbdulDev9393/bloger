@@ -69,7 +69,7 @@
 .about-cta a{
     display:inline-block;
     padding:12px 28px;
-    background:#ff5500;
+    background:#002bff;
     color:#fff;
     text-decoration:none;
     border-radius:6px;
@@ -86,26 +86,24 @@
 
         <!-- Image Side -->
         <div class="about-img">
-            <img src="{{ asset('storage/sitelogo.png') }}" alt="About Us">
+            <img src="https://techblogs.site//favicon.ico" alt="About Us">
         </div>
 
         <!-- Content Side -->
         <div class="about-content">
-            <h1>About Our Website</h1>
+            <h1>Welcome to our tech blog!</h1>
             <p>
-                Our mission is to provide high-quality, SEO-friendly blogs and guides
-                that help businesses and bloggers grow online. We focus on creating
-                content that ranks on Google and drives traffic naturally.
-            </p>
-
+               We are passionate about sharing the latest tips, tricks, and tutorials in the world of technology. From laptops and smartphones to cutting-edge gadgets, we aim to provide our readers with easy-to-understand guides and insights to stay ahead in this fast-paced digital world.
+            </p> <p>
+Our team writes daily posts to keep you updated with the newest trends, product reviews, and practical tech advice. Whether you are a beginner or a tech enthusiast, our content is designed to help you make the most of your devices and digital lifestyle.<p>
             <p>Our key strengths:</p>
-            <ul>
-                <li>SEO-optimized blog articles for better ranking</li>
-                <li>Guides on blogging, affiliate marketing, and AdSense</li>
-                <li>Latest trends in Technology, Entertainment, Digital, and Culture</li>
-                <li>Professional web development using Laravel</li>
-                <li>Speed and performance optimization for websites</li>
-            </ul>
+           <ul>
+                    <li>I write blogs mostly focused on popular countries like the USA, UK, and others.</li>
+                    <li>Providing useful information and tips to readers worldwide.</li>
+                    <li>Sharing daily insights on technology, gadgets, and digital trends.</li>
+                    <li>Covering topics that help people stay updated and informed.</li>
+                    <li>Creating content that educates, informs, and engages tech enthusiasts.</li>
+                </ul>
 
             <div class="about-cta">
                 <a href="{{route('frontend.contect')}}">Contact Us</a>

@@ -1,574 +1,425 @@
 @include('frontend.header')
 
-<section class="contact-hero">
-  <div class="container">
-    <div class="hero-content">
-      <h1>Get in Touch 📬</h1>
-      <p>Have questions or suggestions? We'd love to hear from you! Fill out the form below and we'll get back to you shortly.</p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <i class="fas fa-clock"></i>
-          <span>Response within 24 hours</span>
-        </div>
-        <div class="stat-item">
-          <i class="fas fa-headset"></i>
-          <span>24/7 Customer Support</span>
-        </div>
-        <div class="stat-item">
-          <i class="fas fa-users"></i>
-          <span>100% Satisfaction</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Include Tailwind CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<section class="contact-section">
-  <div class="container">
-    <div class="contact-grid">
-      <!-- Contact Form -->
-      <div class="contact-form-container card">
-        <div class="form-header">
-          <h2>Send a Message</h2>
-          <p>Fill out the form below and we'll respond as soon as possible</p>
-        </div>
-        
-        <form action="{{route('admin.Comments.store')}}" method="POST" class="contact-form" id="contactForm">
-          @csrf
-          
-          <div class="form-group">
-            <label for="name">Full Name <span class="required">*</span></label>
-            <div class="input-with-icon">
-              <i class="fas fa-user"></i>
-              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email Address <span class="required">*</span></label>
-            <div class="input-with-icon">
-              <i class="fas fa-envelope"></i>
-              <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <div class="input-with-icon">
-              <i class="fas fa-tag"></i>
-              <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Your Message <span class="required">*</span></label>
-            <div class="textarea-with-icon">
-              <i class="fas fa-comment-alt"></i>
-              <textarea id="message" name="message" rows="6" placeholder="Please describe your inquiry in detail..." required></textarea>
-            </div>
-            <div class="char-counter">
-              <span id="charCount">0</span>/500 characters
-            </div>
-          </div>
-          
-          <div class="form-footer">
-            <button type="submit" class="submit-btn">
-              <span class="btn-text">Send Message</span>
-              <i class="fas fa-paper-plane"></i>
-            </button>
-            <p class="form-note">By submitting this form, you agree to our <a href="#">Privacy Policy</a>.</p>
-          </div>
-        </form>
-      </div>
-      
-      <!-- Contact Info & Social -->
-      <div class="contact-sidebar">
-        <!-- Contact Information -->
-        <div class="contact-info card">
-          <h3>Contact Information</h3>
-          <div class="info-item">
-            <div class="info-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="info-content">
-              <h4>Our Location</h4>
-              <p>123 Business Street, Suite 101<br>Pakistan layyah 93/ML</p>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <div class="info-content">
-              <h4>Phone Number</h4>
-              <p>+923140699386</p>
-             
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon">
-              <i class="fas fa-envelope-open"></i>
-            </div>
-            <div class="info-content">
-              <h4>Email Address</h4>
-              <p>abduldeveloper701@gmail.com</p>
-              <p class="info-sub">For general inquiries</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Social Media -->
-        <div class="contact-social card">
-          <h3>Connect With Us</h3>
-          <p>Follow us on social media for updates, tips, and more.</p>
-          
-          <div class="social-icons">
-            <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-              <i class="fab fa-facebook-f"></i>
-              <span>Facebook</span>
-            </a>
-            <a href="https://twitter.com/yourpage" target="_blank" class="social-icon twitter">
-              <i class="fab fa-twitter"></i>
-              <span>Twitter</span>
-            </a>
-            <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-              <i class="fab fa-instagram"></i>
-              <span>Instagram</span>
-            </a>
-            <a href="https://linkedin.com/yourpage" target="_blank" class="social-icon linkedin">
-              <i class="fab fa-linkedin-in"></i>
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://youtube.com/yourpage" target="_blank" class="social-icon youtube">
-              <i class="fab fa-youtube"></i>
-              <span>YouTube</span>
-            </a>
-          </div>
-        </div>
-        
-        <!-- FAQ Preview -->
-        <div class="faq-preview card">
-          <h3>Frequently Asked Questions</h3>
-          <div class="faq-item">
-            <h4>How quickly will I receive a response?</h4>
-            <p>We typically respond to all inquiries within 24 hours during business days.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Do you offer phone support?</h4>
-            <p>Yes, phone support is available Mon-Fri from 9am to 6pm EST.</p>
-          </div>
-          <a href="#" class="faq-link">View all FAQs <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- Custom Styles -->
 <style>
-/* Base Styles */
-:root {
-  --primary: #ff6b00;
-  --primary-dark: #e55a00;
-  --secondary: #2d3748;
-  --light: #f8f9fa;
-  --gray: #6c757d;
-  --light-gray: #e9ecef;
-  --success: #28a745;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --radius: 12px;
-}
+    :root {
+        --primary: #3b82f6;
+        --primary-dark: #1d4ed8;
+        --secondary: #6b7280;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --light: #f9fafb;
+        --dark: #1f2937;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f9fafb;
-}
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+    .card-hover {
+        transition: all 0.3s ease;
+    }
 
-.card {
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 30px;
-  margin-bottom: 25px;
-}
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
 
-/* Hero Section */
-.contact-hero {
-  background: linear-gradient(135deg, #ff7700 0%, #ff4500 100%);
-  color: white;
-  padding: 80px 0;
-  position: relative;
-  overflow: hidden;
-}
+    .floating-animation {
+        animation: float 6s ease-in-out infinite;
+    }
 
-.contact-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.05"/></svg>');
-  background-size: cover;
-}
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
 
-.hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
+    .social-icon {
+        transition: all 0.3s ease;
+    }
 
-.contact-hero h1 {
-  font-size: 3.2rem;
-  margin-bottom: 20px;
-  font-weight: 800;
-}
+    .social-icon:hover {
+        transform: scale(1.1) translateY(-3px);
+    }
 
-.contact-hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto 40px;
-  opacity: 0.95;
-}
+    .input-focus:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
 
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 40px;
-}
+    .loader {
+        border-top-color: #3498db;
+        animation: spin 1s ease-in-out infinite;
+    }
 
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 12px 20px;
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-}
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
 
-.stat-item i {
-  font-size: 1.2rem;
-}
+    .fade-in {
+        animation: fadeIn 0.5s ease-in;
+    }
 
-/* Contact Grid */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin: 80px auto;
-}
-
-@media (max-width: 992px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Form Styles */
-.form-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.form-header h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.form-header p {
-  color: var(--gray);
-}
-
-.form-group {
-  margin-bottom: 25px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--secondary);
-}
-
-.required {
-  color: #e53e3e;
-}
-
-.input-with-icon, .textarea-with-icon {
-  position: relative;
-}
-
-.input-with-icon i, .textarea-with-icon i {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--gray);
-}
-
-.textarea-with-icon i {
-  top: 20px;
-  transform: none;
-}
-
-.input-with-icon input, .textarea-with-icon textarea {
-  width: 100%;
-  padding: 15px 15px 15px 45px;
-  border: 1.5px solid var(--light-gray);
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s;
-}
-
-.textarea-with-icon textarea {
-  padding-top: 15px;
-  resize: vertical;
-}
-
-.input-with-icon input:focus, .textarea-with-icon textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
-}
-
-.char-counter {
-  text-align: right;
-  font-size: 0.85rem;
-  color: var(--gray);
-  margin-top: 5px;
-}
-
-/* Submit Button */
-.form-footer {
-  margin-top: 30px;
-}
-
-.submit-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 18px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.submit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
-}
-
-.submit-btn:active {
-  transform: translateY(-1px);
-}
-
-.form-note {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: var(--gray);
-}
-
-.form-note a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.form-note a:hover {
-  text-decoration: underline;
-}
-
-/* Contact Info */
-.contact-info h3, .contact-social h3, .faq-preview h3 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: var(--secondary);
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--light-gray);
-}
-
-.info-item:last-child {
-  border-bottom: none;
-}
-
-.info-icon {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 69, 0, 0.1));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.info-icon i {
-  color: var(--primary);
-  font-size: 1.2rem;
-}
-
-.info-content h4 {
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-  color: var(--secondary);
-}
-
-.info-content p {
-  color: var(--gray);
-  margin-bottom: 5px;
-}
-
-.info-sub {
-  font-size: 0.85rem;
-  color: var(--gray);
-  opacity: 0.8;
-}
-
-/* Social Icons */
-.contact-social p {
-  color: var(--gray);
-  margin-bottom: 25px;
-}
-
-.social-icons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.social-icon i {
-  font-size: 1.2rem;
-  width: 24px;
-}
-
-.social-icon:hover {
-  transform: translateX(5px);
-}
-
-.facebook { background: #1877f2; }
-.twitter { background: #1da1f2; }
-.instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
-.linkedin { background: #0077b5; }
-.youtube { background: #ff0000; }
-
-/* FAQ Preview */
-.faq-item {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--light-gray);
-}
-
-.faq-item h4 {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: var(--secondary);
-}
-
-.faq-item p {
-  font-size: 0.9rem;
-  color: var(--gray);
-}
-
-.faq-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 15px;
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.faq-link:hover {
-  text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .contact-hero h1 {
-    font-size: 2.5rem;
-  }
-  
-  .contact-hero p {
-    font-size: 1.1rem;
-  }
-  
-  .hero-stats {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .card {
-    padding: 25px 20px;
-  }
-  
-  .contact-grid {
-    gap: 25px;
-    margin: 50px auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-hero {
-    padding: 60px 0;
-  }
-  
-  .contact-hero h1 {
-    font-size: 2rem;
-  }
-  
-  .form-header h2 {
-    font-size: 1.7rem;
-  }
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 
-<
-@include('frontend.footer')
+<!-- Hero Section -->
+
+
+<!-- Contact Section -->
+<section class="py-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Left Column - Contact Form -->
+            <div class="fade-in">
+                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-3">Send a Message</h2>
+                        <p class="text-gray-600">Fill out the form below and we'll respond as soon as possible</p>
+                        
+                        <!-- Progress Steps -->
+                        <div class="flex items-center justify-center mt-6 mb-2">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                                    1
+                                </div>
+                                <div class="h-1 w-16 bg-blue-600"></div>
+                                <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold">
+                                    2
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500">Step 1 of 2: Personal Information</p>
+                    </div>
+
+                    <form id="contactForm" action="{{ route('user.message.store') }}" method="POST" class="space-y-6">
+                        @csrf
+                        
+                        <!-- Step 1: Personal Info -->
+                        <div id="step1" class="space-y-6">
+                            <div class="relative">
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Full Name <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="name" name="name" 
+                                           class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                           placeholder="John Doe" required>
+                                </div>
+                                <div class="text-sm text-red-500 mt-1" id="name-error"></div>
+                            </div>
+
+                            <div class="relative">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email Address <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" 
+                                           class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                           placeholder="john@example.com" required>
+                                </div>
+                                <div class="text-sm text-red-500 mt-1" id="email-error"></div>
+                            </div>
+
+                            <div class="relative">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Subject <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-tag text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="subject" name="subject" 
+                                           class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                           placeholder="What is this regarding?" required>
+                                </div>
+                                <div class="text-sm text-red-500 mt-1" id="subject-error"></div>
+                            </div>
+
+                            <button type="button" onclick="nextStep()" 
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                                Next: Write Your Message <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+
+                        <!-- Step 2: Message -->
+                        <div id="step2" class="space-y-6 hidden">
+                            <div class="relative">
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Your Message <span class="text-red-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute top-3 left-3">
+                                        <i class="fas fa-comment-alt text-gray-400"></i>
+                                    </div>
+                                    <textarea id="message" name="message" rows="6"
+                                              class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                                              placeholder="Please describe your inquiry in detail..." required></textarea>
+                                </div>
+                                <div class="flex justify-between items-center mt-2">
+                                    <div class="text-sm text-red-500" id="message-error"></div>
+                                    <div class="text-sm text-gray-500">
+                                        <span id="charCount">0</span>/500 characters
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <button type="button" onclick="prevStep()" 
+                                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors">
+                                    <i class="fas fa-arrow-left mr-2"></i> Back
+                                </button>
+                                <button type="submit" id="submitBtn"
+                                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] relative">
+                                    <span class="flex items-center justify-center">
+                                        <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                    </span>
+                                    <div id="loader" class="hidden absolute inset-0 bg-blue-600 rounded-lg flex items-center justify-center">
+                                        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6"></div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="successMessage" class="hidden p-4 bg-green-50 border border-green-200 rounded-lg text-green-700"></div>
+                        
+                        <p class="text-sm text-gray-500 text-center mt-6">
+                            <i class="fas fa-lock mr-2"></i>
+                            Your information is secure. By submitting, you agree to our 
+                            <a href="#" class="text-blue-600 hover:underline font-medium">Privacy Policy</a>.
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column - Contact Info & Social -->
+            <div class="space-y-8 fade-in">
+                <!-- Contact Information -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-address-card text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Contact Information</h3>
+                    </div>
+
+                    <div class="space-y-6">
+                      
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Phone Number</h4>
+                                <p class="text-gray-600 mb-1">+92 314 0699386</p>
+                                
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope-open-text text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Email Address</h4>
+                                <p class="text-gray-600 mb-1">service@gmail.com</p>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-share-alt text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Connect With Us</h3>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-6">Follow us on social media for updates, tips, and community discussions.</p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<a href="{{ $data->facebook ?? '#' }}" target="_blank" 
+   class="social-icon bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
+    <i class="fab fa-facebook-f text-2xl mb-2"></i>
+    <span class="text-sm font-medium">Facebook</span>
+</a>
+
+<a href="{{ $data->twitter ?? '#' }}" target="_blank" 
+   class="social-icon bg-blue-400 hover:bg-blue-500 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
+    <i class="fab fa-twitter text-2xl mb-2"></i>
+    <span class="text-sm font-medium">Twitter</span>
+</a>
+
+<a href="{{ $data->instagram ?? '#' }}" target="_blank" 
+   class="social-icon bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
+    <i class="fab fa-instagram text-2xl mb-2"></i>
+    <span class="text-sm font-medium">Instagram</span>
+</a>
+
+
+
+<a href="{{ $data->medium ?? '#' }}" target="_blank" 
+   class="social-icon bg-gray-800 hover:bg-gray-900 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
+    <i class="fab fa-medium-m text-2xl mb-2"></i>
+    <span class="text-sm font-medium">Medium</span>
+</a>
+
+
+<a href="{{ $data->youtube ?? '#' }}" target="_blank" 
+   class="social-icon bg-red-600 hover:bg-red-700 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
+    <i class="fab fa-youtube text-2xl mb-2"></i>
+    <span class="text-sm font-medium">YouTube</span>
+</a>
+
+                    </div>
+                </div>
+
+                <!-- FAQ Preview -->
+               
+        </div>
+    </div>
+</section>
+
+<script>
+// Form Steps Management
+let currentStep = 1;
+
+function nextStep() {
+    if (validateStep1()) {
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.remove('hidden');
+        currentStep = 2;
+    }
+}
+
+function prevStep() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step1').classList.remove('hidden');
+    currentStep = 1;
+}
+
+// Character Counter
+const messageTextarea = document.getElementById('message');
+const charCount = document.getElementById('charCount');
+
+if (messageTextarea) {
+    messageTextarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = length;
+        
+        if (length > 500) {
+            charCount.classList.add('text-red-500');
+            this.value = this.value.substring(0, 500);
+        } else if (length > 400) {
+            charCount.classList.add('text-yellow-500');
+        } else {
+            charCount.classList.remove('text-red-500', 'text-yellow-500');
+        }
+    });
+}
+
+// Validation Functions
+function validateStep1() {
+    let isValid = true;
+    
+    // Clear previous errors
+    document.querySelectorAll('[id$="-error"]').forEach(el => el.textContent = '');
+    
+    // Validate name
+    const name = document.getElementById('name');
+    if (!name.value.trim()) {
+        document.getElementById('name-error').textContent = 'Please enter your name';
+        name.classList.add('border-red-500');
+        isValid = false;
+    } else {
+        name.classList.remove('border-red-500');
+    }
+    
+    // Validate email
+    const email = document.getElementById('email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim() || !emailRegex.test(email.value)) {
+        document.getElementById('email-error').textContent = 'Please enter a valid email address';
+        email.classList.add('border-red-500');
+        isValid = false;
+    } else {
+        email.classList.remove('border-red-500');
+    }
+    
+    // Validate subject
+    const subject = document.getElementById('subject');
+    if (!subject.value.trim()) {
+        document.getElementById('subject-error').textContent = 'Please enter a subject';
+        subject.classList.add('border-red-500');
+        isValid = false;
+    } else {
+        subject.classList.remove('border-red-500');
+    }
+    
+    return isValid;
+}
+
+function validateStep2() {
+    let isValid = true;
+    
+    // Clear previous error
+    document.getElementById('message-error').textContent = '';
+    
+    // Validate message
+    const message = document.getElementById('message');
+    if (!message.value.trim()) {
+        document.getElementById('messaage-error').textContent = 'Please enter your message';
+        message.classList.add('border-red-500');
+        isValid = false;
+    } else if (message.value.length < 10) {
+        document.getElementById('message-error').textContent = 'Message should be at least 10 characters';
+        message.classList.add('border-red-500');
+        isValid = false;
+    } else {
+        message.classList.remove('border-red-500');
+    }
+    
+    return isValid;
+}
+
+// Form Submission
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    // Step 2 validation
+    if (!validateStep2()) {
+        e.preventDefault();
+        return;
+    }
+
+    // Loader show
+    document.getElementById('loader').classList.remove('hidden');
+    document.getElementById('submitBtn').disabled = true;
+});
+</script>
+
+@include('frontend.footer') 

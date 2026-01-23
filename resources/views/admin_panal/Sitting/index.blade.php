@@ -626,9 +626,7 @@
             <div class="settings-card">
                 <div class="card-header">
                     <h3><i class="fas fa-share-alt"></i> Social Media Settings</h3>
-                    <button class="btn btn-primary" id="save-social-btn">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
+                 
                 </div>
                 <div class="card-body">
                     <form id="social-settings-form" action="{{route('media_post')}}" method="POST">
@@ -642,7 +640,12 @@
                                     <div class="social-icon facebook-bg">
                                         <i class="fab fa-facebook-f"></i>
                                     </div>
-                                    <input type="url" id="facebook-url" class="form-control" placeholder="https://facebook.com/yourpage" value="{{$data->facebook}}">
+                                  <input type="url"
+       name="facebook"
+       id="facebook-url"
+       class="form-control"
+       placeholder="https://facebook.com/yourpage"
+       value="{{ $data->facebook ?? '' }}">
                                 </div>
                             </div>
                             
@@ -652,7 +655,13 @@
                                     <div class="social-icon twitter-bg">
                                         <i class="fab fa-twitter"></i>
                                     </div>
-                                    <input type="url" id="twitter-url" class="form-control" placeholder="https://twitter.com/yourprofile" value="{{$data->facebook}}">
+                                  <input type="url"
+       name="twitter"
+       id="twitter-url"
+       class="form-control"
+       placeholder="https://twitter.com/yourprofile"
+       value="{{ $data->twitter ?? '' }}">
+
                                 </div>
                             </div>
                             
@@ -662,7 +671,13 @@
                                     <div class="social-icon instagram-bg">
                                         <i class="fab fa-instagram"></i>
                                     </div>
-                                    <input type="url" id="instagram-url" class="form-control" placeholder="https://instagram.com/yourprofile" value="{{$data->instagram}}">
+                                  <input type="url"
+       name="instagram"
+       id="instagram-url"
+       class="form-control"
+       placeholder="https://instagram.com/yourprofile"
+       value="{{ $data->instagram ?? '' }}">
+
                                 </div>
                             </div>
                             
@@ -672,11 +687,13 @@
         <div class="social-icon medium-bg">
             <i class="fab fa-medium-m"></i>
         </div>
-        <input type="url"
-               id="medium-url"
-               name="medium"
-               class="form-control"
-               placeholder="https://medium.com/@yourprofile" value="{{$data->medium}}">
+       <input type="url"
+       id="medium-url"
+       name="medium"
+       class="form-control"
+       placeholder="https://medium.com/@yourprofile"
+       value="{{ $data->medium ?? '' }}">
+
     </div>
 </div>
                             
@@ -686,7 +703,13 @@
                                     <div class="social-icon youtube-bg">
                                         <i class="fab fa-youtube"></i>
                                     </div>
-                                    <input type="url" id="youtube-url" class="form-control" placeholder="https://youtube.com/c/yourchannel" value="{{$data->youtube}}">
+                                   <input type="url"
+       name="youtube"
+       id="youtube-url"
+       class="form-control"
+       placeholder="https://youtube.com/c/yourchannel"
+       value="{{ $data->youtube ?? '' }}">
+
                                 </div>
                             </div>
                         </div>
@@ -699,6 +722,10 @@
                             
                           
                         </div>
+                           <button class="btn btn-primary" type="submit" id="save-social-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                        
+                    </button>
                     </form>
                 </div>
             </div>
