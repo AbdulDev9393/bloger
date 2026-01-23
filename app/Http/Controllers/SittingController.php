@@ -22,6 +22,8 @@ class SittingController extends Controller
 ]);
 
 
+
+
         // agar sirf ek hi row rakhni ho
         $social = SocialMedia::first() ?? new SocialMedia();
 
