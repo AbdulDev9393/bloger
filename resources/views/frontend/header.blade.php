@@ -154,7 +154,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         
             
         }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #fff; z-index: 1000; transition: right 0.4s ease; overflow-y: auto; display: flex; flex-direction: column; padding-left: 26px; }
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 107%; height: 100%; background: #fff; z-index: 1000; transition: right 0.4s ease; overflow-y: auto; display: flex; flex-direction: column; padding-left: 26px; }
         .mobile-menu.show { right:0; }
 
         .mobile-menu-header {background: linear-gradient(135deg, #82afff, #45ae0a); color:#fff; padding:20px; display:flex; justify-content:space-between; align-items:center; }
