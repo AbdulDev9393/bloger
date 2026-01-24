@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msvalidate.01" content="B3AE4772C42AAC50207A6F60FB67D9E6" />
+   
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
 <meta name="mnd-ver" content="h9dolc7vzohgpncidf28q" />
 
-<script async src="https://ss.mrmnd.com/banner.js"></script>
-    <!-- Dynamic Meta Description -->
+
    @php
 $default_schema = [
     "@context" => "https://schema.org",

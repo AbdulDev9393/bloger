@@ -1007,7 +1007,7 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
+
 <section class="hero">
   <div class="hero-container">
     {{-- Right Image --}}
@@ -1050,7 +1050,7 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
+
 {{-- ================= LATEST BLOGS SECTION ================= --}}
 <section class="blogs-section">
   <div class="container">
@@ -1162,8 +1162,8 @@ use Illuminate\Support\Str;
       </a>
     </div>
   </div>
-</section>>
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
+</section>
+
 {{-- ================= CATEGORIES / ALL BLOGS ================= --}}
 <section class="blogs-section">
   <div class="container">
@@ -1297,7 +1297,6 @@ use Illuminate\Support\Str;
   
 </section>
 
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
 </main>
 
 

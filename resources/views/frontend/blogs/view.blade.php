@@ -168,7 +168,7 @@ h4{
     font-size: 17px;
 }
 </style>
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
+
 <section class="blog-detail">
     <div class="blog-detail-container">
 
@@ -249,5 +249,5 @@ h4{
 </a>
 </div>
 </section>
-<div data-mndbanid="955cd6e6-8370-4f00-8def-46e7634b4856"></div>
+
 @include('frontend.footer')
