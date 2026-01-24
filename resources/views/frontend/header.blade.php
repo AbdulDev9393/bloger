@@ -482,31 +482,9 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main id="main-content" class="main-content">
-        <!-- Your page content goes here -->
-        <div class="container">
-            <h1>Welcome to TechBlogs</h1>
-            <p>Your source for the latest technology news, reviews, and insights.</p>
-            
-            <!-- Content will be injected here -->
-            @yield('content')
-            
-        </div>
-    </main>
+    
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; {{ date('Y') }} TechBlogs.site. All rights reserved.</p>
-            <p>Stay connected with the latest tech trends</p>
-            <div style="margin-top: 15px;">
-                <a href="{{ route('frontend.terms-conditions') }}" style="color: #fff; margin: 0 10px;">Terms</a> | 
-                <a href="{{ route('frontend.praivacy-policy') }}" style="color: #fff; margin: 0 10px;">Privacy</a> | 
-                <a href="{{ route('frontend.contect') }}" style="color: #fff; margin: 0 10px;">Contact</a>
-            </div>
-        </div>
-    </footer>
+    
 
     <!-- Scripts -->
     <script>
