@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
-<meta name="mnd-ver" content="h9dolc7vzohgpncidf28q" />
-
+    <meta name="mnd-ver" content="h9dolc7vzohgpncidf28q" />
 
    @php
 $default_schema = [
@@ -37,7 +35,9 @@ $default_schema = [
 
 $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 @endphp
+
     <meta name="description" content="{{ $meta_desc ?? 'TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology' }}">
+    
     <script type="application/ld+json">
         {!! $meta_schema ?? $meta_schema_json !!}
     </script>
@@ -55,7 +55,11 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
     <link rel="icon" type="image/png" href="https://techblogs.site/favicon.ico" sizes="16x16">
     <link rel="apple-touch-icon" sizes="180x180" href="https://techblogs.site/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
-     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <!-- Performance & CDN Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
     <!-- Fonts & CSS -->
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
@@ -64,7 +68,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
     </noscript>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
+    
     <!-- SweetAlert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
 
@@ -77,31 +81,75 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         gtag('config', 'G-4FRZ5NP2M7');
     </script>
 
-
-</head>
     <!-- Custom CSS -->
     <style>
-        * { box-sizing: border-box; }
-        body { margin:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f5f5f5; }
-
-        header {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:10px 30px;
-            min-height:60px;
-           background: linear-gradient(135deg, #82afff, #45ae0a);
-            color:#fff;
-            box-shadow:0 4px 12px rgba(0,0,0,0.15);
-            position:sticky;
-            top:0;
-            z-index:1000;
-            transition: all 0.3s ease;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #82afff, #45ae0a);
+            --hover-color: #ff7700;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f5f5f5; 
+            line-height: 1.6;
+        }
+        
+        /* Skip to content for accessibility */
+        .skip-to-content {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            z-index: 9999;
+            text-decoration: none;
+        }
+        .skip-to-content:focus {
+            left: 10px;
+            top: 10px;
         }
 
-        .logo { display:flex; align-items:center; gap:10px; font-size:26px; font-weight:800; transition: transform 0.3s; }
-        .logo img { width:70px; height:70px; object-fit:contain; border-radius:5px; transition: all 0.3s ease; }
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            min-height: 60px;
+            background: var(--primary-gradient);
+            color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 26px; 
+            font-weight: 800; 
+            transition: transform 0.3s; 
+        }
+        .logo img { 
+            width: 70px; 
+            height: 70px; 
+            max-width: 100%;
+            height: auto;
+            object-fit: contain; 
+            border-radius: 5px; 
+            transition: var(--transition); 
+        }
         .logo img:hover { transform: scale(1.05); }
+        
         .logo span {
             font-family: 'Orbitron', sans-serif;
             font-size: 26px;
@@ -110,112 +158,276 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
             text-transform: uppercase;
             position: relative;
             padding: 6px 14px;
-            color: #ffffff;
+            color: var(--white);
         }
-        .logo span::after{
-            content:'';
-            position:absolute;
-            left:50%;
-            bottom:-6px;
-            transform:translateX(-50%);
-            width:70%;
-            height:3px;
-            background: linear-gradient(90deg,#fff,#ffcc99,#fff);
+        
+        .logo span::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, #fff, #ffcc99, #fff);
             border-radius: 20px;
             box-shadow: 0 0 12px rgba(255,255,255,0.7);
         }
-        .logo span::before{
-            content:'';
-            position:absolute;
-            left:0;
-            top:50%;
-            transform:translateY(-50%);
-            width:4px;
-            height:70%;
-            background:#fff;
-            border-radius:10px;
-        }
-
-        nav ul { list-style:none; display:flex; gap:25px; margin:0; padding:0; }
-        nav ul li a {
-            text-decoration:none; color:#fff; font-weight:600; font-size:16px;
-            padding:8px 12px; border-radius:5px; display:flex; align-items:center; gap:8px; transition:all 0.3s;
-        }
-        nav ul li a:hover, nav ul li a.active { background: #ffffff; color: #111111; }
-
-        .header-icons { display:flex; gap:18px; font-size:18px; }
-        .header-icons a { color:#fff; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; box-shadow:3px 3px 6px #555; }
-        .header-icons a:hover { color:#ff7700; background:#fff; transform:translateY(-2px); }
-
-        .hamburger { display:none; font-size:26px; cursor:pointer; width:40px; height:40px; border-radius:50%; align-items:center; justify-content:center; transition:all 0.3s; }
-        .hamburger:hover { background:rgba(255,255,255,0.2); }
-
-        .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s;
         
-            
-        }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 107%; height: 100%; background: #fff; z-index: 1000; transition: right 0.4s ease; overflow-y: auto; display: flex; flex-direction: column; padding-left: 26px; }
-        .mobile-menu.show { right:0; }
-
-        .mobile-menu-header {background: linear-gradient(135deg, #82afff, #45ae0a); color:#fff; padding:20px; display:flex; justify-content:space-between; align-items:center; }
-        .close-menu { font-size:24px; cursor:pointer; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
-        .close-menu:hover { background:rgba(255,255,255,0.2); }
-
-        .mobile-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px; }
-       .mobile-nav ul li a {
-    text-decoration:none;
-    color:#333;
-    font-weight:600;
-    padding:10px 12px;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    transition:all 0.3s;
-    white-space: nowrap; /* prevent wrapping */
-}
-        .mobile-nav ul li a:hover, .mobile-nav ul li a.active { 
-            color:white;
-            background: linear-gradient(135deg, #82afff, #45ae0a);
-            
-            
-            
+        .logo span::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background: var(--white);
+            border-radius: 10px;
         }
 
-        .mobile-icons { display:flex; justify-content:center; gap:18px; padding:15px 0; border-top:1px solid #eee; }
-        .mobile-icons a { width:50px; height:50px; font-size:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,119,0,0.1); color:#ff7700; transition:all 0.3s ease; }
-        .mobile-icons a:hover { background:#ff7700; color:white; transform:translateY(-2px); }
+        /* Navigation */
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 25px; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        nav ul li a {
+            text-decoration: none; 
+            color: var(--white); 
+            font-weight: 600; 
+            font-size: 16px;
+            padding: 8px 12px; 
+            border-radius: 5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active { 
+            background: var(--white); 
+            color: #111111; 
+        }
 
-        @media(max-width:768px) { nav, .header-icons { display:none; } .hamburger { display:flex; } }
-       @media(max-width:480px){
-    .mobile-nav ul li a {
-        font-size:14px;   /* smaller font for long text */
-        gap:6px;
-        padding:10px 8px;
-    }
-}
+        /* Header Icons */
+        .header-icons { 
+            display: flex; 
+            gap: 18px; 
+            font-size: 18px; 
+        }
+        
+        .header-icons a { 
+            color: var(--white); 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: var(--transition); 
+            box-shadow: 3px 3px 6px rgba(85,85,85,0.3);
+        }
+        
+        .header-icons a:hover { 
+            color: var(--hover-color); 
+            background: var(--white); 
+            transform: translateY(-2px); 
+        }
+
+        /* Hamburger Menu */
+        .hamburger { 
+            display: none; 
+            font-size: 26px; 
+            cursor: pointer; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            align-items: center; 
+            justify-content: center; 
+            transition: var(--transition); 
+        }
+        
+        .hamburger:hover { 
+            background: rgba(255,255,255,0.2); 
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.7); 
+            z-index: 999; 
+            display: none; 
+            opacity: 0; 
+            transition: opacity 0.3s;
+        }
+        
+        .mobile-menu { 
+            position: fixed; 
+            top: 0; 
+            right: -100%; 
+            width: 100%; 
+            max-width: 350px;
+            height: 100%; 
+            background: var(--white); 
+            z-index: 1000; 
+            transition: right 0.4s ease; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        .mobile-menu.show { 
+            right: 0; 
+        }
+
+        .mobile-menu-header {
+            background: var(--primary-gradient); 
+            color: var(--white); 
+            padding: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .close-menu { 
+            font-size: 24px; 
+            cursor: pointer; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: var(--transition); 
+        }
+        
+        .close-menu:hover { 
+            background: rgba(255,255,255,0.2); 
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav ul { 
+            list-style: none; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+        }
+        
+        .mobile-nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .mobile-nav ul li a:hover, 
+        .mobile-nav ul li a.active { 
+            color: var(--white);
+            background: var(--primary-gradient);
+        }
+
+        /* Mobile Icons */
+        .mobile-icons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 18px; 
+            padding: 20px; 
+            border-top: 1px solid #eee; 
+            margin-top: auto;
+        }
+        
+        .mobile-icons a { 
+            width: 50px; 
+            height: 50px; 
+            font-size: 22px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: rgba(255,119,0,0.1); 
+            color: var(--hover-color); 
+            transition: var(--transition); 
+        }
+        
+        .mobile-icons a:hover { 
+            background: var(--hover-color); 
+            color: var(--white); 
+            transform: translateY(-2px); 
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 30px;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) { 
+            nav, .header-icons { display: none; } 
+            .hamburger { display: flex; } 
+            header { padding: 10px 20px; }
+            .mobile-nav ul li a { font-size: 16px; }
+        }
+        
+        @media(max-width: 480px) {
+            .mobile-nav ul li a {
+                font-size: 14px;
+                gap: 6px;
+                padding: 10px 12px;
+            }
+            .logo span {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+            .logo img {
+                width: 50px;
+                height: 50px;
+            }
+        }
     </style>
+</head>
 <body>
+    <!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <!-- Session Alerts -->
-    @if(session('success'))
-        <script>swal("Success!", {!! json_encode(session('success')) !!}, "success");</script>
-    @endif
-    @if(session('error'))
-        <script>swal("Error!", {!! json_encode(session('error')) !!}, "error");</script>
-    @endif
-   @php
-   use App\Models\SocialMedia;
-   $data=SocialMedia::first();
-   @endphp
     <!-- Header -->
     <header>
         <div class="logo">
-            <img src="https://techblogs.site/favicon.ico" alt="Site Logo">
+            <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo">
             <span>Techblogs</span>
         </div>
 
-        <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
+            <i class="fa-solid fa-bars"></i>
+        </div>
 
         <!-- Desktop Menu -->
         <nav>
@@ -229,11 +441,16 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
             </ul>
         </nav>
 
-       <div class="header-icons">
-    <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-    <a href="{{ optional($data)->youtube ?? '#' }}" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-</div>
+        @php
+        use App\Models\SocialMedia;
+        $data = SocialMedia::first();
+        @endphp
+        
+        <div class="header-icons">
+            <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="{{ optional($data)->youtube ?? '#' }}" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
     </header>
 
     <!-- Mobile Menu -->
@@ -241,10 +458,10 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-menu-header">
             <div class="logo">
-                <img src="https://techblogs.site/favicon.ico" alt="Site Logo">
+                <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo">
                 <span>Techblogs</span>
             </div>
-            <div class="close-menu" id="close-menu"><i class="fa-solid fa-times"></i></div>
+            <div class="close-menu" id="close-menu" aria-label="Close menu"><i class="fa-solid fa-times"></i></div>
         </div>
 
         <div class="mobile-nav">
@@ -259,14 +476,41 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         </div>
 
         <div class="mobile-icons">
-            <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-    <a href="{{ optional($data)->instagram ?? '#' }}" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="{{ optional($data)->instagram ?? '#' }}" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
     </div>
 
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Your page content goes here -->
+        <div class="container">
+            <h1>Welcome to TechBlogs</h1>
+            <p>Your source for the latest technology news, reviews, and insights.</p>
+            
+            <!-- Content will be injected here -->
+            @yield('content')
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ date('Y') }} TechBlogs.site. All rights reserved.</p>
+            <p>Stay connected with the latest tech trends</p>
+            <div style="margin-top: 15px;">
+                <a href="{{ route('frontend.terms-conditions') }}" style="color: #fff; margin: 0 10px;">Terms</a> | 
+                <a href="{{ route('frontend.praivacy-policy') }}" style="color: #fff; margin: 0 10px;">Privacy</a> | 
+                <a href="{{ route('frontend.contect') }}" style="color: #fff; margin: 0 10px;">Contact</a>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script>
+        // Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
@@ -291,30 +535,53 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
         navLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
 
-        const currentPage = window.location.pathname;
+        // Active link highlighting
+        const currentPath = window.location.pathname;
         document.querySelectorAll('nav a, .mobile-nav a').forEach(link => {
-            if(link.getAttribute('href') === currentPage || link.classList.contains('active')) {
-                link.classList.add('active');
+            try {
+                const linkUrl = new URL(link.href);
+                if (linkUrl.pathname === currentPath) {
+                    link.classList.add('active');
+                }
+            } catch (e) {
+                // Handle relative URLs
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
             }
-            link.addEventListener('click', function() {
-                document.querySelectorAll('nav a, .mobile-nav a').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-            });
         });
 
+        // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if(window.scrollY > 50) {
                 header.style.padding = '10px 30px';
                 header.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+                header.style.background = 'var(--primary-gradient)';
             } else {
                 header.style.padding = '15px 30px';
-                header.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                header.style.boxShadow = 'var(--shadow)';
+                header.style.background = 'var(--primary-gradient)';
+            }
+        });
+
+        // Keyboard accessibility for hamburger
+        hamburger.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hamburger.click();
+            }
+        });
+
+        closeMenu.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeMobileMenu();
             }
         });
     </script>
 
-   <!-- Flash Messages -->
+    <!-- Flash Messages -->
     @if(session('success'))
         <script>
             swal("Success!", "{{ session('success') }}", "success");
@@ -326,7 +593,5 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
             swal("Error!", "{{ session('error') }}", "error");
         </script>
     @endif
-
-
 </body>
 </html>
