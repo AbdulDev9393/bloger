@@ -453,7 +453,6 @@
             <a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-chevron-right"></i> Blog</a>
             <a href="{{route('frontend.contect')}}"><i class="fa-solid fa-chevron-right"></i> Contact</a>
               <a href="https://www.sigmatraffic.com">Buy traffic for your website</a>
-              <a href="https://mondiad.com?refid=27739" target="_blank" title="Mondiad.com">Mondiad.com</a>
           </div>
         </div>
 
@@ -496,47 +495,6 @@
       </div>
     </div>
   </footer>
-<!-- Multiple MrMND Ads -->
-<script async src="https://ss.mrmnd.com/dynamic.js" data-mnddynid="c4155129-ba8a-4d97-96c3-20175a691a87"></script>
-
-<!-- MrMND Ads -->
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-
-    // Dynamic Ad (page load)
-    const dynamicAd = document.createElement('script');
-    dynamicAd.src = "https://ss.mrmnd.com/dynamic.js";
-    dynamicAd.setAttribute("data-mnddynid","c4155129-ba8a-4d97-96c3-20175a691a87");
-    document.body.appendChild(dynamicAd);
-
-    // Interstitial Ad (after 10 seconds)
-    setTimeout(() => {
-        const interstitialAd = document.createElement('script');
-        interstitialAd.src = "https://ss.mrmnd.com/interstitial.js";
-        interstitialAd.setAttribute("data-mndintid","50e41062-b554-43b1-b372-ba8fae762ca2");
-        document.body.appendChild(interstitialAd);
-    }, 10000);
-
-    // Static Ads (on first scroll)
-    let staticAdsLoaded = false;
-    window.addEventListener('scroll', function onFirstScroll() {
-        if(!staticAdsLoaded){
-            staticAdsLoaded = true;
-
-            const staticAd1 = document.createElement('script');
-            staticAd1.src = "https://ss.mrmnd.com/static/90b2bdb2-1797-4ede-8bd3-d5cda150260d.js";
-            document.body.appendChild(staticAd1);
-
-            const staticAd2 = document.createElement('script');
-            staticAd2.src = "https://ss.mrmnd.com/static/another-static-ad.js"; // example
-            document.body.appendChild(staticAd2);
-
-            window.removeEventListener('scroll', onFirstScroll);
-        }
-    });
-});
-</script>
-
 
   <script>
 const backToTopBtn = document.getElementById('backToTop');

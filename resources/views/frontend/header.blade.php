@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
-
+<meta name="mnd-ver" content="h9dolc7vzohgpncidf28q" />
 
 
    @php
