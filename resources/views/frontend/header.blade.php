@@ -815,82 +815,8 @@
         </div>
     </div>
 
-    <!-- Main Content -->
    
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Company Info -->
-                <div>
-                    <h3 class="footer-title">TechBlogs</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
-                        Your trusted source for technology news, reviews, and insights since 2023.
-                    </p>
-                    <div class="social-links" style="border: none; padding: 0;">
-                        <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="{{ optional($data)->instagram ?? '#' }}" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="{{ route('frontend.index') }}" class="footer-link">Home</a></li>
-                        <li><a href="{{ route('frontend.blogs') }}" class="footer-link">Blog</a></li>
-                        <li><a href="{{ route('frontend.Aboute') }}" class="footer-link">About Us</a></li>
-                        <li><a href="{{ route('frontend.contect') }}" class="footer-link">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h3 class="footer-title">Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="{{ route('frontend.terms-conditions') }}" class="footer-link">Terms & Conditions</a></li>
-                        <li><a href="{{ route('frontend.praivacy-policy') }}" class="footer-link">Privacy Policy</a></li>
-                        <li><a href="#" class="footer-link">Cookie Policy</a></li>
-                        <li><a href="#" class="footer-link">Disclaimer</a></li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter -->
-                <div>
-                    <h3 class="footer-title">Newsletter</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem;">
-                        Subscribe to get the latest tech news directly in your inbox.
-                    </p>
-                    <form class="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Your email" aria-label="Email" style="border-radius: 0.5rem 0 0 0.5rem;">
-                            <button class="btn btn-primary" type="submit" style="border-radius: 0 0.5rem 0.5rem 0;">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} TechBlogs.site. All rights reserved.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.75rem;">
-                    Designed with <i class="fas fa-heart" style="color: #ef4444;"></i> for the tech community
-                </p>
-            </div>
-        </div>
-    </footer>
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -959,22 +885,7 @@
         }
 
         // Newsletter form submission
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const emailInput = newsletterForm.querySelector('input[type="email"]');
-                if (emailInput.value) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'You have been subscribed to our newsletter.',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    });
-                    emailInput.value = '';
-                }
-            });
-        }
+      
 
         // Initialize tooltips
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
