@@ -875,7 +875,7 @@
                     e.preventDefault();
                     const query = searchInput.value.trim();
                     if (query) {
-                        window.location.href = `{{ route('frontend.blogs') }}?search=${encodeURIComponent(query)}`;
+                        window.location.href = `{{ route('frontend.search') }}?search=${encodeURIComponent(query)}`;
                     }
                 }
             });
