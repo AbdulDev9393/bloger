@@ -824,12 +824,11 @@ $data = SocialMedia::first();
         // Submit form
         newsletterForm.submit();
         
-        // Show success message
-        showMessage('Success! You have been subscribed to our newsletter.', 'success');
+        
         emailInput.value = '';
         
       } catch (error) {
-        showMessage('Something went wrong. Please try again.', 'error');
+       
       } finally {
         // Reset button state
         setTimeout(() => {
