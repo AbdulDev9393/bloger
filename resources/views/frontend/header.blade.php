@@ -816,55 +816,7 @@
     </div>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content">
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="container">
-                    <h1 class="hero-title">Latest Tech Insights & News</h1>
-                    <p class="hero-description">
-                        Stay updated with cutting-edge technology trends, AI advancements, mobile innovations, and digital transformation insights.
-                    </p>
-                    <a href="{{ route('frontend.blogs') }}" class="btn btn-outline" style="background: rgba(255,255,255,0.1); border-color: white;">
-                        Explore Articles <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Content will be injected here -->
-            @yield('content')
-            
-            <!-- Sample Content Structure -->
-            <div class="row g-4">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>Latest Articles</h2>
-                        </div>
-                        <div class="card-body">
-                            <!-- Articles will be loaded here -->
-                            <p>Your content will appear here...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Categories</h3>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="d-block py-2 border-bottom">Artificial Intelligence</a></li>
-                                <li><a href="#" class="d-block py-2 border-bottom">Mobile Technology</a></li>
-                                <li><a href="#" class="d-block py-2 border-bottom">Web Development</a></li>
-                                <li><a href="#" class="d-block py-2 border-bottom">Cybersecurity</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+   
 
     <!-- Footer -->
     <footer class="site-footer">
