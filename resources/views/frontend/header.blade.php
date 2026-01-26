@@ -115,7 +115,23 @@
             --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 {
@@ -630,73 +646,7 @@
                 font-size: 1rem;
             }
         }
-@media (max-width: 480px) {
-    /* Header */
-    .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
 
-    /* Logo */
-    .logo-text {
-        font-size: 1.15rem;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-        width: 100%;
-    }
-
-    .mobile-nav-link {
-        font-size: 0.875rem;
-        padding: 0.75rem 1rem;
-    }
-
-    .mobile-social-links {
-        gap: 0.5rem;
-        padding: 1rem;
-    }
-
-    /* Hero Section */
-    .hero-section {
-        padding: 2rem 1rem;
-        border-radius: 0.75rem;
-    }
-
-    .hero-title {
-        font-size: 1.5rem;
-    }
-
-    .hero-description {
-        font-size: 0.9rem;
-        max-width: 100%;
-    }
-
-    /* Cards */
-    .card {
-        border-radius: 0.75rem;
-        margin-bottom: 1rem;
-    }
-
-    /* Search */
-    .search-container {
-        display: none; /* Optional: hide search on very small screens */
-    }
-
-    /* Buttons */
-    .btn {
-        width: 100%;
-        padding: 0.65rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: 1fr; /* stack columns */
-        gap: 1rem;
-    }
-}
         /* Accessibility */
         .sr-only {
             position: absolute;
