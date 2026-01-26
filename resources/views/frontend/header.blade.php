@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
@@ -667,8 +665,7 @@
             outline-offset: 2px;
         }
     </style>
-</head>
-<body>
+
     <!-- Skip to Main Content -->
     <a href="#main-content" class="sr-only">Skip to main content</a>
 
@@ -912,5 +909,3 @@
             });
         @endif
     </script>
-</body>
-</html>

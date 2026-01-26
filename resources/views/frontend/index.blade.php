@@ -1,8 +1,15 @@
-@php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+@include('frontend.header')
+</head>
+<body>
+  @php
 use Illuminate\Support\Str;
 @endphp
 
-@include('frontend.header')
 
 <style>
 .hero {
@@ -1301,3 +1308,6 @@ use Illuminate\Support\Str;
 
 
 @include('frontend.footer')
+
+</body>
+</html>
