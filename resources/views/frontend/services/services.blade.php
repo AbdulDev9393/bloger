@@ -1,5 +1,11 @@
-@include('frontend.header')
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @include('frontend.header')
+</head>
+<body>
+    
    
     <style>
         /* Root theme color with dark mode support */
@@ -545,3 +551,7 @@
     </script>
  
 @include('frontend.footer')
+
+</body>
+</html>
+
