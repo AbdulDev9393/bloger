@@ -115,23 +115,7 @@
             --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--text-primary);
-            background-color: var(--light-bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+       
 
         /* Typography */
         h1, h2, h3, h4, h5, h6 {
