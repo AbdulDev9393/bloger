@@ -1,18 +1,15 @@
 <style>
-
-
-
-
   footer {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: linear-gradient(135deg, #0f172a, #1e293b);
     color: #fff;
-    padding: 60px 20px 30px;
+    padding: 70px 20px 40px;
     margin-top: auto;
     position: relative;
     overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  /* Decorative background elements */
+  /* Animated gradient border */
   footer::before {
     content: '';
     position: absolute;
@@ -20,12 +17,34 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #0014ff, #10ff00);
+    background: linear-gradient(90deg, #2563eb, #10b981, #f59e0b, #8b5cf6);
+    background-size: 400% 100%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Subtle background pattern */
+  footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+    z-index: 0;
   }
 
   /* Footer container */
   .footer-container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -35,11 +54,11 @@
   .footer-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 50px;
+    margin-bottom: 50px;
   }
 
-  /* Footer logo section */
+  /* Footer brand section */
   .footer-brand {
     grid-column: span 1;
   }
@@ -48,47 +67,58 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
   }
 
-  /* Placeholder for logo image */
-  .logo-placeholder {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff7700, #ff5500);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
+  .footer-logo:hover {
+    transform: translateX(5px);
+  }
+
+  .footer-logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    object-fit: contain;
+    background: linear-gradient(135deg, #2563eb, #10b981);
+    padding: 3px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .footer-logo:hover img {
+    transform: rotate(-5deg) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
   }
 
   .footer-logo span {
-          font-family: 'Orbitron', sans-serif; /* Stylish futuristic font */
-    font-size: 26px;
-    font-weight: 800;
-    background: linear-gradient(to right, #115ae1, #1ff539);
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    letter-spacing: -0.5px;
   }
 
   .footer-desc {
     font-size: 15px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.6;
+    color: #94a3b8;
+    line-height: 1.7;
     margin-bottom: 25px;
   }
 
   /* Footer sections */
   .footer-section h3 {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #fff;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
+    font-weight: 600;
   }
 
   .footer-section h3::after {
@@ -98,107 +128,139 @@
     bottom: 0;
     width: 40px;
     height: 3px;
-    background: #004eff;
+    background: linear-gradient(90deg, #2563eb, #10b981);
+    border-radius: 2px;
   }
 
+  /* Footer links */
   .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
   }
 
   .footer-links a {
-    color: rgba(255,255,255,0.8);
+    color: #94a3b8;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    padding: 6px 0;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-links a::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.1), transparent);
+    transition: left 0.4s ease;
+    z-index: -1;
   }
 
   .footer-links a:hover {
-    color: rgb(13 110 253);
-    transform: translateX(5px);
+    color: #fff;
+    transform: translateX(8px);
+  }
+
+  .footer-links a:hover::before {
+    left: 0;
   }
 
   .footer-links a i {
     width: 20px;
     text-align: center;
-    color: #0196ff;
+    color: #2563eb;
+    font-size: 14px;
+    transition: all 0.3s ease;
   }
 
-  /* Contact info */
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  .footer-links a:hover i {
+    color: #10b981;
+    transform: scale(1.2);
   }
 
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    color: rgba(255,255,255,0.8);
-  }
-
-  .contact-item i {
-    color: #ff7700;
-    font-size: 16px;
-    margin-top: 3px;
-  }
-
-  /* Newsletter */
+  /* Newsletter section */
   .newsletter-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
 
   .newsletter-form p {
-    color: rgba(255,255,255,0.8);
+    color: #94a3b8;
     font-size: 14px;
-    margin-bottom: 10px;
+    line-height: 1.6;
+    margin-bottom: 5px;
   }
 
   .newsletter-input {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .newsletter-input input {
     width: 100%;
-    padding: 14px 20px;
-    border-radius: 30px;
-    border: none;
-    background: rgba(255,255,255,0.1);
-    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
     font-size: 15px;
     outline: none;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
   }
 
   .newsletter-input input:focus {
-    background: rgba(255,255,255,0.15);
-    box-shadow: 0 0 0 2px rgba(255, 119, 0, 0.3);
+    border-color: rgba(37, 99, 235, 0.5);
+    background: rgba(37, 99, 235, 0.05);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  }
+
+  .newsletter-input input::placeholder {
+    color: #64748b;
   }
 
   .newsletter-input button {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 14px 24px;
+    border-radius: 12px;
     border: none;
-   background: linear-gradient(135deg, #0037ff, #10ff00);
+    background: linear-gradient(135deg, #2563eb, #10b981);
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
   }
 
   .newsletter-input button:hover {
-    background: linear-gradient(135deg, #ff6600, #ff4400);
+    background: linear-gradient(135deg, #1d4ed8, #0ea271);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 119, 0, 0.4);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+  }
+
+  .newsletter-input button:active {
+    transform: translateY(0);
+  }
+
+  .newsletter-note {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+    margin-top: 5px;
   }
 
   /* Footer bottom */
@@ -206,84 +268,166 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
   }
 
+  /* Social icons */
   .footer-social {
     display: flex;
-    gap: 15px;
+    gap: 12px;
   }
 
   .footer-social a {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.1);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
     font-size: 18px;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-social a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--hover-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .footer-social a:hover {
-    background: linear-gradient(90deg, #0014ff, #10ff00);
+    color: #fff;
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 119, 0, 0.4);
+    border-color: transparent;
   }
 
+  .footer-social a:hover::before {
+    opacity: 1;
+  }
+
+  .footer-social a i {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Social media specific colors */
+  .footer-social a[href*="facebook"] {
+    --hover-color: #1877f2;
+  }
+  
+  .footer-social a[href*="twitter"] {
+    --hover-color: #1da1f2;
+  }
+  
+  .footer-social a[href*="instagram"] {
+    --hover-color: #e4405f;
+  }
+  
+  .footer-social a[href*="youtube"] {
+    --hover-color: #ff0000;
+  }
+  
+  .footer-social a[href*="medium"] {
+    --hover-color: #00ab6c;
+  }
+
+  /* Footer copyright */
   .footer-copy {
     font-size: 14px;
-    color: rgba(255,255,255,0.7);
+    color: #64748b;
   }
 
+  .footer-copy a {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-copy a:hover {
+    color: #10b981;
+    text-decoration: underline;
+  }
+
+  /* Legal links */
   .footer-legal {
     display: flex;
     gap: 20px;
   }
 
   .footer-legal a {
-    color: rgba(255,255,255,0.7);
+    color: #94a3b8;
     text-decoration: none;
     font-size: 14px;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
   }
 
   .footer-legal a:hover {
-    color: #ff7700;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
   }
 
   /* Back to top button */
-.back-to-top {
-  position: fixed;  /* Change from absolute to fixed */
-  right: 20px;
-  bottom: 30px;     /* bottom instead of top */
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-     background: linear-gradient(135deg, #2255b1, #33ff00);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.4s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  opacity: 0;      /* initially hidden */
-  visibility: hidden;
-  z-index: 9999;   /* ensure above all elements */
-}
+  .back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #10b981);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 9999;
+    border: none;
+    outline: none;
+  }
 
-.back-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
+  .back-to-top:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:active {
+    transform: translateY(0) scale(0.95);
+  }
+
   /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .footer-grid {
+      gap: 40px;
+    }
+  }
+
   @media (max-width: 1024px) {
     .footer-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -292,23 +436,38 @@
     
     .footer-brand {
       grid-column: span 2;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      justify-content: center;
     }
   }
 
   @media (max-width: 768px) {
+    footer {
+      padding: 50px 20px 30px;
+    }
+    
     .footer-grid {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 40px;
     }
     
     .footer-brand {
       grid-column: span 1;
+      text-align: left;
+    }
+    
+    .footer-logo {
+      justify-content: flex-start;
     }
     
     .footer-bottom {
       flex-direction: column;
       text-align: center;
-      gap: 15px;
+      gap: 20px;
+      padding-top: 30px;
     }
     
     .footer-legal {
@@ -318,204 +477,413 @@
     }
     
     .back-to-top {
-      width: 45px;
-      height: 45px;
+      width: 48px;
+      height: 48px;
       font-size: 18px;
-      top: -22px;
+      right: 20px;
+      bottom: 20px;
     }
   }
 
   @media (max-width: 480px) {
     footer {
-      padding: 40px 15px 20px;
+      padding: 40px 15px 25px;
     }
     
     .footer-logo {
-      flex-direction: column;
-      text-align: center;
-      gap: 10px;
+      flex-direction: row;
+      text-align: left;
+      gap: 12px;
     }
     
-    .logo-placeholder {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
+    .footer-logo img {
+      width: 40px;
+      height: 40px;
     }
     
     .footer-logo span {
-      font-size: 22px;
+      font-size: 20px;
     }
     
     .footer-section h3 {
       font-size: 16px;
+      margin-bottom: 20px;
     }
     
     .footer-social a {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       font-size: 16px;
     }
     
     .newsletter-input input {
-      padding: 12px 15px;
+      padding: 14px 20px;
       font-size: 14px;
     }
     
     .newsletter-input button {
-      padding: 8px 15px;
+      padding: 12px 20px;
       font-size: 14px;
+    }
+    
+    .footer-copy {
+      font-size: 13px;
     }
   }
 
-  /* Logo image styling */
-.footer-logo img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: contain;
-  background: linear-gradient(135deg, #0072ff, #00ff1f);
-  padding: 5px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.footer-logo img:hover {
-  transform: scale(1.1) rotate(5deg);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Responsive adjustments for logo image */
-@media (max-width: 768px) {
-  .footer-logo img {
-    width: 100px;
-    height: 100px;
+  /* Loading state for newsletter form */
+  .newsletter-input.loading button::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 8px;
   }
-}
 
-@media (max-width: 480px) {
-  .footer-logo img {
-    width: 70px;
-    height: 70px;
-    padding: 4px;
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
-  
-  .footer-logo {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
+
+  /* Success/Error messages */
+  .newsletter-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+    animation: slideDown 0.3s ease;
   }
-}
+
+  .newsletter-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .newsletter-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
 
 @php
-   use App\Models\SocialMedia;
-   $data=SocialMedia::first();
-   @endphp
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <!-- Back to top button -->
-     <div class="back-to-top" id="backToTop">
-  <i class="fa-solid fa-arrow-up"></i>
-</div>
+use App\Models\SocialMedia;
+$data = SocialMedia::first();
+@endphp
 
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
-      <!-- Footer grid -->
-      <div class="footer-grid">
-        <!-- Brand section -->
-<div class="footer-brand">
-  <div class="footer-logo">
-   <img 
-    src="https://techblogs.site/favicon.ico" 
-    alt="Daily Blogs Logo"
-    title="Daily Blogs"
-    width="32"
-    height="32"
-    loading="lazy"
->
-    <span>Techblogs</span>
-  </div>
-  <p class="footer-desc">
-    Explore latest blogs, tips, and tutorials. Stay updated with daily content crafted for you. Join our community of passionate readers and writers.
-  </p>
-</div>
-
-        <!-- Quick links -->
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <div class="footer-links">
-            <a href="{{route('frontend.index')}}"><i class="fa-solid fa-chevron-right"></i> Home</a>
-            <a href="{{route('frontend.Aboute')}}"><i class="fa-solid fa-chevron-right"></i> About Us</a>
-            <a href="{{route('frontend.terms-conditions')}}"><i class="fa-solid fa-chevron-right"></i> Terms Condition</a>
-             <a href="{{route('frontend.praivacy-policy')}}"><i class="fa-solid fa-chevron-right"></i> Privacy Policy</a>
-            <a href="{{route('frontend.blogs')}}"><i class="fa-solid fa-chevron-right"></i> Blog</a>
-            <a href="{{route('frontend.contect')}}"><i class="fa-solid fa-chevron-right"></i> Contact</a>
-              <a href="https://www.sigmatraffic.com">Buy traffic for your website</a>
+    <!-- Footer grid -->
+    <div class="footer-grid">
+      <!-- Brand section -->
+      <div class="footer-brand">
+        <a href="{{ route('frontend.index') }}" class="footer-logo">
+          <img 
+            src="https://techblogs.site/favicon.ico" 
+            alt="TechBlogs Logo"
+            width="50"
+            height="50"
+            loading="lazy"
+          >
+          <span>TechBlogs</span>
+        </a>
+        <p class="footer-desc">
+          Stay ahead of the curve with cutting-edge technology insights, AI updates, mobile reviews, and digital trends. Join our community of tech enthusiasts.
+        </p>
+        
+        <!-- Optional: Site statistics -->
+        <div class="footer-stats" style="display: flex; gap: 20px; margin-top: 20px; font-size: 14px;">
+          <div>
+            <div style="font-weight: 600; color: #fff;">1000+</div>
+            <div style="color: #64748b;">Articles</div>
           </div>
-        </div>
-
-      
-
-        <!-- Newsletter -->
-        <div class="footer-section">
-          <h3>Newsletter</h3>
-          <div class="newsletter-form">
-            <p>Subscribe to our newsletter to get updates on new blogs and special offers.</p>
-            <div class="newsletter-input">
-              <form action="{{route('admin.emails.store')}}" method="POST">
-                @csrf
-              <input type="email" name="email" placeholder="Your email address" id="newsletterEmail">
-              <button type="submit">Subscribe</button>
-              </form>
-            </div>
-
-            <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+          <div>
+            <div style="font-weight: 600; color: #fff;">50K+</div>
+            <div style="color: #64748b;">Readers</div>
           </div>
         </div>
       </div>
 
-      <!-- Footer bottom -->
-      <div class="footer-bottom">
-        <div class="footer-copy">
-          © 2025 techblogs.site. All rights reserved.
+      <!-- Quick links -->
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="{{ route('frontend.index') }}">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </a>
+          <a href="{{ route('frontend.Aboute') }}">
+            <i class="fa-solid fa-info-circle"></i>
+            <span>About Us</span>
+          </a>
+          <a href="{{ route('frontend.blogs') }}">
+            <i class="fa-solid fa-blog"></i>
+            <span>Blog</span>
+          </a>
+          <a href="{{ route('frontend.contect') }}">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Contact</span>
+          </a>
+          <a href="{{ route('frontend.terms-conditions') }}">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>Terms & Conditions</span>
+          </a>
+          <a href="{{ route('frontend.praivacy-policy') }}">
+            <i class="fa-solid fa-shield-alt"></i>
+            <span>Privacy Policy</span>
+          </a>
         </div>
-        
-        <div class="footer-social">
-          <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-          <a href="{{ optional($data)->instagram ?? '#' }}" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-         <a href="{{ optional($data)->medium ?? '#' }}" title="Medium"><i class="fa-brands fa-medium"></i></a>
+      </div>
 
-          <a href="{{ optional($data)->youtube ?? '#' }}" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <!-- Categories (Optional) -->
+      <div class="footer-section">
+        <h3>Popular Categories</h3>
+        <div class="footer-links">
+          <a href="#">
+            <i class="fa-solid fa-microchip"></i>
+            <span>AI & Machine Learning</span>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <span>Mobile Technology</span>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-code"></i>
+            <span>Web Development</span>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Cybersecurity</span>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-gem"></i>
+            <span>Gadgets & Reviews</span>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Tech Trends</span>
+          </a>
         </div>
-        
-    
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section">
+        <h3>Stay Updated</h3>
+        <div class="newsletter-form">
+          <p>Get the latest tech news and insights delivered directly to your inbox.</p>
+          
+          <div class="newsletter-input">
+            <form action="{{ route('admin.emails.store') }}" method="POST" id="newsletterForm">
+              @csrf
+              <input 
+                type="email" 
+                name="email" 
+                placeholder="Enter your email address" 
+                id="newsletterEmail"
+                required
+                aria-label="Email address"
+              >
+              <button type="submit" id="newsletterSubmit">
+                <span>Subscribe</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+            <div id="newsletterMessage"></div>
+          </div>
+
+          <p class="newsletter-note">
+            <i class="fa-solid fa-lock"></i> We respect your privacy. Unsubscribe at any time. No spam, ever.
+          </p>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <script>
-const backToTopBtn = document.getElementById('backToTop');
+    <!-- Footer bottom -->
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © {{ date('Y') }} TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
+      </div>
+      
+      <div class="footer-social">
+        <a href="{{ optional($data)->facebook ?? '#' }}" 
+           title="Facebook"
+           aria-label="Facebook"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="{{ optional($data)->twitter ?? '#' }}" 
+           title="Twitter"
+           aria-label="Twitter"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a href="{{ optional($data)->instagram ?? '#' }}" 
+           title="Instagram"
+           aria-label="Instagram"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="{{ optional($data)->medium ?? '#' }}" 
+           title="Medium"
+           aria-label="Medium"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-brands fa-medium"></i>
+        </a>
+        <a href="{{ optional($data)->youtube ?? '#' }}" 
+           title="YouTube"
+           aria-label="YouTube"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </div>
+      
+      <div class="footer-legal">
+        <a href="{{ route('frontend.terms-conditions') }}">Terms</a>
+        <a href="{{ route('frontend.praivacy-policy') }}">Privacy</a>
+        <a href="{{ route('frontend.contect') }}">Contact</a>
+        <a href="https://www.sigmatraffic.com" target="_blank" rel="noopener noreferrer">Buy Traffic</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-// Show/hide button on scroll
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 150) {
-    backToTopBtn.style.opacity = '1';
-    backToTopBtn.style.visibility = 'visible';
-  } else {
-    backToTopBtn.style.opacity = '0';
-    backToTopBtn.style.visibility = 'hidden';
-  }
-});
-
-// Scroll to top on click
-backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+<script>
+  // Back to top functionality
+  const backToTopBtn = document.getElementById('backToTop');
+  
+  // Show/hide button on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
   });
-});
- 
-  </script>
+  
+  // Scroll to top on click
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  // Enhanced newsletter form handling
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterMessage = document.getElementById('newsletterMessage');
+  const newsletterSubmit = document.getElementById('newsletterSubmit');
+  
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const emailInput = document.getElementById('newsletterEmail');
+      const email = emailInput.value.trim();
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showMessage('Please enter a valid email address.', 'error');
+        return;
+      }
+      
+      // Show loading state
+      newsletterSubmit.disabled = true;
+      newsletterSubmit.classList.add('loading');
+      newsletterSubmit.innerHTML = '<span>Subscribing...</span>';
+      
+      try {
+        // Simulate API call (replace with actual fetch)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Submit form
+        newsletterForm.submit();
+        
+        // Show success message
+        showMessage('Success! You have been subscribed to our newsletter.', 'success');
+        emailInput.value = '';
+        
+      } catch (error) {
+        showMessage('Something went wrong. Please try again.', 'error');
+      } finally {
+        // Reset button state
+        setTimeout(() => {
+          newsletterSubmit.disabled = false;
+          newsletterSubmit.classList.remove('loading');
+          newsletterSubmit.innerHTML = '<span>Subscribe</span><i class="fa-solid fa-paper-plane"></i>';
+        }, 2000);
+      }
+    });
+  }
+  
+  function showMessage(text, type) {
+    newsletterMessage.textContent = text;
+    newsletterMessage.className = 'newsletter-message ' + type;
+    newsletterMessage.style.display = 'block';
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+      newsletterMessage.style.display = 'none';
+    }, 5000);
+  }
+  
+  // Animate social icons on hover
+  document.querySelectorAll('.footer-social a').forEach(icon => {
+    icon.addEventListener('mouseenter', (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      icon.style.setProperty('--x', `${x}px`);
+      icon.style.setProperty('--y', `${y}px`);
+    });
+  });
+  
+  // Add intersection observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+  
+  // Observe footer sections for animation
+  document.querySelectorAll('.footer-section, .footer-brand').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(section);
+  });
+</script>
