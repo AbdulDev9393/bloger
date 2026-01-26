@@ -37,21 +37,7 @@
             }
         }
 
-        /* Reset & Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-secondary);
-            color: var(--text-color);
-            line-height: 1.7;
-            transition: var(--transition);
-        }
-
+    
         a {
             color: var(--theme-color);
             text-decoration: none;
