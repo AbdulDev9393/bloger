@@ -65,31 +65,7 @@
         }
 
         /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 60px auto;
-            background-color: var(--bg-color);
-            padding: 50px 40px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container:hover {
-            box-shadow: var(--shadow-hover);
-        }
-
-        .container:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--theme-color), var(--theme-dark));
-        }
+     
 
         /* Header */
         .header {
