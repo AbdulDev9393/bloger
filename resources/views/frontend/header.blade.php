@@ -731,8 +731,10 @@
 
                     <!-- Search -->
                     <div class="search-container">
+                          <form action="{{ route('frontend.search') }}" method="GET" >
                         <i class="fas fa-search search-icon"></i>
                         <input type="search" class="search-input" placeholder="Search articles..." aria-label="Search articles">
+                          </form>
                     </div>
 
                     <!-- Mobile Menu Toggle -->
@@ -867,20 +869,7 @@
             }
         });
 
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        if (searchInput) {
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const query = searchInput.value.trim();
-                    if (query) {
-                        window.location.href = `{{ route('frontend.search') }}?search=${encodeURIComponent(query)}`;
-                    }
-                }
-            });
-        }
-
+        
         // Newsletter form submission
       
 
