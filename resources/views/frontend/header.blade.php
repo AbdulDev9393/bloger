@@ -630,7 +630,73 @@
                 font-size: 1rem;
             }
         }
+@media (max-width: 480px) {
+    /* Header */
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 
+    /* Logo */
+    .logo-text {
+        font-size: 1.15rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+        width: 100%;
+    }
+
+    .mobile-nav-link {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .mobile-social-links {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 2rem 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+
+    /* Cards */
+    .card {
+        border-radius: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Search */
+    .search-container {
+        display: none; /* Optional: hide search on very small screens */
+    }
+
+    /* Buttons */
+    .btn {
+        width: 100%;
+        padding: 0.65rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr; /* stack columns */
+        gap: 1rem;
+    }
+}
         /* Accessibility */
         .sr-only {
             position: absolute;
