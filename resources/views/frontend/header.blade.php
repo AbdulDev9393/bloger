@@ -4,75 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
-    <meta name="mnd-ver" content="h9dolc7vzohgpncidf28q" />
-
-   @php
-$default_schema = [
-    "@context" => "https://schema.org",
-    "@type" => "BlogPosting",
-    "headline" => "TechBlogs - Latest Technology News, Tips & Reviews",
-    "image" => "https://techblogs.site/favicon.ico",
-    "datePublished" => now()->toIso8601String(),
-    "dateModified" => now()->toIso8601String(),
-    "author" => [
-        "@type" => "Person",
-        "name" => "Admin"
-    ],
-    "publisher" => [
-        "@type" => "Organization",
-        "name" => "TechBlogs",
-        "logo" => [
-            "@type" => "ImageObject",
-            "url" =>  url()->current()
-        ]
-    ],
-    "description" => "Stay updated with the latest technology trends, tips, gadgets, software reviews, and insightful tech articles on TechBlogs.",
-    "mainEntityOfPage" => [
-        "@type" => "WebPage",
-        "@id" => url()->current()  
-    ]
-];
-
-$meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-@endphp
-
     <meta name="description" content="{{ $meta_desc ?? 'TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology' }}">
     
+    <!-- Schema Markup -->
+    @php
+    $default_schema = [
+        "@context" => "https://schema.org",
+        "@type" => "BlogPosting",
+        "headline" => "TechBlogs - Latest Technology News, Tips & Reviews",
+        "image" => "https://techblogs.site/favicon.ico",
+        "datePublished" => now()->toIso8601String(),
+        "dateModified" => now()->toIso8601String(),
+        "author" => [
+            "@type" => "Person",
+            "name" => "Admin"
+        ],
+        "publisher" => [
+            "@type" => "Organization",
+            "name" => "TechBlogs",
+            "logo" => [
+                "@type" => "ImageObject",
+                "url" => url()->current()
+            ]
+        ],
+        "description" => "Stay updated with the latest technology trends, tips, gadgets, software reviews, and insightful tech articles on TechBlogs.",
+        "mainEntityOfPage" => [
+            "@type" => "WebPage",
+            "@id" => url()->current()  
+        ]
+    ];
+    $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+    @endphp
+
     <script type="application/ld+json">
         {!! $meta_schema ?? $meta_schema_json !!}
     </script>
-     
+    
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="{{ url()->current() }}" />
-    <meta property="og:title" content="TechBlogs – Latest Tech News, AI & Mobile Reviews">
-    <meta property="og:description" content="Get the latest tech news, AI updates, and mobile reviews. Stay ahead with tips and insights from TechBlogs.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ $meta_title ?? 'TechBlogs – Latest Tech News, AI & Mobile Reviews' }}">
+    <meta property="og:description" content="{{ $meta_desc ?? 'Get the latest tech news, AI updates, and mobile reviews. Stay ahead with tips and insights from TechBlogs.' }}">
     <meta property="og:image" content="https://techblogs.site/favicon.ico">
-    <meta property="og:url" content="https://techblogs.site/">
+    <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <link rel="icon" type="image/png" href="https://techblogs.site/favicon.ico" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://techblogs.site/favicon.ico" sizes="16x16">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://techblogs.site/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
+    <meta property="og:site_name" content="TechBlogs">
     
-    <!-- Performance & CDN Preconnect -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'TechBlogs – Latest Tech News, AI & Mobile Reviews' }}">
+    <meta name="twitter:description" content="{{ $meta_desc ?? 'Get the latest tech news, AI updates, and mobile reviews. Stay ahead with tips and insights from TechBlogs.' }}">
+    <meta name="twitter:image" content="https://techblogs.site/favicon.ico">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="https://techblogs.site/favicon.ico">
+    <link rel="apple-touch-icon" href="https://techblogs.site/favicon.ico">
+    
+    <!-- Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     
-    <!-- Fonts & CSS -->
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    </noscript>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- SweetAlert -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
-
-    <!-- Google tag (gtag.js) -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert CSS (optional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FRZ5NP2M7"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -84,492 +91,963 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
     <!-- Custom CSS -->
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #82afff, #45ae0a);
-            --hover-color: #ff7700;
-            --text-color: #333;
-            --white: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.15);
-            --transition: all 0.3s ease;
+            /* Modern Color Palette */
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #f5f5f5; 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--light-bg);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        /* Skip to content for accessibility */
-        .skip-to-content {
-            position: absolute;
-            left: -9999px;
-            top: 0;
-            background: #000;
-            color: #fff;
-            padding: 10px;
-            z-index: 9999;
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        a {
             text-decoration: none;
+            color: var(--primary-color);
+            transition: color var(--transition-fast);
         }
-        .skip-to-content:focus {
-            left: 10px;
-            top: 10px;
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
         /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            min-height: 60px;
-            background: var(--primary-gradient);
-            color: var(--white);
-            box-shadow: var(--shadow);
+        .site-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-base);
         }
 
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-size: 26px; 
-            font-weight: 800; 
-            transition: transform 0.3s; 
+        .site-header.scrolled {
+            box-shadow: var(--shadow-lg);
         }
-        .logo img { 
-            width: 70px; 
-            height: 70px; 
-            max-width: 100%;
-            height: auto;
-            object-fit: contain; 
-            border-radius: 5px; 
-            transition: var(--transition); 
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
         }
-        .logo img:hover { transform: scale(1.05); }
-        
-        .logo span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 26px;
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            position: relative;
-            padding: 6px 14px;
-            color: var(--white);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
-        
-        .logo span::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -6px;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, #fff, #ffcc99, #fff);
-            border-radius: 20px;
-            box-shadow: 0 0 12px rgba(255,255,255,0.7);
-        }
-        
-        .logo span::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 70%;
-            background: var(--white);
-            border-radius: 10px;
+
+        .logo-text span {
+            color: var(--primary-color);
         }
 
         /* Navigation */
-        nav ul { 
-            list-style: none; 
-            display: flex; 
-            gap: 25px; 
-            margin: 0; 
-            padding: 0; 
-        }
-        
-        nav ul li a {
-            text-decoration: none; 
-            color: var(--white); 
-            font-weight: 600; 
-            font-size: 16px;
-            padding: 8px 12px; 
-            border-radius: 5px; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            transition: var(--transition);
-        }
-        
-        nav ul li a:hover, 
-        nav ul li a.active { 
-            background: var(--white); 
-            color: #111111; 
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        /* Header Icons */
-        .header-icons { 
-            display: flex; 
-            gap: 18px; 
-            font-size: 18px; 
-        }
-        
-        .header-icons a { 
-            color: var(--white); 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transition: var(--transition); 
-            box-shadow: 3px 3px 6px rgba(85,85,85,0.3);
-        }
-        
-        .header-icons a:hover { 
-            color: var(--hover-color); 
-            background: var(--white); 
-            transform: translateY(-2px); 
+        @media (max-width: 1024px) {
+            .nav-desktop {
+                display: none;
+            }
         }
 
-        /* Hamburger Menu */
-        .hamburger { 
-            display: none; 
-            font-size: 26px; 
-            cursor: pointer; 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            align-items: center; 
-            justify-content: center; 
-            transition: var(--transition); 
-        }
-        
-        .hamburger:hover { 
-            background: rgba(255,255,255,0.2); 
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
         }
 
-        /* Mobile Menu Overlay */
-        .mobile-menu-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.7); 
-            z-index: 999; 
-            display: none; 
-            opacity: 0; 
-            transition: opacity 0.3s;
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all var(--transition-fast);
         }
-        
-        .mobile-menu { 
-            position: fixed; 
-            top: 0; 
-            right: -100%; 
-            width: 100%; 
-            max-width: 350px;
-            height: 100%; 
-            background: var(--white); 
-            z-index: 1000; 
-            transition: right 0.4s ease; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column;
+
+        .nav-link i {
+            font-size: 1rem;
         }
-        
-        .mobile-menu.show { 
-            right: 0; 
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-right: 1rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            background-color: transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            width: 240px;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-menu-toggle:hover {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            z-index: 1100;
+            transition: right var(--transition-base);
+            box-shadow: var(--shadow-xl);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
         }
 
         .mobile-menu-header {
-            background: var(--primary-gradient); 
-            color: var(--white); 
-            padding: 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        
-        .close-menu { 
-            font-size: 24px; 
-            cursor: pointer; 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transition: var(--transition); 
-        }
-        
-        .close-menu:hover { 
-            background: rgba(255,255,255,0.2); 
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav ul { 
-            list-style: none; 
-            margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 5px; 
-        }
-        
-        .mobile-nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            padding: 12px 15px;
-            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-        
-        .mobile-nav ul li a:hover, 
-        .mobile-nav ul li a.active { 
-            color: var(--white);
-            background: var(--primary-gradient);
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* Mobile Icons */
-        .mobile-icons { 
-            display: flex; 
-            justify-content: center; 
-            gap: 18px; 
-            padding: 20px; 
-            border-top: 1px solid #eee; 
-            margin-top: auto;
-        }
-        
-        .mobile-icons a { 
-            width: 50px; 
-            height: 50px; 
-            font-size: 22px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: rgba(255,119,0,0.1); 
-            color: var(--hover-color); 
-            transition: var(--transition); 
-        }
-        
-        .mobile-icons a:hover { 
-            background: var(--hover-color); 
-            color: var(--white); 
-            transform: translateY(-2px); 
+        .mobile-menu-close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
         }
 
-        /* Main Content Area */
-        .main-content {
-            padding: 30px;
-            min-height: calc(100vh - 200px);
+        .mobile-menu-close:hover {
+            color: var(--error-color);
+            background-color: rgba(239, 68, 68, 0.05);
         }
 
-        /* Footer */
-        footer {
-            background: #333;
-            color: var(--white);
-            padding: 30px;
+        .mobile-nav-links {
+            padding: 1.5rem;
+            list-style: none;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all var(--transition-fast);
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav-link i {
+            width: 20px;
             text-align: center;
         }
 
-        /* Responsive */
-        @media(max-width: 768px) { 
-            nav, .header-icons { display: none; } 
-            .hamburger { display: flex; } 
-            header { padding: 10px 20px; }
-            .mobile-nav ul li a { font-size: 16px; }
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
         }
-        
-        @media(max-width: 480px) {
-            .mobile-nav ul li a {
-                font-size: 14px;
-                gap: 6px;
-                padding: 10px 12px;
+
+        .mobile-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1099;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - 200px);
+            padding: 3rem 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .logo span {
-                font-size: 20px;
-                letter-spacing: 1px;
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
             }
-            .logo img {
-                width: 50px;
-                height: 50px;
+        }
+
+        .footer-title {
+            color: white;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
             }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .search-container {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.25rem;
+            }
+            
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <!-- Skip to Content Link -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <!-- Skip to Main Content -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
 
     <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo">
-            <span>Techblogs</span>
-        </div>
+    <header class="site-header" id="site-header">
+        <div class="container">
+            <div class="header-container">
+                <!-- Logo -->
+                <a href="{{ route('frontend.index') }}" class="logo">
+                    <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo" class="logo-img">
+                    <span class="logo-text">Tech<span>Blogs</span></span>
+                </a>
 
-        <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
-            <i class="fa-solid fa-bars"></i>
-        </div>
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop" aria-label="Main Navigation">
+                    <ul class="nav-links">
+                        <li>
+                            <a href="{{ route('frontend.index') }}" class="nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('frontend.blogs') }}" class="nav-link {{ request()->routeIs('frontend.blogs') ? 'active' : '' }}">
+                                <i class="fas fa-blog"></i>
+                                <span>Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('frontend.Aboute') }}" class="nav-link {{ request()->routeIs('frontend.Aboute') ? 'active' : '' }}">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('frontend.contect') }}" class="nav-link {{ request()->routeIs('frontend.contect') ? 'active' : '' }}">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
 
-        <!-- Desktop Menu -->
-        <nav>
-            <ul>
-                <li><a href="{{ route('frontend.index') }}" class="{{ request()->routeIs('frontend.index') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="{{ route('frontend.Aboute') }}" class="{{ request()->routeIs('frontend.Aboute') ? 'active' : '' }}"><i class="fa-solid fa-info-circle"></i> About</a></li>
-                <li><a href="{{ route('frontend.terms-conditions') }}" class="{{ request()->routeIs('frontend.terms-conditions') ? 'active' : '' }}"><i class="fa-solid fa-briefcase"></i> Terms and ..</a></li>
-                <li><a href="{{ route('frontend.praivacy-policy') }}" class="{{ request()->routeIs('frontend.praivacy-policy') ? 'active' : '' }}"><i class="fa-solid fa-briefcase"></i> Privacy Policy</a></li>
-                <li><a href="{{ route('frontend.contect') }}" class="{{ request()->routeIs('frontend.contect') ? 'active' : '' }}"><i class="fa-solid fa-phone"></i> Contact</a></li>
-                <li><a href="{{ route('frontend.blogs') }}" class="{{ request()->routeIs('frontend.blogs') ? 'active' : '' }}"><i class="fa-solid fa-blog"></i> Blog</a></li>
-            </ul>
-        </nav>
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Social Links -->
+                    @php
+                    use App\Models\SocialMedia;
+                    $data = SocialMedia::first();
+                    @endphp
+                    
+                    <div class="social-links">
+                        <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook" title="Follow us on Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter" title="Follow us on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube" title="Subscribe on YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
 
-        @php
-        use App\Models\SocialMedia;
-        $data = SocialMedia::first();
-        @endphp
-        
-        <div class="header-icons">
-            <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="{{ optional($data)->youtube ?? '#' }}" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <!-- Search -->
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" class="search-input" placeholder="Search articles..." aria-label="Search articles">
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Menu">
         <div class="mobile-menu-header">
             <div class="logo">
-                <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo">
-                <span>Techblogs</span>
+                <img src="https://techblogs.site/favicon.ico" alt="TechBlogs Logo" class="logo-img">
+                <span class="logo-text">Tech<span>Blogs</span></span>
             </div>
-            <div class="close-menu" id="close-menu" aria-label="Close menu"><i class="fa-solid fa-times"></i></div>
+            <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+        
+        <ul class="mobile-nav-links">
+            <li>
+                <a href="{{ route('frontend.index') }}" class="mobile-nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('frontend.blogs') }}" class="mobile-nav-link {{ request()->routeIs('frontend.blogs') ? 'active' : '' }}">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('frontend.Aboute') }}" class="mobile-nav-link {{ request()->routeIs('frontend.Aboute') ? 'active' : '' }}">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('frontend.terms-conditions') }}" class="mobile-nav-link {{ request()->routeIs('frontend.terms-conditions') ? 'active' : '' }}">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Terms & Conditions</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('frontend.praivacy-policy') }}" class="mobile-nav-link {{ request()->routeIs('frontend.praivacy-policy') ? 'active' : '' }}">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Privacy Policy</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('frontend.contect') }}" class="mobile-nav-link {{ request()->routeIs('frontend.contect') ? 'active' : '' }}">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
 
-        <div class="mobile-nav">
-            <ul>
-                <li><a href="{{ route('frontend.index') }}" class="{{ request()->routeIs('frontend.index') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="{{ route('frontend.Aboute') }}" class="{{ request()->routeIs('frontend.Aboute') ? 'active' : '' }}"><i class="fa-solid fa-info-circle"></i> About</a></li>
-                <li><a href="{{ route('frontend.terms-conditions') }}" class="{{ request()->routeIs('frontend.terms-conditions') ? 'active' : '' }}"><i class="fa-solid fa-briefcase"></i> Terms and Condition</a></li>
-                <li><a href="{{ route('frontend.praivacy-policy') }}" class="{{ request()->routeIs('frontend.praivacy-policy') ? 'active' : '' }}"><i class="fa-solid fa-briefcase"></i> Privacy Policy</a></li>
-                <li><a href="{{ route('frontend.contect') }}" class="{{ request()->routeIs('frontend.contect') ? 'active' : '' }}"><i class="fa-solid fa-phone"></i> Contact</a></li>
-                <li><a href="{{ route('frontend.blogs') }}" class="{{ request()->routeIs('frontend.blogs') ? 'active' : '' }}"><i class="fa-solid fa-blog"></i> Blog</a></li>
-            </ul>
-        </div>
-
-        <div class="mobile-icons">
-            <a href="{{ optional($data)->facebook ?? '#' }}" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="{{ optional($data)->twitter ?? '#' }}" title="Twitter" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-            <a href="{{ optional($data)->instagram ?? '#' }}" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <div class="mobile-social-links">
+            <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="{{ optional($data)->instagram ?? '#' }}" class="social-link" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
         </div>
     </div>
 
-    
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="container">
+                    <h1 class="hero-title">Latest Tech Insights & News</h1>
+                    <p class="hero-description">
+                        Stay updated with cutting-edge technology trends, AI advancements, mobile innovations, and digital transformation insights.
+                    </p>
+                    <a href="{{ route('frontend.blogs') }}" class="btn btn-outline" style="background: rgba(255,255,255,0.1); border-color: white;">
+                        Explore Articles <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </section>
 
-    
+            <!-- Content will be injected here -->
+            @yield('content')
+            
+            <!-- Sample Content Structure -->
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Latest Articles</h2>
+                        </div>
+                        <div class="card-body">
+                            <!-- Articles will be loaded here -->
+                            <p>Your content will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Categories</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="d-block py-2 border-bottom">Artificial Intelligence</a></li>
+                                <li><a href="#" class="d-block py-2 border-bottom">Mobile Technology</a></li>
+                                <li><a href="#" class="d-block py-2 border-bottom">Web Development</a></li>
+                                <li><a href="#" class="d-block py-2 border-bottom">Cybersecurity</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <!-- Scripts -->
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="footer-title">TechBlogs</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                        Your trusted source for technology news, reviews, and insights since 2023.
+                    </p>
+                    <div class="social-links" style="border: none; padding: 0;">
+                        <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="{{ optional($data)->instagram ?? '#' }}" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('frontend.index') }}" class="footer-link">Home</a></li>
+                        <li><a href="{{ route('frontend.blogs') }}" class="footer-link">Blog</a></li>
+                        <li><a href="{{ route('frontend.Aboute') }}" class="footer-link">About Us</a></li>
+                        <li><a href="{{ route('frontend.contect') }}" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('frontend.terms-conditions') }}" class="footer-link">Terms & Conditions</a></li>
+                        <li><a href="{{ route('frontend.praivacy-policy') }}" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Cookie Policy</a></li>
+                        <li><a href="#" class="footer-link">Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem;">
+                        Subscribe to get the latest tech news directly in your inbox.
+                    </p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Email" style="border-radius: 0.5rem 0 0 0.5rem;">
+                            <button class="btn btn-primary" type="submit" style="border-radius: 0 0.5rem 0.5rem 0;">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; {{ date('Y') }} TechBlogs.site. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+                    Designed with <i class="fas fa-heart" style="color: #ef4444;"></i> for the tech community
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        // Mobile Menu Toggle
-        const hamburger = document.getElementById('hamburger');
+        // Mobile Menu Functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        const closeMenu = document.getElementById('close-menu');
-        const navLinks = document.querySelectorAll('.mobile-nav a');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
 
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.add('show');
-            mobileMenuOverlay.style.display = 'block';
-            mobileMenuOverlay.style.opacity = '1';
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-        });
-
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('show');
-            mobileMenuOverlay.style.opacity = '0';
-            setTimeout(() => mobileMenuOverlay.style.display = 'none', 300);
-            document.body.style.overflow = 'auto';
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
         }
 
-        closeMenu.addEventListener('click', closeMobileMenu);
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-        navLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
 
-        // Active link highlighting
-        const currentPath = window.location.pathname;
-        document.querySelectorAll('nav a, .mobile-nav a').forEach(link => {
-            try {
-                const linkUrl = new URL(link.href);
-                if (linkUrl.pathname === currentPath) {
-                    link.classList.add('active');
-                }
-            } catch (e) {
-                // Handle relative URLs
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            }
+        mobileMenuToggle.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
         });
 
         // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if(window.scrollY > 50) {
-                header.style.padding = '10px 30px';
-                header.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-                header.style.background = 'var(--primary-gradient)';
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
             } else {
-                header.style.padding = '15px 30px';
-                header.style.boxShadow = 'var(--shadow)';
-                header.style.background = 'var(--primary-gradient)';
+                header.classList.remove('scrolled');
             }
         });
 
-        // Keyboard accessibility for hamburger
-        hamburger.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                hamburger.click();
+        // Active link highlighting
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
             }
         });
 
-        closeMenu.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        window.location.href = `{{ route('frontend.blogs') }}?search=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+        }
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                closeMobileMenu();
-            }
+                const emailInput = newsletterForm.querySelector('input[type="email"]');
+                if (emailInput.value) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'You have been subscribed to our newsletter.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                    emailInput.value = '';
+                }
+            });
+        }
+
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         });
+
+        // Flash messages
+        @if(session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        @endif
     </script>
-
-    <!-- Flash Messages -->
-    @if(session('success'))
-        <script>
-            swal("Success!", "{{ session('success') }}", "success");
-        </script>
-    @endif
-
-    @if(session('error'))
-        <script>
-            swal("Error!", "{{ session('error') }}", "error");
-        </script>
-    @endif
 </body>
 </html>
