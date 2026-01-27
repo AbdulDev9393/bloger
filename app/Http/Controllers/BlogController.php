@@ -272,67 +272,67 @@ public function generateContent(Request $request)
 
     $title = $request->title;
 
-    // OpenAI keys
-    $keys = [
-        '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'
-    ];
+    $prompt = "Write a comprehensive blog post about \"$title\".";
 
-    $apiKey = $keys[array_rand($keys)]; // pick random key
-
-    // Prepare prompt
-    $prompt = "Write a comprehensive blog post about \"$title\".\n\n";
-    $prompt .= "Include:\n1. Engaging introduction\n2. Detailed main sections with subheadings\n3. Practical examples/tips\n4. Conclusion\n\n";
-
-    // OpenAI API call
     try {
-    $response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $apiKey,
-    'Content-Type' => 'application/json',
-])
-->timeout(180)
-->post('https://api.openai.com/v1/chat/completions', [
-    'model' => 'gpt-4o-mini',
-    'messages' => [
-   [
-    'role' => 'system',
-    'content' =>
-    "You are a professional blog writer. Write in simple, clear English in HTML format (<h1>, <h2>, <h3>, <p>, <ul>, <li>).
-    - Make the blog **fully unique and original**, do not copy any existing content.
-    - Use your own words, examples, tips, and ideas.
-    - Blog must be at least 800 words.
-    - Make it fully original and unique; do not copy from any source.
-    - Use your own examples, daily-life stories, tips, and human-like conversational tone.
-    - Avoid generic sentences and repetitive phrases.
-    - Include: <h1>Title</h1>, <h2>Main sections</h2>, <h3>Subheadings</h3>, <p>Paragraphs</p>, <ul><li>Lists</li></ul>.
-    - Make it conversational, human-like, and engaging.
-    - Avoid generic or repetitive phrases."
-],
 
-        [
-            'role' => 'user',
-            'content' => "Write a comprehensive blog post about \"$title\"."
-        ]
-    ],
-    'temperature' => 0.7,
-    'max_tokens' => 3000,
-    'top_p' => 0.9
-]);
-dd($response);
-$data = $response->json();
-$generatedContent = $data['choices'][0]['message']['content'] ?? null;
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
+            'Content-Type'  => 'application/json',
+        ])
+        ->timeout(120)
+        ->post('https://api.groq.com/openai/v1/chat/completions', [
+            // ✅ CORRECT GROQ MODEL
+            'model' => 'llama3-70b-8192',
 
-return response()->json([
-    'success' => true,
-    'content' => $generatedContent, // now contains proper HTML
-    'message' => 'Blog content generated successfully!'
-]);
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' =>
+                        "You are a professional blog writer.
+                        Write in simple, clear English using HTML (<h1>, <h2>, <h3>, <p>, <ul>, <li>).
 
+                        Rules:
+                        - Minimum 800 words
+                        - Fully original & unique
+                        - Human-like, conversational tone
+                        - No generic or repetitive phrases
+                        - Use real-life examples and tips
+                        - Proper headings and structure
+                        - Output ONLY valid HTML"
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $prompt
+                ]
+            ],
+
+            'temperature' => 0.7,
+            'max_tokens' => 3000,
+            'top_p' => 0.9
+        ]);
+               dd($response);
+        if ($response->failed()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Groq API error',
+                'error'   => $response->body()
+            ]);
+        }
+
+        $data = $response->json();
+        $content = $data['choices'][0]['message']['content'] ?? null;
+
+        return response()->json([
+            'success' => true,
+            'content' => $content
+        ]);
 
     } catch (\Exception $e) {
+
         return response()->json([
             'success' => false,
-            'message' => $e->getMessage(),
-            'content' => $this->getFallbackContent($title)
+            'message' => $e->getMessage()
         ]);
     }
 }
