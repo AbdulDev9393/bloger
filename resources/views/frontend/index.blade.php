@@ -6,7 +6,7 @@
 @include('frontend.header')
 </head>
 <body>
-  <body>Verification: 2420f6a7e36b5e1d</body>
+  
   @php
 use Illuminate\Support\Str;
 @endphp
