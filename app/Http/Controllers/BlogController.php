@@ -270,7 +270,6 @@ public function generateContent(Request $request)
     ]);
 
     $title = $request->title;
-
     $prompt = "Write a comprehensive blog post about \"$title\".";
 
     try {
@@ -278,33 +277,31 @@ public function generateContent(Request $request)
             'Authorization' => 'Bearer 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',
             'Content-Type'  => 'application/json',
         ])->post('https://api.groq.com/openai/v1/chat/completions', [
-            'model' => 'llama3-70b-8192', // ✅ correct Groq model
+            'model' => 'llama-3.3-70b-versatile', // ✅ Updated model
 
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => "You are a professional blog writer. Write in simple, clear English using HTML (<h1>, <h2>, <h3>, <p>, <ul>, <li>).
-Rules:
-- Minimum 800 words
-- Fully original & unique
-- Human-like, conversational tone
-- No generic or repetitive phrases
-- Use real-life examples and tips
-- Proper headings and structure
-- Output ONLY valid HTML"
+                    'content' =>
+                        "You are a professional blog writer. Write in simple, clear English using HTML tags such as <h1>, <h2>, <h3>, <p>, <ul>, and <li>.  
+                        Include:
+                        - At least 800 words
+                        - Fully original and unique content
+                        - A conversational tone with real examples and tips
+                        - Proper structure with headings and lists
+                        Output only valid HTML."
                 ],
                 [
                     'role' => 'user',
                     'content' => $prompt
-                ]
+                ],
             ],
 
             'temperature' => 0.7,
-            'max_tokens' => 1500, // ✅ reduce to avoid 400/429
-            'top_p' => 0.9
+            'max_tokens' => 1500,
+            'top_p' => 0.9,
         ]);
 
-        // check if API call failed
         if ($response->failed()) {
             return response()->json([
                 'success' => false,
@@ -320,7 +317,6 @@ Rules:
             'success' => true,
             'content' => $content
         ]);
-
     } catch (\Exception $e) {
         return response()->json([
             'success' => false,
