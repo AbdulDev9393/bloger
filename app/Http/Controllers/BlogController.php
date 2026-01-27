@@ -276,12 +276,10 @@ public function generateContent(Request $request)
 
     try {
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
-            'Content-Type'  => 'application/json',
-        ])
-        ->timeout(120)
-        ->post('https://api.groq.com/openai/v1/chat/completions', [
+$response = Http::withHeaders([
+    'Authorization' => 'Bearer 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',
+    'Content-Type'  => 'application/json',
+])->post('https://api.groq.com/openai/v1/chat/completions', [
             // ✅ CORRECT GROQ MODEL
             'model' => 'llama3-70b-8192',
 
