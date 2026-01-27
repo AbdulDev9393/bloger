@@ -301,7 +301,7 @@ public function generateContent(Request $request)
             'max_tokens' => 1500,
             'top_p' => 0.9,
         ]);
-   dd($response);
+
         if ($response->failed()) {
             return response()->json([
                 'success' => false,
