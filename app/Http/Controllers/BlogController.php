@@ -321,7 +321,7 @@ public function generateContent(Request $request)
     'max_tokens' => 3000,
     'top_p' => 0.9
 ]);
-
+dd($response);
 $data = $response->json();
 $generatedContent = $data['choices'][0]['message']['content'] ?? null;
 
