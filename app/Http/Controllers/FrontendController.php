@@ -13,7 +13,8 @@ class FrontendController extends Controller
     //
     function index(){
         $latestBlog=Blog::latest()->first();
-       $meta_title="TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
+    $meta_title = "TechBlogs Info – Latest Technology News, AI Innovations, Mobile Reviews, Gadgets, Software Updates & Digital Trends for Tech Enthusiasts";
+
        $meta_desc="TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology";
        $latestBlogs = Blog::latest()->skip(2)->take(12)->get();
        $secondLatestBlog = Blog::latest()->skip(1)->first();
