@@ -266,87 +266,31 @@ public function blogView($id)
 public function generateContent(Request $request)
 {
     $request->validate([
-        'title' => 'required|string|max:255'
+        'title' => 'required|string|max:255',
     ]);
 
     $title = $request->title;
-    $prompt = "Write a comprehensive blog post about \"$title\".";
 
-    try {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer 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',
-            'Content-Type'  => 'application/json',
-        ])->post('https://api.groq.com/openai/v1/chat/completions', [
-            'model' => 'llama-3.3-70b-versatile', // ✅ Updated model
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' => "
-            You are an expert human blog writer and content strategist.
+    // Python script path
+    $scriptPath = base_path('scripts/generate_blog.py'); // resources/scripts/ یا project root
 
-            Write a fully original, plagiarism-free blog article in simple, clear, and natural English that sounds written by a real human — not AI.
+    // Execute Python script
+    $command = escapeshellcmd("python3 {$scriptPath} " . escapeshellarg($title));
+    $output = shell_exec($command);
 
-            Strict Requirements:
-            - Minimum 900–1000 words
-            - 100% unique and original content
-            - Easy English (simple words, short sentences)
-            - Conversational and friendly tone
-            - Human-like explanations with real-life examples
-            - No robotic phrases or keyword stuffing
-            - Google-friendly and AI-detection safe
-            - No plagiarism or copied structure
-
-            Content Structure (use ONLY HTML tags):
-            - <h1> for the main title
-            - <h2> and <h3> for subheadings
-            - <p> for paragraphs
-            - <ul> and <li> for lists
-
-            Writing Style Rules:
-            - Explain ideas as if talking to a beginner
-            - Use practical examples people can relate to
-            - Give helpful tips and clear explanations
-            - Avoid repeating sentences or ideas
-            - Make the content engaging and readable
-
-            Output Rules:
-            - Output ONLY valid HTML
-            - Do NOT include markdown
-            - Do NOT include explanations outside HTML
-            - Do NOT mention AI, models, or prompts
-            "
-                ],
-                [
-                    'role' => 'user',
-                    'content' => $prompt
-                ],
-            ],
-
-            'temperature' => 0.7,
-            'max_tokens' => 1500,
-            'top_p' => 0.9,
-        ]);
-
-        if ($response->failed()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Groq API error',
-                'error'   => $response->body()
-            ]);
-        }
-
-        $data = $response->json();
-        $content = $data['choices'][0]['message']['content'] ?? null;
-            
-        return response()->json([
-            'success' => true,
-            'content' => $content
-        ]);
-    } catch (\Exception $e) {
+    if (!$output) {
         return response()->json([
             'success' => false,
-            'message' => $e->getMessage()
-        ]);
+            'message' => 'Python script execution failed'
+        ], 500);
     }
+
+    $data = json_decode($output, true);
+
+    return response()->json([
+        'success' => true,
+        'content' => $data['content'] ?? null
+    ]);
 }
+
 }
