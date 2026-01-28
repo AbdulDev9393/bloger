@@ -263,27 +263,5 @@ public function blogView($id)
 
     return back()->with('success', 'SEO updated successfully for this blog');
 }
-public function generateContent(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255'
-    ]);
-
-    $title = $request->title;
-
-    // Python script call کریں
-    $output = shell_exec("scripts/generate_blog.py" . escapeshellarg($title));
-
-    $data = json_decode($output, true);
-
-    return response()->json([
-        'success' => true,
-        'content' => $data['content'] ?? ''
-    ]);
-}
-
 
 }
-
-
-
