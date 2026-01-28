@@ -276,7 +276,7 @@ public function generateContent(Request $request)
         $response = Http::withHeaders([
             'Authorization' => 'Bearer sk-99c96b90647c4e5fb1785d99ba6d4a1e',
             'Content-Type'  => 'application/json',
-        ])->post('https://api.deepseek.com/chat/completions', [
+        ])->post('https://api.deepseek.com', [
             'model' => 'deepseek-chat', // ✅ DeepSeek model
             'messages' => [
                 [
