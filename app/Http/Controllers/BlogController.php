@@ -265,9 +265,7 @@ public function blogView($id)
 }
 public function generateContent(Request $request)
 {
-    $request->validate([
-        'title' => 'required|string|max:255'
-    ]);
+    
 
     $title = $request->title;
 
