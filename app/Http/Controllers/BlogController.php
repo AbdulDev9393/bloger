@@ -278,24 +278,49 @@ public function generateContent(Request $request)
             'Content-Type'  => 'application/json',
         ])->post('https://api.groq.com/openai/v1/chat/completions', [
             'model' => 'llama-3.3-70b-versatile', // ✅ Updated model
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => "
+                You are an expert human blog writer and content strategist.
 
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' =>
-                        "You are a professional blog writer. Write in simple, clear English using HTML tags such as <h1>, <h2>, <h3>, <p>, <ul>, and <li>.  
-                        Include:
-                        - At least 800 words
-                        - Fully original and unique content
-                        - A conversational tone with real examples and tips
-                        - Proper structure with headings and lists
-                        Output only valid HTML."
+                Write a fully original, plagiarism-free blog article in simple, clear, and natural English that sounds written by a real human — not AI.
+
+                Strict Requirements:
+                - Minimum 900–1000 words
+                - 100% unique and original content
+                - Easy English (simple words, short sentences)
+                - Conversational and friendly tone
+                - Human-like explanations with real-life examples
+                - No robotic phrases or keyword stuffing
+                - Google-friendly and AI-detection safe
+                - No plagiarism or copied structure
+
+                Content Structure (use ONLY HTML tags):
+                - <h1> for the main title
+                - <h2> and <h3> for subheadings
+                - <p> for paragraphs
+                - <ul> and <li> for lists
+
+                Writing Style Rules:
+                - Explain ideas as if talking to a beginner
+                - Use practical examples people can relate to
+                - Give helpful tips and clear explanations
+                - Avoid repeating sentences or ideas
+                - Make the content engaging and readable
+
+                Output Rules:
+                - Output ONLY valid HTML
+                - Do NOT include markdown
+                - Do NOT include explanations outside HTML
+                - Do NOT mention AI, models, or prompts
+                "
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $prompt
+                    ],
                 ],
-                [
-                    'role' => 'user',
-                    'content' => $prompt
-                ],
-            ],
 
             'temperature' => 0.7,
             'max_tokens' => 1500,
