@@ -266,79 +266,55 @@ public function blogView($id)
 public function generateContent(Request $request)
 {
     $request->validate([
-    'title' => 'required|string|max:255'
-]);
-
-$title  = $request->title;
-$prompt = "Write a comprehensive blog post about \"$title\".";
-
-try {
-    $response = Http::withHeaders([
-        'Authorization' => 'Bearer sk-99c96b90647c4e5fb1785d99ba6d4a1e',
-        'Content-Type'  => 'application/json',
-    ])->post('https://api.deepseek.com/v1/chat/completions', [
-        'model' => 'deepseek-chat',
-        'messages' => [
-            [
-                'role' => 'system',
-                'content' => "
-You are an expert human blog writer and content strategist.
-
-Write a fully original, plagiarism-free blog article in simple, clear, and natural English that sounds written by a real human.
-
-Strict Requirements:
-- Minimum 900–1000 words
-- 100% unique content
-- Easy English
-- Conversational tone
-- Real-life examples
-- Google-friendly
-- No plagiarism
-
-Content Structure (HTML ONLY):
-- <h1>, <h2>, <h3>
-- <p>, <ul>, <li>
-
-Output Rules:
-- ONLY valid HTML
-- No markdown
-- No AI mentions
-"
-            ],
-            [
-                'role' => 'user',
-                'content' => $prompt
-            ],
-        ],
-        'temperature' => 0.7,
-        'max_tokens'  => 1500,
-        'top_p'       => 0.9,
+        'title' => 'required|string|max:255'
     ]);
 
-    if ($response->failed()) {
+    $title = $request->title;
+
+    try {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer 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',
+            'Content-Type'  => 'application/json',
+            'Accept'        => 'application/json',
+
+            // OpenRouter required / optional headers
+            'HTTP-Referer'  => 'https://www.techblogs.site',
+            'X-Title'       => 'TechBlogs',
+        ])->post('https://openrouter.ai/api/v1/chat/completions', [
+            'model' => 'openai/gpt-5.2',
+            'messages' => [
+                [
+                    'role' => 'user',
+                    'content' => "Write a comprehensive blog post about \"$title\"."
+                ],
+            ],
+            'temperature' => 0.7,
+            'max_tokens'  => 1500,
+        ]);
+
+        if ($response->failed()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'OpenRouter API error',
+                'error'   => $response->body()
+            ], 500);
+        }
+
+        $data = $response->json();
+
+        $content = $data['choices'][0]['message']['content'] ?? null;
+
+        return response()->json([
+            'success' => true,
+            'content' => $content
+        ]);
+
+    } catch (\Throwable $e) {
         return response()->json([
             'success' => false,
-            'message' => 'DeepSeek API error',
-            'error'   => $response->json()
-        ]);
+            'message' => $e->getMessage()
+        ], 500);
     }
-
-    $data = $response->json();
-
-    $content = $data['choices'][0]['message']['content'] ?? null;
-
-    return response()->json([
-        'success' => true,
-        'content' => $content
-    ]);
-
-} catch (\Exception $e) {
-    return response()->json([
-        'success' => false,
-        'message' => $e->getMessage()
-    ]);
-}
-
 }
 
 }
