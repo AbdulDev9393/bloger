@@ -266,31 +266,24 @@ public function blogView($id)
 public function generateContent(Request $request)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
+        'title' => 'required|string|max:255'
     ]);
 
     $title = $request->title;
 
-    // Python script path
-    $scriptPath = base_path('scripts/generate_blog.py'); // resources/scripts/ یا project root
-
-    // Execute Python script
-    $command = escapeshellcmd("python3 {$scriptPath} " . escapeshellarg($title));
-    $output = shell_exec($command);
-
-    if (!$output) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Python script execution failed'
-        ], 500);
-    }
+    // Python script call کریں
+    $output = shell_exec("scripts/generate_blog.py" . escapeshellarg($title));
 
     $data = json_decode($output, true);
 
     return response()->json([
         'success' => true,
-        'content' => $data['content'] ?? null
+        'content' => $data['content'] ?? ''
     ]);
 }
 
+
 }
+
+
+
