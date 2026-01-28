@@ -333,8 +333,9 @@ Output Rules:
                 'error'   => $response->body()
             ]);
         }
-
+       
         $data = $response->json();
+        dd($response);
         $content = $data['choices'][0]['message']['content'] ?? null;
 
         return response()->json([
