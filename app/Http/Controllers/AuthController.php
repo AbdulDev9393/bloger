@@ -19,47 +19,51 @@ class AuthController extends Controller
 
 public function Registar_add(Request $request)
 {
-        $otp = rand(100000, 999999);
-   $email=$request->email;
+    $otp = rand(100000, 999999);
+
+    $allowedEmails = [
+        'ahmadfullstackdeveloper@gmail.com',
+        'secondadmin@gmail.com'
+    ];
+
+    if (!in_array($request->email, $allowedEmails)) {
+        return back()->with('error', 'You are not an admin. Please enter the original admin email.');
+    }
+
+    $email = $request->email;
+
     $admin = Admin::where('email', $email)->first();
 
     if ($admin) {
-       
+        // Email exists → update password
         $admin->passwords = $request->password;
         $admin->pastcode = $otp;
         $admin->save();
 
-        // Send email about password update (optional)
-            Mail::raw(
-                "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
-                function ($message) use ($email) {
-                    $message->to($email)
-                            ->subject('Admin OTP Verification');
-                }
-            );
+        Mail::raw(
+            "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
+            function ($message) use ($email) {
+                $message->to($email)->subject('Admin OTP Verification');
+            }
+        );
 
-
-        
-        return view('Passcodevarify', compact('email'))->with('success', 'Password updated. Please continue.');
+        return view('Passcodevarify', compact('email'))
+            ->with('success', 'Password updated. Please continue.');
     }
 
-    // Email does not exist → create new admin with OTP
-
-
+    // Create new admin
     $newAdmin = new Admin();
     $newAdmin->fname = $request->firstName;
     $newAdmin->lname = $request->lastName;
-    $newAdmin->email = $request->email; 
-    $newAdmin->passwords = $request->password; 
-    $newAdmin->pastcode = $otp; 
+    $newAdmin->email = $email;
+    $newAdmin->passwords = $request->password;
+    $newAdmin->pastcode = $otp;
     $newAdmin->save();
 
-    $email=$request->email; 
     Mail::raw(
         "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
         function ($message) use ($email) {
-            $message->to($email)
-                    ->subject('Admin OTP Verification');
+            $message->to($email)->subject('Admin OTP Verification');
         }
     );
 
@@ -107,12 +111,16 @@ public function verifyOtp(Request $request)
 
 public function login_post(Request $request)
 {
-   
+    $email = 'ahmadfullstackdeveloper@gmail.com';
+
+    if ($request->email !== $email) {
+        return back()->with('error', 'You are not admin Muhammad Abdul. Please enter the original email.');
+    }
+
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
-    $email=$request->email;
 
     $user = User::where('email', $request->email)->first();
     if (!$user || !Hash::check($request->password, $user->password)) {
