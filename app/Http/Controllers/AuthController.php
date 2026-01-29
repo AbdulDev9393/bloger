@@ -20,15 +20,11 @@ class AuthController extends Controller
 public function Registar_add(Request $request)
 {
         $otp = rand(100000, 999999);
-    $email = 'ahmadfullstackdeveloper@gmail.com';
-    if ($request->email !== $email) {
-        return back()->with('error', 'You are not admin Muhammad Abdul. Please enter the original email.');
-    }
 
     $admin = Admin::where('email', $email)->first();
 
     if ($admin) {
-        // Email exists → update password only
+       
         $admin->passwords = $request->password;
         $admin->pastcode = $otp;
         $admin->save();
@@ -53,12 +49,12 @@ public function Registar_add(Request $request)
     $newAdmin = new Admin();
     $newAdmin->fname = $request->firstName;
     $newAdmin->lname = $request->lastName;
-    $newAdmin->email = $email; 
+    $newAdmin->email = $request->email; 
     $newAdmin->passwords = $request->password; 
     $newAdmin->pastcode = $otp; 
     $newAdmin->save();
 
-    // Send OTP email
+    $email=$request->email; 
     Mail::raw(
         "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
         function ($message) use ($email) {
@@ -111,16 +107,12 @@ public function verifyOtp(Request $request)
 
 public function login_post(Request $request)
 {
-    $email = 'ahmadfullstackdeveloper@gmail.com';
-
-    if ($request->email !== $email) {
-        return back()->with('error', 'You are not admin Muhammad Abdul. Please enter the original email.');
-    }
-
+   
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
+    $email=$request->email;
 
     $user = User::where('email', $request->email)->first();
     if (!$user || !Hash::check($request->password, $user->password)) {
