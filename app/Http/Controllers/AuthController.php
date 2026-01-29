@@ -23,7 +23,7 @@ public function Registar_add(Request $request)
 
     $allowedEmails = [
         'ahmadfullstackdeveloper@gmail.com',
-        'secondadmin@gmail.com'
+        'sherbahadar9394@gmail.com'
     ];
 
     if (!in_array($request->email, $allowedEmails)) {
@@ -113,7 +113,7 @@ public function login_post(Request $request)
 {
     $allowedEmails = [
         'ahmadfullstackdeveloper@gmail.com',
-        'secondadmin@gmail.com'
+        'sherbahadar9394@gmail.com'
     ];
 
     // Validate input
