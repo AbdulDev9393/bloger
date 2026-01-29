@@ -20,7 +20,7 @@ class AuthController extends Controller
 public function Registar_add(Request $request)
 {
         $otp = rand(100000, 999999);
-
+   $email=$request->email;
     $admin = Admin::where('email', $email)->first();
 
     if ($admin) {
