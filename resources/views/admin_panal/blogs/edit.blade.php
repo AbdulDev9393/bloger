@@ -109,9 +109,7 @@
                 <label class="form-label" for="blog-title">Blog Title</label>
                 <div class="title-with-generate">
                     <input type="text" name="name" id="blog-title" value="{{ old('name', $blog->name) }}" required>
-                    <button type="button" id="generate-content" class="btn btn-primary">
-                        <i class="fas fa-robot"></i> Auto Generate
-                    </button>
+                   
                 </div>
                 @error('name')
                     <div class="text-danger">{{ $message }}</div>
