@@ -111,18 +111,29 @@ public function verifyOtp(Request $request)
 
 public function login_post(Request $request)
 {
-    $email = 'ahmadfullstackdeveloper@gmail.com';
+    $allowedEmails = [
+        'ahmadfullstackdeveloper@gmail.com',
+        'secondadmin@gmail.com'
+    ];
 
-    if ($request->email !== $email) {
-        return back()->with('error', 'You are not admin Muhammad Abdul. Please enter the original email.');
-    }
-
+    // Validate input
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    $user = User::where('email', $request->email)->first();
+    // Check admin email
+    if (!in_array($request->email, $allowedEmails)) {
+        return back()->with(
+            'error',
+            'You are not an admin. Please enter the original admin email.'
+        );
+    }
+
+    $email = $request->email;
+
+    $user = User::where('email', $email)->first();
+
     if (!$user || !Hash::check($request->password, $user->password)) {
         return back()->with('error', 'Invalid email or password.');
     }
@@ -134,13 +145,11 @@ public function login_post(Request $request)
     Mail::raw(
         "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
         function ($message) use ($email) {
-            $message->to($email)
-                    ->subject('Admin OTP Verification');
+            $message->to($email)->subject('Admin OTP Verification');
         }
     );
 
-    // Show OTP page and pass OTP as hidden input
-    return view('login_passcode', compact('otp','email'));
+    return view('login_passcode', compact('otp', 'email'));
 }
 
   public function logout(Request $request)
