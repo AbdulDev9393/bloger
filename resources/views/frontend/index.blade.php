@@ -67,12 +67,14 @@ use Illuminate\Support\Str;
   overflow: hidden;
   min-width: 0; /* flexbox overflow fix */
   border-radius: 5px;
+    min-height: 400px;
 }
 
 .hero-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* تصویر پوری دکھے، crop نہ ہو */
+  height: auto;
+    object-fit: cover;
   object-position: center;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
