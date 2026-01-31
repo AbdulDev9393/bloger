@@ -323,7 +323,12 @@
                 <tbody>
                     @foreach ($RecentBlogs as $Blgs)
                       <tr>
-                        <a href="https://www.techblogs.site/blog/view/{{$Blog->id}}/{{$Blog->name}}"><td class="post-title">{{$Blgs->name}}</td></a>
+                        <td>
+                             <a href="https://www.techblogs.site/blog/view/{{$Blgs->id}}/{{$Blgs->name}}">
+            {{$Blgs->name}}
+        </a>
+                        </td>
+                            
                         <td><span class="post-status status-published">{{$Blgs->Status}}</span></td>
                         
                     </tr>  
