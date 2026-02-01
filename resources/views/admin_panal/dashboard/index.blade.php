@@ -317,21 +317,22 @@
                     <tr>
                         <th>Title</th>
                         <th>Status</th>
-                       
+                        <th>Create Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($RecentBlogs as $Blgs)
                       <tr>
                         <td class="post-title">
-    <a href="https://www.techblogs.site/blog/view/{{$Blgs->id}}/{{$Blgs->name}}" target="_blank" rel="noopener noreferrer">
-        {{$Blgs->name}}
-    </a>
-</td>
+                            <a href="https://www.techblogs.site/blog/view/{{$Blgs->id}}/{{$Blgs->name}}" target="_blank" rel="noopener noreferrer">
+                                {{$Blgs->name}}
+                            </a>
+                
+                        
                         </td>
                             
                         <td><span class="post-status status-published">{{$Blgs->Status}}</span></td>
-                        
+                     <td>{{ $Blgs->created_at->toDateString() }}</td>
                     </tr>  
                     @endforeach
                     
