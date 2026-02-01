@@ -981,17 +981,16 @@ use Illuminate\Support\Str;
 </style>
 <main>
  <div class="ad-center">
-    <script>
-        var atOptions1 = {
-            'key' : 'd40d0a6e881f16735879c5c25cda2f98',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
-    </script>
-    <script src="https://www.highperformanceformat.com/d40d0a6e881f16735879c5c25cda2f98/invoke.js"></script>
-</div>
+<script>
+  atOptions = {
+    'key' : 'd40d0a6e881f16735879c5c25cda2f98',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/d40d0a6e881f16735879c5c25cda2f98/invoke.js"></script></div>
 
 <section class="hero">
   <div class="hero-container">
