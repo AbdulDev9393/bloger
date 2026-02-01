@@ -1321,6 +1321,6 @@ use Illuminate\Support\Str;
 
 
 @include('frontend.footer')
-
+<script src="https://pl28624267.effectivegatecpm.com/76/17/9f/76179f00bab06d636434cb54393313cf.js"></script>
 </body>
 </html>
