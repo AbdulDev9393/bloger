@@ -126,7 +126,5 @@ public function sitemap()
             compact('getBlogs')
         );
   }
-  function earning(){
-return "good";
-  }
+
 }
