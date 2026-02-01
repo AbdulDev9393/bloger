@@ -1,6 +1,6 @@
 @extends('admin_panal.mainbar')
 
-@section('title', 'Comments & Messages')
+@section('title', 'Manage Developers')
 
 @section('main-section')
 
@@ -865,23 +865,22 @@
     </style>
 
     <!-- Top Header -->
+    <!-- Top Header -->
     <div class="top-header">
         <h1 class="page-title"><i class="fas fa-users"></i> Manage Developers</h1>
-
     </div>
+
     <!-- Page Content -->
-    <!-- All Items Tab -->
     <div class="tab-content active" id="all-tab">
         <div class="table-container">
             <div class="table-header">
                 <h3>All Developers</h3>
-                <button class="btn btn-primary btn sm" id="createUser"> + Create User</button>
+                <button class="btn btn-primary btn-sm" id="createUser"> + Create User</button>
             </div>
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -889,32 +888,30 @@
                         </tr>
                     </thead>
                     <tbody id="all-items-table">
-                        @foreach ($developers as $developer )
-                            <tr>
-                                <td>{{$developer->id}}</td>
-                                <td>{{$developer->name}}</td>
-                                <td>{{$developer->email}}</td>
-                                <td>{{$developer->role}}</td>
-                                <td class="d-flex gap-1">
-                                    <button class="btn btn-warning btn-sm" id="updatebtn">Update</button>
-                                    <form action="" method="post">
-                                        <button class="btn btn-danger btn-sm" id="deleteBtn">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                        @if (auth()->user()->role === 'admin')
+                            @foreach ($users as $user)
+                                @if ($user->role !== 'admin')
+                                    <tr data-id="{{ $user->id }}">
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->role }}</td>
+                                        <td class="d-flex gap-1">
+                                            <button class="btn btn-warning btn-sm editUser"
+                                                data-id="{{ $user->id }}">Update</button>
+                                            <button class="btn btn-danger btn-sm deleteUser"
+                                                data-id="{{ $user->id }}">Delete</button>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
-
-
-            <div class="pagination">
-
-            </div>
+            <div class="pagination"></div>
         </div>
     </div>
-    <!-- Pending Tab -->
-    </div>
+
     <!-- Create Developer Modal -->
     <div class="modal" id="developerModal">
         <div class="modal-content">
@@ -922,16 +919,13 @@
                 <h3>Create Developer</h3>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
-
-            <form action="{{ route('admin.developers.store') }}" method="POST">
+            <form id="createDeveloperForm">
                 @csrf
                 <div class="modal-body">
-
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" name="name" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" name="email" class="form-control" required>
@@ -940,7 +934,6 @@
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label>Role</label>
                         <select name="role" class="form-control" required>
@@ -950,12 +943,52 @@
                             <option value="editor">Editor</option>
                         </select>
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="cancelModal">Cancel</button>
                     <button type="submit" class="btn btn-success">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Developer Modal -->
+    <div class="modal" id="editDeveloperModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Developer</h3>
+                <button class="close-modal" id="closeEditModal">&times;</button>
+            </div>
+            <form id="editDeveloperForm">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" id="edit_user_id">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" id="edit_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" id="edit_email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" id="user_password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select name="role" id="edit_role" class="form-control" required>
+                            <option value="">Select Role</option>
+                            <option value="junior developer">Junior Developer</option>
+                            <option value="seo developer">Seo Developer</option>
+                            <option value="editor">Editor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="cancelEditModal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </div>
             </form>
         </div>
@@ -967,24 +1000,169 @@
         const closeBtn = document.getElementById('closeModal');
         const cancelBtn = document.getElementById('cancelModal');
 
-        openBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        cancelBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // Close when clicking outside
+        openBtn.addEventListener('click', () => modal.style.display = 'flex');
+        closeBtn.addEventListener('click', () => modal.style.display = 'none');
+        cancelBtn.addEventListener('click', () => modal.style.display = 'none');
         window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Create Developer AJAX
+        $('#createDeveloperForm').on('submit', function(e) {
+            e.preventDefault();
+            let form = this;
+            swal({
+                title: "Processing...",
+                text: "Please wait...",
+                icon: "info",
+                buttons: false,
+                closeOnClickOutside: false
+            });
+
+            $.ajax({
+                url: "{{ route('admin.developers.store') }}",
+                method: "POST",
+                data: $(form).serialize(),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    swal.close();
+                    if (response.status) {
+                        swal("Success!", response.message, "success");
+
+                        $('#all-items-table').append(`
+                    <tr data-id="${response.user.id}">
+                        <td>${response.user.name}</td>
+                        <td>${response.user.email}</td>
+                        <td>${response.user.role}</td>
+                        <td class="d-flex gap-1">
+                            <button class="btn btn-warning btn-sm editUser" data-id="${response.user.id}">Update</button>
+                            <button class="btn btn-danger btn-sm deleteUser" data-id="${response.user.id}">Delete</button>
+                        </td>
+                    </tr>
+                `);
+                        form.reset();
+                        $('#developerModal').hide();
+                    }
+                },
+                error: function(xhr) {
+                    swal.close();
+                    let errors = xhr.responseJSON.errors;
+                    let errorMsg = '';
+                    $.each(errors, function(key, value) {
+                        errorMsg += value[0] + "\n";
+                    });
+                    swal("Validation Error", errorMsg, "error");
+                }
+            });
+        });
+
+        // Delete Developer
+        $(document).on('click', '.deleteUser', function(e) {
+            e.preventDefault();
+            let button = $(this);
+            let userId = button.data('id');
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this developer!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: `/manage_developers/${userId}`,
+                        type: 'DELETE',
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        success: function(response) {
+                            if (response.status) {
+                                button.closest('tr').remove();
+                                swal("Deleted!", response.message, "success");
+                            }
+                        },
+                        error: function() {
+                            swal("Error!", "Something went wrong!", "error");
+                        }
+                    });
+                }
+            });
+        });
+
+        // Edit Developer - Open Modal
+        $(document).on('click', '.editUser', function() {
+            let userId = $(this).data('id');
+            $.get(`/manage_developers/${userId}/edit`, function(user) {
+                $('#edit_user_id').val(user.id);
+                $('#edit_name').val(user.name);
+                $('#edit_email').val(user.email);
+                $('#user_password').val(user.password);
+                $('#edit_role').val(user.role);
+                $('#editDeveloperModal').css('display', 'flex');
+            });
+        });
+
+        // Close Edit Modal
+        $('#closeEditModal, #cancelEditModal').on('click', function() {
+            $('#editDeveloperModal').hide();
+        });
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('editDeveloperModal')) $('#editDeveloperModal').hide();
+        });
+
+        // Update Developer AJAX
+        $('#editDeveloperForm').on('submit', function(e) {
+            e.preventDefault();
+            let userId = $('#edit_user_id').val();
+            let formData = $(this).serialize();
+
+            swal({
+                title: "Processing...",
+                text: "Please wait...",
+                icon: "info",
+                buttons: false,
+                closeOnClickOutside: false
+            });
+
+            $.ajax({
+                url: `/manage_developers/${userId}`,
+                type: 'PUT',
+                data: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    swal.close();
+                    if (response.status) {
+                        swal("Success!", response.message, "success");
+
+                        let row = $(`#all-items-table tr[data-id='${userId}']`);
+                        row.find('td:eq(0)').text(response.user.name);
+                        row.find('td:eq(1)').text(response.user.email);
+                        row.find('td:eq(2)').text(response.user.password);
+                        row.find('td:eq(3)').text(response.user.role);
+
+                        $('#editDeveloperModal').hide();
+                    }
+                },
+                error: function(xhr) {
+                    swal.close();
+                    let errors = xhr.responseJSON.errors;
+                    let errorMsg = '';
+                    $.each(errors, function(key, value) {
+                        errorMsg += value[0] + "\n";
+                    });
+                    swal("Validation Error", errorMsg, "error");
+                }
+            });
         });
     </script>
+
 
 @endsection
