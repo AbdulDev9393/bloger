@@ -1235,9 +1235,17 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-<a href="https://www.effectivegatecpm.com/dyxkvvcf0?key=cf2ff505a04bb0513051665ccd971fef" target="_blank">
-    Visit Offer
-</a>
+
+<script>
+  atOptions = {
+    'key' : '59ac55686ca45ec66c3daea3d0d846fe',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/59ac55686ca45ec66c3daea3d0d846fe/invoke.js"></script>
 <!-- Daily Blog Reviews Section -->
 <section class="blog-reviews">
   <div class="container">
