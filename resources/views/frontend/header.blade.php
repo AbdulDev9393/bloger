@@ -4,13 +4,7 @@
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
     <meta name="description" content="{{ $meta_desc ?? 'TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology' }}">
    <script src="https://pl28624149.effectivegatecpm.com/62/da/f8/62daf8ae325831f2fe81a79aa9927646.js"></script> 
-   <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
-   <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
- <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
-<script>
-    window.ezstandalone = window.ezstandalone || {};
-    ezstandalone.cmd = ezstandalone.cmd || [];
-</script>
+
  @php
     $default_schema = [
         "@context" => "https://schema.org",
