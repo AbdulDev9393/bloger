@@ -19,4 +19,6 @@ class AdminController extends Controller
         $RecentBlogs = Blog::latest()->take(7)->get();
         return view('admin_panal.dashboard.index',compact('Comment','Subscribr','Category','Blog','RecentBlogs'));
     }
+
+    
 }
