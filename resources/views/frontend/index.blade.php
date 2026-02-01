@@ -971,10 +971,7 @@ use Illuminate\Support\Str;
     padding: 0 20px;
   }
 }
-iframe {
-    display: block;
-    margin: 20px auto;
-}
+
 </style>
 <main>
   <script>
