@@ -656,7 +656,7 @@
         </div>
     </div>
 
-    
+    <span id="ezoic-privacy-policy-embed"></span>
     <script>
         // Set current date and year
         const currentDate = new Date();
