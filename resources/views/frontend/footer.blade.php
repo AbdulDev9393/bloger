@@ -771,12 +771,7 @@ $data = SocialMedia::first();
     </div>
   </div>
 </footer>
-<script>
-    ezstandalone.cmd.push(function () {
-        // call new placeholders
-        ezstandalone.showAds(104, 105); // yahan IDs apni rakhni
-    });
-</script>
+
 <script>
   // Back to top functionality
   const backToTopBtn = document.getElementById('backToTop');

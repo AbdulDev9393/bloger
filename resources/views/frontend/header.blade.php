@@ -4,16 +4,14 @@
     <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
     <meta name="description" content="{{ $meta_desc ?? 'TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology' }}">
     
-    <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
-    <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
-
-    <!-- EZOIC HEADER SCRIPT -->
-    <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
-    <script>
-        window.ezstandalone = window.ezstandalone || {};
-        ezstandalone.cmd = ezstandalone.cmd || [];
-    </script>
-    @php
+   <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></script>
+   <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></script>
+ <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+<script>
+    window.ezstandalone = window.ezstandalone || {};
+    ezstandalone.cmd = ezstandalone.cmd || [];
+</script>
+ @php
     $default_schema = [
         "@context" => "https://schema.org",
         "@type" => "BlogPosting",
@@ -823,8 +821,29 @@
     </div>
 
    
-
-
+<div id="ezoic-pub-ad-placeholder-101"></div>
+<script>
+    ezstandalone.cmd.push(function () {
+        ezstandalone.showAds(101);
+    });
+</script>
+<script>
+    ezstandalone.cmd.push(function () {
+        ezstandalone.showAds();
+    });
+</script>
+<script>
+    ezstandalone.cmd.push(function () {
+        // call new placeholders
+        ezstandalone.showAds(104, 105);
+    });
+</script>
+<script>
+    window.ezstandalone.cmd.push(function () {
+        // call new placeholders
+        ezstandalone.showAds(105, 106);
+    });
+</script>
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
