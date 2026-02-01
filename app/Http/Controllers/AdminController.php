@@ -16,7 +16,7 @@ class AdminController extends Controller
         $Subscribr=Subscribe::count();
         $Comment=Comment::count();
         $Blog=Blog::count();
-        $RecentBlogs = Blog::latest()->take(5)->get();
+        $RecentBlogs = Blog::latest()->take(7)->get();
         return view('admin_panal.dashboard.index',compact('Comment','Subscribr','Category','Blog','RecentBlogs'));
     }
 }
