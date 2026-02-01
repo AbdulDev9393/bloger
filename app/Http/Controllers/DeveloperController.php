@@ -2,35 +2,74 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DeveloperRegisterRequest;
-use App\Models\Developer;
-use Exception;
-use Illuminate\Container\Attributes\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreDeveloperRequest;
+use App\Http\Requests\UpdateDeveloperRequest;
 
 class DeveloperController extends Controller
 {
     public function index()
     {
-        $developers = Developer::all();
-        return view('admin_panal.developers.index', compact('developers'));
+        $users = User::all();
+        return view('admin_panal.developers.index', compact('users'));
     }
 
-    public function store(DeveloperRegisterRequest $request)
+    public function store(StoreDeveloperRequest $request)
     {
         $request->validated();
-        $developer = Developer::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
             'created_by' => auth()->id()
         ]);
-        if ($developer) {
-            return redirect()->route('admin.developers.index')->with('success', 'User Created Successfully');
-        } else {
-            return redirect()->route('admin.developers.index')->with('error', 'User Creation Failed!');
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'User Created Successfully',
+                'user' => $user
+            ]);
         }
+        return redirect()->route('admin.developers.index')->with('success', 'User Created Successfully');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json($user); // Return JSON for AJAX
+    }
+
+    public function update(UpdateDeveloperRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $data = $request->only(['name', 'email', 'role']);
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+        $user->update($data);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Developer updated successfully',
+                'user' => $user
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Developer updated successfully');
+    }
+
+
+    public function delete($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        if ($request->ajax()) {
+            return response()->json(['status' => true, 'message' => 'Developer deleted successfully']);
+        }
+        return redirect()->back()->with('success', 'Developer deleted successfully');
     }
 }

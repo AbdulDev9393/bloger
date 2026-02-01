@@ -6,7 +6,7 @@ use App\Enums\DeveloperRoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class DeveloperRegisterRequest extends FormRequest
+class StoreDeveloperRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class DeveloperRegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:developers,email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
             'role' => ['required', new Enum(DeveloperRoleEnum::class)],
         ];

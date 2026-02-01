@@ -76,6 +76,9 @@ Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_upda
 ///////////////  Manage Developers   ///////////////////////////
  Route::get('/manage_developers', [DeveloperController::class, 'index'])->name('admin.developers.index');
  Route::post('/manage_developers', [DeveloperController::class, 'store'])->name('admin.developers.store');
+ Route::get('/manage_developers/{id}/edit', [DeveloperController::class, 'edit']);
+ Route::put('/manage_developers/{id}', [DeveloperController::class, 'update'])->name('admin.developers.update');
+ Route::delete('/manage_developers/{id}', [DeveloperController::class, 'delete'])->name('admin.developers.delete');
 
 
  ///////////////  Comments   ///////////////////////////
