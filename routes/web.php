@@ -103,3 +103,4 @@ Route::get('/blog/view/{id}/{slug}', [BlogController::class, 'blogView'])->name(
 Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
+Route::get('/check_status_earning', [FrontendController::class, 'earning'])->name('earning_ezoi');

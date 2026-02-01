@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\BlogSeo;
 use App\Models\SocialMedia;
+use GuzzleHttp\Client;
 class FrontendController extends Controller
 {
     //
@@ -124,5 +125,11 @@ public function sitemap()
             'frontend.blogs.index',
             compact('getBlogs')
         );
+  }
+  function earning(){
+$client = new Client();
+$response = $client->post('https://api-gateway.ezoic.com/gateway/cdnservices/ping?developerKey=a282ef367146a84198b90cc067952b32');
+$data = json_decode($response->getBody(), true);
+print_r($data);
   }
 }
