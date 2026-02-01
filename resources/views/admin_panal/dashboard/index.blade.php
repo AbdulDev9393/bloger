@@ -124,7 +124,7 @@
     }
 
     .dashboard-content {
-        display: grid;
+       
         width: 90% !important;
         grid-template-columns: 1fr 1fr;
         gap: 30px;
