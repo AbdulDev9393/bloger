@@ -1186,7 +1186,16 @@ use Illuminate\Support\Str;
     </div>
   </div>
 </section>
-
+<script>
+  atOptions = {
+    'key' : '59ac55686ca45ec66c3daea3d0d846fe',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/59ac55686ca45ec66c3daea3d0d846fe/invoke.js"></script>
 {{-- ================= CATEGORIES / ALL BLOGS ================= --}}
 <section class="blogs-section">
   <div class="container">
