@@ -1027,8 +1027,7 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-<script async="async" data-cfasync="false" src="https://pl28624175.effectivegatecpm.com/6a1c467807ba6c476df52e18a1c6588b/invoke.js"></script>
-<div id="container-6a1c467807ba6c476df52e18a1c6588b"></div>
+
 <section class="hero">
   <div class="hero-container">
     {{-- Right Image --}}
@@ -1224,8 +1223,6 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-<script async="async" data-cfasync="false" src="https://pl28624175.effectivegatecpm.com/6a1c467807ba6c476df52e18a1c6588b/invoke.js"></script>
-<div id="container-6a1c467807ba6c476df52e18a1c6588b"></div>
 <!-- Daily Blog Reviews Section -->
 <section class="blog-reviews">
   <div class="container">
@@ -1324,6 +1321,6 @@ use Illuminate\Support\Str;
 
 
 @include('frontend.footer')
-<script src="https://pl28624267.effectivegatecpm.com/76/17/9f/76179f00bab06d636434cb54393313cf.js"></script>
+
 </body>
 </html>

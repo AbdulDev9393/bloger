@@ -85,7 +85,7 @@
         gtag('js', new Date());
         gtag('config', 'G-4FRZ5NP2M7');
     </script>
-<script src="https://pl28624149.effectivegatecpm.com/62/da/f8/62daf8ae325831f2fe81a79aa9927646.js"></script>
+
     <!-- Custom CSS -->
     <style>
         :root {
