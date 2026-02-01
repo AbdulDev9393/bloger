@@ -1,10 +1,10 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
   body { display:flex; min-height:100vh; background:#f8f9fa; transition: all 0.3s;}
-  
+
   /* Sidebar */
   .admin-sidebar {
-    width: 250px;
+    width: 260px;
     background: #fff8f0;
     padding: 20px;
     height: 100vh;
@@ -24,10 +24,12 @@
   .sidebar-menu li a { display:flex; align-items:center; gap:10px; color:#333; text-decoration:none; padding:10px 15px; border-radius:8px; transition:all 0.3s; font-weight:500;}
   .sidebar-menu li a i { width:20px; text-align:center;}
   .sidebar-menu li a:hover { background:#ff7700; color:#fff; transform:translateX(3px);}
-  
+  .sidebar-menu li a.active { background: #ff7700; color: #fff; box-shadow: 0 4px 10px rgba(255,119,0,0.3);
+}
+
   /* Main Content */
   .main-content { margin-left:250px; padding:30px; flex:1; transition: all 0.3s;}
-  
+
   /* Toggle button */
   #sidebarToggle {
     display:none;
@@ -54,12 +56,13 @@
     <h2>Blog Admin</h2>
   </div>
   <ul class="sidebar-menu">
-    <li><a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li><a href="{{route('admin.blogs')}}"><i class="fas fa-newspaper"></i> Manage Blogs</a></li>
-    <li><a href="{{route('admin.Categories')}}"><i class="fas fa-tags"></i> Categories</a></li>
-    <li><a href="{{route('admin.Comments')}}"><i class="fas fa-comments"></i> Comments</a></li>
-    <li><a href="{{route('admin.emails')}}"><i class="fas fa-users"></i> Users Subcribe</a></li>
-    <li><a href="{{route('admin.sitting')}}"><i class="fas fa-cog"></i> Settings</a></li>
+    <li><a href="{{ route('admin.dashboard') }}" class="{{request()->routeIs('admin.dashboard') ? 'active' : ''}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+    <li><a href="{{route('admin.blogs')}}" class="{{request()->routeIs('admin.blogs') ? 'active' : ''}}"><i class="fas fa-newspaper"></i> Manage Blogs</a></li>
+    <li><a href="{{route('admin.developers.index')}}" class="{{request()->routeIs('admin.developers.index') ? 'active' : ''}}"><i class="fas fa-users"></i> Manage Developers</a></li>
+    <li><a href="{{route('admin.Categories')}}"  class="{{request()->routeIs('admin.Categories') ? 'active' : ''}}"><i class="fas fa-tags"></i> Categories</a></li>
+    <li><a href="{{route('admin.Comments')}}"  class="{{request()->routeIs('admin.Comments') ? 'active' : ''}}"><i class="fas fa-comments"></i> Comments</a></li>
+    <li><a href="{{route('admin.emails')}}"  class="{{request()->routeIs('admin.emails') ? 'active' : ''}}"><i class="fas fa-users"></i> Users Subcribe</a></li>
+    <li><a href="{{route('admin.sitting')}}"  class="{{request()->routeIs('admin.sitting') ? 'active' : ''}}"><i class="fas fa-cog"></i> Settings</a></li>
     <li>
       <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
           @csrf

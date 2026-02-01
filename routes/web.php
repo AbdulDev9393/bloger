@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\FrontendController;
-use  App\Http\Controllers\AdminController;
-use  App\Http\Controllers\BlogController;
-use  App\Http\Controllers\CategoryController;
-use  App\Http\Controllers\ContectController;
-use  App\Http\Controllers\SittingController;
-use  App\Http\Controllers\EmailsController;
-use  App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
+use  App\Http\Controllers\AuthController;
+use  App\Http\Controllers\BlogController;
+use  App\Http\Controllers\AdminController;
+use  App\Http\Controllers\EmailsController;
+use  App\Http\Controllers\ContectController;
+use  App\Http\Controllers\SittingController;
+use  App\Http\Controllers\CategoryController;
+use  App\Http\Controllers\FrontendController;
+use App\Http\Controllers\DeveloperController;
 
 
 
@@ -69,6 +70,12 @@ Route::post('/admin/blogs/generate-content', [BlogController::class, 'generateCo
  /////////////////////////        //////////////////////
 Route::get('/manage_blogs_seo/{id}',[BlogController::class,'blog_seo'])->name('admin.blogs.seo');
 Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_update'])->name('admin.blogs.update.seo');
+
+
+
+///////////////  Manage Developers   ///////////////////////////
+ Route::get('/manage_developers', [DeveloperController::class, 'index'])->name('admin.developers.index');
+ Route::post('/manage_developers', [DeveloperController::class, 'store'])->name('admin.developers.store');
 
 
  ///////////////  Comments   ///////////////////////////
