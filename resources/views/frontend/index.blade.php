@@ -973,6 +973,21 @@ use Illuminate\Support\Str;
 }
 </style>
 <main>
+  <div style="display:flex; justify-content:center; margin:15px 0;">
+    <div>
+        <script>
+            atOptions = {
+                'key' : 'd40d0a6e881f16735879c5c25cda2f98',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/d40d0a6e881f16735879c5c25cda2f98/invoke.js"></script>
+    </div>
+</div>
+
 <section class="hero">
   <div class="hero-container">
 
@@ -1016,6 +1031,20 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
+<div style="display:flex; justify-content:center; margin:15px 0;">
+    <div>
+        <script>
+            atOptions = {
+                'key' : 'd40d0a6e881f16735879c5c25cda2f98',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/d40d0a6e881f16735879c5c25cda2f98/invoke.js"></script>
+    </div>
+</div>
 
 <section class="hero">
   <div class="hero-container">
