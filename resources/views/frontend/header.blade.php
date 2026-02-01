@@ -815,29 +815,7 @@
     </div>
 
    
-<div id="ezoic-pub-ad-placeholder-101"></div>
-<script>
-    ezstandalone.cmd.push(function () {
-        ezstandalone.showAds(101);
-    });
-</script>
-<script>
-    ezstandalone.cmd.push(function () {
-        ezstandalone.showAds();
-    });
-</script>
-<script>
-    ezstandalone.cmd.push(function () {
-        // call new placeholders
-        ezstandalone.showAds(104, 105);
-    });
-</script>
-<script>
-    window.ezstandalone.cmd.push(function () {
-        // call new placeholders
-        ezstandalone.showAds(105, 106);
-    });
-</script>
+
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
