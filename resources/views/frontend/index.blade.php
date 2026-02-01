@@ -1226,6 +1226,9 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
+<a href="https://www.effectivegatecpm.com/dyxkvvcf0?key=cf2ff505a04bb0513051665ccd971fef" target="_blank">
+    Visit Offer
+</a>
 <!-- Daily Blog Reviews Section -->
 <section class="blog-reviews">
   <div class="container">
