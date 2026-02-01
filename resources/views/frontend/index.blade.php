@@ -971,18 +971,9 @@ use Illuminate\Support\Str;
     padding: 0 20px;
   }
 }
+
 </style>
 <main>
-  <script>
-  atOptions = {
-    'key' : 'd40d0a6e881f16735879c5c25cda2f98',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/d40d0a6e881f16735879c5c25cda2f98/invoke.js"></script>
 <section class="hero">
   <div class="hero-container">
 
@@ -1026,7 +1017,8 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-
+<script async="async" data-cfasync="false" src="https://pl28624175.effectivegatecpm.com/6a1c467807ba6c476df52e18a1c6588b/invoke.js"></script>
+<div id="container-6a1c467807ba6c476df52e18a1c6588b"></div>
 <section class="hero">
   <div class="hero-container">
     {{-- Right Image --}}
@@ -1069,7 +1061,8 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-
+<script async="async" data-cfasync="false" src="https://pl28624175.effectivegatecpm.com/6a1c467807ba6c476df52e18a1c6588b/invoke.js"></script>
+<div id="container-6a1c467807ba6c476df52e18a1c6588b"></div>
 {{-- ================= LATEST BLOGS SECTION ================= --}}
 <section class="blogs-section">
   <div class="container">
@@ -1109,6 +1102,7 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
+
 <section class="categories-section">
   <div class="container">
     <div class="section-header">
@@ -1182,7 +1176,16 @@ use Illuminate\Support\Str;
     </div>
   </div>
 </section>
-
+<script>
+  atOptions = {
+    'key' : '59ac55686ca45ec66c3daea3d0d846fe',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/59ac55686ca45ec66c3daea3d0d846fe/invoke.js"></script>
 {{-- ================= CATEGORIES / ALL BLOGS ================= --}}
 <section class="blogs-section">
   <div class="container">
@@ -1222,6 +1225,17 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
+
+<script>
+  atOptions = {
+    'key' : '59ac55686ca45ec66c3daea3d0d846fe',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/59ac55686ca45ec66c3daea3d0d846fe/invoke.js"></script>
 <!-- Daily Blog Reviews Section -->
 <section class="blog-reviews">
   <div class="container">
@@ -1320,6 +1334,6 @@ use Illuminate\Support\Str;
 
 
 @include('frontend.footer')
-
+<script src="https://pl28624267.effectivegatecpm.com/76/17/9f/76179f00bab06d636434cb54393313cf.js"></script>
 </body>
 </html>

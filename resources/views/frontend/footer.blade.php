@@ -652,6 +652,9 @@ $data = SocialMedia::first();
             <i class="fa-solid fa-shield-alt"></i>
             <span>Privacy Policy</span>
           </a>
+          <a href="https://www.effectivegatecpm.com/dyxkvvcf0?key=cf2ff505a04bb0513051665ccd971fef" target="_blank">
+    Visit Offer
+</a>
         </div>
       </div>
 
@@ -739,6 +742,7 @@ $data = SocialMedia::first();
            rel="noopener noreferrer">
           <i class="fa-brands fa-twitter"></i>
         </a>
+
         <a href="{{ optional($data)->instagram ?? '#' }}" 
            title="Instagram"
            aria-label="Instagram"
