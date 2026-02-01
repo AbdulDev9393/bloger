@@ -1027,7 +1027,8 @@ use Illuminate\Support\Str;
 
   </div>
 </section>
-
+<script async="async" data-cfasync="false" src="https://pl28624175.effectivegatecpm.com/6a1c467807ba6c476df52e18a1c6588b/invoke.js"></script>
+<div id="container-6a1c467807ba6c476df52e18a1c6588b"></div>
 <section class="hero">
   <div class="hero-container">
     {{-- Right Image --}}
