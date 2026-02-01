@@ -127,9 +127,6 @@ public function sitemap()
         );
   }
   function earning(){
-$client = new Client();
-$response = $client->post('https://api-gateway.ezoic.com/gateway/cdnservices/ping?developerKey=a282ef367146a84198b90cc067952b32');
-$data = json_decode($response->getBody(), true);
-print_r($data);
+return "good";
   }
 }
