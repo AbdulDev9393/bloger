@@ -697,27 +697,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                 </ul>
             </nav>
 
-            <!-- Header Actions -->
-            <div class="header-actions">
-                <!-- Social Links -->
-                @php
-                use App\Models\SocialMedia;
-                $data = SocialMedia::first();
-                @endphp
-                
-                <!-- Search -->
-                <div class="search-container">
-                    <form action="{{ route('frontend.search') }}" method="GET">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="search" class="search-input" name="query" placeholder="Search articles..." aria-label="Search articles">
-                    </form>
-                </div>
-
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            
         </div>
     </div>
 </header>
