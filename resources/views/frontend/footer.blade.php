@@ -652,42 +652,10 @@ $data = SocialMedia::first();
             <i class="fa-solid fa-shield-alt"></i>
             <span>Privacy Policy</span>
           </a>
-          <a href="https://www.effectivegatecpm.com/dyxkvvcf0?key=cf2ff505a04bb0513051665ccd971fef" target="_blank">
-    Visit Offer
-</a>
+      
         </div>
       </div>
 
-      <!-- Categories (Optional) -->
-      <div class="footer-section">
-        <h3>Popular Categories</h3>
-        <div class="footer-links">
-          <a href="#">
-            <i class="fa-solid fa-microchip"></i>
-            <span>AI & Machine Learning</span>
-          </a>
-          <a href="#">
-            <i class="fa-solid fa-mobile-screen"></i>
-            <span>Mobile Technology</span>
-          </a>
-          <a href="#">
-            <i class="fa-solid fa-code"></i>
-            <span>Web Development</span>
-          </a>
-          <a href="#">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>Cybersecurity</span>
-          </a>
-          <a href="#">
-            <i class="fa-solid fa-gem"></i>
-            <span>Gadgets & Reviews</span>
-          </a>
-          <a href="#">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Tech Trends</span>
-          </a>
-        </div>
-      </div>
 
       <!-- Newsletter -->
       <div class="footer-section">
@@ -770,7 +738,7 @@ $data = SocialMedia::first();
         <a href="{{ route('frontend.terms-conditions') }}">Terms</a>
         <a href="{{ route('frontend.praivacy-policy') }}">Privacy</a>
         <a href="{{ route('frontend.contect') }}">Contact</a>
-        <a href="https://www.sigmatraffic.com" target="_blank" rel="noopener noreferrer">Buy Traffic</a>
+       
       </div>
     </div>
   </div>

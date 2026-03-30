@@ -12,24 +12,55 @@ use GuzzleHttp\Client;
 class FrontendController extends Controller
 {
     //
-    function index(){
-        $latestBlog=Blog::latest()->first();
-       $meta_title="TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
-       $meta_desc="TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology";
-       $latestBlogs = Blog::latest()->skip(2)->take(12)->get();
-       $secondLatestBlog = Blog::latest()->skip(1)->first();
-       $trankBlogs = Blog::oldest()->take(4)->get();
-      
-       $techCount=Blog::where('category','5')->count();
-       $techinfo=Blog::where('category','7')->count();
-        $techhealth=Blog::where('category','6')->count();
-      $blogs = Blog::whereIn('id', function($query) {
-    $query->selectRaw('MAX(id)') // latest blog per category
-          ->from('blogs')->latest()
-          ->groupBy('category');
-})->get();
-        return view('frontend.index',compact('latestBlog','latestBlogs','blogs','meta_desc','meta_title','trankBlogs','secondLatestBlog','techCount','techinfo','techhealth'));
-    }
+ function index(){
+
+    // SEO Meta
+    $meta_title = "TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
+    $meta_desc  = "TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology.";
+
+    // Latest Published Blog
+    $latestBlog = Blog::where('status', 'published')->latest()->first();
+
+    // Other Blogs
+    $secondLatestBlog = Blog::where('status', 'published')->latest()->skip(1)->first();
+
+    $latestBlogs = Blog::where('status', 'published')
+                        ->latest()
+                        ->skip(2)
+                        ->take(12)
+                        ->get();
+
+    // Trending / Oldest
+    $trankBlogs = Blog::where('status', 'published')
+                        ->oldest()
+                        ->take(4)
+                        ->get();
+
+    // Category Counts
+    $techCount   = Blog::where('category', 5)->where('status','published')->count();
+    $techinfo    = Blog::where('category', 7)->where('status','published')->count();
+    $techhealth  = Blog::where('category', 6)->where('status','published')->count();
+
+    // Latest blog from each category
+    $blogs = Blog::whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+              ->from('blogs')
+              ->groupBy('category');
+    })->where('status','published')->get();
+
+    return view('frontend.index', compact(
+        'meta_title',
+        'meta_desc',
+        'latestBlog',
+        'secondLatestBlog',
+        'latestBlogs',
+        'trankBlogs',
+        'techCount',
+        'techinfo',
+        'techhealth',
+        'blogs'
+    ));
+}
 public function Contectus() {
     $data = SocialMedia::first();
     return view('frontend.content-us', compact('data'));

@@ -713,10 +713,16 @@
             @csrf
             <div class="container-fluid">
                 <div class="row g-3">
-                    <div class="col-md-6">
+                   <div class="col-md-6">
                         <label for="blog-title" class="form-label">Blog Title</label>
                         <input type="text" name="name" class="form-control" id="blog-title" placeholder="Enter blog title" required>
+                    
+                        <!-- AI Button -->
+                     <button type="button" id="generate-ai" class="btn btn-success mt-2">
+                        🤖 Generate Content (AI)
+                    </button>
                     </div>
+                    
                     <div class="col-md-6">
                         <label for="blog-category" class="form-label">Category</label>
                         <select class="form-select" name="category" id="blog-category" required>
@@ -779,11 +785,20 @@
 
 
 
+
 <script>
+let editorInstance = null;
+
 document.addEventListener('DOMContentLoaded', function () {
+
+    // =========================
+    // ✅ CKEditor INIT (ONLY ONE)
+    // =========================
     ClassicEditor
         .create(document.querySelector('#editor'))
         .then(editor => {
+            editorInstance = editor;
+
             const wordCountDisplay = document.getElementById('word-count');
 
             function countWords(text) {
@@ -799,8 +814,73 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => {
-            console.error(error);
+            console.error('Editor Error:', error);
         });
+
+
+    // =========================
+    // ✅ AI GENERATE BUTTON
+    // =========================
+    const aiBtn = document.getElementById('generate-ai');
+
+    if (aiBtn) {
+        aiBtn.addEventListener('click', function () {
+
+            let title = document.getElementById('blog-title').value.trim();
+
+            if (!title) {
+                alert('Title likho pehle');
+                return;
+            }
+
+            if (!editorInstance) {
+                alert('Editor abhi load ho raha hai, wait karo');
+                return;
+            }
+
+            // Loading state
+            editorInstance.setData('<p>Generating content... ⏳</p>');
+
+            fetch("{{ route('admin.ai.generate') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    title: title
+                })
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response not ok: ' + res.status);
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log('AI Response:', data);
+
+                // ✅ FULL RESPONSE HANDLE
+                if (data.status && data.content) {
+                    editorInstance.setData(data.content);
+
+                    // optional: title update
+                    if (data.title) {
+                        document.getElementById('blog-title').value = data.title;
+                    }
+
+                } else {
+                    editorInstance.setData('<p>No content returned ❌</p>');
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
+            });
+
+        });
+    }
+
 });
 </script>
 @endsection

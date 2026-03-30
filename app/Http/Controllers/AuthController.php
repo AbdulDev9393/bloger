@@ -22,8 +22,7 @@ public function Registar_add(Request $request)
     $otp = rand(100000, 999999);
 
     $allowedEmails = [
-        'ahmadfullstackdeveloper@gmail.com',
-        'usamadogar807@gmail.com'
+        'ahmadfullstackdeveloper@gmail.com'
     ];
 
     if (!in_array($request->email, $allowedEmails)) {
@@ -112,8 +111,7 @@ public function verifyOtp(Request $request)
 public function login_post(Request $request)
 {
     $allowedEmails = [
-        'ahmadfullstackdeveloper@gmail.com',
-        'usamadogar807@gmail.com'
+        'ahmadfullstackdeveloper@gmail.com'
     ];
 
     // Validate input
@@ -138,18 +136,9 @@ public function login_post(Request $request)
         return back()->with('error', 'Invalid email or password.');
     }
 
-    // Generate OTP
-    $otp = rand(100000, 999999);
-
-    // Send OTP email
-    Mail::raw(
-        "Your Admin OTP is: $otp\n\nValid for 5 minutes.",
-        function ($message) use ($email) {
-            $message->to($email)->subject('Admin OTP Verification');
-        }
-    );
-
-    return view('login_passcode', compact('otp', 'email'));
+     Auth::login($user);
+     return redirect()->route('admin.dashboard')
+        ->with('success','Welcome Muhammad Abdul');
 }
 
   public function logout(Request $request)

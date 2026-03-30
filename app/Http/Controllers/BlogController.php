@@ -88,8 +88,100 @@ public function store(Request $request)
 
   }
 
+public function generateAI(Request $request)
+{
+    // ✅ Validate
+    $request->validate([
+        'title' => 'required|string|max:255'
+    ]);
 
+    $title = $request->title;
+      
+    // ✅ API Key (ENV se lo)
+    $key = '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';
+    
+    if (!$key) {
+        return response()->json([
+            'status' => false,
+            'message' => 'OpenAI API key missing'
+        ], 500);
+    }
 
+    // ✅ OpenAI Client
+    $client = \OpenAI::client($key);
+       
+    // ✅ Prompt
+  $prompt = "
+Write a detailed, SEO-optimized blog post for a technology website.
+
+Website Name: techblogs.site  
+Blog Title: {$title}
+
+Instructions:
+- Write at least 1200+ words
+- Content must be 100% unique, human-like, and engaging
+- Topic must be strictly technology-related
+- Use SEO best practices
+- Naturally include 'techblogs.site' in introduction and conclusion
+- please give me the Real-world examples
+- pleae explain topic in deeply level 
+
+Formatting Rules:
+- Output MUST be in clean HTML format
+- Use <h2> for main headings
+- Use <h3> for subheadings
+- Use <p> for paragraphs
+- Use <strong> for important keywords
+- Use <ul> and <li> for bullet points
+- Do NOT include markdown (** or ##), only HTML
+- No explanation, only return blog HTML
+
+SEO:
+- Use primary keyword (from title)
+- Add secondary keywords naturally
+- Maintain keyword density without stuffing
+
+Structure:
+- Introduction (with keyword + mention techblogs.site)
+- Multiple sections with headings
+- Bullet points where useful
+- Examples where needed
+- Conclusion (include techblogs.site again)
+
+Tone:
+- Simple, professional English
+- Beginner-friendly
+";
+    // ✅ API Call
+    $response = $client->chat()->create([
+        'model' => 'gpt-4o-mini',
+        'messages' => [
+            [
+                'role' => 'user',
+                'content' => $prompt
+            ]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 2000
+    ]);
+
+    // ✅ Safe Extract
+    $content = $response->choices[0]->message->content ?? null;
+
+    if (!$content) {
+        return response()->json([
+            'status' => false,
+            'message' => 'No content generated'
+        ], 500);
+    }
+
+    // ✅ Response
+    return response()->json([
+        'status' => true,
+        'title' => $title,
+        'content' => $content
+    ]);
+}
 public function update(Request $request, $id)
 {
     $request->validate([
@@ -184,6 +276,30 @@ public function update(Request $request, $id)
 
     return redirect()->route('admin.blogs')->with('success', 'Blog updated successfully!');
 }   // JSON-LD schema as array
+
+
+
+public function delete($id)
+{
+    $blog = Blog::findOrFail($id);
+
+    // optional: images bhi delete karo
+    if ($blog->Thumbnail_Image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image)) {
+        unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image);
+    }
+
+    if ($blog->Banner_mage && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage)) {
+        unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage);
+    }
+
+    if ($blog->resize_image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image)) {
+        unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image);
+    }
+
+    $blog->delete();
+
+    return back()->with('success', 'Blog deleted successfully');
+}
 public function blogView($id)
 {
     $seo = BlogSeo::where('blog_id', $id)->first();
