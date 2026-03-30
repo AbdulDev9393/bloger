@@ -692,18 +692,8 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                             <span>Cookie Policy</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-bullhorn"></i>
-                            <span>Disclaimer</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-sitemap"></i>
-                            <span>Sitemap</span>
-                        </a>
-                    </li>
+                  
+                   
                 </ul>
             </nav>
 
