@@ -658,31 +658,13 @@ $data = SocialMedia::first();
 
       <!-- Quick links -->
       <div class="footer-section">
-        <h3>Quick Links</h3>
+       
         <div class="footer-links">
-          <a href="{{ route('frontend.index') }}">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-          </a>
-          <a href="{{ route('frontend.Aboute') }}">
-            <i class="fa-solid fa-info-circle"></i>
-            <span>About Us</span>
-          </a>
-          <a href="{{ route('frontend.blogs') }}">
-            <i class="fa-solid fa-blog"></i>
-            <span>Blog</span>
-          </a>
-          <a href="{{ route('frontend.contect') }}">
-            <i class="fa-solid fa-envelope"></i>
-            <span>Contact</span>
-          </a>
-          <a href="{{ route('frontend.terms-conditions') }}">
-            <i class="fa-solid fa-file-contract"></i>
-            <span>Terms & Conditions</span>
-          </a>
+          
           <a href="{{ route('frontend.praivacy-policy') }}">
             <i class="fa-solid fa-shield-alt"></i>
-            <span>Privacy Policy</span>
+                                      <span>Cookie Policy</span>
+
           </a>
       
         </div>
