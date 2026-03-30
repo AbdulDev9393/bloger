@@ -96,7 +96,10 @@ function Services(){
 }
 
     function Aboute(){
-      return view('frontend.about.about');
+         $meta_title = "About Us – TechBlogs | Latest Tech News, AI & Digital Trends Platform";
+    $meta_desc  = "TechBlogs is a technology-focused platform where we share the latest tech news, AI updates, mobile reviews, gadgets, software tips, and digital trends. Our goal is to keep readers updated with simple and reliable tech information.";
+  
+      return view('frontend.about.about', compact('meta_title', 'meta_desc'));
     }
 public function sitemap()
 {
