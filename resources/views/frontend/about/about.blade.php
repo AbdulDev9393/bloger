@@ -93,33 +93,50 @@
 
         <!-- Image Side -->
         <div class="about-img">
-            <img src="https://techblogs.site//favicon.ico" alt="About Us">
+            <img src="https://techblogs.site/favicon.ico" alt="About TechBlogs">
         </div>
 
         <!-- Content Side -->
         <div class="about-content">
-            <h1>Welcome to our tech blog!</h1>
+
+            <h1>About TechBlogs</h1>
+
             <p>
-               We are passionate about sharing the latest tips, tricks, and tutorials in the world of technology. From laptops and smartphones to cutting-edge gadgets, we aim to provide our readers with easy-to-understand guides and insights to stay ahead in this fast-paced digital world.
-            </p> <p>
-Our team writes daily posts to keep you updated with the newest trends, product reviews, and practical tech advice. Whether you are a beginner or a tech enthusiast, our content is designed to help you make the most of your devices and digital lifestyle.<p>
-            <p>Our key strengths:</p>
-           <ul>
-                    <li>I write blogs mostly focused on popular countries like the USA, UK, and others.</li>
-                    <li>Providing useful information and tips to readers worldwide.</li>
-                    <li>Sharing daily insights on technology, gadgets, and digital trends.</li>
-                    <li>Covering topics that help people stay updated and informed.</li>
-                    <li>Creating content that educates, informs, and engages tech enthusiasts.</li>
-                </ul>
+                Welcome to TechBlogs, your trusted source for the latest technology news, tutorials, and digital insights. 
+                Our mission is to simplify technology and make it easy for everyone to understand, whether you're a beginner or an advanced user.
+            </p>
+
+            <p>
+                We regularly publish articles about smartphones, laptops, gadgets, software updates, AI tools, and emerging digital trends. 
+                Our goal is to keep you updated with accurate, helpful, and easy-to-follow tech information.
+            </p>
+
+            <p>
+                At TechBlogs, we focus on delivering high-quality content that helps users solve real problems, learn new skills, and stay ahead in the fast-changing tech world.
+            </p>
+
+            <p><strong>What we cover:</strong></p>
+
+            <ul>
+                <li>Latest technology news and updates</li>
+                <li>Smartphone and gadget reviews</li>
+                <li>AI tools and digital innovations</li>
+                <li>Step-by-step tutorials and guides</li>
+                <li>Tips to improve digital skills and productivity</li>
+            </ul>
+
+            <p>
+                Our content is written for a global audience, including readers from the USA, UK, Canada, and other countries who are passionate about technology.
+            </p>
 
             <div class="about-cta">
                 <a href="{{route('frontend.contect')}}">Contact Us</a>
             </div>
+
         </div>
 
     </div>
 </section>
-
 @include('frontend.footer')
 
 </body>
