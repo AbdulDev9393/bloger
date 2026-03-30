@@ -675,6 +675,40 @@
                                 <span>Contact</span>
                             </a>
                         </li>
+                        <li>
+        <a href="#" class="nav-link">
+            <i class="fas fa-user-shield"></i>
+            <span>Privacy Policy</span>
+        </a>
+    </li>
+      <li>
+        <a href="#" class="nav-link">
+            <i class="fas fa-file-contract"></i>
+            <span>Terms & Conditions</span>
+        </a>
+    </li>
+        <li>
+        <a href="#" class="nav-link">
+            <i class="fas fa-cookie-bite"></i>
+            <span>Cookie Policy</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="#" class="nav-link">
+            <i class="fas fa-bullhorn"></i>
+            <span>Disclaimer</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="#" class="nav-link">
+            <i class="fas fa-sitemap"></i>
+            <span>Sitemap</span>
+        </a>
+    </li>
+
+
                     </ul>
                 </nav>
 
