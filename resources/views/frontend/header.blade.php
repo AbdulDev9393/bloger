@@ -632,9 +632,9 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         outline: 2px solid var(--primary-color);
         outline-offset: 2px;
     }
-    li a{
-        font-size: 12px;
-    }
+   .nav-links .nav-link {
+    font-size: 12px !important;
+}
 </style>
 
 <!-- Skip to Main Content -->
