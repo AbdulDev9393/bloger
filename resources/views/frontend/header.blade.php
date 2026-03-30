@@ -320,31 +320,6 @@
             gap: 1rem;
         }
 
-        .social-links {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding-right: 1rem;
-            border-right: 1px solid var(--border-color);
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            color: var(--text-secondary);
-            background-color: transparent;
-            transition: all var(--transition-fast);
-        }
-
-        .social-link:hover {
-            color: var(--primary-color);
-            background-color: rgba(37, 99, 235, 0.05);
-            transform: translateY(-2px);
-        }
 
         /* Search */
         .search-container {
@@ -474,14 +449,7 @@
             background-color: rgba(37, 99, 235, 0.05);
         }
 
-        .mobile-social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
-        }
+       
 
         .mobile-menu-overlay {
             position: fixed;
@@ -718,18 +686,7 @@
                     $data = SocialMedia::first();
                     @endphp
                     
-                    <div class="social-links">
-                        <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook" title="Follow us on Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter" title="Follow us on Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube" title="Subscribe on YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-
+                    
                     <!-- Search -->
                     <div class="search-container">
                           <form action="{{ route('frontend.search') }}" method="GET" >
