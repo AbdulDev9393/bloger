@@ -62,8 +62,11 @@ class FrontendController extends Controller
     ));
 }
 public function Contectus() {
+      $meta_title = "TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
+    $meta_desc  = "TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology.";
+
     $data = SocialMedia::first();
-    return view('frontend.content-us', compact('data'));
+    return view('frontend.content-us', compact('data','meta_desc','meta_title'));
 }
     function bogs(){
         $getBlogs = Blog::where('Status','published')->latest()->get();
