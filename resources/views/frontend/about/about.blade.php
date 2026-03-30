@@ -1,4 +1,11 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
 @include('frontend.header')
+</head>
+<body>
 <style>
 .about-section{
     width:100%;
@@ -114,3 +121,6 @@ Our team writes daily posts to keep you updated with the newest trends, product 
 </section>
 
 @include('frontend.footer')
+
+</body>
+</html>
