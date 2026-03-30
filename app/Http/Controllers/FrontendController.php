@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\BlogSeo;
 use App\Models\SocialMedia;
 use GuzzleHttp\Client;
+use GuzzleHttp\ss;
 class FrontendController extends Controller
 {
     //
