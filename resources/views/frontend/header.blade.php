@@ -799,20 +799,7 @@
             </li>
         </ul>
 
-        <div class="mobile-social-links">
-            <a href="{{ optional($data)->facebook ?? '#' }}" class="social-link" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="{{ optional($data)->twitter ?? '#' }}" class="social-link" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="{{ optional($data)->instagram ?? '#' }}" class="social-link" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="{{ optional($data)->youtube ?? '#' }}" class="social-link" aria-label="YouTube">
-                <i class="fab fa-youtube"></i>
-            </a>
-        </div>
+       
     </div>
 
    
