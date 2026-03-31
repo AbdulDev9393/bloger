@@ -19,7 +19,9 @@ class FrontendController extends Controller
 }
 public function cookiePolicy()
 {
-    return view('frontend.cookie');
+    $meta_title = "Cookie Policy | TechBlogs - How We Use Cookies";
+    $meta_desc = "Learn how TechBlogs uses cookies to improve your browsing experience. Understand what cookies are, how we use them, and how you can manage your preferences.";
+    return view('frontend.cookie',compact('meta_title','meta_desc'));
 }
  function index(){
 
