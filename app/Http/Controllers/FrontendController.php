@@ -17,6 +17,10 @@ class FrontendController extends Controller
 {
     return view('frontend.privacy');
 }
+public function cookiePolicy()
+{
+    return view('frontend.cookie');
+}
  function index(){
 
     // SEO Meta

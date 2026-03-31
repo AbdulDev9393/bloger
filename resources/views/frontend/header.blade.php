@@ -684,13 +684,13 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                         </a>
                     </li>
                     <li>
-                         <a href="{{ route('frontend.terms-conditions') }}" class="mobile-nav-link {{ request()->routeIs('frontend.terms-conditions') ? 'active' : '' }}">
+                         <a href="{{ route('frontend.terms-conditions') }}" >
                             <i class="fas fa-file-contract"></i>
                             <span>Terms & Conditions</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('frontend.cookie') }}" class="nav-link">
                             <i class="fas fa-cookie-bite"></i>
                             <span>Cookie Policy</span>
                         </a>
@@ -751,6 +751,12 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         </li>
         <li>
             <a href="{{ route('frontend.contect') }}" class="mobile-nav-link {{ request()->routeIs('frontend.contect') ? 'active' : '' }}">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('frontend.cookie') }}" class="mobile-nav-link {{ request()->routeIs('frontend.cookie') ? 'active' : '' }}">
                 <i class="fas fa-envelope"></i>
                 <span>Contact</span>
             </a>

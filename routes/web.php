@@ -39,6 +39,8 @@ Route::get('/bogs',[FrontendController::class,'bogs'])->name('frontend.blogs');
 Route::get('/bogs/seach/',[FrontendController::class,'bogs_search'])->name('frontend.search');
 Route::get('/bog-view',[FrontendController::class,'bogs__view'])->name('frontend.bogs-view');
 Route::get('/terms-condition',[FrontendController::class,'Services'])->name('frontend.terms-conditions');
+Route::get('/cookie-policy',[FrontendController::class,'cookiePolicy'])->name('frontend.cookie');
+
 Route::get('/privacy-policy',[FrontendController::class,'condition'])->name('frontend.praivacy-policy');
 Route::get('/Aboute-us',[FrontendController::class,'Aboute'])->name('frontend.Aboute');
 
