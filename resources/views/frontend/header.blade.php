@@ -678,19 +678,19 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('frontend.praivacy-policy') }}" class="nav-link">
+                        <a href="{{ route('frontend.praivacy-policy') }}" class="nav-link {{ request()->routeIs('frontend.praivacy-policy') ? 'active' : '' }}">
                             <i class="fas fa-user-shield"></i>
                             <span>Privacy Policy</span>
                         </a>
                     </li>
                     <li>
-                         <a href="{{ route('frontend.terms-conditions') }}" >
+                         <a href="{{ route('frontend.terms-conditions') }}" class="nav-link {{ request()->routeIs('frontend.terms-conditions') ? 'active' : '' }}" >
                             <i class="fas fa-file-contract"></i>
                             <span>Terms & Conditions</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('frontend.cookie') }}" class="nav-link">
+                        <a href="{{ route('frontend.cookie') }}" class="nav-link {{ request()->routeIs('frontend.cookie') ? 'active' : '' }}">
                             <i class="fas fa-cookie-bite"></i>
                             <span>Cookie Policy</span>
                         </a>
