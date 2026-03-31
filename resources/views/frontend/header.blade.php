@@ -684,7 +684,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                         </a>
                     </li>
                     <li>
-                        <a href="href="{{ route('frontend.terms-conditions') }}"" class="nav-link">
+                        <a href="href="{{ route('frontend.terms-conditions') }}" class="nav-link">
                             <i class="fas fa-file-contract"></i>
                             <span>Terms & Conditions</span>
                         </a>
