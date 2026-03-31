@@ -678,7 +678,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('frontend.privacy') }}" class="nav-link">
+                        <a href="{{ route('frontend.praivacy-policy') }}" class="nav-link">
                             <i class="fas fa-user-shield"></i>
                             <span>Privacy Policy</span>
                         </a>
@@ -744,7 +744,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
             </a>
         </li>
         <li>
-            <a href="{{ route('frontend.privacy') }}" class="mobile-nav-link {{ request()->routeIs('frontend.privacy') ? 'active' : '' }}">
+            <a href="{{ route('frontend.praivacy-policy') }}" class="mobile-nav-link {{ request()->routeIs('frontend.praivacy-policy') ? 'active' : '' }}">
                 <i class="fas fa-shield-alt"></i>
                 <span>Privacy Policy</span>
             </a>
