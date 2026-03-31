@@ -661,7 +661,7 @@ $data = SocialMedia::first();
        
         <div class="footer-links">
           
-          <a href="{{ route('frontend.praivacy-policy') }}">
+          <a href="{{ route('frontend.cookie') }}">
             <i class="fa-solid fa-shield-alt"></i>
                                       <span>Cookie Policy</span>
           </a>
