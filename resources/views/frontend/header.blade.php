@@ -3,6 +3,15 @@
 <title>{{ $meta_title ?? 'TechBlogs.site – Latest Tech News, AI, Mobiles & Digital Trends' }}</title>
 <meta name="description" content="{{ $meta_desc ?? 'TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology' }}">
 <meta name="keywords" content="{{ $meta_keywords ?? 'tech blogs, technology news, latest tech news, AI news, artificial intelligence, chatgpt news, mobile reviews, smartphone reviews, latest smartphones, mobile comparison, gadgets, gadget reviews, digital trends, technology updates, software reviews, web development, programming tutorials, PHP tutorials, Laravel tutorials, JavaScript tips, coding tips, developer tools, SEO guide, SEO tips, blogging tips, blog monetization, AdSense approval, website traffic tips, digital marketing, online earning, tech articles, tech updates, TechBlogs, TechBlogs.site, future technology, tech innovation, robotics news, machine learning updates' }}">
+@if($faq_schema_encoded)
+    {{-- FAQ Schema --}}
+    <script type="application/ld+json">
+        {!! $faq_schema_encoded !!}
+    </script>
+@endif
+<script type="application/ld+json">
+    {!! $breadcrumb_schema_encoded !!}
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6175688413021049"
  crossorigin="anonymous"></script>
 
