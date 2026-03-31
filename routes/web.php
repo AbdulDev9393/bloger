@@ -34,6 +34,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/contact-us',[FrontendController::class,'Contectus'])->name('frontend.contect');
+Route::get('/privacy-policy',[FrontendController::class,'privacyPolicy'])->name('frontend.privacy');
 Route::get('/bogs',[FrontendController::class,'bogs'])->name('frontend.blogs');
 Route::get('/bogs/seach/',[FrontendController::class,'bogs_search'])->name('frontend.search');
 Route::get('/bog-view',[FrontendController::class,'bogs__view'])->name('frontend.bogs-view');

@@ -12,6 +12,11 @@ use GuzzleHttp\Client;
 class FrontendController extends Controller
 {
     //
+
+    public function privacyPolicy()
+{
+    return view('frontend.privacy');
+}
  function index(){
 
     // SEO Meta
