@@ -459,12 +459,7 @@ public function blogView($id)
                 "name" => "Blogs",
                 "item" => route('frontend.blogs') // Adjust this to your blogs listing route
             ],
-            [
-                "@type" => "ListItem",
-                "position" => 3,
-                "name" => $category,
-                "item" => route('blogs.category', $category) // Adjust this to your category route
-            ],
+           
             [
                 "@type" => "ListItem",
                 "position" => 4,
