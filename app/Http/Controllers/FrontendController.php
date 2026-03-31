@@ -164,7 +164,9 @@ public function sitemap()
               ->header('Content-Type', 'application/xml');
 }
   function condition(){
-    return view('frontend.terms');
+    $meta_title = "Privacy Policy | TechBlogs - Your Data Protection & Privacy Rights";
+    $meta_desc = "Read TechBlogs Privacy Policy to understand how we collect, use, and protect your personal information. Learn about your privacy rights and data security practices.";
+    return view('frontend.terms',compact('meta_title','meta_title'));
   }
   function Categories($Categories){
       $categoryId = Category::where('name', $Categories)->value('id');
