@@ -78,10 +78,12 @@ public function Contectus() {
     return view('frontend.content-us', compact('data','meta_desc','meta_title'));
 }
     function bogs(){
+        $meta_title= "Latest Tech Blogs, AI News, Mobile Reviews & Digital Trends | TechBlogs";
+        $meta_desc= "Explore the latest tech blogs on AI, mobile reviews, gadgets, and digital trends. Stay updated with expert insights, tips, and breaking technology news on TechBlogs.";
         $getBlogs = Blog::where('Status','published')->latest()->get();
         return view(
             'frontend.blogs.index',
-            compact('getBlogs')
+            compact('getBlogs','meta_desc','meta_title')
         );
     }
     public function bogs_search(Request $request)
