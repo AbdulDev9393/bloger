@@ -303,56 +303,211 @@ public function delete($id)
 public function blogView($id)
 {
     $seo = BlogSeo::where('blog_id', $id)->first();
-
-    $meta_title = $seo->title ?? 'daliyblogs';
-    $meta_desc  = $seo->Description ?? 'Read latest blogs on daliyblogs';
-
     $Blog_info = Blog::find($id);
 
+    if (!$Blog_info) {
+        abort(404);
+    }
+
+    $meta_title = $seo->title ?? ($Blog_info->name ?? 'daliyblogs');
+    $meta_desc = $seo->Description ?? (Str::limit(strip_tags($Blog_info->description ?? ''), 160));
+
+    // Prepare images array
+    $images = [];
+    
+    if ($Blog_info->Thumbnail_Image) {
+        $images[] = asset($Blog_info->Thumbnail_Image);
+    }
+    
+    if ($Blog_info->Banner_mage) {
+        $images[] = asset($Blog_info->Banner_mage);
+    }
+    
+    if ($Blog_info->resize_image) {
+        $images[] = asset($Blog_info->resize_image);
+    }
+
+    if (empty($images)) {
+        $images[] = asset('storage/default.png');
+    }
+
+    // Get author name (assuming you have an author relationship or field)
+    $authorName = $Blog_info->Author ?? 'Admin';
+    $authorUrl = $Blog_info->author_url ?? null;
+    
+    // Get category
+    $category = $Blog_info->category ?? 'General';
+    
+    // Get keywords if available
+    $keywords = $seo->keywords ?? '';
+    $keywordsArray = $keywords ? array_map('trim', explode(',', $keywords)) : [];
+
+    // Get estimated reading time
+    $wordCount = str_word_count(strip_tags($Blog_info->description ?? ''));
+    $readingTime = ceil($wordCount / 200); // Average reading speed: 200 words per minute
+
+    // Get article section
+    $articleSection = $category;
+
+    // Get comment count if you have comments system
+    $commentCount = $Blog_info->comments_count ?? 0;
+
+    // Build comprehensive schema array
     $schema_array = [
         "@context" => "https://schema.org",
         "@type" => "BlogPosting",
+        
+        // Basic identification
+        "@id" => url()->current(),
+        "url" => url()->current(),
         "headline" => $meta_title,
-
-        "image" => $Blog_info->Thumbnail_Image
-            ? asset($Blog_info->Thumbnail_Image)
-            : asset('storage/default.png'),
-
+        "alternativeHeadline" => $Blog_info->name ?? $meta_title,
+        "description" => $meta_desc,
+        
+        // Images
+        "image" => count($images) === 1 ? $images[0] : $images,
+        
+        // Dates
         "datePublished" => $Blog_info->created_at?->toIso8601String(),
         "dateModified" => $Blog_info->updated_at?->toIso8601String(),
-
+        "dateCreated" => $Blog_info->created_at?->toIso8601String(),
+        
+        // Author with enhanced details
         "author" => [
             "@type" => "Person",
-            "name" => $Blog_info->Author ?? 'Admin'
+            "name" => $authorName,
+            "url" => $authorUrl ?? url()->current(),
+            "sameAs" => $authorUrl ? [$authorUrl] : null
         ],
-
+        
+        // Publisher with complete details
         "publisher" => [
             "@type" => "Organization",
-            "name" => "daliyblogs",
+            "name" => "DailyBlogs",
+            "url" => "https://www.techblogs.site",
             "logo" => [
                 "@type" => "ImageObject",
-                "url" => "https://www.techblogs.site/favicon.ico"
+                "url" => "https://www.techblogs.site/images/logo.png",
+                "width" => "600",
+                "height" => "60"
+            ],
+            "sameAs" => [
+                "https://www.facebook.com/dailyblogs",
+                "https://twitter.com/dailyblogs",
+                "https://www.instagram.com/dailyblogs"
             ]
         ],
-
-        "description" => Str::limit(strip_tags($meta_desc), 160),
-
+        
+        // Main entity reference
         "mainEntityOfPage" => [
             "@type" => "WebPage",
             "@id" => url()->current()
+        ],
+        
+        // Article specific
+        "articleBody" => strip_tags($Blog_info->description ?? ''),
+        "articleSection" => $articleSection,
+        "articleType" => "BlogPosting",
+        
+        // Keywords and categories
+        "keywords" => $keywords ? implode(', ', $keywordsArray) : $category,
+        "about" => [
+            "@type" => "Thing",
+            "name" => $category
+        ],
+        
+        // Reading time
+        "timeRequired" => "PT{$readingTime}M",
+        
+        // Comment section
+        "commentCount" => $commentCount,
+        
+        // Share count (if you have social sharing data)
+        "interactionStatistic" => [
+            "@type" => "InteractionCounter",
+            "interactionType" => "https://schema.org/ShareAction",
+            "userInteractionCount" => $Blog_info->share_count ?? 0
+        ],
+        
+        // Language
+        "inLanguage" => "en-US",
+        
+        // Is this accessible for free
+        "isAccessibleForFree" => true,
+        
+        // Creative work status
+        "creativeWorkStatus" => "Published",
+        
+        // License (if applicable)
+        "license" => "https://creativecommons.org/licenses/by/4.0/"
+    ];
+
+    // Add breadcrumbs schema
+    $breadcrumb_schema = [
+        "@context" => "https://schema.org",
+        "@type" => "BreadcrumbList",
+        "itemListElement" => [
+            [
+                "@type" => "ListItem",
+                "position" => 1,
+                "name" => "Home",
+                "item" => url('/')
+            ],
+            [
+                "@type" => "ListItem",
+                "position" => 2,
+                "name" => "Blogs",
+                "item" => route('blogs.index') // Adjust this to your blogs listing route
+            ],
+            [
+                "@type" => "ListItem",
+                "position" => 3,
+                "name" => $category,
+                "item" => route('blogs.category', $category) // Adjust this to your category route
+            ],
+            [
+                "@type" => "ListItem",
+                "position" => 4,
+                "name" => $meta_title,
+                "item" => url()->current()
+            ]
         ]
     ];
 
+    // Add FAQ schema if you have Q&A sections in your blog
+    $faq_schema = null;
+    if ($seo && $seo->faq_data) {
+        // Assuming you have FAQ data stored
+        $faq_schema = [
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => json_decode($seo->faq_data, true)
+        ];
+    }
+
+    // Encode all schemas
     $meta_schema = json_encode(
-        $schema_array,
+        array_filter($schema_array, fn($value) => $value !== null && $value !== ''),
         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
     );
+    
+    $breadcrumb_schema_encoded = json_encode(
+        $breadcrumb_schema,
+        JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+    );
+    
+    $faq_schema_encoded = $faq_schema ? json_encode(
+        $faq_schema,
+        JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+    ) : null;
 
     return view('frontend.blogs.view', compact(
         'Blog_info',
         'meta_desc',
         'meta_title',
-        'meta_schema'
+        'meta_schema',
+        'breadcrumb_schema_encoded',
+        'faq_schema_encoded'
     ));
 }
  function blog_seo($id){
