@@ -1051,7 +1051,7 @@ use Illuminate\Support\Str;
          {!! Str::limit($desc, 1200) !!}
       </p>
 
-        <a href="{{ route('blogs.view', [ Str::slug($secondLatestBlog->name)]) }}" class="btn-readmore">
+        <a href="{{ route('blogs.view', [ Str::slug($secondLatestBlog->slug)]) }}" class="btn-readmore">
          
          Read More about {{ Str::limit(strip_tags($secondLatestBlog->name ?? ''), 200) }}
         </a>
@@ -1082,7 +1082,7 @@ use Illuminate\Support\Str;
           </div>
 
           <h3 class="blog-title">
-            <a href="{{ route('blogs.view', [$blog->id, Str::slug($blog->name)]) }}">
+            <a href="{{ route('blogs.view', [ Str::slug($blog->slug)]) }}">
               {{ Str::limit($blog->name, 50) }}
             </a>
           </h3>
@@ -1091,7 +1091,7 @@ use Illuminate\Support\Str;
             {{ Str::limit(strip_tags($blog->Description), 50) }}
           </p>
 
-          <a href="{{ route('blogs.view', [$blog->id, Str::slug($blog->name)]) }}"
+          <a href="{{ route('blogs.view', [Str::slug($blog->slug)]) }}"
              class="read-more">
              Read More →
           </a>
