@@ -1205,7 +1205,7 @@ use Illuminate\Support\Str;
           </div>
 
           <h3 class="blog-title">
-            <a href="{{ route('blogs.view', [$blog->id, Str::slug($blog->name)]) }}">
+            <a href="{{ route('blogs.view', [Str::slug($blog->slug)]) }}">
               {{ Str::limit($blog->name, 50) }}
             </a>
           </h3>
