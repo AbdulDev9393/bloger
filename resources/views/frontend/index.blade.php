@@ -1051,7 +1051,7 @@ use Illuminate\Support\Str;
          {!! Str::limit($desc, 1200) !!}
       </p>
 
-        <a href="{{ route('blogs.view', [$secondLatestBlog->id, Str::slug($secondLatestBlog->name)]) }}" class="btn-readmore">
+        <a href="{{ route('blogs.view', [ Str::slug($secondLatestBlog->name)]) }}" class="btn-readmore">
          
          Read More about {{ Str::limit(strip_tags($secondLatestBlog->name ?? ''), 200) }}
         </a>
