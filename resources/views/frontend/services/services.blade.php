@@ -506,10 +506,6 @@
     <p style="margin-top: 8px; font-size: 0.75rem;">By using TechBlogs, you acknowledge that you have read and agree to our Terms & Conditions, which fully comply with Google Adsense program policies and global privacy standards.</p>
 </div>
 
-<!-- Scroll to top button -->
-<div class="scroll-top" id="scrollTopBtn">
-    <i class="fas fa-chevron-up"></i>
-</div>
 
 <script>
     (function() {
