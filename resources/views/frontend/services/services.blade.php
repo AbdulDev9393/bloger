@@ -403,7 +403,7 @@
         <div class="section-title">
             <i class="fas fa-check-circle"></i> 1. Acceptance of Terms
         </div>
-        <p class="legal-text">Your use of TechBlogs constitutes your unconditional acceptance of these Terms & Conditions, our <a href="#" style="color:#FF7700;">Privacy Policy</a>, and any additional guidelines or rules applicable to specific services. We reserve the right to update these terms periodically, and your continued use implies acceptance of modifications.</p>
+        <p class="legal-text">Your use of TechBlogs constitutes your unconditional acceptance of these Terms & Conditions, our <a href="{{ route('frontend.praivacy-policy') }}" style="color:#FF7700;">Privacy Policy</a>, and any additional guidelines or rules applicable to specific services. We reserve the right to update these terms periodically, and your continued use implies acceptance of modifications.</p>
 
         <!-- Section 2: Use of Content + Cards (professional) -->
         <div class="section-title">
