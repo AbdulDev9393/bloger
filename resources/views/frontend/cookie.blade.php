@@ -303,11 +303,7 @@
                     <p>Insights • Innovation • Integrity</p>
                 </div>
             </div>
-            <div class="last-updated">
-                <i class="far fa-calendar-alt"></i> Effective: April 01, 2026
-                <span style="margin:0 6px">•</span>
-                <i class="fas fa-sync-alt"></i> v2.3
-            </div>
+         
         </div>
 
         <div class="policy-title">
