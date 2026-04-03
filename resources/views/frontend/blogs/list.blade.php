@@ -261,7 +261,7 @@ use Illuminate\Support\Str;
                     <img src="{{ asset($blog->resize_image) }}" alt="{{ $blog->name }}">
                 </div>
                 <div class="blog-content">
-                    <a href="{{ route('blogs.view', [$blog->id, Str::slug($blog->name)]) }}" class="read-more">
+                    <a href="{{ route('blogs.view', [ Str::slug($blog->slug)]) }}" class="read-more">
                         <h3>{{ Str::limit($blog->name, 30) }}</h3>
                     </a>
                     <p>{{ Str::limit(strip_tags($blog->Description), 120) }}</p>
