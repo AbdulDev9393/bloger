@@ -126,7 +126,8 @@ Formatting Rules:
 - Use <strong> for important keywords
 - Use <ul> and <li> for bullet points
 - Do NOT include markdown (** or ##), only HTML
-- No explanation, only return blog HTML
+- Do NOT add intro text like 'Here is the article'
+- Do NOT use **, ##, or any markdown symbols
 
 SEO:
 - Use primary keyword (from title)
@@ -138,7 +139,7 @@ Structure:
 - Multiple sections with headings
 - Bullet points where useful
 - Examples where needed
-- Conclusion (include techblogs.site again)
+
 
 Tone:
 - Simple, professional English
