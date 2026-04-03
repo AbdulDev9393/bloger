@@ -319,11 +319,68 @@
                 border: none;
             }
         }
+        
+        /* header area with brand accent */
+        .policy-header {
+            margin-bottom: 2.25rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .brand-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .brand-icon {
+            background: #2563eb;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 12px -6px rgba(37, 99, 235, 0.25);
+        }
+           .brand-text h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .brand-text p {
+            font-size: 0.85rem;
+            color: #475569;
+        }
     </style>
 
 <div class="legal-container">
     <div class="legal-inner">
         <!-- Header section with last updated -->
+           <div class="policy-header">
+            <div class="brand-badge">
+                <div class="brand-icon">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>TechBlogs</h2>
+                    <p>Insights • Innovation • Integrity</p>
+                </div>
+            </div>
+         
+        </div>
+
         <div class="terms-header">
             <div class="title-badge">
                 <h1>Terms & Conditions</h1>
