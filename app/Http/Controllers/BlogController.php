@@ -302,8 +302,8 @@ public function delete($id)
 }
 public function blogView($slug)
 {
-     $Blog_info = Blog::where('name',$slug)->first();
-     $id=$Blog_info->id;
+    $Blog_info = Blog::where('slug', $slug)->firstOrFail();
+$id = $Blog_info->id;
     $seo = BlogSeo::where('blog_id', $id)->first();
    
 
