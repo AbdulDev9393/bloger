@@ -380,11 +380,7 @@
         <div class="cookie-section">
             <h3><i class="fas fa-envelope-open-text"></i> Questions? Contact Our Privacy Team</h3>
             <p>If you have any inquiries about our Cookie Policy, data processing, or wish to exercise your data subject rights (access, deletion, opt-out), please reach out to us.</p>
-            <div class="contact-card">
-                <p><i class="fas fa-paper-plane" style="color:#2563eb;"></i> <strong>Email:</strong> <a href="mailto:privacy@techblogs.com">privacy@techblogs.com</a></p>
-                <p><i class="fas fa-globe"></i> <strong>Contact form:</strong> <a href="/contact">TechBlogs Support Center</a></p>
-                <p><i class="fas fa-map-marker-alt"></i> <strong>DPO:</strong> Data Protection Office, TechBlogs</p>
-            </div>
+           
         </div>
 
         <hr>
