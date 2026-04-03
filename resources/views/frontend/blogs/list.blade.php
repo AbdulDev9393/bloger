@@ -257,13 +257,12 @@ use Illuminate\Support\Str;
         <!-- Blog Card -->
         @forelse ($getBlogs as $blog)
             <div class="blog-card">
-                    <a href="{{ route('blogs.view', [ Str::slug($blog->slug)]) }}" class="read-more">
+                   <a href="{{ route('blogs.view', [$blog->slug]) }}">
+        <div class="blog-img">
+            <img src="{{ asset($blog->resize_image) }}" alt="{{ $blog->name }}">
+        </div>
+    </a>
 
-                <div class="blog-img">
-
-                    <img src="{{ asset($blog->resize_image) }}" alt="{{ $blog->name }}">
-                </div>
-            </a>
                 <div class="blog-content">
                     <a href="{{ route('blogs.view', [ Str::slug($blog->slug)]) }}" class="read-more">
                         <h3>{{ Str::limit($blog->name, 30) }}</h3>
