@@ -390,10 +390,7 @@
     </div>
 
     <!-- Custom footer (replaces frontend.footer) to avoid missing includes, but still fully professional -->
-    <div class="custom-footer">
-        <p>© 2026 TechBlogs — All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#" id="fakeCookieSettingsLink" style="cursor:pointer;">Cookie Preferences</a></p>
-        <p style="margin-top: 8px; font-size: 0.75rem;">TechBlogs uses cookies to enhance performance, analytics, and ad relevance. By using our site, you acknowledge our Cookie Policy.</p>
-    </div>
+   
 </main>
 <script>
     (function() {
