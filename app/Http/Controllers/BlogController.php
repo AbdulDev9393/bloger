@@ -161,6 +161,7 @@ $response = Http::withToken($activeKey)
     ]);
 $contentHtml = $response->json()['choices'][0]['message']['content'];
   $content = str_replace('—', ' ', $contentHtml);
+  dd($content);
     if (!$content) {
         return response()->json([
             'status' => false,
