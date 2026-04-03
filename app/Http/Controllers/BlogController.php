@@ -175,6 +175,7 @@ if (!$response->successful() || !isset($data['choices'][0]['message']['content']
 
 // ✅ SAFE OUTPUT
 $contentHtml = $data['choices'][0]['message']['content'];
+dd($contentHtml);
     if (!$contentHtml) {
         return response()->json([
             'status' => false,
