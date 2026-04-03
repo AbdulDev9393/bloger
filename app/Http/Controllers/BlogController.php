@@ -160,13 +160,20 @@ $response = Http::withToken($activeKey)
         'max_tokens' => 2000,
     ]);
 
+// ✅ ADD THIS (IMPORTANT)
+$data = $response->json();
+
+// ✅ SAFE CHECK
 if (!$response->successful() || !isset($data['choices'][0]['message']['content'])) {
     return response()->json([
         'status' => false,
         'message' => 'AI API failed',
-        'error' => $response->body()
+        'error' => $response->body(),
+        'http_status' => $response->status(),
     ], 500);
 }
+
+// ✅ SAFE OUTPUT
 $contentHtml = $data['choices'][0]['message']['content'];
     if (!$contentHtml) {
         return response()->json([
