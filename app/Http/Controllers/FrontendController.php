@@ -153,7 +153,7 @@ public function sitemap()
    foreach ($blogs as $blog) {
     $slug = Str::slug($blog->name); // SEO-friendly slug
     $sitemap .= '<url>';
-    $sitemap .= '<loc>' . url('/blog/view/' . $blog->id . '/' . $slug) . '</loc>'; // ✅ id pehle, slug baad
+    $sitemap .= '<loc>' . url('/blog/' . $slug) . '</loc>'; // ✅ id pehle, slug baad
     $sitemap .= '<lastmod>' . $blog->updated_at->toAtomString() . '</lastmod>';
     $sitemap .= '<changefreq>daily</changefreq>';
     $sitemap .= '<priority>0.8</priority>';
