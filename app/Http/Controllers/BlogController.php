@@ -99,17 +99,8 @@ public function generateAI(Request $request)
     $title = $request->title;
       
     // ✅ API Key (ENV se lo)
-    $key = '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';
-    
-    if (!$key) {
-        return response()->json([
-            'status' => false,
-            'message' => 'OpenAI API key missing'
-        ], 500);
-    }
+   
 
-    // ✅ OpenAI Client
-    $client = \OpenAI::client($key);
        
     // ✅ Prompt
   $prompt = "
@@ -153,22 +144,23 @@ Tone:
 - Simple, professional English
 - Beginner-friendly
 ";
-    // ✅ API Call
-    $response = $client->chat()->create([
-        'model' => 'gpt-4o-mini',
-        'messages' => [
-            [
-                'role' => 'user',
-                'content' => $prompt
-            ]
-        ],
-        'temperature' => 0.7,
-        'max_tokens' => 2000
-    ]);
-
-    // ✅ Safe Extract
-    $content = $response->choices[0]->message->content ?? null;
-
+  $activeKey='ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+$response = Http::withHeaders([
+    'Authorization' => 'Bearer ' . $activeKey,
+    'Content-Type'  => 'application/json',
+])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+    'model' => 'LongCat-Flash-Chat',
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => $prompt
+        ]
+    ],
+    'temperature' => 0.7,
+    'max_tokens' => 2000,
+]);
+$contentHtml = $response->json()['choices'][0]['message']['content'];
+  $content = str_replace('—', ' ', $contentHtml);
     if (!$content) {
         return response()->json([
             'status' => false,
