@@ -146,34 +146,24 @@ Tone:
 ";
 $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
 
-$response = Http::withToken($activeKey)
-    ->acceptJson()
-    ->post('https://api.longcat.chat/openai/v1/chat/completions', [
-        'model' => 'LongCat-Flash-Chat',
-        'messages' => [
-            [
-                'role' => 'user',
-                'content' => $prompt,
-            ]
-        ],
-        'temperature' => 0.7,
-        'max_tokens' => 2000,
-    ]);
+$response = Http::withHeaders([
+    'Authorization' => 'Bearer ' . $activeKey,
+    'Content-Type'  => 'application/json',
+])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+    'model' => 'LongCat-Flash-Chat',
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => $prompt
+        ]
+    ],
+    'temperature' => 0.7,
+    'max_tokens' => 2000,
+]);
 
 // ✅ ADD THIS (IMPORTANT)
 $data = $response->json();
 
-// ✅ SAFE CHECK
-if (!$response->successful() || !isset($data['choices'][0]['message']['content'])) {
-    return response()->json([
-        'status' => false,
-        'message' => 'AI API failed',
-        'error' => $response->body(),
-        'http_status' => $response->status(),
-    ], 500);
-}
-
-// ✅ SAFE OUTPUT
 $contentHtml = $data['choices'][0]['message']['content'];
 $contentHtml = str_replace('—', '-', $contentHtml);
     if (!$contentHtml) {
