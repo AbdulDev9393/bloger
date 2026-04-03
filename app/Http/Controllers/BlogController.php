@@ -159,10 +159,16 @@ $response = Http::withToken($activeKey)
         'temperature' => 0.7,
         'max_tokens' => 2000,
     ]);
-$contentHtml = $response->json()['choices'][0]['message']['content'];
-  $content = str_replace('—', ' ', $contentHtml);
-  dd($content);
-    if (!$content) {
+
+if (!$response->successful() || !isset($data['choices'][0]['message']['content'])) {
+    return response()->json([
+        'status' => false,
+        'message' => 'AI API failed',
+        'error' => $response->body()
+    ], 500);
+}
+$contentHtml = $data['choices'][0]['message']['content'];
+    if (!$contentHtml) {
         return response()->json([
             'status' => false,
             'message' => 'No content generated'
@@ -173,7 +179,7 @@ $contentHtml = $response->json()['choices'][0]['message']['content'];
     return response()->json([
         'status' => true,
         'title' => $title,
-        'content' => $content
+        'content' => $contentHtml
     ]);
 }
 public function update(Request $request, $id)
