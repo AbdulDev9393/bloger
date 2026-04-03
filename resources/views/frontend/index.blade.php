@@ -998,7 +998,7 @@ use Illuminate\Support\Str;
  {!! Str::limit($desc, 1200) !!}
 </p>
 
-      <a href="{{ route('blogs.view', ['slug' => Str::slug($latestBlog->name)]) }}" class="btn-readmore">
+      <a href="{{ route('blogs.view', ['slug' => Str::slug($latestBlog->slug)]) }}" class="btn-readmore">
             Read More about "{{ $latestBlog->name }}"
         </a>
     </div>
