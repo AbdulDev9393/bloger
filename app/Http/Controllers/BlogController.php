@@ -41,10 +41,11 @@ public function store(Request $request)
 
     $blog = new Blog;
     $blog->name = $request->name;
+    $blog->slug = Str::slug($request->name);
     $blog->category = $request->category;
     $blog->Status = $request->Status;
     $blog->description = $request->description;
-
+           
     // Base path for public_html storage
     $storagePath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs';
 
@@ -196,6 +197,7 @@ public function update(Request $request, $id)
 
     $blog = Blog::findOrFail($id);
     $blog->name = $request->name;
+    $blog->slug = Str::slug($request->name);
     $blog->category = $request->category;
     $blog->Status = $request->Status;
     $blog->Description = $request->Description;
