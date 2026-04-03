@@ -113,7 +113,7 @@ Route::post('/sitting/media/post',[SittingController::class,'media_post'])->name
 
 });
 
-Route::get('/blog/view/{id}/{slug}', [BlogController::class, 'blogView'])->name('blogs.view');
+Route::get('/blog/{id}/{slug}', [BlogController::class, 'blogView'])->name('blogs.view');
 Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
