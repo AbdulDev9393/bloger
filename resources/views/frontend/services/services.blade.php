@@ -471,7 +471,7 @@
         <div class="section-title">
             <i class="fas fa-shield-alt"></i> 8. Privacy & Data Usage
         </div>
-        <p class="legal-text">Your privacy is a top priority. Please review our detailed <a href="#" style="color:#FF7700;">Privacy Policy</a> and <a href="#" style="color:#FF7700;">Cookie Policy</a> to understand how we collect, use, and protect your personal data. By using TechBlogs, you consent to data practices described therein, including the use of cookies for analytics and personalized advertising (where permitted).</p>
+        <p class="legal-text">Your privacy is a top priority. Please review our detailed <a href="{{ route('frontend.praivacy-policy') }}" style="color:#FF7700;">Privacy Policy</a> and <a href="#" style="color:#FF7700;">Cookie Policy</a> to understand how we collect, use, and protect your personal data. By using TechBlogs, you consent to data practices described therein, including the use of cookies for analytics and personalized advertising (where permitted).</p>
 
         <!-- Section 9: Modifications & Termination -->
         <div class="section-title">
@@ -496,7 +496,7 @@
 
 <!-- Footer similar to main site consistency -->
 <div class="legal-footer">
-    <p>© <span id="yearFooter"></span> TechBlogs — All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a> | <a href="#">Accessibility</a></p>
+    <p>© <span id="yearFooter"></span> TechBlogs — All rights reserved. | <a href="{{ route('frontend.praivacy-policy') }}">Privacy Policy</a> | <a href="#">Cookie Policy</a> | <a href="#">Accessibility</a></p>
     <p style="margin-top: 8px; font-size: 0.75rem;">By using TechBlogs, you acknowledge that you have read and agree to our Terms & Conditions, which fully comply with Google Adsense program policies and global privacy standards.</p>
 </div>
 
