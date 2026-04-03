@@ -268,7 +268,7 @@ use Illuminate\Support\Str;
 
                     <div class="blog-footer">
                         <span class="blog-date">{{ $blog->created_at->format('M d, Y') }}</span>
-                        <a href="{{ route('blogs.view', [$blog->id, Str::slug($blog->name)]) }}" class="read-more">
+                        <a href="{{ route('blogs.view', [Str::slug($blog->slug)]) }}" class="read-more">
                             Read More
                         </a>
                     </div>
