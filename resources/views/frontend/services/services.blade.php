@@ -383,7 +383,7 @@
 
         <div class="terms-header">
             <div class="title-badge">
-                <h1>Terms & Conditions</h1>
+                <h2>Terms & Conditions</h1>
                 <p><i class="fas fa-gavel"></i> Legally binding agreement between TechBlogs and users</p>
             </div>
             <div class="last-updated-badge">
