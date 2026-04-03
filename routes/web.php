@@ -112,7 +112,9 @@ Route::post('/sitting/media/post',[SittingController::class,'media_post'])->name
 
 
 });
-
+Route::get('/blog/view/{id}/{slug}', function ($id, $slug) {
+    return redirect()->route('blogs.view', ['slug' => $slug], 301);
+});
 Route::get('/blog/{slug}', [BlogController::class, 'blogView'])->name('blogs.view');
 Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 
