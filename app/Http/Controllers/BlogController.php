@@ -144,21 +144,21 @@ Tone:
 - Simple, professional English
 - Beginner-friendly
 ";
-  $activeKey='ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
-$response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $activeKey,
-    'Content-Type'  => 'application/json',
-])->post('https://api.longcat.chat/openai/v1/chat/completions', [
-    'model' => 'LongCat-Flash-Chat',
-    'messages' => [
-        [
-            'role' => 'user',
-            'content' => $prompt
-        ]
-    ],
-    'temperature' => 0.7,
-    'max_tokens' => 2000,
-]);
+$activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+
+$response = Http::withToken($activeKey)
+    ->acceptJson()
+    ->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model' => 'LongCat-Flash-Chat',
+        'messages' => [
+            [
+                'role' => 'user',
+                'content' => $prompt,
+            ]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 2000,
+    ]);
 $contentHtml = $response->json()['choices'][0]['message']['content'];
   $content = str_replace('—', ' ', $contentHtml);
     if (!$content) {
