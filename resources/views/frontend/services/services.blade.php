@@ -494,7 +494,7 @@
         </div>
 
         <!-- Back to homepage button (matches cookie policy style) -->
-        <a href="index.html" class="btn-back" id="backToHomeBtn">
+        <a href="{{ route('frontend.blogs') }}" class="btn-back" id="backToHomeBtn">
             <i class="fas fa-arrow-left"></i> Back to TechBlogs Home
         </a>
     </div>
