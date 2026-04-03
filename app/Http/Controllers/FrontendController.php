@@ -136,8 +136,10 @@ public function sitemap()
         '/blogs',
          '/Aboute-us',
         '/terms-condition',
-        '/Contect-us',
+        '/contact-us',
         '/privacy-policy',
+        '/terms-condition',
+        '/cookie-policy',
         
     ];
 
