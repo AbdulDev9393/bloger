@@ -300,9 +300,9 @@ public function delete($id)
 
     return back()->with('success', 'Blog deleted successfully');
 }
-public function blogView($id)
+public function blogView($slug)
 {
-    $seo = BlogSeo::where('blog_id', $id)->first();
+    $seo = BlogSeo::where('name', $slug)->first();
     $Blog_info = Blog::find($id);
 
     if (!$Blog_info) {
