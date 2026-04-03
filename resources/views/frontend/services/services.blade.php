@@ -486,13 +486,7 @@
         <p class="legal-text">These Terms shall be governed by and interpreted in accordance with the laws of the State of Delaware, without regard to conflict of law principles. Any legal action or proceeding arising under these Terms shall be brought exclusively in the federal or state courts located in Delaware, and you consent to personal jurisdiction therein.</p>
 
         <!-- Contact info box with professional style -->
-        <div class="contact-highlight">
-            <h3><i class="fas fa-envelope-open-text"></i> Have questions or legal concerns?</h3>
-            <p>Our team is committed to transparency. For any inquiries regarding these Terms & Conditions, copyright issues, or partnership proposals, please reach out via:</p>
-            <p style="margin-top: 12px;"><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:legal@techblogs.site">legal@techblogs.site</a> &nbsp;|&nbsp; <strong><i class="fas fa-phone-alt"></i> Support:</strong> <a href="mailto:support@techblogs.site">support@techblogs.site</a></p>
-            <p style="font-size:0.9rem; margin-top: 12px;">We aim to respond within 2–3 business days for all legal requests.</p>
-        </div>
-
+        
         <!-- Back to homepage button (matches cookie policy style) -->
         <a href="{{ route('frontend.blogs') }}" class="btn-back" id="backToHomeBtn">
             <i class="fas fa-arrow-left"></i> Back to TechBlogs Home
