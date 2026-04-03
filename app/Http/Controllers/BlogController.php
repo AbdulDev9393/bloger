@@ -126,8 +126,7 @@ Formatting Rules:
 - Use <strong> for important keywords
 - Use <ul> and <li> for bullet points
 - Do NOT include markdown (** or ##), only HTML
-- Do NOT add intro text like 'Here is the article'
-- Do NOT use **, ##, or any markdown symbols
+- No explanation, only return blog HTML
 
 SEO:
 - Use primary keyword (from title)
@@ -139,7 +138,7 @@ Structure:
 - Multiple sections with headings
 - Bullet points where useful
 - Examples where needed
-
+- Conclusion (include techblogs.site again)
 
 Tone:
 - Simple, professional English
@@ -176,7 +175,6 @@ if (!$response->successful() || !isset($data['choices'][0]['message']['content']
 
 // ✅ SAFE OUTPUT
 $contentHtml = $data['choices'][0]['message']['content'];
-dd($contentHtml);
     if (!$contentHtml) {
         return response()->json([
             'status' => false,
