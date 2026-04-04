@@ -614,7 +614,11 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
-
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{{ route('frontend.blogs') }}" class="btn-secondary">
+            View All Blogs →
+        </a>
+    </div>
     <!-- Trending Blogs Grid -->
     <section class="blogs-section" style="background: #f8fafc;">
         <div class="container">
