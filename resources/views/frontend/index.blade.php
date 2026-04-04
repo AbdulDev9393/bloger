@@ -65,7 +65,7 @@ use Illuminate\Support\Str;
     }
 
     .hero-content h1 {
-        font-size: 1rem;
+        font-size: 1.5rem;
         margin-bottom: 1.5rem;
         background: linear-gradient(135deg, #1e293b, #334155);
         background-clip: text;
