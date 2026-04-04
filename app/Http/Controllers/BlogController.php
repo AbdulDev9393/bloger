@@ -339,8 +339,8 @@ public function blogView($slug)
     $category = $Blog_info->category ?? 'General';
     
     // Get keywords if available
-    $keywords = $seo->keywords ?? '';
-    $keywordsArray = $keywords ? array_map('trim', explode(',', $keywords)) : [];
+    $meta_keywords = $seo->keywords ?? '';
+   
 
     // Get estimated reading time
     $wordCount = str_word_count(strip_tags($Blog_info->description ?? ''));
@@ -501,6 +501,8 @@ public function blogView($slug)
         'meta_desc',
         'meta_title',
         'meta_schema',
+        'meta_keywords',
+        
         'breadcrumb_schema_encoded',
         'faq_schema_encoded'
     ));

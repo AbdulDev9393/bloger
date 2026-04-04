@@ -10,7 +10,7 @@
 @endif
 @if(!empty($meta_keywords))
 
-<meta name="keywords" content="{{ $meta_keywords ?? ($blog_seo->keywords ?? 'tech blogs, technology news, latest tech news, AI news, artificial intelligence, chatgpt news, mobile reviews, smartphone reviews, latest smartphones, mobile comparison, gadgets, gadget reviews, digital trends, technology updates, software reviews, web development, programming tutorials, PHP tutorials, Laravel tutorials, JavaScript tips, coding tips, developer tools, SEO guide, SEO tips, blogging tips, blog monetization, AdSense approval, website traffic tips, digital marketing, online earning, tech articles, tech updates, TechBlogs, TechBlogs.site, future technology, tech innovation, robotics news, machine learning updates') }}">
+<meta name="keywords" content="{{ $meta_keywords ?? ($meta_keywords ?? 'tech blogs, technology news, latest tech news, AI news, artificial intelligence, chatgpt news, mobile reviews, smartphone reviews, latest smartphones, mobile comparison, gadgets, gadget reviews, digital trends, technology updates, software reviews, web development, programming tutorials, PHP tutorials, Laravel tutorials, JavaScript tips, coding tips, developer tools, SEO guide, SEO tips, blogging tips, blog monetization, AdSense approval, website traffic tips, digital marketing, online earning, tech articles, tech updates, TechBlogs, TechBlogs.site, future technology, tech innovation, robotics news, machine learning updates') }}">
 @endif
 @if(!empty($breadcrumb_schema_encoded))
     <script type="application/ld+json">
