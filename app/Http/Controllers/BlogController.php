@@ -339,9 +339,8 @@ public function blogView($slug)
     $category = $Blog_info->category ?? 'General';
     
     // Get keywords if available
-    $meta_keywords = $seo->keywords ?? '';
     $keywords = $seo->keywords ?? '';
-   
+    $keywordsArray = $keywords ? array_map('trim', explode(',', $keywords)) : [];
 
     // Get estimated reading time
     $wordCount = str_word_count(strip_tags($Blog_info->description ?? ''));
@@ -496,6 +495,7 @@ public function blogView($slug)
         $faq_schema,
         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
     ) : null;
+    $meta_keywords = $seo->keywords ?? '';
 
     return view('frontend.blogs.view', compact(
         'Blog_info',
@@ -503,7 +503,6 @@ public function blogView($slug)
         'meta_title',
         'meta_schema',
         'meta_keywords',
-        
         'breadcrumb_schema_encoded',
         'faq_schema_encoded'
     ));
