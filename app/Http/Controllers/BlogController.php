@@ -340,6 +340,7 @@ public function blogView($slug)
     
     // Get keywords if available
     $meta_keywords = $seo->keywords ?? '';
+    $keywords = $seo->keywords ?? '';
    
 
     // Get estimated reading time
