@@ -60,7 +60,6 @@
                                            name="meta_title" 
                                            value="{{ old('meta_title', $blog_seo->title ?? '') }}"
                                            placeholder="Enter a compelling title for search results"
-                                          
                                            data-preview="title">
                                     <div class="form-text">
                                         The title tag is displayed in search engine results. Keep it under 60 characters.
@@ -79,22 +78,50 @@
                                               name="meta_description" 
                                               rows="4" 
                                               placeholder="Write a brief and engaging description that encourages clicks"
-                                             
                                               data-preview="description">{{ old('meta_description', $blog_seo->Description ?? '') }}</textarea>
-
                                     <div class="form-text">
                                         This description appears in search results. Aim for 150-160 characters.
                                     </div>
                                 </div>
 
-                             
+                                <!-- Meta Keywords Field - Added -->
+                                <div class="mb-4">
+                                    <label for="meta_keywords" class="form-label fw-semibold">
+                                        <i class="fas fa-tags me-1 text-info"></i>Meta Keywords
+                                        <span class="text-muted float-end">
+                                            <span id="keywordsCounter">0</span> keywords (comma separated)
+                                        </span>
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control border-primary-subtle" 
+                                           id="meta_keywords" 
+                                           name="meta_keywords" 
+                                           value="{{ old('meta_keywords', $blog_seo->keywords ?? '') }}"
+                                           placeholder="SEO, laravel, meta tags, optimization, search engine"
+                                           data-preview="keywords">
+                                    <div class="form-text">
+                                        Enter relevant keywords separated by commas. This helps search engines understand your content focus.
+                                    </div>
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary" id="keywordSuggestionsTitle">Suggestions:</span>
+                                        <div id="keywordSuggestions" class="mt-1">
+                                            @php
+                                                $titleWords = explode(' ', $blog->name);
+                                                $suggestions = array_slice(array_unique($titleWords), 0, 5);
+                                            @endphp
+                                            @foreach($suggestions as $word)
+                                                @if(strlen($word) > 3)
+                                                    <span class="badge bg-light text-dark me-1 mb-1 suggestion-tag" style="cursor: pointer;" data-keyword="{{ strtolower($word) }}">{{ strtolower($word) }}</span>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Right Column - Slug and Actions -->
                             <div class="col-lg-4">
                                 <div class="sticky-top" style="top: 20px;">
-                                  
-
                                     <div class="d-grid gap-2">
                                         <button type="submit" class="btn btn-primary btn-lg shadow-sm">
                                             <i class="fas fa-save me-2"></i>Save SEO Settings
@@ -150,7 +177,122 @@
     .card-header {
         border-radius: 12px 12px 0 0 !important;
     }
+    .suggestion-tag:hover {
+        background-color: #0d6efd !important;
+        color: white !important;
+    }
 </style>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Meta Title Character Counter
+        const titleInput = document.getElementById('meta_title');
+        const titleCounter = document.getElementById('titleCounter');
+        const previewTitle = document.getElementById('previewTitle');
+        
+        function updateTitleCounter() {
+            const length = titleInput.value.length;
+            titleCounter.textContent = length;
+            if (length > 60) {
+                titleCounter.style.color = 'red';
+                titleInput.classList.add('is-invalid');
+            } else {
+                titleCounter.style.color = '';
+                titleInput.classList.remove('is-invalid');
+            }
+            // Update preview
+            if (previewTitle) {
+                previewTitle.textContent = titleInput.value.substring(0, 60) || '{{ Str::limit($blog->name, 60) }}';
+            }
+        }
+        
+        if (titleInput) {
+            titleInput.addEventListener('input', updateTitleCounter);
+            updateTitleCounter();
+        }
+        
+        // Meta Description Character Counter
+        const descInput = document.getElementById('meta_description');
+        const descCounter = document.getElementById('descCounter');
+        const previewDescription = document.getElementById('previewDescription');
+        
+        function updateDescCounter() {
+            const length = descInput.value.length;
+            descCounter.textContent = length;
+            if (length > 160) {
+                descCounter.style.color = 'red';
+                descInput.classList.add('is-invalid');
+            } else {
+                descCounter.style.color = '';
+                descInput.classList.remove('is-invalid');
+            }
+            // Update preview
+            if (previewDescription) {
+                previewDescription.textContent = descInput.value.substring(0, 160) || '{{ Str::limit(strip_tags($blog->description), 160) }}';
+            }
+        }
+        
+        if (descInput) {
+            descInput.addEventListener('input', updateDescCounter);
+            updateDescCounter();
+        }
+        
+        // Meta Keywords Counter
+        const keywordsInput = document.getElementById('meta_keywords');
+        const keywordsCounter = document.getElementById('keywordsCounter');
+        
+        function updateKeywordsCounter() {
+            if (keywordsInput.value.trim() === '') {
+                keywordsCounter.textContent = '0 keywords';
+                return;
+            }
+            const keywordCount = keywordsInput.value.split(',').filter(k => k.trim().length > 0).length;
+            keywordsCounter.textContent = keywordCount + (keywordCount === 1 ? ' keyword' : ' keywords');
+        }
+        
+        if (keywordsInput) {
+            keywordsInput.addEventListener('input', updateKeywordsCounter);
+            updateKeywordsCounter();
+        }
+        
+        // Keyword suggestion click handler
+        const suggestionTags = document.querySelectorAll('.suggestion-tag');
+        suggestionTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.getAttribute('data-keyword');
+                if (keywordsInput) {
+                    let currentValue = keywordsInput.value.trim();
+                    let keywords = currentValue ? currentValue.split(',').map(k => k.trim()) : [];
+                    if (!keywords.includes(keyword)) {
+                        keywords.push(keyword);
+                        keywordsInput.value = keywords.join(', ');
+                        updateKeywordsCounter();
+                    }
+                }
+            });
+        });
+        
+        // Reset button functionality
+        const resetBtn = document.querySelector('button[type="reset"]');
+        const form = document.getElementById('seoForm');
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const originalTitle = '{{ old('meta_title', $blog_seo->title ?? '') }}';
+                const originalDesc = '{{ old('meta_description', $blog_seo->Description ?? '') }}';
+                const originalKeywords = '{{ old('meta_keywords', $blog_seo->keywords ?? '') }}';
+                
+                if (titleInput) titleInput.value = originalTitle;
+                if (descInput) descInput.value = originalDesc;
+                if (keywordsInput) keywordsInput.value = originalKeywords;
+                
+                updateTitleCounter();
+                updateDescCounter();
+                updateKeywordsCounter();
+            });
+        }
+    });
+</script>
 
 @endsection
