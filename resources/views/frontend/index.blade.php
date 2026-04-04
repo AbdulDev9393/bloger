@@ -56,10 +56,12 @@ use Illuminate\Support\Str;
         max-width: 1280px;
         margin: 0 auto;
         gap: 60px;
+        flex-wrap: wrap;
     }
 
     .hero-content {
         flex: 1;
+         min-width: 0;
     }
 
     .hero-content h1 {
