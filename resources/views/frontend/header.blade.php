@@ -9,7 +9,7 @@
 @endif
 @if(!empty($meta_keywords))
 
-<meta name="keywords" content="{{ $meta_keywords ?? ($meta_keywords ?? 'tech blogs, technology news, latest tech news, AI news, artificial intelligence, chatgpt news, mobile reviews, smartphone reviews, latest smartphones, mobile comparison, gadgets, gadget reviews, digital trends, technology updates, software reviews, web development, programming tutorials, PHP tutorials, Laravel tutorials, JavaScript tips, coding tips, developer tools, SEO guide, SEO tips, blogging tips, blog monetization, AdSense approval, website traffic tips, digital marketing, online earning, tech articles, tech updates, TechBlogs, TechBlogs.site, future technology, tech innovation, robotics news, machine learning updates') }}">
+<meta name="keywords" content="{{ $meta_keywords }}">
 @endif
 @if(!empty($breadcrumb_schema_encoded))
     <script type="application/ld+json">
@@ -81,8 +81,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
