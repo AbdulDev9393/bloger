@@ -208,10 +208,6 @@ use Illuminate\Support\Str;
   text-decoration: none;
 }
 /* Categories Section */
-.categories-section {
-  padding: 60px 20px;
-  background: #ffffff;
-}
 
 .section-subtitle {
   text-align: center;
@@ -220,12 +216,6 @@ use Illuminate\Support\Str;
   margin-bottom: 40px;
 }
 
-/* Grid */
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 25px;
-}
 
 /* Card */
 .category-card {
@@ -244,11 +234,6 @@ use Illuminate\Support\Str;
   box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
-/* Icon */
-.category-icon {
-  font-size: 40px;
-  margin-bottom: 15px;
-}
 
 /* Text */
 .category-card h3 {
@@ -393,15 +378,6 @@ use Illuminate\Support\Str;
     flex-direction: column;
     align-items: center;
   }
-}
-.categories-section {
-  padding: 50px 20px;
-}
-
-.category-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
 }
 
 
@@ -777,11 +753,6 @@ use Illuminate\Support\Str;
 
 </style>
 <style>
-.categories-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
 
 .container {
   max-width: 1200px;
@@ -815,15 +786,6 @@ use Illuminate\Support\Str;
   margin: 0 auto;
   line-height: 1.6;
 }
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
 .category-card {
   display: block;
   background: white;
@@ -858,49 +820,6 @@ use Illuminate\Support\Str;
   border-color: #f87171;
 }
 
-.card-inner {
-  position: relative;
-  z-index: 2;
-}
-
-.category-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  transition: all 0.3s ease;
-}
-
-.category-card:nth-child(1) .category-icon {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  color: white;
-}
-
-.category-card:nth-child(2) .category-icon {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-}
-
-.category-card:nth-child(3) .category-icon {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: white;
-}
-
-.category-card:hover .category-icon {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.category-icon svg {
-  width: 32px;
-  height: 32px;
-}
-
-.category-content {
-  position: relative;
-}
 
 .category-title {
   font-size: 1.75rem;
@@ -909,12 +828,6 @@ use Illuminate\Support\Str;
   color: #1e293b;
 }
 
-.category-description {
-  font-size: 1rem;
-  color: #64748b;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
 
 .category-stats {
   display: flex;
@@ -957,10 +870,7 @@ use Illuminate\Support\Str;
 }
 
 @media (max-width: 768px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-  }
+ 
   
   .section-title {
     font-size: 2.5rem;
@@ -1103,88 +1013,7 @@ use Illuminate\Support\Str;
   </div>
 </section>
 
-<section class="categories-section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Explore <span class="highlight">Categories</span></h2>
-      <p class="section-subtitle">
-        Browse through our diverse collection of topics and find what interests you most
-      </p>
-    </div>
 
-    <div class="categories-grid">
-      <!-- Tech -->
-      <a href="{{ route('frontend.Categories', 'Tech') }}" class="category-card">
-        <div class="card-inner">
-          <div class="category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16.5 7.5h-9v9h9v-9z" opacity="0.3"/>
-              <path d="M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-3.5 7.5h-9v9h9v-9zM20 5v2.5h-2.5V5H20zm-2.5 11.5V19H20v-2.5h-2.5zM6.5 5v2.5H4V5h2.5zM4 16.5V19h2.5v-2.5H4z"/>
-            </svg>
-          </div>
-          <div class="category-content">
-            <h3 class="category-title">Tech</h3>
-            <p class="category-description">Latest technology & innovations</p>
-            <div class="category-stats">
-              <span><i class="fas fa-layer-group"></i> {{$techCount}} Topics</span>
-              <span><i class="fas fa-arrow-right"></i></span>
-            </div>
-          </div>
-          <div class="category-hover-effect"></div>
-        </div>
-      </a>
-
-      <!-- Information -->
-      <a href="{{ route('frontend.Categories', 'Information') }}" class="category-card">
-        <div class="card-inner">
-          <div class="category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-            </svg>
-          </div>
-          <div class="category-content">
-            <h3 class="category-title">Information</h3>
-            <p class="category-description">Useful knowledge & updates</p>
-            <div class="category-stats">
-              <span><i class="fas fa-layer-group"></i> {{$techinfo}} Topics</span>
-              <span><i class="fas fa-arrow-right"></i></span>
-            </div>
-          </div>
-          <div class="category-hover-effect"></div>
-        </div>
-      </a>
-
-      <!-- Health & Wellness -->
-      <a href="{{ route('frontend.Categories', 'HealthWellness') }}" class="category-card">
-        <div class="card-inner">
-          <div class="category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7 7h4V5.28c-.6-.34-1.3-.5-2-.5-2.2 0-4 1.8-4 4 0 1.1.45 2.1 1.17 2.83L7 10.83V7zm6 0h4v3.83l-1.17-1.17C14.55 9.1 15 8.1 15 7c0-2.2-1.8-4-4-4-.7 0-1.4.16-2 .5V7zm-1 11c-2.2 0-4-1.8-4-4 0-.7.16-1.4.5-2H5.28c-.34.6-.5 1.3-.5 2 0 3.31 2.69 6 6 6 .7 0 1.4-.16 2-.5V18h-1.5c-.6.34-1.3.5-2 .5z"/>
-            </svg>
-          </div>
-          <div class="category-content">
-            <h3 class="category-title">Health & Wellness</h3>
-            <p class="category-description">Healthy living & wellbeing</p>
-            <div class="category-stats">
-              <span><i class="fas fa-layer-group"></i> {{$techhealth}} Topics</span>
-              <span><i class="fas fa-arrow-right"></i></span>
-            </div>
-          </div>
-          <div class="category-hover-effect"></div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-<script>
-  atOptions = {
-    'key' : '59ac55686ca45ec66c3daea3d0d846fe',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
 
 {{-- ================= CATEGORIES / ALL BLOGS ================= --}}
 <section class="blogs-section">
@@ -1331,7 +1160,6 @@ use Illuminate\Support\Str;
 </section>
 
 </main>
-
 
 @include('frontend.footer')
 
