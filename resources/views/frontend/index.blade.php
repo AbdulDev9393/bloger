@@ -75,7 +75,7 @@ use Illuminate\Support\Str;
     }
 
     .hero-content p {
-        font-size: 1.125rem;
+        font-size: 16px;
         color: #475569;
         margin-bottom: 2rem;
         line-height: 1.7;
