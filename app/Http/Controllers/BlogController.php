@@ -522,6 +522,7 @@ public function blogView($slug)
     // Save plain text to DB
     $seo->title = strip_tags($request->meta_title);            // plain text
     $seo->Description = strip_tags($request->meta_description); // plain text
+      $seo->keywords = strip_tags($request->meta_keywords);
     $seo->blog_id = $id;
     $seo->org_des = strip_tags($request->meta_description);
 
