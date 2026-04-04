@@ -577,7 +577,7 @@ use Illuminate\Support\Str;
                 <img src="{{ asset($secondLatestBlog->Thumbnail_Image) }}" alt="{{ $secondLatestBlog->name }}" width="1200" height="720" loading="eager">
             </div>
             <div class="hero-content">
-                <h1>{{ $secondLatestBlog->name }}</h1>
+                <h2>{{ $secondLatestBlog->name }}</h2>
                 @php
                     $desc2 = $secondLatestBlog->Description;
                     $desc2 = preg_replace('/<(\/)?h[1-6][^>]*>/i', '<$1p>', $desc2);
