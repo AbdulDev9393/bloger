@@ -94,7 +94,10 @@ public function generateAI(Request $request)
     $request->validate([
         'title' => 'required|string|max:255'
     ]);
-  $prompt = "
+
+    $title = $request->title;
+
+    $prompt = "
 Write a detailed, SEO-optimized blog post for a technology website.
 
 Website Name: techblogs.site  
@@ -104,38 +107,18 @@ Instructions:
 - Write at least 1200+ words
 - Content must be 100% unique, human-like, and engaging
 - Topic must be strictly technology-related
+- Include real-world examples
+- Explain deeply
 - Use SEO best practices
-- Naturally include 'techblogs.site' in introduction and conclusion
-- please give me the Real-world examples
-- pleae explain topic in deeply level 
+- Include 'techblogs.site' in intro and conclusion
 
 Formatting Rules:
-- Output MUST be in clean HTML format
-- Use <h2> for main headings
-- Use <h3> for subheadings
-- Use <p> for paragraphs
-- Use <strong> for important keywords
-- Use <ul> and <li> for bullet points
-- Do NOT include markdown (** or ##), only HTML
-- No explanation, only return blog HTML
+- Output MUST be clean HTML only
+- Use <h2>, <h3>, <p>, <strong>, <ul>, <li>
+- No markdown, no explanation
 
-SEO:
-- Use primary keyword (from title)
-- Add secondary keywords naturally
-- Maintain keyword density without stuffing
-
-Structure:
-- Introduction (with keyword + mention techblogs.site)
-- Multiple sections with headings
-- Bullet points where useful
-- Examples where needed
-- Conclusion (include techblogs.site again)
-
-Tone:
-- Simple, professional English
-- Beginner-friendly
+Return ONLY HTML.
 ";
-    $title = $request->title;
 
     $response = Http::withHeaders([
         'Authorization' => 'Bearer ' . env('LONGCAT_KEY'),
@@ -145,14 +128,13 @@ Tone:
         'messages' => [
             [
                 'role' => 'user',
-                'content' => $prompt,
+                'content' => $prompt
             ]
         ],
         'temperature' => 0.7,
-        'max_tokens' => 2000,
+        'max_tokens' => 4000,
     ]);
 
-    // ✅ STEP 1: check HTTP status
     if (!$response->successful()) {
         return response()->json([
             'status' => false,
@@ -163,7 +145,6 @@ Tone:
 
     $data = $response->json();
 
-    // ✅ STEP 2: safe extraction
     $contentHtml = data_get($data, 'choices.0.message.content');
 
     if (!$contentHtml) {
@@ -173,6 +154,10 @@ Tone:
             'debug' => $data
         ], 500);
     }
+
+    // cleanup
+    $contentHtml = trim($contentHtml);
+    $contentHtml = preg_replace('/^```html|```$/', '', $contentHtml);
 
     return response()->json([
         'status' => true,
