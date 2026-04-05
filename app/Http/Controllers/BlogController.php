@@ -91,18 +91,9 @@ public function store(Request $request)
 
 public function generateAI(Request $request)
 {
-    // ✅ Validate
     $request->validate([
         'title' => 'required|string|max:255'
     ]);
-
-    $title = $request->title;
-      
-    // ✅ API Key (ENV se lo)
-   
-
-       
-    // ✅ Prompt
   $prompt = "
 Write a detailed, SEO-optimized blog post for a technology website.
 
@@ -144,36 +135,45 @@ Tone:
 - Simple, professional English
 - Beginner-friendly
 ";
-$activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+    $title = $request->title;
 
-$response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $activeKey,
-    'Content-Type'  => 'application/json',
-])->post('https://api.longcat.chat/openai/v1/chat/completions', [
-    'model' => 'LongCat-Flash-Chat',
-    'messages' => [
-        [
-            'role' => 'user',
-            'content' => $prompt
-        ]
-    ],
-    'temperature' => 0.7,
-    'max_tokens' => 2000,
-]);
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . env('LONGCAT_KEY'),
+        'Content-Type'  => 'application/json',
+    ])->timeout(60)->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model' => 'LongCat-Flash-Chat',
+        'messages' => [
+            [
+                'role' => 'user',
+                'content' => $prompt,
+            ]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 2000,
+    ]);
 
-// ✅ ADD THIS (IMPORTANT)
-$data = $response->json();
-
-$contentHtml = $data['choices'][0]['message']['content'];
-$contentHtml = str_replace('—', '-', $contentHtml);
-    if (!$contentHtml) {
+    // ✅ STEP 1: check HTTP status
+    if (!$response->successful()) {
         return response()->json([
             'status' => false,
-            'message' => 'No content generated'
+            'message' => 'API request failed',
+            'debug' => $response->body()
         ], 500);
     }
 
-    // ✅ Response
+    $data = $response->json();
+
+    // ✅ STEP 2: safe extraction
+    $contentHtml = data_get($data, 'choices.0.message.content');
+
+    if (!$contentHtml) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Empty content from AI',
+            'debug' => $data
+        ], 500);
+    }
+
     return response()->json([
         'status' => true,
         'title' => $title,
