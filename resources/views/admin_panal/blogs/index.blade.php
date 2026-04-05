@@ -841,42 +841,46 @@ document.addEventListener('DOMContentLoaded', function () {
             // Loading state
             editorInstance.setData('<p>Generating content... ⏳</p>');
 
-            fetch("{{ route('admin.ai.generate') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    title: title
-                })
-            })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Network response not ok: ' + res.status);
-                }
-                return res.json();
-            })
-            .then(data => {
-                console.log('AI Response:', data);
+       fetch("{{ route('admin.ai.generate') }}", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ title: title })
+})
+.then(async (res) => {
 
-                // ✅ FULL RESPONSE HANDLE
-                if (data.status && data.content) {
-                    editorInstance.setData(data.content);
+    const text = await res.text(); // 👈 raw response first
 
-                    // optional: title update
-                    if (data.title) {
-                        document.getElementById('blog-title').value = data.title;
-                    }
+    try {
+        return JSON.parse(text); // try convert to JSON
+    } catch (e) {
+        console.error("Invalid JSON Response:", text);
+        throw new Error("Server returned invalid JSON");
+    }
 
-                } else {
-                    editorInstance.setData('<p>No content returned ❌</p>');
-                }
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
-            });
+})
+.then(data => {
+
+    console.log('AI Response:', data);
+
+    // ✅ SAFE CONTENT CHECK (improved)
+    if (data.content) {
+        editorInstance.setData(data.content);
+    } else {
+        editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
+    }
+
+    if (data.title) {
+        document.getElementById('blog-title').value = data.title;
+    }
+
+})
+.catch(err => {
+    console.error('Error:', err);
+    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
+});
 
         });
     }
