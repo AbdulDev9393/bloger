@@ -120,20 +120,24 @@ Formatting Rules:
 Return ONLY HTML.
 ";
 
-    $response = Http::withHeaders([
-        'Authorization' => 'Bearer ' . env('LONGCAT_KEY'),
-        'Content-Type'  => 'application/json',
-    ])->timeout(60)->post('https://api.longcat.chat/openai/v1/chat/completions', [
-        'model' => 'LongCat-Flash-Chat',
-        'messages' => [
-            [
-                'role' => 'user',
-                'content' => $prompt
-            ]
-        ],
-        'temperature' => 0.7,
-        'max_tokens' => 4000,
-    ]);
+ $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+ $response = Http::withHeaders([
+    'Authorization' => 'Bearer ' . $activeKey,
+    'Content-Type'  => 'application/json',
+])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+    'model' => 'LongCat-Flash-Chat',
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => $prompt
+        ]
+    ],
+    'temperature' => 0.7,
+    'max_tokens' => 2000,
+]);
+
+$contentHtml = $response->json()['choices'][0]['message']['content'];
+  $contentHtml = str_replace('—', ' ', $contentHtml);
 
     if (!$response->successful()) {
         return response()->json([
