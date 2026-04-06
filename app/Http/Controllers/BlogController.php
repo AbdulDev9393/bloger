@@ -88,147 +88,82 @@ public function store(Request $request)
     return view('admin_panal.blogs.edit',compact('blog','categories'));
 
   }
+
 public function generateAI(Request $request)
 {
-    try {
-        $request->validate([
-            'title' => 'required|string|max:255'
-        ]);
+    $request->validate([
+        'title' => 'required|string|max:255'
+    ]);
 
-        $title = $request->title;
+    $title = $request->title;
 
-        $prompt = "Write a detailed, SEO-optimized blog post for a technology website.
+    $prompt = "
+Write a detailed, SEO-optimized blog post for a technology website.
 
 Website Name: techblogs.site  
 Blog Title: {$title}
 
-Requirements:
+Instructions:
 - Write at least 1200+ words
 - Content must be 100% unique, human-like, and engaging
 - Topic must be strictly technology-related
-- Include real-world examples and case studies
-- Explain concepts deeply with technical details
-- Use SEO best practices (keyword placement, meta descriptions)
+- Include real-world examples
+- Explain deeply
+- Use SEO best practices
 - Include 'techblogs.site' in intro and conclusion
-- Add practical tips and actionable insights
 
 Formatting Rules:
 - Output MUST be clean HTML only
-- Use proper heading hierarchy: <h1> for main title, <h2> for sections, <h3> for subsections
-- Use <p> for paragraphs
-- Use <strong> or <b> for emphasis
-- Use <ul> and <li> for lists
-- Add <code> tags for technical terms
-- Include a table of contents at the beginning
-- Add a conclusion section
+- Use <h2>, <h3>, <p>, <strong>, <ul>, <li>
+- No markdown, no explanation
 
-Return ONLY valid HTML. Do not include any markdown, explanations, or additional text.";
+Return ONLY HTML.
+";
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('LONGCAT_KEY'),
-            'Content-Type' => 'application/json',
-        ])->timeout(120)->post('https://api.longcat.chat/openai/v1/chat/completions', [
-            'model' => 'LongCat-Flash-Chat',
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' => 'You are an expert technology blogger and SEO specialist who writes detailed, engaging, and well-structured blog posts.'
-                ],
-                [
-                    'role' => 'user',
-                    'content' => $prompt
-                ]
-            ],
-            'temperature' => 0.7,
-            'max_tokens' => 4000,
-        ]);
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . env('LONGCAT_KEY'),
+        'Content-Type'  => 'application/json',
+    ])->timeout(60)->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model' => 'LongCat-Flash-Chat',
+        'messages' => [
+            [
+                'role' => 'user',
+                'content' => $prompt
+            ]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 4000,
+    ]);
 
-        // Log the response for debugging
-        Log::info('LongCat API Response', [
-            'status' => $response->status(),
-            'successful' => $response->successful()
-        ]);
-
-        if (!$response->successful()) {
-            Log::error('LongCat API Error', [
-                'status' => $response->status(),
-                'body' => $response->body()
-            ]);
-            
-            return response()->json([
-                'status' => false,
-                'message' => 'AI service temporarily unavailable. Please try again later.',
-                'debug' => $response->body()
-            ], 500);
-        }
-
-        $data = $response->json();
-
-        // Check if we have the expected response structure
-        if (!isset($data['choices'][0]['message']['content'])) {
-            Log::error('Invalid LongCat API response structure', ['data' => $data]);
-            
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid response from AI service',
-                'debug' => $data
-            ], 500);
-        }
-
-        $contentHtml = $data['choices'][0]['message']['content'];
-
-        if (empty($contentHtml)) {
-            return response()->json([
-                'status' => false,
-                'message' => 'AI returned empty content'
-            ], 500);
-        }
-
-        // Clean up the HTML content
-        $contentHtml = trim($contentHtml);
-        
-        // Remove markdown code blocks if present
-        $contentHtml = preg_replace('/^```html\\s*|\\s*```$/', '', $contentHtml);
-        $contentHtml = preg_replace('/^```\\s*|\\s*```$/', '', $contentHtml);
-        
-        // Remove any markdown formatting that might have slipped through
-        $contentHtml = preg_replace('/\\*\\*([^*]+)\\*\\*/', '<strong>$1</strong>', $contentHtml);
-        $contentHtml = preg_replace('/\\*([^*]+)\\*/', '<em>$1</em>', $contentHtml);
-        
-        // Ensure the content has proper HTML structure
-        if (!str_contains($contentHtml, '<h1>') && !str_contains($contentHtml, '<h2>')) {
-            $contentHtml = "<h1>{$title}</h1>\n" . $contentHtml;
-        }
-
-        return response()->json([
-            'status' => true,
-            'title' => $title,
-            'content' => $contentHtml
-        ]);
-        
-    } catch (\Illuminate\Validation\ValidationException $e) {
+    if (!$response->successful()) {
         return response()->json([
             'status' => false,
-            'message' => 'Please provide a valid blog title'
-        ], 422);
-    } catch (\Illuminate\Http\Client\ConnectionException $e) {
-        Log::error('Connection error to LongCat API', ['error' => $e->getMessage()]);
-        
-        return response()->json([
-            'status' => false,
-            'message' => 'Unable to connect to AI service. Please check your internet connection.'
-        ], 500);
-    } catch (\Exception $e) {
-        Log::error('Unexpected error in generateAI', [
-            'error' => $e->getMessage(),
-            'trace' => $e->getTraceAsString()
-        ]);
-        
-        return response()->json([
-            'status' => false,
-            'message' => 'An unexpected error occurred: ' . $e->getMessage()
+            'message' => 'API request failed',
+            'debug' => $response->body()
         ], 500);
     }
+
+    $data = $response->json();
+
+    $contentHtml = data_get($data, 'choices.0.message.content');
+
+    if (!$contentHtml) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Empty content from AI',
+            'debug' => $data
+        ], 500);
+    }
+
+    // cleanup
+    $contentHtml = trim($contentHtml);
+    $contentHtml = preg_replace('/^```html|```$/', '', $contentHtml);
+
+    return response()->json([
+        'status' => true,
+        'title' => $title,
+        'content' => $contentHtml
+    ]);
 }
 public function update(Request $request, $id)
 {
