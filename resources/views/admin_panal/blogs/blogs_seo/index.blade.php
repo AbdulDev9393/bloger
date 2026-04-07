@@ -6,6 +6,9 @@
 
 <div class="container-fluid py-4">
     <div class="row">
+                             <button type="button" id="generate-ai" class="btn btn-success mt-2">
+                        🤖 Generate Content (AI)
+                    </button>
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white border-bottom py-3">
@@ -293,6 +296,75 @@
             });
         }
     });
+    
+    // =========================
+    // ✅ AI GENERATE BUTTON
+    // =========================
+    const aiBtn = document.getElementById('generate-ai');
+
+    if (aiBtn) {
+        aiBtn.addEventListener('click', function () {
+
+            let title = document.getElementById('blog-title').value.trim();
+
+            if (!title) {
+                alert('Title likho pehle');
+                return;
+            }
+
+            if (!editorInstance) {
+                alert('Editor abhi load ho raha hai, wait karo');
+                return;
+            }
+
+            // Loading state
+            editorInstance.setData('<p>Generating content... ⏳</p>');
+
+       fetch("{{ route('admin.ai.generate') }}", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ title: title })
+})
+.then(async (res) => {
+
+    const text = await res.text(); // 👈 raw response first
+
+    try {
+        return JSON.parse(text); // try convert to JSON
+    } catch (e) {
+        console.error("Invalid JSON Response:", text);
+        throw new Error("Server returned invalid JSON");
+    }
+
+})
+.then(data => {
+
+    console.log('AI Response:', data);
+
+    // ✅ SAFE CONTENT CHECK (improved)
+    if (data.content) {
+        editorInstance.setData(data.content);
+    } else {
+        editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
+    }
+
+    if (data.title) {
+        document.getElementById('blog-title').value = data.title;
+    }
+
+})
+.catch(err => {
+    console.error('Error:', err);
+    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
+});
+
+        });
+    }
+
+});
 </script>
 
 @endsection
