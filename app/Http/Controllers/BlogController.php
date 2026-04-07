@@ -104,7 +104,7 @@ Website Name: techblogs.site
 Blog Title: {$title}
 
 Instructions:
-- Write at least 800+ words
+- Write at least 900+ words
 - Content must be 100% unique, human-like, and engaging
 - Topic must be disscuss clear human words 
 - Include real-world examples and real human example
