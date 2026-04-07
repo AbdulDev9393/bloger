@@ -296,75 +296,72 @@
             });
         }
     });
-    
-    // =========================
-    // ✅ AI GENERATE BUTTON
-    // =========================
+document.addEventListener('DOMContentLoaded', function () {
+
     const aiBtn = document.getElementById('generate-ai');
 
     if (aiBtn) {
         aiBtn.addEventListener('click', function () {
 
-            let title = document.getElementById('blog-title').value.trim();
+            const titleInput = document.getElementById('blog-title');
+            const title = titleInput ? titleInput.value.trim() : '';
 
             if (!title) {
-                alert('Title likho pehle');
+                alert('Please enter blog title first');
                 return;
             }
 
-            if (!editorInstance) {
-                alert('Editor abhi load ho raha hai, wait karo');
-                return;
+            aiBtn.disabled = true;
+            aiBtn.innerHTML = '⏳ Generating...';
+
+            // Optional loader in editor
+            if (typeof editorInstance !== 'undefined') {
+                editorInstance.setData('<p>Generating content... ⏳</p>');
             }
 
-            // Loading state
-            editorInstance.setData('<p>Generating content... ⏳</p>');
+            fetch("{{ route('admin.ai.generate') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
 
-       fetch("{{ route('admin.ai.generate') }}", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    },
-    body: JSON.stringify({ title: title })
-})
-.then(async (res) => {
+                console.log('AI Response:', data);
 
-    const text = await res.text(); // 👈 raw response first
+                if (data.content) {
+                    editorInstance.setData(data.content);
+                } else {
+                    editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
+                }
 
-    try {
-        return JSON.parse(text); // try convert to JSON
-    } catch (e) {
-        console.error("Invalid JSON Response:", text);
-        throw new Error("Server returned invalid JSON");
-    }
+                if (data.title && titleInput) {
+                    titleInput.value = data.title;
+                }
 
-})
-.then(data => {
+                aiBtn.disabled = false;
+                aiBtn.innerHTML = '🤖 Generate Content (AI)';
 
-    console.log('AI Response:', data);
+            })
+            .catch(error => {
+                console.error(error);
 
-    // ✅ SAFE CONTENT CHECK (improved)
-    if (data.content) {
-        editorInstance.setData(data.content);
-    } else {
-        editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
-    }
+                if (typeof editorInstance !== 'undefined') {
+                    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
+                }
 
-    if (data.title) {
-        document.getElementById('blog-title').value = data.title;
-    }
-
-})
-.catch(err => {
-    console.error('Error:', err);
-    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
-});
+                aiBtn.disabled = false;
+                aiBtn.innerHTML = '🤖 Generate Content (AI)';
+            });
 
         });
     }
 
 });
+
 </script>
 
 @endsection
