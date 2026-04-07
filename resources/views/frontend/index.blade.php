@@ -396,44 +396,12 @@ use Illuminate\Support\Str;
         font-size: 0.75rem;
         color: #64748b;
     }
-
-    .reviews-stats {
-        display: flex;
-        justify-content: center;
-        gap: 60px;
-        margin: 50px 0;
-        flex-wrap: wrap;
-    }
-
-    .stat-item {
-        text-align: center;
-    }
-
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #0f172a;
-        line-height: 1;
-        margin-bottom: 8px;
-        display: block;
-    }
-
     .stat-label {
         font-size: 0.875rem;
         color: #475569;
     }
 
-    .reviews-cta {
-        text-align: center;
-        margin-top: 40px;
-    }
-
-    .reviews-cta p {
-        font-size: 1.25rem;
-        margin-bottom: 24px;
-        font-weight: 500;
-    }
-
+  
     .btn-primary, .btn-secondary {
         display: inline-block;
         padding: 12px 32px;
@@ -533,9 +501,7 @@ use Illuminate\Support\Str;
         .reviews-container {
             grid-template-columns: 1fr;
         }
-        .reviews-stats {
-            gap: 30px;
-        }
+      
         .subscribe-form {
             flex-direction: column;
         }
@@ -684,16 +650,6 @@ use Illuminate\Support\Str;
                         <div class="reviewer-details"><h4>Emily R.</h4><span class="reviewer-role">Content Creator</span><span class="review-date">3 days ago</span></div>
                     </div>
                 </div>
-            </div>
-            <div class="reviews-stats">
-                <div class="stat-item"><span class="stat-number">4.8</span><span class="stat-label">Average Rating</span></div>
-                <div class="stat-item"><span class="stat-number">1.2K+</span><span class="stat-label">Monthly Readers</span></div>
-                <div class="stat-item"><span class="stat-number">98%</span><span class="stat-label">Satisfaction Rate</span></div>
-            </div>
-            <div class="reviews-cta">
-                <p>Join our community of satisfied readers today!</p>
-                <a href="{{ route('frontend.blogs') }}" class="btn-primary">Explore All Blogs</a>
-                <a href="{{ route('frontend.contect') }}" class="btn-secondary">Share Your Experience</a>
             </div>
         </div>
     </section>
