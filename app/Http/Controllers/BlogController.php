@@ -69,7 +69,7 @@ Blog Content:
         'temperature' => 0.7,
         'max_tokens' => 1200
     ]);
-dd($response->json());
+
     $aiText = $response->json()['choices'][0]['message']['content'] ?? null;
 
     // 🧠 JSON decode safe
