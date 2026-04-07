@@ -7,7 +7,7 @@
 <div class="container-fluid py-4">
     <div class="row">
                              <button type="button" id="generate-ai" class="btn btn-success mt-2">
-                        🤖 Generate Content (AI)
+                        🤖 Generate SEO  (AI)
                     </button>
         <div class="col-12">
             <div class="card shadow-sm border-0">
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
             aiBtn.disabled = true;
             aiBtn.innerHTML = '⏳ Generating...';
 
-            fetch("{{ route('admin.ai.generate') }}", {
+            fetch("{{ route('admin.ai.generate.seo') }}", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

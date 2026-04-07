@@ -59,6 +59,8 @@ Route::put('/update/{id}',[CategoryController::class,'update'])->name('admin.Cat
 Route::get('/admin/categories/search', [CategoryController::class, 'search'])->name('admin.categories.search');
 Route::post('/ai-generate', [BlogController::class, 'generateAI'])
     ->name('admin.ai.generate');
+Route::post('/ai-generate-seo', [BlogController::class, 'generateAISeo'])
+    ->name('admin.ai.generate.seo');
 
 //////////////////////     blogs //////////////////
 

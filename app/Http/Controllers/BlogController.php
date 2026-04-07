@@ -27,6 +27,13 @@ function index() {
    
     return view('admin_panal.blogs.index', compact('categories', 'blogs','allblogs'));
 }
+public function generateAISeo(Request $request)
+{
+    $blog = Blog::find($request->blog_id);
+     dd($blog);
+   
+   
+}
 public function store(Request $request)
 {
     $request->validate([
