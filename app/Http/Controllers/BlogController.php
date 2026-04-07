@@ -36,29 +36,56 @@ public function generateAISeo(Request $request)
     }
 
     $content = strip_tags($blog->description);
+$prompt = "
+You are a senior SEO strategist and content optimization expert working for high-ranking websites.
 
-$prompt = "You are an expert SEO content optimizer. Generate SEO metadata for a blog article.
+Your job is to analyze blog content and generate highly optimized SEO metadata that can rank on Google.
 
-STRICT OUTPUT REQUIREMENTS:
-- Return ONLY valid JSON. No markdown, no backticks, no explanations, no extra text.
-- JSON must be parseable by json_decode() without any cleaning.
+STRICT OUTPUT RULES:
+- Return ONLY valid JSON
+- No markdown, no backticks, no explanations, no extra text
+- Output must be directly usable with json_decode()
+- Do not include any additional keys outside the required structure
 
-Required JSON format:
+REQUIRED JSON FORMAT:
 {
   \"title\": \"string\",
   \"description\": \"string\",
-  \"keywords\": [\"string\", \"string\", \"string\", \"string\", \"string\", \"string\", \"string\", \"string\", \"string\", \"string\"]
+  \"keywords\": [\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\",\"string\"]
 }
 
-SEO RULES:
-- Title: Max 60 characters, catchy, includes primary keyword naturally.
-- Description: Max 160 characters, compelling, includes 1–2 keywords, matches search intent.
-- Keywords: Exactly 10 unique keywords/phrases (lowercase, comma-separated within array). No repetition. No single generic words like 'blog', 'article', 'SEO'. Focus on specific topics, entities, and long-tail variations.
+SEO OPTIMIZATION RULES:
 
-Content to analyze:
+TITLE:
+- Max 60 characters
+- Must be catchy, human-readable, and SEO-friendly
+- Must include the primary keyword naturally (not forced)
+- Should increase CTR (click-through rate)
+
+DESCRIPTION:
+- Max 160 characters
+- Must clearly describe the blog value
+- Must include 1–2 strong SEO keywords naturally
+- Must be optimized for Google snippet display
+- Must encourage clicks
+
+KEYWORDS:
+- Exactly 10 keywords (no more, no less)
+- All must be lowercase
+- Must be highly relevant to the content
+- Include mix of:
+  - primary keyword
+  - long-tail keywords
+  - related search terms
+- No repetition
+- No generic words like: blog, article, post, SEO only, etc.
+- Focus on real search intent and ranking terms
+
+CONTENT TO ANALYZE:
 \"\"\"{$content}\"\"\"
 
-Generate only the JSON now.";
+Now generate the SEO JSON only.
+";
  $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
 
     $response = Http::withHeaders([
