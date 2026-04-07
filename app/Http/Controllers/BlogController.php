@@ -134,8 +134,7 @@ Return ONLY HTML.
             'content' => $prompt
         ]
     ],
-    'temperature' => 0.7,
-    'max_tokens' => 2000,
+ 
 ]);
 
 $contentHtml = $response->json()['choices'][0]['message']['content'];
