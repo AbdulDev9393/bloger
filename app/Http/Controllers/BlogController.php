@@ -37,17 +37,13 @@ public function generateAISeo(Request $request)
 
     $content = strip_tags($blog->description);
 
-$prompt = "
-You are an expert SEO content optimizer.
+$prompt = "You are an expert SEO content optimizer. Generate SEO metadata for a blog article.
 
-Your task is to generate SEO metadata for a blog article.
+STRICT OUTPUT REQUIREMENTS:
+- Return ONLY valid JSON. No markdown, no backticks, no explanations, no extra text.
+- JSON must be parseable by json_decode() without any cleaning.
 
-IMPORTANT RULES:
-- Return ONLY valid JSON (no markdown, no explanation, no extra text)
-- Do NOT include ``` or any formatting
-- Output must be strictly parseable JSON
-
-JSON FORMAT:
+Required JSON format:
 {
   \"title\": \"string\",
   \"description\": \"string\",
@@ -55,18 +51,14 @@ JSON FORMAT:
 }
 
 SEO RULES:
-- Title must be catchy, SEO-friendly, and MAX 60 characters
-- Description must be compelling and MAX 160 characters
-- Keywords MUST be exactly 10 items (no more, no less)
-- Keywords must be highly relevant, non-repetitive, and SEO focused
-- Avoid keyword stuffing
-- Focus on search intent and ranking potential
+- Title: Max 60 characters, catchy, includes primary keyword naturally.
+- Description: Max 160 characters, compelling, includes 1–2 keywords, matches search intent.
+- Keywords: Exactly 10 unique keywords/phrases (lowercase, comma-separated within array). No repetition. No single generic words like 'blog', 'article', 'SEO'. Focus on specific topics, entities, and long-tail variations.
 
-CONTENT:
-{$content}
+Content to analyze:
+\"\"\"{$content}\"\"\"
 
-Return ONLY JSON now.
-";
+Generate only the JSON now.";
  $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
 
     $response = Http::withHeaders([
