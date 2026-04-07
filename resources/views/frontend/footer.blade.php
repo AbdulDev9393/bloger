@@ -610,18 +610,6 @@ $data = SocialMedia::first();
         <p class="footer-desc">
           Stay ahead of the curve with cutting-edge technology insights, AI updates, mobile reviews, and digital trends. Join our community of tech enthusiasts.
         </p>
-        
-        <!-- Optional: Site statistics -->
-        <div class="footer-stats" style="display: flex; gap: 20px; margin-top: 20px; font-size: 14px;">
-          <div>
-            <div style="font-weight: 600; color: #fff;">1000+</div>
-            <div style="color: #64748b;">Articles</div>
-          </div>
-          <div>
-            <div style="font-weight: 600; color: #fff;">50K+</div>
-            <div style="color: #64748b;">Readers</div>
-          </div>
-        </div>
       </div>
 
       <!-- Quick links -->
