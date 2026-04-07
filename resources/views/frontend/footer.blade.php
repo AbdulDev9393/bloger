@@ -704,7 +704,7 @@ $data = SocialMedia::first();
     <!-- Footer bottom -->
     <div class="footer-bottom">
       <div class="footer-copy">
-        © {{ date('Y') }} TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
+        © 2025 TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
       </div>
       
       <div class="footer-social">
