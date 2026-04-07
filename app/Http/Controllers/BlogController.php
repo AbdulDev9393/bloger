@@ -35,7 +35,7 @@ public function generateAISeo(Request $request)
         return response()->json(['error' => 'Blog not found'], 404);
     }
 
-    $content = strip_tags($blog->description);
+    $content = strip_tags($blog->Description);
 $prompt = "
 You are a senior SEO strategist and content optimization expert working for high-ranking websites.
 
