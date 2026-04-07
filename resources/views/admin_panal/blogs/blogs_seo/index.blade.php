@@ -303,21 +303,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (aiBtn) {
         aiBtn.addEventListener('click', function () {
 
-            const titleInput = document.getElementById('blog-title');
-            const title = titleInput ? titleInput.value.trim() : '';
+            // ✅ BLOG ID from Blade (IMPORTANT FIX)
+            const blogId = "{{ $blog->id }}";
 
-            if (!title) {
-                alert('Please enter blog title first');
+            if (!blogId) {
+                alert('Blog ID missing');
                 return;
             }
 
             aiBtn.disabled = true;
             aiBtn.innerHTML = '⏳ Generating...';
-
-            // Optional loader in editor
-            if (typeof editorInstance !== 'undefined') {
-                editorInstance.setData('<p>Generating content... ⏳</p>');
-            }
 
             fetch("{{ route('admin.ai.generate') }}", {
                 method: "POST",
@@ -325,29 +320,29 @@ document.addEventListener('DOMContentLoaded', function () {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ title: title })
+                body: JSON.stringify({
+                    blog_id: blogId   // ✅ sending ID instead of title
+                })
             })
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
 
                 console.log('AI Response:', data);
 
-                if (data.content) {
-                    editorInstance.setData(data.content);
-                } else {
-                    editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
+                if (typeof editorInstance !== 'undefined') {
+                    editorInstance.setData(data.content ?? '<p>No content ❌</p>');
                 }
 
-                if (data.title && titleInput) {
-                    titleInput.value = data.title;
+                if (data.title && document.getElementById('meta_title')) {
+                    document.getElementById('meta_title').value = data.title;
                 }
 
                 aiBtn.disabled = false;
                 aiBtn.innerHTML = '🤖 Generate Content (AI)';
 
             })
-            .catch(error => {
-                console.error(error);
+            .catch(err => {
+                console.error(err);
 
                 if (typeof editorInstance !== 'undefined') {
                     editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
@@ -361,7 +356,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-
 </script>
 
 @endsection
