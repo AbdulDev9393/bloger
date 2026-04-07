@@ -106,14 +106,7 @@ Blog Title: {$title}
 Instructions:
 - Write at least 1200+ words
 - Content must be 100% unique, human-like, and engaging
-- Topic must be disscuss clear human words 
-- Include real-world examples and real human example
-- Explain deeply
-- Use SEO best practices
-- Use key words in related this 
-- Include 'techblogs.site' in intro and conclusion
--approach by us traffic
--I write blog posts that are related to the USA.
+
 Formatting Rules:
 - Output MUST be clean HTML only
 - Use <h2>, <h3>, <p>, <strong>, <ul>, <li>
