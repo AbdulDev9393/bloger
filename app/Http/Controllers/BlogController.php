@@ -30,9 +30,62 @@ function index() {
 public function generateAISeo(Request $request)
 {
     $blog = Blog::find($request->blog_id);
-     dd($blog);
-   
-   
+
+    if (!$blog) {
+        return response()->json(['error' => 'Blog not found'], 404);
+    }
+
+    $content = strip_tags($blog->description);
+
+    $prompt = "
+You are an expert SEO assistant.
+
+Return ONLY JSON:
+{
+  \"title\": \"...\",
+  \"description\": \"...\",
+  \"keywords\": [\"...\"]
+}
+
+Rules:
+- Title max 60 characters
+- Description max 160 characters
+- Exactly 10 SEO keywords
+- No extra text
+
+Blog Content:
+{$content}
+";
+
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . 'YOUR_API_KEY',
+        'Content-Type'  => 'application/json',
+    ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model' => 'LongCat-Flash-Chat',
+        'messages' => [
+            ['role' => 'user', 'content' => $prompt]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 1200
+    ]);
+
+    $aiText = $response->json()['choices'][0]['message']['content'] ?? null;
+
+    // 🧠 JSON decode safe
+    $seo = json_decode($aiText, true);
+
+    if (!$seo) {
+        return response()->json([
+            'error' => 'Invalid AI response',
+            'raw' => $aiText
+        ]);
+    }
+
+    return response()->json([
+        'title' => $seo['title'] ?? '',
+        'description' => $seo['description'] ?? '',
+        'keywords' => implode(', ', $seo['keywords'] ?? [])
+    ]);
 }
 public function store(Request $request)
 {

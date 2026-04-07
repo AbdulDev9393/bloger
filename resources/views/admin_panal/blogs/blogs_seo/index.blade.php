@@ -325,22 +325,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             })
             .then(res => res.json())
-            .then(data => {
+           .then(data => {
 
-                console.log('AI Response:', data);
+                    console.log('AI Response:', data);
 
-                if (typeof editorInstance !== 'undefined') {
-                    editorInstance.setData(data.content ?? '<p>No content ❌</p>');
-                }
+                    // ✅ TITLE
+                    if (data.title) {
+                        document.getElementById('meta_title').value = data.title;
+                    }
 
-                if (data.title && document.getElementById('meta_title')) {
-                    document.getElementById('meta_title').value = data.title;
-                }
+                    // ✅ DESCRIPTION
+                    if (data.description) {
+                        document.getElementById('meta_description').value = data.description;
+                    }
 
-                aiBtn.disabled = false;
-                aiBtn.innerHTML = '🤖 Generate Content (AI)';
+                    // ✅ KEYWORDS
+                    if (data.keywords) {
+                        document.getElementById('meta_keywords').value = data.keywords;
+                    }
 
-            })
+                    aiBtn.disabled = false;
+                    aiBtn.innerHTML = '🤖 Generate SEO (AI)';
+
+                })
             .catch(err => {
                 console.error(err);
 
