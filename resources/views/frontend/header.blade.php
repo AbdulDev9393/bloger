@@ -656,6 +656,9 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
 
 <!-- Header -->
 <header class="site-header" id="site-header">
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu">
+    <i class="fas fa-bars"></i>
+</button>
     <div class="container">
         <div class="header-container">
             <!-- Logo -->
@@ -803,7 +806,9 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
     }
 
+  if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', openMobileMenu);
+}
     mobileMenuClose.addEventListener('click', closeMobileMenu);
     mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
