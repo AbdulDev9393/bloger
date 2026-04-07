@@ -132,8 +132,7 @@ Return ONLY HTML.
 ]);
 
 $contentHtml = $response->json()['choices'][0]['message']['content'];
-  $contentHtml = str_replace('—', ' ', $contentHtml);
-
+ 
     if (!$response->successful()) {
         return response()->json([
             'status' => false,
