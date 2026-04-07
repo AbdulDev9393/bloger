@@ -36,6 +36,7 @@ public function generateAISeo(Request $request)
     }
 
     $content = strip_tags($blog->description);
+    dd($content);
 $prompt = "
 You are a senior SEO strategist and content optimization expert working for high-ranking websites.
 
