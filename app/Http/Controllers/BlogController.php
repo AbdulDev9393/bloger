@@ -56,9 +56,10 @@ Rules:
 Blog Content:
 {$content}
 ";
+ $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
 
     $response = Http::withHeaders([
-        'Authorization' => 'Bearer ' . 'YOUR_API_KEY',
+      'Authorization' => 'Bearer ' . $activeKey,
         'Content-Type'  => 'application/json',
     ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
         'model' => 'LongCat-Flash-Chat',
