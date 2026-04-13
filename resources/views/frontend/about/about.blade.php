@@ -264,31 +264,6 @@
 @include('frontend.footer')
 
 <!-- additional schema for about page to boost trust (optional but useful) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About TechBlogs",
-  "description": "TechBlogs is founded by Muhammad Abdul, providing original, expert-written tech content including AI, gadget reviews, tutorials, and news. Built for readers worldwide.",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "Muhammad Abdul",
-    "jobTitle": "Founder & Tech Writer",
-    "url": "https://techblogs.site/about",
-    "sameAs": [
-      "https://techblogs.site/contact"
-    ]
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "TechBlogs",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://techblogs.site/favicon.ico"
-    }
-  }
-}
-</script>
 
 </body>
 </html>
