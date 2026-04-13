@@ -1,4 +1,12 @@
-@include('frontend.header')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @include('frontend.header')
+</head>
+<body>
+    
+
+
 <style>
 .blog-detail{
     width:100%;
@@ -251,3 +259,5 @@ h4{
 </section>
 
 @include('frontend.footer')
+</body>
+</html>
