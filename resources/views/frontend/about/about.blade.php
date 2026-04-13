@@ -246,7 +246,7 @@
 
             <div class="signature">
                 <span>✍️ <strong>Muhammad Abdul</strong> — Founder & Principal Writer</span>
-                <span>📍 Based in [Your City/Country] · Writing tech since 2022</span>
+                <span>📍 Based in US · Writing tech since 2022</span>
                 <span>📧 Reachable via <a href="{{route('frontend.contect')}}" style="color:#ff5500; text-decoration:underline;">Contact page</a></span>
             </div>
 
