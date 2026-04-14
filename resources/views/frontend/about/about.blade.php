@@ -138,25 +138,7 @@
         }
 
 
-        .signature {
-            font-size: 1rem;
-            font-style: normal;
-            margin-top: 35px;
-            border-top: 2px solid #e2e8f0;
-            padding-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            background: #ffffffb3;
-            border-radius: 40px;
-            padding: 20px 28px;
-        }
-
-        .signature strong {
-            color: #0a0e27;
-            font-size: 1.1rem;
-        }
+       
 
         .about-cta a {
             display: inline-flex;
@@ -307,13 +289,7 @@
                 Additionally, I will be collaborating with other expert tech writers occasionally (under my supervision) to bring more diverse perspectives while maintaining the same quality standard. Every guest post will be reviewed and edited by me personally.
             </p>
 
-            <div class="signature">
-                <span>✍️ <strong>Muhammad Abdul</strong> — Founder, Author, Editor-in-Chief</span>
-                <span>📍 Based in United States · Writing tech since 2021</span>
-                <span>📧 <a href="{{route('frontend.contect')}}" style="color:#ff5500; text-decoration:underline;">Contact me directly</a> (I reply within 24h)</span>
-                <span>🎓 BS Computer Science · Tech Enthusiast</span>
-            </div>
-
+           
             <p style="margin-top: 28px; font-size: 1rem; color: #2c3e50; background:#fefce8; padding: 15px 20px; border-radius: 28px;">
                 🙏 Thank you for stopping by TechBlogs. Whether you're here to solve a tech problem, learn something new, or simply explore — you're part of our growing family. If you have any feedback or topics you'd like me to cover, don't hesitate to reach out through the contact page. I read every single message personally.
             </p>
