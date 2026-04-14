@@ -44,7 +44,7 @@ public function cookiePolicy()
     // Trending / Oldest
     $trankBlogs = Blog::where('status', 'published')
                         ->oldest()
-                        ->take(4)
+                        ->take(6)
                         ->get();
 
     // Category Counts
