@@ -137,32 +137,6 @@
             font-size: 1.02rem;
         }
 
-        .stats-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: space-between;
-            margin: 35px 0;
-            background: #f1f5fe;
-            border-radius: 32px;
-            padding: 28px 20px;
-        }
-        .stat-item {
-            flex: 1;
-            text-align: center;
-            min-width: 140px;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ff5500;
-            display: block;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            color: #1e293b;
-            font-weight: 500;
-        }
 
         .signature {
             font-size: 1rem;
@@ -218,10 +192,7 @@
             .about-content ul {
                 grid-template-columns: 1fr;
             }
-            .stats-grid {
-                flex-direction: column;
-                gap: 15px;
-            }
+      
         }
 
         .about-content p, .about-content li {
@@ -300,12 +271,7 @@
                 I don’t use clickbait titles or false promises. My goal is to build a long-term resource that you can trust, whether you need to fix a printer error, understand blockchain basics, or choose the right laptop under $1000. TechBlogs is my full-time passion, and I treat every post like a mini research project.
             </p>
 
-            <div class="stats-grid">
-                <div class="stat-item"><span class="stat-number">250+</span><span class="stat-label">Original Articles</span></div>
-                <div class="stat-item"><span class="stat-number">4+ Years</span><span class="stat-label">Consistent Writing</span></div>
-                <div class="stat-item"><span class="stat-number">50k+</span><span class="stat-label">Monthly Readers</span></div>
-                <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Human-Curated</span></div>
-            </div>
+           
 
             <h2>✅ How TechBlogs Aligns With Google AdSense Policies</h2>
             <p>
