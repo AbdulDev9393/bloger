@@ -532,7 +532,7 @@ Location: Pakistan Layyah</p>
                 <li><strong>Advertising Cookies:</strong>We use Google AdSense to serve ads. Google may use cookies (such as the DoubleClick cookie) to show ads to users based on their visits to this and other websites.
 
 Users may opt out of personalized advertising by visiting:
-https://www.google.com/settings/ads</li>
+<a href="https://www.google.com/settings/ads">https://www.google.com/settings/ads</a></li>
             </ul>
 
             <h2><i class="fas fa-tasks"></i> 3. How We Use Your Information</h2>
