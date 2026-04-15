@@ -490,7 +490,8 @@
 
         <div class="content-section">
             <p>At <strong>TechBlogs.site</strong>, we are committed to protecting your privacy and being transparent about how we handle your data. This Privacy Policy applies to all visitors, users, and others who access our website.</p>
-
+            <p>This website is owned and operated by Muhammad Abdul techblogs.site 
+Location: Pakistan Layyah</p>
             <h2><i class="fas fa-info-circle"></i> 1. Information We Collect</h2>
             <p>We collect several types of information to provide and improve our services:</p>
 
@@ -514,7 +515,7 @@
                     <li>Referring website or search query</li>
                 </ul>
             </div>
-
+            
             <h2><i class="fas fa-cookie-bite"></i> 2. Cookies and Tracking Technologies</h2>
             <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze website traffic.</p>
 
@@ -528,7 +529,10 @@
                 <li><strong>Essential Cookies:</strong> Required for basic website functionality</li>
                 <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site</li>
                 <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
-                <li><strong>Advertising Cookies:</strong> Deliver relevant advertisements (if applicable)</li>
+                <li><strong>Advertising Cookies:</strong>We use Google AdSense to serve ads. Google may use cookies (such as the DoubleClick cookie) to show ads to users based on their visits to this and other websites.
+
+Users may opt out of personalized advertising by visiting:
+https://www.google.com/settings/ads</li>
             </ul>
 
             <h2><i class="fas fa-tasks"></i> 3. How We Use Your Information</h2>
