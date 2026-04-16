@@ -641,8 +641,8 @@ use Illuminate\Support\Str;
                 <div class="review-card highlight">
                     <div class="review-badge">Featured Review</div>
                     <div class="review-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">5.0</span>
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.5</span>
                     </div>
                     <p class="review-text">"Amazing content every single day! The morning blog has become part of my daily routine. The variety of topics keeps things fresh and engaging. Highly recommended!"</p>
                     <div class="reviewer-info">
