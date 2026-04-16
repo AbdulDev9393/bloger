@@ -647,7 +647,7 @@ use Illuminate\Support\Str;
                     <p class="review-text">"Amazing content every single day! The morning blog has become part of my daily routine. The variety of topics keeps things fresh and engaging. Highly recommended!"</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Emily+R.&background=00aa55&color=fff&size=50" alt="Emily R."></div>
-                        <div class="reviewer-details"><h4>Aaron Bennett Nahyan</h4><span class="reviewer-role">Content Creator</span></div>
+                        <div class="reviewer-details"><h4>Aaron Bennett</h4><span class="reviewer-role">Content Creator</span></div>
                     </div>
                 </div>
             </div>
