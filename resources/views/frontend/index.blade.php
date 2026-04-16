@@ -624,7 +624,7 @@ use Illuminate\Support\Str;
                     <p class="review-text">"I love the daily tips and insights! The content is consistently valuable and helps me stay updated with industry trends. The writing style makes complex topics easy to understand."</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Sarah+J.&background=ff7700&color=fff&size=50" alt="Sarah J."></div>
-                        <div class="reviewer-details"><h4>Ryan Mitchell</h4><span class="reviewer-role">Marketing Professional</span></div>
+                        <div class="reviewer-details"><h4>Ryan Mitchell</h4></div>
                     </div>
                 </div>
                 <div class="review-card">
@@ -635,7 +635,7 @@ use Illuminate\Support\Str;
                     <p class="review-text">"The articles are incredibly informative and well-researched. I've implemented several strategies from your tech blogs that have saved our team hours of work each week!"</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=David+K.&background=0066cc&color=fff&size=50" alt="David K."></div>
-                        <div class="reviewer-details"><h4>Zachary Reed</h4><span class="reviewer-role">Tech Lead</span></div>
+                        <div class="reviewer-details"><h4>Zachary Reed</h4></div>
                     </div>
                 </div>
                 <div class="review-card highlight">
@@ -647,7 +647,7 @@ use Illuminate\Support\Str;
                     <p class="review-text">"Amazing content every single day! The morning blog has become part of my daily routine. The variety of topics keeps things fresh and engaging. Highly recommended!"</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Emily+R.&background=00aa55&color=fff&size=50" alt="Emily R."></div>
-                        <div class="reviewer-details"><h4>Aaron Bennett</h4><span class="reviewer-role">Content Creator</span></div>
+                        <div class="reviewer-details"><h4>Aaron Bennett</h4></div>
                     </div>
                 </div>
             </div>
