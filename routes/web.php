@@ -122,3 +122,4 @@ Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
 
+Route::get('/robots.txt', [FrontendController::class, 'robo']);

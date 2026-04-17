@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Cache;
 class FrontendController extends Controller
 {
     //
-
+ function robo(){
+    return "sdsd";
+ }
     public function privacyPolicy()
 {
     return view('frontend.privacy');
