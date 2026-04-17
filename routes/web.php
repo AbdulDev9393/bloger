@@ -121,3 +121,11 @@ Route::get('/blog/{slug}', [BlogController::class, 'blogView'])->name('blogs.vie
 Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
+
+
+Route::get('/robots.txt', function () {
+    return response(
+        "User-agent: *\nDisallow:\n\nSitemap: https://techblogs.site/sitemap.xml",
+        200
+    )->header('Content-Type', 'text/plain');
+});
