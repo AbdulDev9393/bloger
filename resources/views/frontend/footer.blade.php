@@ -35,7 +35,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
       radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
@@ -327,19 +327,19 @@
   .footer-social a[href*="facebook"] {
     --hover-color: #1877f2;
   }
-  
+
   .footer-social a[href*="twitter"] {
     --hover-color: #1da1f2;
   }
-  
+
   .footer-social a[href*="instagram"] {
     --hover-color: #e4405f;
   }
-  
+
   .footer-social a[href*="youtube"] {
     --hover-color: #ff0000;
   }
-  
+
   .footer-social a[href*="medium"] {
     --hover-color: #00ab6c;
   }
@@ -433,12 +433,12 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 40px 30px;
     }
-    
+
     .footer-brand {
       grid-column: span 2;
       text-align: center;
     }
-    
+
     .footer-logo {
       justify-content: center;
     }
@@ -448,34 +448,34 @@
     footer {
       padding: 50px 20px 30px;
     }
-    
+
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 40px;
     }
-    
+
     .footer-brand {
       grid-column: span 1;
       text-align: left;
     }
-    
+
     .footer-logo {
       justify-content: flex-start;
     }
-    
+
     .footer-bottom {
       flex-direction: column;
       text-align: center;
       gap: 20px;
       padding-top: 30px;
     }
-    
+
     .footer-legal {
       justify-content: center;
       flex-wrap: wrap;
       gap: 15px;
     }
-    
+
     .back-to-top {
       width: 48px;
       height: 48px;
@@ -489,43 +489,43 @@
     footer {
       padding: 40px 15px 25px;
     }
-    
+
     .footer-logo {
       flex-direction: row;
       text-align: left;
       gap: 12px;
     }
-    
+
     .footer-logo img {
       width: 40px;
       height: 40px;
     }
-    
+
     .footer-logo span {
       font-size: 20px;
     }
-    
+
     .footer-section h3 {
       font-size: 16px;
       margin-bottom: 20px;
     }
-    
+
     .footer-social a {
       width: 40px;
       height: 40px;
       font-size: 16px;
     }
-    
+
     .newsletter-input input {
       padding: 14px 20px;
       font-size: 14px;
     }
-    
+
     .newsletter-input button {
       padding: 12px 20px;
       font-size: 14px;
     }
-    
+
     .footer-copy {
       font-size: 13px;
     }
@@ -879,8 +879,8 @@ $data = SocialMedia::first();
                 We value your privacy
             </h3>
             <p>
-                We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. 
-                By clicking "Accept All", you consent to our use of cookies. 
+                We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic.
+                By clicking "Accept All", you consent to our use of cookies.
                 <a href="{{ route('frontend.cookie') }}">Learn more</a>
             </p>
         </div>
@@ -905,7 +905,7 @@ $data = SocialMedia::first();
             <i class="fa-solid fa-cookie"></i>
             Privacy Preferences
         </h3>
-        
+
         <div class="cookie-option">
             <div class="option-header">
                 <label>✅ Essential Cookies (Always Active)</label>
@@ -913,7 +913,7 @@ $data = SocialMedia::first();
             </div>
             <p class="option-desc">These cookies are necessary for the website to function properly. They cannot be disabled.</p>
         </div>
-        
+
         <div class="cookie-option">
             <div class="option-header">
                 <label for="analyticsCookies">📊 Analytics Cookies</label>
@@ -924,7 +924,7 @@ $data = SocialMedia::first();
             </div>
             <p class="option-desc">Help us understand how visitors interact with our website (Google Analytics, etc.)</p>
         </div>
-        
+
         <div class="cookie-option">
             <div class="option-header">
                 <label for="marketingCookies">🎯 Marketing & Ad Cookies</label>
@@ -935,7 +935,7 @@ $data = SocialMedia::first();
             </div>
             <p class="option-desc">Used to deliver relevant ads (Google AdSense) and track ad performance.</p>
         </div>
-        
+
         <div class="cookie-option">
             <div class="option-header">
                 <label for="functionalCookies">⚙️ Functional Cookies</label>
@@ -946,7 +946,7 @@ $data = SocialMedia::first();
             </div>
             <p class="option-desc">Enhance functionality like remembering your preferences and settings.</p>
         </div>
-        
+
         <div class="settings-actions">
             <button class="settings-close" id="closeSettingsBtn">Cancel</button>
             <button class="settings-save" id="saveSettingsBtn">Save Preferences</button>
@@ -958,8 +958,8 @@ $data = SocialMedia::first();
       <!-- Brand section -->
       <div class="footer-brand">
         <a href="{{ route('frontend.index') }}" class="footer-logo">
-          <img 
-            src="https://techblogs.site/favicon.ico" 
+          <img
+            src="https://techblogs.site/favicon.ico"
             alt="TechBlogs Logo"
             width="50"
             height="50"
@@ -1000,20 +1000,20 @@ $data = SocialMedia::first();
             <i class="fa-solid fa-shield-alt"></i>
             <span>Privacy Policy</span>
           </a>
-      
+
         </div>
       </div>
 
       <!-- Quick links -->
       <div class="footer-section">
-       
+
         <div class="footer-links">
-          
-          <a href="{{ route('frontend.cookie') }}">
+
+          <a href="https://www.techblogs.site/cookie-policy">
             <i class="fa-solid fa-shield-alt"></i>
                                       <span>Cookie Policy</span>
           </a>
-      
+
         </div>
       </div>
 
@@ -1022,14 +1022,14 @@ $data = SocialMedia::first();
         <h3>Stay Updated</h3>
         <div class="newsletter-form">
           <p>Get the latest tech news and insights delivered directly to your inbox.</p>
-          
+
           <div class="newsletter-input">
             <form action="{{ route('admin.emails.store') }}" method="POST" id="newsletterForm">
               @csrf
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="Enter your email address" 
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email address"
                 id="newsletterEmail"
                 required
                 aria-label="Email address"
@@ -1054,16 +1054,16 @@ $data = SocialMedia::first();
       <div class="footer-copy">
         © 2025 TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
       </div>
-      
+
       <div class="footer-social">
-        <a href="{{ optional($data)->facebook ?? '#' }}" 
+        <a href="{{ optional($data)->facebook ?? '#' }}"
            title="Facebook"
            aria-label="Facebook"
            target="_blank"
            rel="noopener noreferrer">
           <i class="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="{{ optional($data)->twitter ?? '#' }}" 
+        <a href="{{ optional($data)->twitter ?? '#' }}"
            title="Twitter"
            aria-label="Twitter"
            target="_blank"
@@ -1071,21 +1071,21 @@ $data = SocialMedia::first();
           <i class="fa-brands fa-twitter"></i>
         </a>
 
-        <a href="{{ optional($data)->instagram ?? '#' }}" 
+        <a href="{{ optional($data)->instagram ?? '#' }}"
            title="Instagram"
            aria-label="Instagram"
            target="_blank"
            rel="noopener noreferrer">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="{{ optional($data)->medium ?? '#' }}" 
+        <a href="{{ optional($data)->medium ?? '#' }}"
            title="Medium"
            aria-label="Medium"
            target="_blank"
            rel="noopener noreferrer">
           <i class="fa-brands fa-medium"></i>
         </a>
-        <a href="{{ optional($data)->youtube ?? '#' }}" 
+        <a href="{{ optional($data)->youtube ?? '#' }}"
            title="YouTube"
            aria-label="YouTube"
            target="_blank"
@@ -1093,12 +1093,12 @@ $data = SocialMedia::first();
           <i class="fa-brands fa-youtube"></i>
         </a>
       </div>
-      
+
       <div class="footer-legal">
         <a href="{{ route('frontend.terms-conditions') }}">Terms</a>
         <a href="{{ route('frontend.praivacy-policy') }}">Privacy</a>
         <a href="{{ route('frontend.contect') }}">Contact</a>
-       
+
       </div>
     </div>
   </div>
@@ -1107,7 +1107,7 @@ $data = SocialMedia::first();
 <script>
   // Back to top functionality
   const backToTopBtn = document.getElementById('backToTop');
-  
+
   // Show/hide button on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
@@ -1116,7 +1116,7 @@ $data = SocialMedia::first();
       backToTopBtn.classList.remove('visible');
     }
   });
-  
+
   // Scroll to top on click
   backToTopBtn.addEventListener('click', () => {
     window.scrollTo({
@@ -1124,43 +1124,43 @@ $data = SocialMedia::first();
       behavior: 'smooth'
     });
   });
-  
+
   // Enhanced newsletter form handling
   const newsletterForm = document.getElementById('newsletterForm');
   const newsletterMessage = document.getElementById('newsletterMessage');
   const newsletterSubmit = document.getElementById('newsletterSubmit');
-  
+
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const emailInput = document.getElementById('newsletterEmail');
       const email = emailInput.value.trim();
-      
+
       // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         showMessage('Please enter a valid email address.', 'error');
         return;
       }
-      
+
       // Show loading state
       newsletterSubmit.disabled = true;
       newsletterSubmit.classList.add('loading');
       newsletterSubmit.innerHTML = '<span>Subscribing...</span>';
-      
+
       try {
         // Simulate API call (replace with actual fetch)
         await new Promise(resolve => setTimeout(resolve, 1500));
-        
+
         // Submit form
         newsletterForm.submit();
-        
-        
+
+
         emailInput.value = '';
-        
+
       } catch (error) {
-       
+
       } finally {
         // Reset button state
         setTimeout(() => {
@@ -1171,36 +1171,36 @@ $data = SocialMedia::first();
       }
     });
   }
-  
+
   function showMessage(text, type) {
     newsletterMessage.textContent = text;
     newsletterMessage.className = 'newsletter-message ' + type;
     newsletterMessage.style.display = 'block';
-    
+
     // Hide message after 5 seconds
     setTimeout(() => {
       newsletterMessage.style.display = 'none';
     }, 5000);
   }
-  
+
   // Animate social icons on hover
   document.querySelectorAll('.footer-social a').forEach(icon => {
     icon.addEventListener('mouseenter', (e) => {
       const rect = e.target.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       icon.style.setProperty('--x', `${x}px`);
       icon.style.setProperty('--y', `${y}px`);
     });
   });
-  
+
   // Add intersection observer for fade-in animations
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1209,7 +1209,7 @@ $data = SocialMedia::first();
       }
     });
   }, observerOptions);
-  
+
   // Observe footer sections for animation
   document.querySelectorAll('.footer-section, .footer-brand').forEach(section => {
     section.style.opacity = '0';
@@ -1221,7 +1221,7 @@ $data = SocialMedia::first();
 (function() {
     const COOKIE_CONSENT_KEY = 'techblogs_cookie_consent';
     const CONSENT_VERSION = '1.0';
-    
+
     // DOM Elements
     const cookieBanner = document.getElementById('cookieConsent');
     const acceptBtn = document.getElementById('acceptCookiesBtn');
@@ -1230,12 +1230,12 @@ $data = SocialMedia::first();
     const settingsPanel = document.getElementById('cookieSettingsPanel');
     const closeSettingsBtn = document.getElementById('closeSettingsBtn');
     const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-    
+
     // Checkbox elements
     const analyticsCheckbox = document.getElementById('analyticsCookies');
     const marketingCheckbox = document.getElementById('marketingCookies');
     const functionalCheckbox = document.getElementById('functionalCookies');
-    
+
     // Helper: Set cookie with expiry (1 year)
     function setCookie(name, value, days = 365) {
         const date = new Date();
@@ -1243,7 +1243,7 @@ $data = SocialMedia::first();
         const expires = "; expires=" + date.toUTCString();
         document.cookie = name + "=" + JSON.stringify(value) + expires + "; path=/; SameSite=Lax";
     }
-    
+
     // Helper: Get cookie
     function getCookie(name) {
         const nameEQ = name + "=";
@@ -1261,23 +1261,23 @@ $data = SocialMedia::first();
         }
         return null;
     }
-    
+
     // Apply consent settings (Enable/Disable actual scripts)
     function applyConsent(consent) {
         console.log('✅ Consent applied:', consent);
-        
+
         // Google Analytics (Example) - Enable/Disable based on analytics consent
         if (typeof gtag !== 'undefined') {
             window['ga-disable-UA-XXXXX-Y'] = !consent.analytics;
         }
-        
+
         // For AdSense: We store consent in localStorage so AdSense scripts can read it
         localStorage.setItem('adsense_consent_granted', consent.marketing ? 'true' : 'false');
         localStorage.setItem('cookie_consent_preferences', JSON.stringify(consent));
-        
+
         // Dispatch custom event so other scripts can listen
         window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
-        
+
         // If marketing cookies are rejected, we can optionally disable AdSense personalization
         if (!consent.marketing) {
             // Google AdSense non-personalized ads flag
@@ -1285,7 +1285,7 @@ $data = SocialMedia::first();
             console.log('⚠️ Non-personalized ads mode (AdSense compliant)');
         }
     }
-    
+
     // Load user's previous consent
     function loadExistingConsent() {
         const savedConsent = getCookie(COOKIE_CONSENT_KEY);
@@ -1294,7 +1294,7 @@ $data = SocialMedia::first();
         }
         return null;
     }
-    
+
     // Save consent after user choice
     function saveConsent(preferences) {
         const consentData = {
@@ -1304,13 +1304,13 @@ $data = SocialMedia::first();
         };
         setCookie(COOKIE_CONSENT_KEY, consentData, 365);
         applyConsent(preferences);
-        
+
         // Hide banner after saving consent
         if (cookieBanner) {
             cookieBanner.classList.remove('show');
         }
     }
-    
+
     // Accept All Cookies
     function acceptAll() {
         const preferences = {
@@ -1321,7 +1321,7 @@ $data = SocialMedia::first();
         };
         saveConsent(preferences);
     }
-    
+
     // Reject All Non-Essential Cookies
     function rejectAll() {
         const preferences = {
@@ -1336,7 +1336,7 @@ $data = SocialMedia::first();
         if (functionalCheckbox) functionalCheckbox.checked = false;
         saveConsent(preferences);
     }
-    
+
     // Save custom preferences from settings modal
     function saveCustomPreferences() {
         const preferences = {
@@ -1348,7 +1348,7 @@ $data = SocialMedia::first();
         saveConsent(preferences);
         settingsPanel.classList.remove('show');
     }
-    
+
     // Show settings panel
     function showSettings() {
         // Load current settings from cookie if available
@@ -1361,16 +1361,16 @@ $data = SocialMedia::first();
         }
         settingsPanel.classList.add('show');
     }
-    
+
     // Close settings panel
     function closeSettings() {
         settingsPanel.classList.remove('show');
     }
-    
+
     // Initialize: Check if consent already given
     function initCookieConsent() {
         const existingPrefs = loadExistingConsent();
-        
+
         if (existingPrefs) {
             // Consent already given, apply preferences and hide banner
             applyConsent(existingPrefs);
@@ -1389,14 +1389,14 @@ $data = SocialMedia::first();
             };
             applyConsent(defaultPrefs); // Temporarily disable all non-essential until choice
         }
-        
+
         // Add event listeners for buttons
         if (acceptBtn) acceptBtn.addEventListener('click', acceptAll);
         if (rejectBtn) rejectBtn.addEventListener('click', rejectAll);
         if (customizeBtn) customizeBtn.addEventListener('click', showSettings);
         if (closeSettingsBtn) closeSettingsBtn.addEventListener('click', closeSettings);
         if (saveSettingsBtn) saveSettingsBtn.addEventListener('click', saveCustomPreferences);
-        
+
         // Close modal if clicking outside content
         if (settingsPanel) {
             settingsPanel.addEventListener('click', function(e) {
@@ -1405,13 +1405,13 @@ $data = SocialMedia::first();
                 }
             });
         }
-        
+
         // For AdSense auto ads compliance: notify Google
         if (typeof window.adsbygoogle !== 'undefined') {
             console.log('AdSense detected - consent ready');
         }
     }
-    
+
     // Run when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initCookieConsent);

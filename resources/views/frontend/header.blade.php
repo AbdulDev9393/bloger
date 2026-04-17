@@ -43,7 +43,7 @@ $default_schema = [
     "description" => "Stay updated with the latest technology trends, tips, gadgets, software reviews, and insightful tech articles on TechBlogs.",
     "mainEntityOfPage" => [
         "@type" => "WebPage",
-        "@id" => url()->current()  
+        "@id" => url()->current()
     ]
 ];
 $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
@@ -116,13 +116,13 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         --border-color: #e2e8f0;
         --success-color: #10b981;
         --error-color: #ef4444;
-        
+
         /* Shadows */
         --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        
+
         /* Transitions */
         --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
         --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -462,7 +462,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         background-color: rgba(37, 99, 235, 0.05);
     }
 
-    
+
 
     .mobile-menu-overlay {
         position: fixed;
@@ -597,19 +597,19 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         .container {
             padding: 0 1rem;
         }
-        
+
         h1 {
             font-size: 2rem;
         }
-        
+
         h2 {
             font-size: 1.75rem;
         }
-        
+
         .hero-title {
             font-size: 2.25rem;
         }
-        
+
         .search-container {
             display: none;
         }
@@ -619,11 +619,11 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         .logo-text {
             font-size: 1.25rem;
         }
-        
+
         .hero-title {
             font-size: 1.75rem;
         }
-        
+
         .hero-description {
             font-size: 1rem;
         }
@@ -707,17 +707,17 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('frontend.cookie') }}" class="nav-link {{ request()->routeIs('frontend.cookie') ? 'active' : '' }}">
+                        <a href="https://www.techblogs.site/cookie-policy" class="nav-link {{ request()->routeIs('frontend.cookie') ? 'active' : '' }}">
                             <i class="fas fa-cookie-bite"></i>
                             <span>Cookie Policy</span>
                         </a>
                     </li>
-                  
-                   
+
+
                 </ul>
             </nav>
 
-            
+
         </div>
     </div>
 </header>
@@ -734,7 +734,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
             <i class="fas fa-times"></i>
         </button>
     </div>
-    
+
     <ul class="mobile-nav-links">
         <li>
             <a href="{{ route('frontend.index') }}" class="mobile-nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}">
