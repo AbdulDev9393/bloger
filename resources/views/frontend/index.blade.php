@@ -561,7 +561,6 @@ use Illuminate\Support\Str;
             </h1>
         <div class="hero-container">
             <div class="hero-content">
-                <h2>{{ $latestBlog->name }}</h2>
                 <p>{!! Str::limit($latestBlog->Description, 1200) !!}</p>
                 <a href="{{ route('blogs.view', ['slug' => Str::slug($latestBlog->slug)]) }}" class="btn-readmore">
                     Read More about "{{ $latestBlog->name }}" →
