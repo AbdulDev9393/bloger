@@ -24,7 +24,44 @@ use Illuminate\Support\Str;
         line-height: 1.5;
         scroll-behavior: smooth;
     }
+.hero-main-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
 
+    /* Gradient Text */
+    background: linear-gradient(135deg, #4e83fa, #58c918);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    letter-spacing: -1px;
+
+    /* Better rendering */
+    text-wrap: balance;
+
+    /* Smooth animation */
+    animation: fadeUp 0.7s ease;
+}
+
+/* Optional highlight word */
+.hero-main-title span {
+    background: linear-gradient(135deg, #ff5500, #ff7700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     /* ===== TYPOGRAPHY ===== */
     h1, h2, h3, h4 {
         font-weight: 700;
@@ -516,9 +553,12 @@ use Illuminate\Support\Str;
 <main>
     <!-- HERO - First Blog -->
     <section class="hero">
+       <h1 class="hero-main-title">
+                Tech Blogs & <span>Technology Insights</span>
+            </h1>
         <div class="hero-container">
             <div class="hero-content">
-                <h1>{{ $latestBlog->name }}</h1>
+                <h2>{{ $latestBlog->name }}</h2>
                 @php
                     $desc = $latestBlog->Description;
                     $desc = preg_replace('/<(\/)?h[1-6][^>]*>/i', '<$1p>', $desc);
