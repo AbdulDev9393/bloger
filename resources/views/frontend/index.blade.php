@@ -562,13 +562,7 @@ use Illuminate\Support\Str;
         <div class="hero-container">
             <div class="hero-content">
                 <h2>{{ $latestBlog->name }}</h2>
-                @php
-                    $desc = $latestBlog->Description;
-                    $desc = preg_replace('/<(\/)?h[1-6][^>]*>/i', '<$1p>', $desc);
-                    $desc = preg_replace('/<(\/)?div[^>]*>/i', '<$1p>', $desc);
-                    $desc = strip_tags($desc, '<p><b><strong><i><em>');
-                @endphp
-                <p>{!! Str::limit($desc, 1200) !!}</p>
+                <p>{!! Str::limit($latestBlog->Description, 1200) !!}</p>
                 <a href="{{ route('blogs.view', ['slug' => Str::slug($latestBlog->slug)]) }}" class="btn-readmore">
                     Read More about "{{ $latestBlog->name }}" →
                 </a>
