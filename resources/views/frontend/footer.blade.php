@@ -447,7 +447,9 @@
     footer {
       padding: 50px 20px 30px;
     }
-
+    h2 {
+        font-size: 20px;
+    }
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 40px;
