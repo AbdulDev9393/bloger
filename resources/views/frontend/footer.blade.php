@@ -880,7 +880,7 @@ $data = SocialMedia::first();
             <p>
                 We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic.
                 By clicking "Accept All", you consent to our use of cookies.
-                <a href="{{ route('frontend.cookie') }}">Learn more</a>
+               <a href="{{ route('frontend.cookie') }}">Read our Cookie Policy</a>
             </p>
         </div>
         <div class="cookie-buttons">
