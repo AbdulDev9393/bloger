@@ -580,7 +580,6 @@ use Illuminate\Support\Str;
                 <img src="{{ asset($secondLatestBlog->Thumbnail_Image) }}" alt="{{ $secondLatestBlog->name }}" width="1200" height="720" loading="eager">
             </div>
             <div class="hero-content">
-                <h2>{{ $secondLatestBlog->name }}</h2>
                 <p>{!! Str::limit($secondLatestBlog->Description, 1200) !!}</p>
                 <a href="{{ route('blogs.view', ['slug' => Str::slug($secondLatestBlog->slug)]) }}" class="btn-readmore">
                     Read More about {{ Str::limit(strip_tags($secondLatestBlog->name ?? ''), 200) }} →
