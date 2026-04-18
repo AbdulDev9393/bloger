@@ -547,6 +547,9 @@ use Illuminate\Support\Str;
             width: 100%;
             max-width: 280px;
         }
+        h2 {
+        font-size: 20px;
+    }
     }
 </style>
 
