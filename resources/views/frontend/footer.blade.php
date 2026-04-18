@@ -93,16 +93,15 @@
     box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
   }
 
-  .footer-logo span {
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: -0.5px;
-  }
+.footer-logo span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b; /* solid dark color for light footer */
+  background: none; /* remove gradient */
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
 
   .footer-desc {
     font-size: 15px;
