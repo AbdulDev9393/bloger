@@ -677,11 +677,7 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.cookie-btn-reject:hover {
-    background: rgba(239, 68, 68, 0.2);
-    color: #fff;
-    border-color: rgba(239, 68, 68, 0.4);
-}
+
 
 .cookie-btn-settings {
     background: transparent;
@@ -689,10 +685,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.cookie-btn-settings:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-}
+
 
 /* Settings Panel (Modal) */
 .cookie-settings-panel {
