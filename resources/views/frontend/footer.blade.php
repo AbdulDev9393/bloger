@@ -673,7 +673,7 @@
 
 .cookie-btn-reject {
     background: rgba(255, 255, 255, 0.08);
-    color: #cbd5e1;
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -685,7 +685,7 @@
 
 .cookie-btn-settings {
     background: transparent;
-    color: #94a3b8;
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
