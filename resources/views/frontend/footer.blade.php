@@ -1,6 +1,6 @@
 <style>
   footer {
-    background: wheat;
+    background: white;
     color: #fff;
     padding: 70px 20px 40px;
     margin-top: auto;
