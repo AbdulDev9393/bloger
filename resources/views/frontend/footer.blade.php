@@ -17,7 +17,7 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #2563eb, #10b981, #f59e0b, #8b5cf6);
+   background: linear-gradient(90deg, #2563eb, #10b981, #f59e0b, #8b5cf6);
     background-size: 400% 100%;
     animation: gradientShift 8s ease infinite;
   }
@@ -106,7 +106,7 @@
 
   .footer-desc {
     font-size: 15px;
-    color: #94a3b8;
+      color: #475569;
     line-height: 1.7;
     margin-bottom: 25px;
   }
@@ -115,7 +115,7 @@
   .footer-section h3 {
     font-size: 18px;
     margin-bottom: 25px;
-    color: #fff;
+   color: #0f172a;
     position: relative;
     padding-bottom: 12px;
     font-weight: 600;
@@ -140,7 +140,7 @@
   }
 
   .footer-links a {
-    color: #94a3b8;
+     color: #475569;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -165,7 +165,7 @@
   }
 
   .footer-links a:hover {
-    color: #fff;
+    color: #2563eb;
     transform: translateX(8px);
   }
 
@@ -211,9 +211,9 @@
     width: 100%;
     padding: 16px 24px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
+     border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #0f172a;
     font-size: 15px;
     outline: none;
     transition: all 0.3s ease;
@@ -227,7 +227,7 @@
   }
 
   .newsletter-input input::placeholder {
-    color: #64748b;
+    color: #94a3b8;
   }
 
   .newsletter-input button {
@@ -287,13 +287,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    color: #94a3b8;
+    background: #f1f5f9;
+      color: #475569;
     font-size: 18px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+     border: 1px solid #e2e8f0;
   }
 
   .footer-social a::before {
@@ -309,7 +309,7 @@
   }
 
   .footer-social a:hover {
-    color: #fff;
+   color: #fff;
     transform: translateY(-5px);
     border-color: transparent;
   }
@@ -368,7 +368,7 @@
   }
 
   .footer-legal a {
-    color: #94a3b8;
+     color: #64748b;
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -377,7 +377,7 @@
   }
 
   .footer-legal a:hover {
-    color: #fff;
+    color: #2563eb;
     background: rgba(255, 255, 255, 0.05);
   }
 
@@ -584,9 +584,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
+    background: #ffffff;
     backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(37, 99, 235, 0.3);
+    border-top: 1px solid #e2e8f0;
     padding: 20px;
     z-index: 10000;
     transform: translateY(100%);
@@ -614,7 +614,7 @@
 }
 
 .cookie-text h3 {
-    color: #fff;
+     color: #0f172a;
     font-size: 1.2rem;
     margin-bottom: 8px;
     display: flex;
@@ -628,7 +628,7 @@
 }
 
 .cookie-text p {
-    color: #94a3b8;
+    color: #475569;
     font-size: 0.85rem;
     line-height: 1.5;
     margin: 0;
