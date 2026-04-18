@@ -1,6 +1,6 @@
 <style>
   footer {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
+    background: wheat;
     color: #fff;
     padding: 70px 20px 40px;
     margin-top: auto;
