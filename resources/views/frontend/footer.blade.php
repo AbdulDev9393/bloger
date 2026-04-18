@@ -1,7 +1,7 @@
 <style>
   footer {
      background: #ffffff;
-    color: black;
+    color: #1e293b;
     padding: 70px 20px 40px;
     margin-top: auto;
     position: relative;
