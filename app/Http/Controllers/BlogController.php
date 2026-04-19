@@ -244,7 +244,7 @@ SEO (natural, not robotic):
 - Use the core keyword from {$title} within the first 60 words
 - Mention techblogs.site once in the intro and once in the conclusion — naturally, not forced
 - Use related terms naturally (don't repeat the exact title phrase more than 4 times total)
-
+- please  not use ai patterns  ok .
 ---
 
 LENGTH & STRUCTURE:
@@ -261,6 +261,7 @@ FORMAT:
 Return clean HTML only: <h2> <h3> <p> <strong> <ul> <li> <ol>
 No markdown. No code fences. No <html> or <body> tags.
 Write the full article from the first word to the last. Do not stop early.
+
 ";
 
     $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
