@@ -8,8 +8,7 @@
     </script>
 @endif
 @if(!empty($meta_keywords))
-
-<meta name="keywords" content="{{ $meta_keywords }}">
+<meta name="keywords" content="{{ $meta_keywords ?? 'tech blogs, technology insights, latest tech news, AI news, artificial intelligence, AI in healthcare, AI tools 2026, software development, web development, Laravel tutorials, PHP development, programming tips, coding best practices, SEO strategies, website security, tech trends USA, mobile technology news, gadget reviews, developer guides, cloud computing, API integration, machine learning, future of AI, tech tutorials, coding for beginners, freelance development, earn money online tech, startup technology, innovation news' }}">
 @endif
 @if(!empty($breadcrumb_schema_encoded))
     <script type="application/ld+json">
