@@ -8,13 +8,13 @@
 
 
 <style>
-    a {
+  a {
     text-decoration: underline;
-    font-weight: 500;
 }
 
 a:hover {
     text-decoration: none;
+    color: var(--primary-dark);
 }
 .blog-detail{
     width:100%;
