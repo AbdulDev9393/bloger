@@ -24,50 +24,50 @@ public function cookiePolicy()
     $meta_desc = "Learn how TechBlogs uses cookies to improve your browsing experience. Understand what cookies are, how we use them, and how you can manage your preferences.";
     return view('frontend.cookie',compact('meta_title','meta_desc'));
 }
+// In your controller
 function index(){
-
-    // Cache keys
-    $cacheKey = 'index_page_data';
-    $cacheDuration = 3600; // 1 hour (adjust as needed)
+    // Cache key with version
+    $cacheVersion = Cache::get('blog_cache_version', 1);
+    $cacheKey = 'index_page_data_v' . $cacheVersion;
+    $cacheDuration = 3600; // 1 hour
 
     // Check if we have cached data
     if (Cache::has($cacheKey)) {
         $cachedData = Cache::get($cacheKey);
-
-        return view('frontend.index', [
-            'meta_title' => $cachedData['meta_title'],
-            'meta_desc' => $cachedData['meta_desc'],
-            'latestBlog' => $cachedData['latestBlog'],
-            'secondLatestBlog' => $cachedData['secondLatestBlog'],
-            'latestBlogs' => $cachedData['latestBlogs'],
-            'trankBlogs' => $cachedData['trankBlogs'],
-            'techCount' => $cachedData['techCount'],
-            'techinfo' => $cachedData['techinfo'],
-            'techhealth' => $cachedData['techhealth'],
-            'blogs' => $cachedData['blogs']
-        ]);
+        return view('frontend.index', $cachedData);
     }
 
-    // If no cache, fetch from database
+    // Fetch fresh data from database
+    $data = $this->getIndexPageData();
+
+    // Store in cache
+    Cache::put($cacheKey, $data, $cacheDuration);
+
+    return view('frontend.index', $data);
+}
+
+// Helper method to fetch data
+private function getIndexPageData()
+{
     // SEO Meta
     $meta_title = "TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
     $meta_desc  = "TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology.";
 
     // Latest Published Blog
-    $latestBlog = Blog::where('status', 'published')->latest()->first();
+    $latestBlog = Blog::where('status', 'published')->latest('id')->first();
 
     // Other Blogs
-    $secondLatestBlog = Blog::where('status', 'published')->latest()->skip(1)->first();
+    $secondLatestBlog = Blog::where('status', 'published')->latest('id')->skip(1)->first();
 
     $latestBlogs = Blog::where('status', 'published')
-                        ->latest()
+                        ->latest('id')
                         ->skip(2)
                         ->take(12)
                         ->get();
 
     // Trending / Oldest
     $trankBlogs = Blog::where('status', 'published')
-                        ->oldest()
+                        ->oldest('id')
                         ->take(6)
                         ->get();
 
@@ -80,27 +80,11 @@ function index(){
     $blogs = Blog::whereIn('id', function($query) {
         $query->selectRaw('MAX(id)')
               ->from('blogs')
+              ->where('status', 'published')
               ->groupBy('category');
-    })->where('status','published')->get();
+    })->get();
 
-    // Prepare data for cache
-    $cacheData = [
-        'meta_title' => $meta_title,
-        'meta_desc' => $meta_desc,
-        'latestBlog' => $latestBlog,
-        'secondLatestBlog' => $secondLatestBlog,
-        'latestBlogs' => $latestBlogs,
-        'trankBlogs' => $trankBlogs,
-        'techCount' => $techCount,
-        'techinfo' => $techinfo,
-        'techhealth' => $techhealth,
-        'blogs' => $blogs
-    ];
-
-    // Store in cache
-    Cache::put($cacheKey, $cacheData, $cacheDuration);
-
-    return view('frontend.index', compact(
+    return compact(
         'meta_title',
         'meta_desc',
         'latestBlog',
@@ -111,7 +95,7 @@ function index(){
         'techinfo',
         'techhealth',
         'blogs'
-    ));
+    );
 }
 public function Contectus() {
       $meta_title = "Contact Us – TechBlogs | Get Support & Connect with Our Team";
