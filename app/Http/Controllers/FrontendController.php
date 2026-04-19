@@ -158,7 +158,7 @@ public function sitemap()
     // Static pages
     $staticPages = [
         '/blogs',
-         '/Aboute-us',
+         '/about-us',
         '/terms-condition',
         '/contact-us',
         '/privacy-policy',
