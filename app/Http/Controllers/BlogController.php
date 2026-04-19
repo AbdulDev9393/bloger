@@ -24,19 +24,19 @@ function index() {
     $blogs = Blog::latest()->paginate(30);
       $allblogs=blog::count();
     $seo=BlogSeo::all();
-   
+
     return view('admin_panal.blogs.index', compact('categories', 'blogs','allblogs'));
 }
 public function generateAISeo(Request $request)
 {
     $blog = Blog::find($request->blog_id);
-  
+
     if (!$blog) {
         return response()->json(['error' => 'Blog not found'], 404);
     }
 
     $content = strip_tags($blog->Description);
-   
+
 $prompt = "
 You are a senior SEO strategist and content optimization expert working for high-ranking websites.
 
@@ -137,7 +137,7 @@ public function store(Request $request)
     $blog->category = $request->category;
     $blog->Status = $request->Status;
     $blog->description = $request->description;
-           
+
     // Base path for public_html storage
     $storagePath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs';
 
@@ -189,29 +189,32 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-    $prompt = "
+   $prompt = "
 Write a detailed, SEO-optimized blog post for a technology website.
 
-Website Name: techblogs.site  
+Website Name: techblogs.site
+Target Audience: USA-based tech readers (general to intermediate tech knowledge)
 Blog Title: {$title}
 
 Instructions:
-- Write at least 900+ words
-- Content must be 100% unique, human-like, and engaging
-- Topic must be disscuss clear human words 
-- Include real-world examples and real human example
-- Explain deeply
-- Use SEO best practices
-- Use key words in related this 
-- Include 'techblogs.site' in intro and conclusion
--approach by us traffic
--I write blog posts that are related to the USA.
-Formatting Rules:
-- Output MUST be clean HTML only
-- Use <h2>, <h3>, <p>, <strong>, <ul>, <li>
-- No markdown, no explanation
+- Write at least 1500+ words (comprehensive, no fluff)
+- Content must be 100% unique, human-like, conversational, and engaging
+- Explain the topic in simple, clear, human-friendly language (avoid jargon overload)
+- Include real-world examples and relatable human stories (e.g., how a normal user in the USA would encounter this)
+- Use deep explanations with logical flow (problem → solution → why it works)
+- Apply SEO best practices naturally: primary keyword in first 100 words, semantic keywords, LSI terms, and natural keyword density (1-2%)
+- Explicitly mention 'techblogs.site' in the introduction and conclusion
+- Focus on USA traffic: use US-centric examples (e.g., American services, local comparisons, cultural references), write in US English, and address US reader concerns (privacy, cost, speed, reliability)
+- Assume the reader is from the USA and cares about practical tech improvements for daily life
 
-Return ONLY HTML.
+Formatting Rules (HTML only):
+- Use: <h2>, <h3>, <p>, <strong>, <ul>, <li>, <ol> if needed
+- Use short paragraphs (2-3 sentences max) for readability
+- Add at least one bullet list or numbered list for key takeaways
+- No markdown, no code block explanations, no extra text outside HTML
+- Do not wrap in <html> or <body> – just the article content
+
+Return ONLY clean HTML.
 ";
 
  $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
@@ -227,7 +230,7 @@ Return ONLY HTML.
         ]
     ],
        'temperature' => 0.7,
-            'max_tokens' => 1200 
+            'max_tokens' => 1200
 ]);
 
 $contentHtml = $response->json()['choices'][0]['message']['content'];
@@ -284,7 +287,7 @@ public function update(Request $request, $id)
 
     // Initialize Image Manager
     $manager = new ImageManager(new Driver());
-    
+
     // Base path for public_html storage
     $storagePath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs';
     $webpPath = $_SERVER['DOCUMENT_ROOT'].'/storage/blogs/webp';
@@ -304,16 +307,16 @@ public function update(Request $request, $id)
         // Generate unique filename
         $filename = time().'_'.$type.'_'.uniqid().'.webp';
         $webpFilePath = $webpPath.'/'.$filename;
-        
+
         // Load and process image
         $image = $manager->read($file);
-        
+
         // Resize image while maintaining aspect ratio
         $image->scale(width: $maxWidth, height: $maxHeight);
-        
+
         // Convert to WebP and save with optimization
         $image->toWebp($quality)->save($webpFilePath);
-        
+
         // Return relative path for database
         return 'storage/blogs/webp/'.$filename;
     };
@@ -324,7 +327,7 @@ public function update(Request $request, $id)
         if ($blog->Thumbnail_Image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image)) {
             unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Thumbnail_Image);
         }
-        
+
         // Process new image - Thumbnail size: 400x300
         $file = $request->file('Thumbnail_Image');
         $blog->Thumbnail_Image = $processImage($file, 'thumbnail', 400, 300, 85);
@@ -336,7 +339,7 @@ public function update(Request $request, $id)
         if ($blog->resize_image && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image)) {
             unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->resize_image);
         }
-        
+
         // Process new image - Medium size: 800x600
         $file = $request->file('Resizeable_Image');
         $blog->resize_image = $processImage($file, 'resizeable', 800, 600, 85);
@@ -348,7 +351,7 @@ public function update(Request $request, $id)
         if ($blog->Banner_mage && file_exists($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage)) {
             unlink($_SERVER['DOCUMENT_ROOT'].'/'.$blog->Banner_mage);
         }
-        
+
         // Process new image - Banner size: 1200x400
         $file = $request->file('Banner_Image');
         $blog->Banner_mage = $processImage($file, 'banner', 1200, 400, 90);
@@ -397,15 +400,15 @@ public function blogView($slug)
 
     // Prepare images array
     $images = [];
-    
+
     if ($Blog_info->Thumbnail_Image) {
         $images[] = asset($Blog_info->Thumbnail_Image);
     }
-    
+
     if ($Blog_info->Banner_mage) {
         $images[] = asset($Blog_info->Banner_mage);
     }
-    
+
     if ($Blog_info->resize_image) {
         $images[] = asset($Blog_info->resize_image);
     }
@@ -417,10 +420,10 @@ public function blogView($slug)
     // Get author name (assuming you have an author relationship or field)
     $authorName = $Blog_info->Author ?? 'Admin';
     $authorUrl = $Blog_info->author_url ?? null;
-    
+
     // Get category
     $category = $Blog_info->category ?? 'General';
-    
+
     // Get keywords if available
     $keywords = $seo->keywords ?? '';
     $keywordsArray = $keywords ? array_map('trim', explode(',', $keywords)) : [];
@@ -439,22 +442,22 @@ public function blogView($slug)
     $schema_array = [
         "@context" => "https://schema.org",
         "@type" => "BlogPosting",
-        
+
         // Basic identification
         "@id" => url()->current(),
         "url" => url()->current(),
         "headline" => $meta_title,
         "alternativeHeadline" => $Blog_info->name ?? $meta_title,
         "description" => $meta_desc,
-        
+
         // Images
         "image" => count($images) === 1 ? $images[0] : $images,
-        
+
         // Dates
         "datePublished" => $Blog_info->created_at?->toIso8601String(),
         "dateModified" => $Blog_info->updated_at?->toIso8601String(),
         "dateCreated" => $Blog_info->created_at?->toIso8601String(),
-        
+
         // Author with enhanced details
         "author" => [
             "@type" => "Person",
@@ -462,7 +465,7 @@ public function blogView($slug)
             "url" => $authorUrl ?? url()->current(),
             "sameAs" => $authorUrl ? [$authorUrl] : null
         ],
-        
+
         // Publisher with complete details
         "publisher" => [
             "@type" => "Organization",
@@ -480,47 +483,47 @@ public function blogView($slug)
                 "https://www.instagram.com/dailyblogs"
             ]
         ],
-        
+
         // Main entity reference
         "mainEntityOfPage" => [
             "@type" => "WebPage",
             "@id" => url()->current()
         ],
-        
+
         // Article specific
         "articleBody" => strip_tags($Blog_info->description ?? ''),
         "articleSection" => $articleSection,
         "articleType" => "BlogPosting",
-        
+
         // Keywords and categories
         "keywords" => $keywords ? implode(', ', $keywordsArray) : $category,
         "about" => [
             "@type" => "Thing",
             "name" => $category
         ],
-        
+
         // Reading time
         "timeRequired" => "PT{$readingTime}M",
-        
+
         // Comment section
         "commentCount" => $commentCount,
-        
+
         // Share count (if you have social sharing data)
         "interactionStatistic" => [
             "@type" => "InteractionCounter",
             "interactionType" => "https://schema.org/ShareAction",
             "userInteractionCount" => $Blog_info->share_count ?? 0
         ],
-        
+
         // Language
         "inLanguage" => "en-US",
-        
+
         // Is this accessible for free
         "isAccessibleForFree" => true,
-        
+
         // Creative work status
         "creativeWorkStatus" => "Published",
-        
+
         // License (if applicable)
         "license" => "https://creativecommons.org/licenses/by/4.0/"
     ];
@@ -542,7 +545,7 @@ public function blogView($slug)
                 "name" => "Blogs",
                 "item" => route('frontend.blogs') // Adjust this to your blogs listing route
             ],
-           
+
             [
                 "@type" => "ListItem",
                 "position" => 4,
@@ -568,12 +571,12 @@ public function blogView($slug)
         array_filter($schema_array, fn($value) => $value !== null && $value !== ''),
         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
     );
-    
+
     $breadcrumb_schema_encoded = json_encode(
         $breadcrumb_schema,
         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
     );
-    
+
     $faq_schema_encoded = $faq_schema ? json_encode(
         $faq_schema,
         JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
@@ -593,14 +596,14 @@ public function blogView($slug)
  function blog_seo($id){
     $blog=Blog::find($id);
     $blog_seo = BlogSeo::where('blog_id', $id)->first();
-   
+
     return view('admin_panal.blogs.blogs_seo.index',compact('blog','blog_seo'));
 
  }
  public function blog_seo_update(Request $request, $id)
 {
-    
- 
+
+
     // Check if SEO record exists
     $seo = BlogSeo::firstOrNew(['blog_id' => $id]);
 
