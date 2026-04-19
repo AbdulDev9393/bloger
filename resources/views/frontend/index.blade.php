@@ -661,7 +661,7 @@ use Illuminate\Support\Str;
                         <span class="stars">★★★★☆</span>
                         <span class="rating-text">4.5</span>
                     </div>
-                    <p class="review-text">"The articles are incredibly informative and well-researched. I've implemented several strategies from your tech blogs that have saved our team hours of work each week!"</p>
+                    <p class="review-text">I have been learning things from this site for a long time. I am a student, and after studying, I read helpful content on it</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=David+K.&background=0066cc&color=fff&size=50" alt="David K."></div>
                         <div class="reviewer-details"><h4>Samiullah Sai</h4></div>
@@ -673,7 +673,7 @@ use Illuminate\Support\Str;
                         <span class="stars">★★★★☆</span>
                         <span class="rating-text">4.5</span>
                     </div>
-                    <p class="review-text">"Amazing content every single day! The morning blog has become part of my daily routine. The variety of topics keeps things fresh and engaging. Highly recommended!"</p>
+                    <p class="review-text">These blogs are good, and I advise people that this site is built for tech purposes</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Emily+R.&background=00aa55&color=fff&size=50" alt="Emily R."></div>
                         <div class="reviewer-details"><h4>Kathrin US lady</h4></div>
