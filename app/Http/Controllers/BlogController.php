@@ -180,7 +180,6 @@ public function store(Request $request)
     return view('admin_panal.blogs.edit',compact('blog','categories'));
 
   }
-
 public function generateAI(Request $request)
 {
     $request->validate([
@@ -189,7 +188,8 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-$prompt = "
+    // IMPROVED PROMPT - optimized for LongCat-Flash-Chat
+    $prompt = "
 Write a detailed, SEO-optimized blog post for a technology website.
 
 Website Name: techblogs.site
@@ -207,33 +207,37 @@ Instructions:
 - Focus on USA traffic: use US-centric examples (e.g., American services, local comparisons, cultural references), write in US English, and address US reader concerns (privacy, cost, speed, reliability)
 - Assume the reader is from the USA and cares about practical tech improvements for daily life
 
-Formatting Rules (HTML only):
-- Use: <h2>, <h3>, <p>, <strong>, <ul>, <li>, <ol> if needed
-- Use short paragraphs (2-3 sentences max) for readability
-- Add at least one bullet list or numbered list for key takeaways
-- No markdown, no code block explanations, no extra text outside HTML
-- Do not wrap in <html> or <body> – just the article content
+Formatting Rules (HTML only - CRITICAL):
+- Use ONLY: <h2>, <h3>, <p>, <strong>, <ul>, <li>, <ol>
+- Short paragraphs (2-3 sentences max)
+- Add at least one bullet or numbered list
+- NO markdown, NO ```html blocks, NO explanations
+- DO NOT wrap in <html> or <body>
+- Return ONLY raw HTML starting with <h2> or <p>
 
-Return ONLY clean HTML.
+IMPORTANT: Return ONLY HTML. No introductory text, no closing remarks. Just pure HTML.
 ";
- $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
- $response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $activeKey,
-    'Content-Type'  => 'application/json',
-])->post('https://api.longcat.chat/openai/v1/chat/completions', [
-    'model' => 'LongCat-Flash-Chat',
-    'messages' => [
-        [
-            'role' => 'user',
-            'content' => $prompt
-        ]
-    ],
-       'temperature' => 0.7,
-            'max_tokens' => 1200
-]);
 
-$contentHtml = $response->json()['choices'][0]['message']['content'];
-  $contentHtml = str_replace('—', ' ', $contentHtml);
+    $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . $activeKey,
+        'Content-Type'  => 'application/json',
+    ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model' => 'LongCat-Flash-Chat',
+        'messages' => [
+            [
+                'role' => 'system',
+                'content' => 'You are an expert tech blogger for techblogs.site. You write engaging, USA-focused, SEO-optimized HTML articles. You NEVER use markdown. You ONLY return raw HTML.'
+            ],
+            [
+                'role' => 'user',
+                'content' => $prompt
+            ]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 4000  // Increased from 1200 for 1500+ words
+    ]);
 
     if (!$response->successful()) {
         return response()->json([
@@ -244,7 +248,6 @@ $contentHtml = $response->json()['choices'][0]['message']['content'];
     }
 
     $data = $response->json();
-
     $contentHtml = data_get($data, 'choices.0.message.content');
 
     if (!$contentHtml) {
@@ -255,9 +258,14 @@ $contentHtml = $response->json()['choices'][0]['message']['content'];
         ], 500);
     }
 
-    // cleanup
+    // Enhanced cleanup
     $contentHtml = trim($contentHtml);
-    $contentHtml = preg_replace('/^```html|```$/', '', $contentHtml);
+    $contentHtml = preg_replace('/^```html|```$/i', '', $contentHtml);
+    $contentHtml = preg_replace('/^```|```$/i', '', $contentHtml);
+    $contentHtml = str_replace('—', '—', $contentHtml); // Fixed em dash
+
+    // Optional: Remove any markdown leftovers
+    $contentHtml = preg_replace('/^\#\#?\s+/m', '', $contentHtml);
 
     return response()->json([
         'status' => true,
