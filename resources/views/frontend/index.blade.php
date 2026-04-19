@@ -312,7 +312,7 @@ use Illuminate\Support\Str;
     /* ===== REVIEWS SECTION (Premium) ===== */
     .blog-reviews {
         background: linear-gradient(135deg, #fefce8 0%, #fef9e3 100%);
-        padding: 80px 20px;
+        padding: 10px 20px;
         position: relative;
     }
 
