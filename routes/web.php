@@ -42,7 +42,7 @@ Route::get('/terms-condition',[FrontendController::class,'Services'])->name('fro
 Route::get('/cookie-policy',[FrontendController::class,'cookiePolicy'])->name('frontend.cookie');
 
 Route::get('/privacy-policy',[FrontendController::class,'condition'])->name('frontend.praivacy-policy');
-Route::get('/aboute-us',[FrontendController::class,'Aboute'])->name('frontend.Aboute');
+Route::get('/about-us',[FrontendController::class,'Aboute'])->name('frontend.Aboute');
 
 Route::get('/Categories/{Categories}',[FrontendController::class,'Categories'])->name('frontend.Categories');
 
