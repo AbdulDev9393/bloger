@@ -638,7 +638,6 @@ use Illuminate\Support\Str;
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">What Our Readers Say 📝</h2>
-                <p class="section-subtitle">Discover why thousands of readers trust our daily insights and expert advice</p>
             </div>
             <div class="reviews-container highlight">
                 <div class="review-card">
