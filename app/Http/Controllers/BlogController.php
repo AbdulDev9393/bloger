@@ -364,7 +364,22 @@ public function update(Request $request, $id)
 }   // JSON-LD schema as array
 
 
+public function search(Request $request)
+{
+    $query = $request->get('query');
 
+    $categories = Category::latest()->get();
+
+    $blogs = Blog::when($query, function ($q) use ($query) {
+        $q->where('name', 'LIKE', "%{$query}%")
+          ->orWhere('description', 'LIKE', "%{$query}%")
+          ->orWhere('category', 'LIKE', "%{$query}%");
+    })->latest()->paginate(30);
+
+    $allblogs = $blogs->total();
+
+    return view('admin_panal.blogs.index', compact('blogs', 'categories', 'allblogs'));
+}
 public function delete($id)
 {
     $blog = Blog::findOrFail($id);
