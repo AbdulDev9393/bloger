@@ -184,6 +184,7 @@ h4{
     font-size: 17px;
 }
 </style>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <section class="blog-detail">
     <div class="blog-detail-container">
