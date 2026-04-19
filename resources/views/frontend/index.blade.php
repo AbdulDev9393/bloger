@@ -644,7 +644,7 @@ use Illuminate\Support\Str;
                 <h2 class="section-title">What Our Readers Say 📝</h2>
                 <p class="section-subtitle">Discover why thousands of readers trust our daily insights and expert advice</p>
             </div>
-            <div class="reviews-container">
+            <div class="reviews-container highlight">
                 <div class="review-card">
                     <div class="review-rating">
                         <span class="stars">★★★★★</span>
@@ -667,7 +667,7 @@ use Illuminate\Support\Str;
                         <div class="reviewer-details"><h4>Samiullah Sai</h4></div>
                     </div>
                 </div>
-                <div class="review-card highlight">
+                <div class="review-card ">
                     <div class="review-badge">Featured Review</div>
                     <div class="review-rating">
                         <span class="stars">★★★★☆</span>
