@@ -644,7 +644,6 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
 </style>
 
 <!-- Skip to Main Content -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
 
 
 <!-- Header -->
