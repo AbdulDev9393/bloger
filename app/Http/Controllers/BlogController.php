@@ -257,7 +257,9 @@ $contentHtml = $response->json()['choices'][0]['message']['content'];
 
     // cleanup
     $contentHtml = trim($contentHtml);
-    $contentHtml = preg_replace('/^```html|```$/', '', $contentHtml);
+    $contentHtml = preg_replace('/^```html|```$/i', '', $contentHtml);
+    $contentHtml = preg_replace('/^```|```$/i', '', $contentHtml);
+    $contentHtml = str_replace('—', '—', $contentHtml); // Fixed em dash
 
     return response()->json([
         'status' => true,
