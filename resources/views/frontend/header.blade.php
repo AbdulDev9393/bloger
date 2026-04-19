@@ -185,7 +185,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
         max-width: 1280px;
         margin: 0 auto;
         padding: 0 1.5rem;
-        position: fixed;
+        
     }
 
     .btn {
