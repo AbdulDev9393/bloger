@@ -8,6 +8,14 @@
 
 
 <style>
+    a {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: none;
+}
 .blog-detail{
     width:100%;
     background:#f7f7f7;
