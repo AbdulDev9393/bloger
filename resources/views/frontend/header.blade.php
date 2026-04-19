@@ -26,8 +26,6 @@ $default_schema = [
     "@type" => "BlogPosting",
     "headline" => "TechBlogs - Latest Technology News, Tips & Reviews",
     "image" => "https://techblogs.site/favicon.ico",
-    "datePublished" => now()->toIso8601String(),
-    "dateModified" => now()->toIso8601String(),
     "author" => [
         "@type" => "Person",
         "name" => "Admin"
@@ -119,9 +117,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
 
         /* Shadows */
         --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
 
         /* Transitions */
         --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -783,8 +779,6 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     // Mobile Menu Functionality
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
