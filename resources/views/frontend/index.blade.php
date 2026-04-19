@@ -363,11 +363,7 @@ use Illuminate\Support\Str;
         box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
     }
 
-    .review-card.highlight {
-        background: linear-gradient(135deg, #ffffff, #fffaf0);
-        border: 2px solid #4e83fa;
-        position: relative;
-    }
+
 
     .review-badge {
         position: absolute;
@@ -668,7 +664,6 @@ use Illuminate\Support\Str;
                     </div>
                 </div>
                 <div class="review-card ">
-                    <div class="review-badge">Featured Review</div>
                     <div class="review-rating">
                         <span class="stars">★★★★☆</span>
                         <span class="rating-text">4.5</span>
