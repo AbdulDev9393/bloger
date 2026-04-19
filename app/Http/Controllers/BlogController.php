@@ -197,6 +197,9 @@ Target Audience: USA-based tech readers (general to intermediate tech knowledge)
 Blog Title: {$title}
 
 Instructions:
+-Content like you are telling a story to a person
+-Unique Content 1000% ok .
+-Don’t take paragraphs from anywhere. Create them yourself from your own knowledge, and make them unique.
 - Write at least 1500+ words (comprehensive, no fluff)
 - Content must be 100% unique, human-like, conversational, and engaging
 - Explain the topic in simple, clear, human-friendly language (avoid jargon overload)
