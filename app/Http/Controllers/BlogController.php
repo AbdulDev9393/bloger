@@ -180,7 +180,6 @@ public function store(Request $request)
     return view('admin_panal.blogs.edit',compact('blog','categories'));
 
   }
-
 public function generateAI(Request $request)
 {
     $request->validate([
@@ -189,84 +188,105 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-$prompt = "
-Write a detailed, SEO-optimized blog post for a technology website.
+    $prompt = "
+You are a senior tech writer at techblogs.site. You have been writing for American tech readers for over 10 years. You write like a real human being — not like a robot, not like a textbook.
 
-Website Name: techblogs.site
-Target Audience: USA-based tech readers (general to intermediate tech knowledge)
-Blog Title: {$title}
+Your job is to write a full blog post on this topic: {$title}
 
-Instructions:
--Content like you are telling a story to a person
--Unique Content 1000% ok .
--Don’t take paragraphs from anywhere. Create them yourself from your own knowledge, and make them unique.
-- Write at least 1500+ words (comprehensive, no fluff)
-- Content must be 100% unique, human-like, conversational, and engaging
-- Explain the topic in simple, clear, human-friendly language (avoid jargon overload)
-- Include real-world examples and relatable human stories (e.g., how a normal user in the USA would encounter this)
-- Use deep explanations with logical flow (problem → solution → why it works)
-- Apply SEO best practices naturally: primary keyword in first 100 words, semantic keywords, LSI terms, and natural keyword density (1-2%)
-- Explicitly mention 'techblogs.site' in the introduction and conclusion
-- Focus on USA traffic: use US-centric examples (e.g., American services, local comparisons, cultural references), write in US English, and address US reader concerns (privacy, cost, speed, reliability)
-- Assume the reader is from the USA and cares about practical tech improvements for daily life
+WEBSITE: techblogs.site
+AUDIENCE: Everyday Americans aged 20-45 who use technology daily but are not hardcore engineers.
 
-Formatting Rules (HTML only):
-- Use: <h2>, <h3>, <p>, <strong>, <ul>, <li>, <ol> if needed
-- Use short paragraphs (2-3 sentences max) for readability
-- Add at least one bullet list or numbered list for key takeaways
-- No markdown, no code block explanations, no extra text outside HTML
-- Do not wrap in <html> or <body> – just the article content
-Note: Please not use my content in 'Em Dash' ok .
-Return ONLY clean HTML.
+---
+
+YOUR WRITING STYLE RULES (Follow every single one):
+
+1. VOICE: Write like you are a smart friend explaining something over coffee. Casual but informative. Use 'you' and 'we' often.
+
+2. SENTENCE VARIETY: Mix short punchy sentences with longer explanatory ones. Example: 'It sounds complicated. But honestly, it is not. Let me show you exactly how it works and why millions of Americans are already using it every day.'
+
+3. STORYTELLING: Start with a real-life scenario. Example: 'It is a Tuesday morning in Austin, Texas. Sarah opens her phone and...' Make the reader feel they are IN the story.
+
+4. NO AI PATTERNS TO AVOID:
+   - Never start sentences with 'In today's world' or 'In conclusion'
+   - Never use the word 'delve' or 'straightforward' or 'game-changer' or 'leverage'
+   - Never use em dashes (—) anywhere
+   - Never write three bullet points that all start with the same structure
+   - Never write robotic transitions like 'Furthermore,' or 'Moreover,'
+
+5. HUMAN IMPERFECTIONS: Occasionally use a conversational aside. Example: '(And yes, I know that sounds dramatic, but stick with me.)' or 'Here is the thing though.'
+
+6. US-FOCUSED EXAMPLES: Use American brands, cities, services. Mention things like Netflix, Amazon, Walmart, Google, iPhones, Android phones, American cities (New York, LA, Chicago, Houston), American concerns (monthly bills, data privacy, internet speed).
+
+7. SEO RULES:
+   - Use the main keyword from the title naturally in the first 80 words
+   - Mention techblogs.site in the introduction and conclusion
+   - Use related semantic keywords naturally throughout
+   - Do NOT stuff keywords — write for humans first
+
+8. LENGTH: Write minimum 1600 words. No fluff. Every paragraph must add real value.
+
+9. STRUCTURE:
+   - Hook opening (2-3 short paragraphs — a story or surprising fact)
+   - Mention techblogs.site in intro
+   - Use <h2> for main sections (at least 5 sections)
+   - Use <h3> for subsections where needed
+   - Short paragraphs: maximum 3 sentences each
+   - One <ul> or <ol> list somewhere in the middle
+   - Strong conclusion with a call to action and mention of techblogs.site
+
+10. FORMAT: Return only clean HTML using these tags only: <h2> <h3> <p> <strong> <ul> <li> <ol>
+    No markdown. No code blocks. No <html> or <body> tags. No extra explanation outside the article.
+
+Now write the full blog post. Do not summarize. Do not skip sections. Write the complete article from start to finish.
 ";
- $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
- $response = Http::withHeaders([
-    'Authorization' => 'Bearer ' . $activeKey,
-    'Content-Type'  => 'application/json',
-])->post('https://api.longcat.chat/openai/v1/chat/completions', [
-    'model' => 'LongCat-Flash-Chat',
-    'messages' => [
-        [
-            'role' => 'user',
-            'content' => $prompt
-        ]
-    ],
-       'temperature' => 0.7,
-            'max_tokens' => 1200
-]);
 
-$contentHtml = $response->json()['choices'][0]['message']['content'];
-  $contentHtml = str_replace('—', ' ', $contentHtml);
+    $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
+
+    $response = Http::timeout(120)->withHeaders([
+        'Authorization' => 'Bearer ' . $activeKey,
+        'Content-Type'  => 'application/json',
+    ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
+        'model'       => 'LongCat-Flash-Chat',
+        'messages'    => [
+            [
+                'role'    => 'user',
+                'content' => $prompt
+            ]
+        ],
+        'temperature' => 0.88,
+        'max_tokens'  => 6000   // 1200 se 4000 kar diya
+    ]);
 
     if (!$response->successful()) {
         return response()->json([
-            'status' => false,
+            'status'  => false,
             'message' => 'API request failed',
-            'debug' => $response->body()
+            'debug'   => $response->body()
         ], 500);
     }
 
     $data = $response->json();
-
     $contentHtml = data_get($data, 'choices.0.message.content');
 
     if (!$contentHtml) {
         return response()->json([
-            'status' => false,
+            'status'  => false,
             'message' => 'Empty content from AI',
-            'debug' => $data
+            'debug'   => $data
         ], 500);
     }
 
-    // cleanup
+    // Cleanup
     $contentHtml = trim($contentHtml);
-    $contentHtml = preg_replace('/^```html|```$/i', '', $contentHtml);
-    $contentHtml = preg_replace('/^```|```$/i', '', $contentHtml);
-    $contentHtml = str_replace('—', '—', $contentHtml); // Fixed em dash
+    $contentHtml = preg_replace('/^```html\s*/i', '', $contentHtml);
+    $contentHtml = preg_replace('/\s*```$/i', '', $contentHtml);
+
+    // Em dash aur uske variants hatao
+    $contentHtml = str_replace(['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;'], [' ', ' ', ' ', ' ', ' ', ' '], $contentHtml);
 
     return response()->json([
-        'status' => true,
-        'title' => $title,
+        'status'  => true,
+        'title'   => $title,
         'content' => $contentHtml
     ]);
 }
