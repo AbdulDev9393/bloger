@@ -138,7 +138,7 @@
         }
 
 
-       
+
 
         .about-cta a {
             display: inline-flex;
@@ -174,7 +174,7 @@
             .about-content ul {
                 grid-template-columns: 1fr;
             }
-      
+
         }
 
         .about-content p, .about-content li {
@@ -220,7 +220,7 @@
             </p>
 
             <div class="highlight-box">
-                🔥 <strong>Why TechBlogs is different (AdSense approved mindset):</strong> 
+                🔥 <strong>Why TechBlogs is different (AdSense approved mindset):</strong>
                 <ul style="margin-top: 12px; display:block; list-style: disc; padding-left:20px;">
                     <li style="background:none; padding-left:0;">✅ 100% human-written, reviewed by Muhammad Abdul himself</li>
                     <li style="background:none; padding-left:0;">✅ Complete transparency: real author identity, real photo, real contact</li>
@@ -247,13 +247,13 @@
                 Hi, I’m Muhammad Abdul. I hold a BS degree in Computer Science and have been working in the tech field for over 4 years. I started TechBlogs because I saw too many websites publishing shallow, misleading, or purely AI-generated content that doesn’t actually help readers. I decided to change that.
             </p>
             <p>
-                Every morning, I research trending tech topics, test new software, and write detailed guides based on my personal experience. I also love engaging with the community — I reply to every email and comment because your feedback makes this blog better. I'm based in the US, but my readers come from all over the world: USA, UK, Canada, Australia, India, Germany, and beyond.
+                Every morning, I research trending tech topics, test new software, and write detailed guides based on my personal experience. I also love engaging with the community — I reply to every email and comment because your feedback makes this blog better. I'm based in the Pakistan, but my readers come from all over the world: USA, UK, Canada, Australia, India, Germany, and beyond.
             </p>
             <p>
                 I don’t use clickbait titles or false promises. My goal is to build a long-term resource that you can trust, whether you need to fix a printer error, understand blockchain basics, or choose the right laptop under $1000. TechBlogs is my full-time passion, and I treat every post like a mini research project.
             </p>
 
-           
+
 
             <h2>✅ How TechBlogs Aligns With Google AdSense Policies</h2>
             <p>
@@ -289,7 +289,7 @@
                 Additionally, I will be collaborating with other expert tech writers occasionally (under my supervision) to bring more diverse perspectives while maintaining the same quality standard. Every guest post will be reviewed and edited by me personally.
             </p>
 
-           
+
             <p style="margin-top: 28px; font-size: 1rem; color: #2c3e50; background:#fefce8; padding: 15px 20px; border-radius: 28px;">
                 🙏 Thank you for stopping by TechBlogs. Whether you're here to solve a tech problem, learn something new, or simply explore — you're part of our growing family. If you have any feedback or topics you'd like me to cover, don't hesitate to reach out through the contact page. I read every single message personally.
             </p>
