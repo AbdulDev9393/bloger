@@ -650,7 +650,7 @@ use Illuminate\Support\Str;
                         <span class="stars">★★★★★</span>
                         <span class="rating-text">5.0</span>
                     </div>
-                    <p class="review-text">"I love the daily tips and insights! The content is consistently valuable and helps me stay updated with industry trends. The writing style makes complex topics easy to understand."</p>
+                    <p class="review-text">I've been visiting your site for 3 months, and very good, helpful blogs come on it that guide people on a good path</p>
                     <div class="reviewer-info">
                         <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Sarah+J.&background=ff7700&color=fff&size=50" alt="Sarah J."></div>
                         <div class="reviewer-details"><h4>Yousaf IT Manager</h4></div>
