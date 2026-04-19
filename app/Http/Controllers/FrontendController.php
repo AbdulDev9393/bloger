@@ -145,12 +145,13 @@ public function sitemap()
 {
     $blogs = Blog::latest()->get();
 
-    $sitemap = '<?xml version="1.0" encoding="UTF-8"?>';
+    $sitemap  = '<?xml version="1.0" encoding="UTF-8"?>';
     $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     // Home page
     $sitemap .= '<url>';
     $sitemap .= '<loc>' . url('/') . '</loc>';
+    $sitemap .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
     $sitemap .= '<changefreq>daily</changefreq>';
     $sitemap .= '<priority>1.0</priority>';
     $sitemap .= '</url>';
@@ -158,38 +159,35 @@ public function sitemap()
     // Static pages
     $staticPages = [
         '/blogs',
-         '/about-us',
-        '/terms-condition',
+        '/about-us',
         '/contact-us',
         '/privacy-policy',
         '/terms-condition',
         '/cookie-policy',
-
     ];
 
     foreach ($staticPages as $page) {
         $sitemap .= '<url>';
         $sitemap .= '<loc>' . url($page) . '</loc>';
-        $sitemap .= '<changefreq>daily</changefreq>';
+        $sitemap .= '<changefreq>monthly</changefreq>'; // static pages dont change daily
         $sitemap .= '<priority>0.7</priority>';
         $sitemap .= '</url>';
     }
 
     // Blog pages
-   foreach ($blogs as $blog) {
-    $slug = Str::slug($blog->slug); // SEO-friendly slug
-    $sitemap .= '<url>';
-    $sitemap .= '<loc>' . url('/blog/' . $slug) . '</loc>'; // ✅ id pehle, slug baad
-    $sitemap .= '<lastmod>' . $blog->updated_at->toAtomString() . '</lastmod>';
-    $sitemap .= '<changefreq>daily</changefreq>';
-    $sitemap .= '<priority>0.8</priority>';
-    $sitemap .= '</url>';
-}
+    foreach ($blogs as $blog) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . url('/blog/' . $blog->slug) . '</loc>';
+        $sitemap .= '<lastmod>' . $blog->updated_at->toAtomString() . '</lastmod>';
+        $sitemap .= '<changefreq>weekly</changefreq>';
+        $sitemap .= '<priority>0.8</priority>';
+        $sitemap .= '</url>';
+    }
 
     $sitemap .= '</urlset>';
 
     return response($sitemap, 200)
-              ->header('Content-Type', 'application/xml');
+        ->header('Content-Type', 'application/xml');
 }
   function condition(){
     $meta_title = "Privacy Policy | TechBlogs - Your Data Protection & Privacy Rights";
