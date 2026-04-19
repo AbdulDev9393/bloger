@@ -213,7 +213,7 @@ Formatting Rules (HTML only):
 - Add at least one bullet list or numbered list for key takeaways
 - No markdown, no code block explanations, no extra text outside HTML
 - Do not wrap in <html> or <body> – just the article content
-
+Note: Please not use my content in 'Em Dash' ok .
 Return ONLY clean HTML.
 ";
  $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
