@@ -4,7 +4,7 @@
     @include('frontend.header')
 </head>
 <body>
-    
+
 
 
 <style>
@@ -188,12 +188,14 @@ h4{
 
         <!-- Main Image -->
         <div class="blog-main-img">
-             <img 
-                        src="{{ asset($Blog_info->Thumbnail_Image) }}" 
-                        alt="{{ $Blog_info->name ?? 'Blog Image' }}"
-                        title="{{ $Blog_info->name ?? 'Blog Image' }}"
-                        loading="lazy"
-                    >
+           <img
+    src="{{ asset($Blog_info->Thumbnail_Image) }}"
+    alt="{{ $Blog_info->name ?? 'Blog Image' }}"
+    title="{{ $Blog_info->name ?? 'Blog Image' }}"
+    loading="lazy"
+    width="800"
+    height="450"
+>
         </div>
 
         <!-- Blog Content -->
@@ -202,14 +204,16 @@ h4{
 
             <!-- Multiple Images -->
             <div class="blog-gallery">
-              
+
                 @if($Blog_info->Banner_mage)
-                 <img 
-                        src="{{ asset($Blog_info->Banner_mage) }}" 
-                        alt="{{ $Blog_info->name ?? 'Blog Image' }}"
-                        title="{{ $Blog_info->name ?? 'Blog Image' }}"
-                        loading="lazy"
-                    >
+                 <img
+                                src="{{ asset($Blog_info->Banner_mage) }}"
+                                alt="{{ $Blog_info->name ?? 'Blog Image' }}"
+                                title="{{ $Blog_info->name ?? 'Blog Image' }}"
+                                loading="lazy"
+                                width="800"
+                                height="450"
+                            >
                 @endif
             </div>
 
@@ -231,7 +235,7 @@ h4{
        target="_blank"
        class="share-twitter"
        title="Share on Twitter">
-        <i class="fab fa-twitter"></i>   
+        <i class="fab fa-twitter"></i>
     </a>
 
     <!-- Instagram (copy/open) -->
