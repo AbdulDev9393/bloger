@@ -639,7 +639,7 @@ use Illuminate\Support\Str;
             <div class="section-header">
                 <h2 class="section-title">What Our Readers Say 📝</h2>
             </div>
-            <div class="reviews-container highlight">
+            <div class="reviews-container">
                 <div class="review-card">
                     <div class="review-rating">
                         <span class="stars">★★★★★</span>
