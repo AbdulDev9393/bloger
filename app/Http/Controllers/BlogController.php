@@ -189,7 +189,7 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-   $prompt = "
+$prompt = "
 Write a detailed, SEO-optimized blog post for a technology website.
 
 Website Name: techblogs.site
@@ -216,7 +216,6 @@ Formatting Rules (HTML only):
 
 Return ONLY clean HTML.
 ";
-
  $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
  $response = Http::withHeaders([
     'Authorization' => 'Bearer ' . $activeKey,
