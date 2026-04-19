@@ -92,7 +92,7 @@
                     <div class="text-center mb-8">
                         <h2 class="text-3xl font-bold text-gray-800 mb-3">Send a Message</h2>
                         <p class="text-gray-600">Fill out the form below and we'll respond as soon as possible</p>
-                        
+
                         <!-- Progress Steps -->
                         <div class="flex items-center justify-center mt-6 mb-2">
                             <div class="flex items-center">
@@ -110,7 +110,7 @@
 
                     <form id="contactForm" action="{{ route('user.message.store') }}" method="POST" class="space-y-6">
                         @csrf
-                        
+
                         <!-- Step 1: Personal Info -->
                         <div id="step1" class="space-y-6">
                             <div class="relative">
@@ -121,7 +121,7 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i class="fas fa-user text-gray-400"></i>
                                     </div>
-                                    <input type="text" id="name" name="name" 
+                                    <input type="text" id="name" name="name"
                                            class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                            placeholder="John Doe" required>
                                 </div>
@@ -136,7 +136,7 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i class="fas fa-envelope text-gray-400"></i>
                                     </div>
-                                    <input type="email" id="email" name="email" 
+                                    <input type="email" id="email" name="email"
                                            class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                            placeholder="john@example.com" required>
                                 </div>
@@ -151,14 +151,14 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i class="fas fa-tag text-gray-400"></i>
                                     </div>
-                                    <input type="text" id="subject" name="subject" 
+                                    <input type="text" id="subject" name="subject"
                                            class="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                            placeholder="What is this regarding?" required>
                                 </div>
                                 <div class="text-sm text-red-500 mt-1" id="subject-error"></div>
                             </div>
 
-                            <button type="button" onclick="nextStep()" 
+                            <button type="button" onclick="nextStep()"
                                     class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
                                 Next: Write Your Message <i class="fas fa-arrow-right ml-2"></i>
                             </button>
@@ -187,7 +187,7 @@
                             </div>
 
                             <div class="flex gap-4">
-                                <button type="button" onclick="prevStep()" 
+                                <button type="button" onclick="prevStep()"
                                         class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-colors">
                                     <i class="fas fa-arrow-left mr-2"></i> Back
                                 </button>
@@ -204,10 +204,10 @@
                         </div>
 
                         <div id="successMessage" class="hidden p-4 bg-green-50 border border-green-200 rounded-lg text-green-700"></div>
-                        
+
                         <p class="text-sm text-gray-500 text-center mt-6">
                             <i class="fas fa-lock mr-2"></i>
-                            Your information is secure. By submitting, you agree to our 
+                            Your information is secure. By submitting, you agree to our
                             <a href="#" class="text-blue-600 hover:underline font-medium">Privacy Policy</a>.
                         </p>
                     </form>
@@ -226,7 +226,7 @@
                     </div>
 
                     <div class="space-y-6">
-                      
+
 
                         <div class="flex gap-4">
                             <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -235,7 +235,7 @@
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Phone Number</h4>
                                 <p class="text-gray-600 mb-1">+92 314 0699386</p>
-                                
+
                             </div>
                         </div>
 
@@ -245,8 +245,8 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Email Address</h4>
-                                <p class="text-gray-600 mb-1">service@gmail.com</p>
-                              
+                                <p class="text-gray-600 mb-1">service@techblogs.site</p>
+
                             </div>
                         </div>
                     </div>
@@ -260,23 +260,23 @@
                         </div>
                         <h3 class="text-2xl font-bold text-gray-800">Connect With Us</h3>
                     </div>
-                    
+
                     <p class="text-gray-600 mb-6">Follow us on social media for updates, tips, and community discussions.</p>
 
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-<a href="{{ $data->facebook ?? '#' }}" target="_blank" 
+<a href="{{ $data->facebook ?? '#' }}" target="_blank"
    class="social-icon bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
     <i class="fab fa-facebook-f text-2xl mb-2"></i>
     <span class="text-sm font-medium">Facebook</span>
 </a>
 
-<a href="{{ $data->twitter ?? '#' }}" target="_blank" 
+<a href="{{ $data->twitter ?? '#' }}" target="_blank"
    class="social-icon bg-blue-400 hover:bg-blue-500 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
     <i class="fab fa-twitter text-2xl mb-2"></i>
     <span class="text-sm font-medium">Twitter</span>
 </a>
 
-<a href="{{ $data->instagram ?? '#' }}" target="_blank" 
+<a href="{{ $data->instagram ?? '#' }}" target="_blank"
    class="social-icon bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
     <i class="fab fa-instagram text-2xl mb-2"></i>
     <span class="text-sm font-medium">Instagram</span>
@@ -284,14 +284,14 @@
 
 
 
-<a href="{{ $data->medium ?? '#' }}" target="_blank" 
+<a href="{{ $data->medium ?? '#' }}" target="_blank"
    class="social-icon bg-gray-800 hover:bg-gray-900 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
     <i class="fab fa-medium-m text-2xl mb-2"></i>
     <span class="text-sm font-medium">Medium</span>
 </a>
 
 
-<a href="{{ $data->youtube ?? '#' }}" target="_blank" 
+<a href="{{ $data->youtube ?? '#' }}" target="_blank"
    class="social-icon bg-red-600 hover:bg-red-700 text-white rounded-lg p-4 flex flex-col items-center justify-center transition-all duration-300">
     <i class="fab fa-youtube text-2xl mb-2"></i>
     <span class="text-sm font-medium">YouTube</span>
@@ -301,7 +301,7 @@
                 </div>
 
                 <!-- FAQ Preview -->
-               
+
         </div>
     </div>
 </section>
@@ -332,7 +332,7 @@ if (messageTextarea) {
     messageTextarea.addEventListener('input', function() {
         const length = this.value.length;
         charCount.textContent = length;
-        
+
         if (length > 500) {
             charCount.classList.add('text-red-500');
             this.value = this.value.substring(0, 500);
@@ -347,10 +347,10 @@ if (messageTextarea) {
 // Validation Functions
 function validateStep1() {
     let isValid = true;
-    
+
     // Clear previous errors
     document.querySelectorAll('[id$="-error"]').forEach(el => el.textContent = '');
-    
+
     // Validate name
     const name = document.getElementById('name');
     if (!name.value.trim()) {
@@ -360,7 +360,7 @@ function validateStep1() {
     } else {
         name.classList.remove('border-red-500');
     }
-    
+
     // Validate email
     const email = document.getElementById('email');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -371,7 +371,7 @@ function validateStep1() {
     } else {
         email.classList.remove('border-red-500');
     }
-    
+
     // Validate subject
     const subject = document.getElementById('subject');
     if (!subject.value.trim()) {
@@ -381,16 +381,16 @@ function validateStep1() {
     } else {
         subject.classList.remove('border-red-500');
     }
-    
+
     return isValid;
 }
 
 function validateStep2() {
     let isValid = true;
-    
+
     // Clear previous error
     document.getElementById('message-error').textContent = '';
-    
+
     // Validate message
     const message = document.getElementById('message');
     if (!message.value.trim()) {
@@ -404,7 +404,7 @@ function validateStep2() {
     } else {
         message.classList.remove('border-red-500');
     }
-    
+
     return isValid;
 }
 
@@ -422,4 +422,4 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
 });
 </script>
 
-@include('frontend.footer') 
+@include('frontend.footer')
