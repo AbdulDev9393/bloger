@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta property="og:title" content="{{ $Blog_info->name }}">
+        <meta property="og:description" content="{{ Str::limit(strip_tags($Blog_info->Description),150) }}">
+        <meta property="og:image" content="{{ asset($Blog_info->Thumbnail_Image) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
     @include('frontend.header')
 </head>
 <body>
@@ -183,8 +187,11 @@ a:hover {
 h4{
     font-size: 17px;
 }
+.blog-detail-container{
+    width:80%;
+}
 </style>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<section id="main-content" class="blog-detail">Skip to main content</a>
 
 <section class="blog-detail">
     <div class="blog-detail-container">
