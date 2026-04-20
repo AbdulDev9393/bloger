@@ -191,7 +191,7 @@ h4{
     width:80%;
 }
 </style>
-<section id="main-content" class="blog-detail">Skip to main content</a>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <section class="blog-detail">
     <div class="blog-detail-container">
