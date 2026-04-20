@@ -130,8 +130,10 @@ public function store(Request $request)
         'Banner_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:4096',
          'Resizeable_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:4096',
     ]);
-
-    $blog = new Blog;
+     if($request->Status=="published"){
+                 Blog::clearHomepageCache();
+         }
+     $blog = new Blog;
     $blog->name = $request->name;
     $blog->slug = Str::slug($request->name);
     $blog->category = $request->category;
@@ -325,7 +327,9 @@ public function update(Request $request, $id)
         'Banner_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:4096',
         'Resizeable_Image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:4096',
     ]);
-
+    if($request->Status=="published"){
+                 Blog::clearHomepageCache();
+         }
     $blog = Blog::findOrFail($id);
     $blog->name = $request->name;
     $blog->slug = Str::slug($request->name);
