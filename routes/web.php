@@ -122,4 +122,6 @@ Route::get('/blog/view/{id}/{slug}', function ($id, $slug) {
 Route::get('/blog/{slug}', [BlogController::class, 'blogView'])->name('blogs.view');
 Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
-
+Route::get('/ads.txt', function () {
+    return redirect('https://srv.adstxtmanager.com/19390/techblogs.site', 301);
+});
