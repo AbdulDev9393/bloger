@@ -8,15 +8,7 @@
         <priority>1.0</priority>
     </url>
 
-    @foreach ($pages as $page)
-    <url>
-        <loc>{{ url($page) }}</loc>
-        <lastmod>{{ now()->toAtomString() }}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    @endforeach
-
+   
     @foreach ($blogs as $blog)
     <url>
         <loc>{{ url('/blog/' . $blog->slug) }}</loc>
