@@ -143,7 +143,7 @@ function Services(){
     }
 public function sitemap()
 {
-    $blogs = Blog::latest()->get();
+    $blogs = Blog::latest()->get(['slug', 'updated_at']);
 
     return response()
         ->view('sitemap', compact('blogs'))
