@@ -141,55 +141,12 @@ function Services(){
 
       return view('frontend.about.about', compact('meta_title', 'meta_desc'));
     }
-    public function sitemap()
-    {
-        $blogs = Blog::latest()->get();
-
-        $sitemap  = '<?xml version="1.0" encoding="UTF-8"?>';
-        $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-
-        // Home
-        $sitemap .= '<url>';
-        $sitemap .= '<loc>' . url('/') . '</loc>';
-        $sitemap .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-        $sitemap .= '<changefreq>daily</changefreq>';
-        $sitemap .= '<priority>1.0</priority>';
-        $sitemap .= '</url>';
-
-        // Static pages
-        $pages = [
-            '/blogs',
-            '/about-us',
-            '/contact-us',
-            '/privacy-policy',
-            '/terms-condition',
-            '/cookie-policy',
-        ];
-
-        foreach ($pages as $page) {
-            $sitemap .= '<url>';
-            $sitemap .= '<loc>' . url($page) . '</loc>';
-            $sitemap .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-            $sitemap .= '<changefreq>monthly</changefreq>';
-            $sitemap .= '<priority>0.7</priority>';
-            $sitemap .= '</url>';
-        }
-
-        // Blogs
-        foreach ($blogs as $blog) {
-            $sitemap .= '<url>';
-            $sitemap .= '<loc>' . url('/blog/' . $blog->slug) . '</loc>';
-            $sitemap .= '<lastmod>' . $blog->updated_at->toAtomString() . '</lastmod>';
-            $sitemap .= '<changefreq>weekly</changefreq>';
-            $sitemap .= '<priority>0.8</priority>';
-            $sitemap .= '</url>';
-        }
-
-        $sitemap .= '</urlset>';
-
-        return response($sitemap, 200)
-            ->header('Content-Type', 'application/xml');
-    }
+public function sitemap()
+{
+    $blogs = Blog::latest()->get();
+    return response()->view('sitemap', compact('blogs'))
+        ->header('Content-Type', 'application/xml');
+}
 
   function condition(){
     $meta_title = "Privacy Policy | TechBlogs - Your Data Protection & Privacy Rights";
