@@ -46,7 +46,7 @@ $default_schema = [
 ];
 $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 @endphp
-
+<meta name="monetag" content="eedc2819e3d5c012bfcccc54b267a064">
 <script type="application/ld+json">
     {!! $meta_schema ?? $meta_schema_json !!}
 </script>
@@ -764,7 +764,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                 <span>Contact</span>
             </a>
         </li>
-        
+
     </ul>
 </div>
 
