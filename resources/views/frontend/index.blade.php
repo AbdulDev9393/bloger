@@ -443,6 +443,332 @@ use Illuminate\Support\Str;
         font-size: 20px;
     }
     }
+
+
+        /* ===== TEAM SECTION STYLES ===== */
+    .team-section {
+        padding: 90px 20px;
+        background: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .team-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #4e83fa, #58c918, #f59e0b, #8b5cf6);
+        background-size: 300% 100%;
+        animation: gradientMove 6s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .team-section .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Section Header */
+    .team-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .team-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, rgba(78, 131, 250, 0.1), rgba(88, 201, 24, 0.1));
+        border: 1px solid rgba(78, 131, 250, 0.2);
+        color: #4e83fa;
+        padding: 6px 18px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .team-title {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    .team-title span {
+        background: linear-gradient(135deg, #4e83fa, #58c918);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .team-subtitle {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+
+    /* Team Grid */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    /* Team Card */
+    .team-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 36px 28px;
+        text-align: center;
+        border: 1px solid #eef2ff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .team-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #4e83fa, #58c918);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+        transform-origin: left;
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(78, 131, 250, 0.12);
+        border-color: rgba(78, 131, 250, 0.2);
+    }
+
+    .team-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    /* Avatar */
+    .team-avatar-wrap {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .team-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid transparent;
+        background: linear-gradient(white, white) padding-box,
+                    linear-gradient(135deg, #4e83fa, #58c918) border-box;
+        transition: transform 0.4s ease;
+    }
+
+    .team-card:hover .team-avatar {
+        transform: scale(1.08);
+    }
+
+    /* Online badge */
+    .team-status {
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        width: 18px;
+        height: 18px;
+        background: #22c55e;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3); }
+        50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.1); }
+    }
+
+    /* Member Info */
+    .team-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 6px;
+    }
+
+    .team-role {
+        display: inline-block;
+        background: linear-gradient(135deg, rgba(78, 131, 250, 0.1), rgba(88, 201, 24, 0.08));
+        color: #4e83fa;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 50px;
+        letter-spacing: 0.5px;
+        margin-bottom: 14px;
+    }
+
+    .team-bio {
+        font-size: 0.875rem;
+        color: #64748b;
+        line-height: 1.65;
+        margin-bottom: 20px;
+    }
+
+    /* Stats row */
+    .team-stats {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 14px 0;
+        border-top: 1px solid #f1f5f9;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 20px;
+    }
+
+    .team-stat {
+        text-align: center;
+    }
+
+    .team-stat-num {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1;
+    }
+
+    .team-stat-label {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 3px;
+        display: block;
+    }
+
+    /* Social links */
+    .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .team-social-link {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 14px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .team-social-link:hover {
+        background: linear-gradient(135deg, #4e83fa, #58c918);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(78, 131, 250, 0.25);
+    }
+
+    /* Join CTA */
+    .team-cta {
+        text-align: center;
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border-radius: 24px;
+        padding: 50px 30px;
+        border: 1px dashed #cbd5e1;
+        transition: all 0.3s ease;
+    }
+
+    .team-cta:hover {
+        border-color: #4e83fa;
+        background: linear-gradient(135deg, rgba(78, 131, 250, 0.03), rgba(88, 201, 24, 0.03));
+    }
+
+    .team-cta h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 10px;
+    }
+
+    .team-cta p {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+
+    .btn-join {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #4e83fa, #58c918);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 40px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(78, 131, 250, 0.25);
+    }
+
+    .btn-join:hover {
+        background: linear-gradient(135deg, #ff5500, #ff7700);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 85, 0, 0.3);
+        color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .team-section {
+            padding: 60px 20px;
+        }
+        .team-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+        .team-cta {
+            padding: 36px 20px;
+        }
+    }
+
 </style>
 
 <main>
@@ -529,7 +855,145 @@ use Illuminate\Support\Str;
         </div>
     </section>
 </main>
+<section class="team-section">
+    <div class="container">
 
+        {{-- Section Header --}}
+        <div class="team-header">
+            <div class="team-badge">
+                <i class="fa-solid fa-users"></i>
+                Our Writers
+            </div>
+            <h2 class="team-title">Meet the <span>Team</span> Behind TechBlogs</h2>
+            <p class="team-subtitle">Real people. Real expertise. We research, test, and write every article to help you stay ahead in the world of technology.</p>
+        </div>
+
+        {{-- Team Grid --}}
+        <div class="team-grid">
+
+            {{-- Member 1 --}}
+            <div class="team-card">
+                <div class="team-avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Abdul+Sial&background=4e83fa&color=fff&size=200" alt="Abdul Sial" class="team-avatar" />
+                    <span class="team-status"></span>
+                </div>
+                <h3 class="team-name">Abdul Sial</h3>
+                <span class="team-role">Founder & Lead Writer</span>
+                <p class="team-bio">Tech enthusiast with 5+ years of experience in web development and AI. Passionate about making complex tech simple for everyone.</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <span class="team-stat-num">50+</span>
+                        <span class="team-stat-label">Articles</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">5 yrs</span>
+                        <span class="team-stat-label">Experience</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">AI</span>
+                        <span class="team-stat-label">Specialty</span>
+                    </div>
+                </div>
+                <div class="team-socials">
+                    <a href="https://www.facebook.com/share/17jW53gkza/" target="_blank" class="team-social-link" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://x.com/techblogssite" target="_blank" class="team-social-link" title="Twitter">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/abdulsial93" target="_blank" class="team-social-link" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+            {{-- Member 2 - Aap yahan doosra member add karein --}}
+            <div class="team-card">
+                <div class="team-avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Tech+Writer&background=58c918&color=fff&size=200" alt="Tech Writer" class="team-avatar" />
+                    <span class="team-status"></span>
+                </div>
+                <h3 class="team-name">Team Writer</h3>
+                <span class="team-role">Senior Tech Blogger</span>
+                <p class="team-bio">Covers the latest in mobile technology, gadgets, and software reviews. Always testing the newest devices so you don't have to.</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <span class="team-stat-num">30+</span>
+                        <span class="team-stat-label">Articles</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">3 yrs</span>
+                        <span class="team-stat-label">Experience</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">Mobile</span>
+                        <span class="team-stat-label">Specialty</span>
+                    </div>
+                </div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-link" title="Twitter">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="team-social-link" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://medium.com/@techblogs.site" target="_blank" class="team-social-link" title="Medium">
+                        <i class="fa-brands fa-medium"></i>
+                    </a>
+                </div>
+            </div>
+
+            {{-- Member 3 --}}
+            <div class="team-card">
+                <div class="team-avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=SEO+Expert&background=f59e0b&color=fff&size=200" alt="SEO Expert" class="team-avatar" />
+                    <span class="team-status"></span>
+                </div>
+                <h3 class="team-name">SEO Specialist</h3>
+                <span class="team-role">Content Strategist</span>
+                <p class="team-bio">Ensures every article reaches the right audience. Expert in digital marketing, SEO strategies, and growing online presence.</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <span class="team-stat-num">20+</span>
+                        <span class="team-stat-label">Articles</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">4 yrs</span>
+                        <span class="team-stat-label">Experience</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-stat-num">SEO</span>
+                        <span class="team-stat-label">Specialty</span>
+                    </div>
+                </div>
+                <div class="team-socials">
+                    <a href="#" class="team-social-link" title="Twitter">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="team-social-link" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="team-social-link" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        {{-- End Team Grid --}}
+
+        {{-- Join CTA --}}
+        <div class="team-cta">
+            <h3>✍️ Want to Write for TechBlogs?</h3>
+            <p>We are always looking for passionate tech writers to join our growing team. Share your knowledge with thousands of readers.</p>
+            <a href="{{ route('frontend.contact') ?? 'https://www.techblogs.site/contact-us' }}" class="btn-join">
+                <i class="fa-solid fa-paper-plane"></i>
+                Get In Touch
+            </a>
+        </div>
+
+    </div>
+</section>
 @include('frontend.footer')
 </body>
 </html>
