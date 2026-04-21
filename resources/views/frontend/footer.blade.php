@@ -447,7 +447,7 @@
     footer {
       padding: 50px 20px 30px;
     }
-    
+
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 40px;
@@ -1044,7 +1044,7 @@ $data = SocialMedia::first();
     <!-- Footer bottom -->
     <div class="footer-bottom">
       <div class="footer-copy">
-        © 2025 TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
+     © {{ date('Y') }} TechBlogs.site • Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the tech community
       </div>
 
       <div class="footer-social">
