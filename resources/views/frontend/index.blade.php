@@ -930,17 +930,7 @@ use Illuminate\Support\Str;
                         <span class="team-stat-label">Specialty</span>
                     </div>
                 </div>
-                <div class="team-socials">
-                    <a href="#" class="team-social-link" title="Twitter">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                    <a href="#" class="team-social-link" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://medium.com/@techblogs.site" target="_blank" class="team-social-link" title="Medium">
-                        <i class="fa-brands fa-medium"></i>
-                    </a>
-                </div>
+
             </div>
 
             {{-- Member 3 --}}
@@ -966,17 +956,7 @@ use Illuminate\Support\Str;
                         <span class="team-stat-label">Specialty</span>
                     </div>
                 </div>
-                <div class="team-socials">
-                    <a href="#" class="team-social-link" title="Twitter">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                    <a href="#" class="team-social-link" title="LinkedIn">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="team-social-link" title="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                </div>
+
             </div>
 
         </div>
