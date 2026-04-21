@@ -528,9 +528,7 @@ public function blogView($slug)
         // Author with enhanced details
         "author" => [
             "@type" => "Person",
-            "name" => $authorName,
-            "url" => $authorUrl ?? url()->current(),
-            "sameAs" => $authorUrl ? [$authorUrl] : null
+            "name" => "Muhammad Abdul",
         ],
 
         // Publisher with complete details
