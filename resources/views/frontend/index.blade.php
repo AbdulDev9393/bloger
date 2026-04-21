@@ -308,24 +308,6 @@ use Illuminate\Support\Str;
         color: #64748b;
         font-size: 0.9rem;
     }
-
-    /* ===== REVIEWS SECTION (Premium) ===== */
-    .blog-reviews {
-        background: linear-gradient(135deg, #fefce8 0%, #fef9e3 100%);
-        padding: 10px 20px;
-        position: relative;
-    }
-
-    .blog-reviews::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #4e83fa, #58c918, #ff7700);
-    }
-
     .section-header {
         text-align: center;
         margin-bottom: 3rem;
@@ -342,93 +324,9 @@ use Illuminate\Support\Str;
         margin: 0 auto;
     }
 
-    .reviews-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        margin-bottom: 50px;
-    }
-
-    .review-card {
-        background: white;
-        padding: 30px;
-        border-radius: 28px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-        border: 1px solid #fff0db;
-    }
-
-    .review-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
-    }
 
 
 
-    .review-badge {
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #4e83fa;
-        color: white;
-        padding: 4px 16px;
-        border-radius: 40px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .review-rating {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .stars {
-        color: #fbbf24;
-        font-size: 1.25rem;
-        letter-spacing: 2px;
-    }
-
-    .rating-text {
-        font-weight: 700;
-        color: #0f172a;
-    }
-
-    .review-text {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #334155;
-        margin-bottom: 25px;
-        font-style: italic;
-    }
-
-    .reviewer-info {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding-top: 20px;
-        border-top: 1px solid #f1f5f9;
-    }
-
-    .reviewer-avatar img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .reviewer-details h4 {
-        font-size: 1rem;
-        margin-bottom: 4px;
-        color: #0f172a;
-    }
-
-    .reviewer-role, .review-date {
-        font-size: 0.75rem;
-        color: #64748b;
-    }
     .stat-label {
         font-size: 0.875rem;
         color: #475569;
@@ -531,9 +429,7 @@ use Illuminate\Support\Str;
         .section-title {
             font-size: 2rem;
         }
-        .reviews-container {
-            grid-template-columns: 1fr;
-        }
+
 
         .subscribe-form {
             flex-direction: column;
@@ -629,50 +525,6 @@ use Illuminate\Support\Str;
                         <a href="{{ route('blogs.view', ['slug' => Str::slug($blog->slug)]) }}" class="read-more">Read More →</a>
                     </div>
                 @endforeach
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="blog-reviews">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What Our Readers Say 📝</h2>
-            </div>
-            <div class="reviews-container">
-                <div class="review-card">
-                    <div class="review-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-text">5.0</span>
-                    </div>
-                    <p class="review-text">I've been visiting your site for 3 months, and very good, helpful blogs come on it that guide people on a good path</p>
-                    <div class="reviewer-info">
-                        <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Sarah+J.&background=ff7700&color=fff&size=50" alt="Sarah J."></div>
-                        <div class="reviewer-details"><h4>Yousaf IT Manager</h4></div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-text">4.5</span>
-                    </div>
-                    <p class="review-text">I have been learning things from this site for a long time. I am a student, and after studying, I read helpful content on it</p>
-                    <div class="reviewer-info">
-                        <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=David+K.&background=0066cc&color=fff&size=50" alt="David K."></div>
-                        <div class="reviewer-details"><h4>Samiullah Sai</h4></div>
-                    </div>
-                </div>
-                <div class="review-card ">
-                    <div class="review-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-text">4.5</span>
-                    </div>
-                    <p class="review-text">These blogs are good, and I advise people that this site is built for tech purposes</p>
-                    <div class="reviewer-info">
-                        <div class="reviewer-avatar"><img src="https://ui-avatars.com/api/?name=Emily+R.&background=00aa55&color=fff&size=50" alt="Emily R."></div>
-                        <div class="reviewer-details"><h4>Kathrin US lady</h4></div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
