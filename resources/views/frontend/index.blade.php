@@ -986,7 +986,7 @@ use Illuminate\Support\Str;
         <div class="team-cta">
             <h3>✍️ Want to Write for TechBlogs?</h3>
             <p>We are always looking for passionate tech writers to join our growing team. Share your knowledge with thousands of readers.</p>
-            <a href="{{ route('frontend.contact') ?? 'https://www.techblogs.site/contact-us' }}" class="btn-join">
+            <a href="{{ route('frontend.contect') ?? 'https://www.techblogs.site/contact-us' }}" class="btn-join">
                 <i class="fa-solid fa-paper-plane"></i>
                 Get In Touch
             </a>
