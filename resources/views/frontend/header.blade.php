@@ -764,12 +764,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRE
                 <span>Contact</span>
             </a>
         </li>
-        <li>
-            <a href="{{ route('frontend.cookie') }}" class="mobile-nav-link {{ request()->routeIs('frontend.cookie') ? 'active' : '' }}">
-                <i class="fas fa-envelope"></i>
-                <span>Contact</span>
-            </a>
-        </li>
+        
     </ul>
 </div>
 
