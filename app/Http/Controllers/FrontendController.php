@@ -144,7 +144,9 @@ function Services(){
 public function sitemap()
 {
     $blogs = Blog::latest()->get();
-    return response()->view('sitemap', compact('blogs'))
+
+    return response()
+        ->view('sitemap', compact('blogs'))
         ->header('Content-Type', 'application/xml');
 }
 
