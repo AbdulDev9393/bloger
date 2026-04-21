@@ -120,6 +120,6 @@ Route::get('/blog/view/{id}/{slug}', function ($id, $slug) {
     return redirect()->route('blogs.view', ['slug' => $slug], 301);
 });
 Route::get('/blog/{slug}', [BlogController::class, 'blogView'])->name('blogs.view');
-Route::get('/sitemap2.xml', [FrontendController::class, 'sitemap']);
+Route::get('/sitemap.xml', [FrontendController::class, 'sitemap']);
 Route::get('/sitemap_index.xml', [FrontendController::class, 'sitemap']);
 
