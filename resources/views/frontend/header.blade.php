@@ -17,7 +17,7 @@
     </script>
 @endif
 
-
+<script src="https://quge5.com/88/tag.min.js" data-zone="232266" async data-cfasync="false"></script>
 @php
 $default_schema = [
     "@context" => "https://schema.org",
