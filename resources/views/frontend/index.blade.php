@@ -789,7 +789,7 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
-     <script>(function(s){s.dataset.zone='10908105',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script src="https://quge5.com/88/tag.min.js" data-zone="232267" async data-cfasync="false"></script>
     <!-- HERO - Second Blog -->
     <section class="hero" style="background: linear-gradient(135deg, #ffffff 0%, #fef9e3 100%);">
         <div class="hero-container">
@@ -855,7 +855,7 @@ use Illuminate\Support\Str;
         </div>
     </section>
 </main>
-<script>(function(s){s.dataset.zone='10908105',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script src="https://quge5.com/88/tag.min.js" data-zone="232267" async data-cfasync="false"></script>
 <section class="team-section">
     <div class="container">
 
