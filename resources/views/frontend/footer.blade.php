@@ -579,7 +579,6 @@
   }
   /* ===== COOKIE CONSENT POPUP - ADSENSE COMPLIANT ===== */
 .cookie-consent {
-    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
