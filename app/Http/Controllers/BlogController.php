@@ -13,7 +13,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class BlogController extends Controller
@@ -171,7 +171,7 @@ public function store(Request $request)
     }
 
     $blog->save();
-
+   Cache::increment('blog_cache_version');
     return back()->with('success', 'Blog added successfully!');
 }
 
@@ -410,7 +410,7 @@ public function update(Request $request, $id)
     }
 
     $blog->save();
-
+Cache::increment('blog_cache_version');
     return redirect()->route('admin.blogs')->with('success', 'Blog updated successfully!');
 }   // JSON-LD schema as array
 
