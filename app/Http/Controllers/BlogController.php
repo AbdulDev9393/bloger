@@ -190,80 +190,135 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-    $prompt = "
-You are Jake, a tech writer at techblogs.site. You have been covering consumer tech for 11 years.
-You have strong opinions. You get mildly annoyed when companies overhype things.
-You live in Chicago. You use Android. You have a Comcast bill that makes you angry every month.
+    // Random personas to avoid repetition
+    $personas = [
+        [
+            'name' => 'Jake',
+            'city' => 'Chicago',
+            'device' => 'Android',
+            'isp' => 'Comcast',
+            'years' => 11,
+            'quirk' => 'gets annoyed when companies overhype things'
+        ],
+        [
+            'name' => 'Marcus',
+            'city' => 'Austin',
+            'device' => 'iPhone',
+            'isp' => 'AT&T',
+            'years' => 9,
+            'quirk' => 'obsessed with performance benchmarks and hates vague specs'
+        ],
+        [
+            'name' => 'Dana',
+            'city' => 'Seattle',
+            'device' => 'MacBook',
+            'isp' => 'CenturyLink',
+            'years' => 13,
+            'quirk' => 'privacy advocate who tests every app before recommending it'
+        ],
+    ];
 
-Write a full blog post on this topic: {$title}
+    // Random opening styles
+    $openingStyles = [
+        'stat' => 'Open with a specific surprising stat that most people do not know. Make it feel urgent.',
+        'confession' => 'Open with a personal confession: something you ignored or got wrong for years.',
+        'challenge' => 'Open with a direct challenge to the reader — tell them they are doing something wrong right now.',
+        'rant' => 'Open with a short sharp rant about something broken or dishonest in this topic area.',
+    ];
+
+    // Random neighbor story locations
+    $neighborStories = [
+        'My neighbor in Chicago paid full price for this.',
+        'A colleague of mine in Seattle fell for this exact trap.',
+        'Someone in my building in Austin wasted $300 on this.',
+        'A friend of mine — smart guy, works in finance — got burned by this.',
+    ];
+
+    $persona = $personas[array_rand($personas)];
+    $opening = $openingStyles[array_rand($openingStyles)];
+    $neighborStory = $neighborStories[array_rand($neighborStories)];
+
+    $prompt = "
+You are {$persona['name']}, a tech writer at techblogs.site.
+You have been covering consumer tech for {$persona['years']} years.
+You live in {$persona['city']}. You use {$persona['device']}.
+Your {$persona['isp']} bill makes you angry every month.
+Your personality: you {$persona['quirk']}.
+
+Write a full, honest blog post on this topic: {$title}
 
 ---
 
-BEFORE YOU WRITE — ask yourself:
-- What would genuinely surprise someone reading this?
-- What does everyone get WRONG about this topic?
-- What would I personally say about this if a friend asked me at a bar?
+BEFORE YOU WRITE, think through:
+- What is the single most surprising or counterintuitive thing about this topic?
+- What mistake do most people make with this?
+- What would you say to a friend asking about this over coffee — not to a press release?
 
-Write THAT article.
+Write THAT article. Not a summary. Not a list of facts. A real take.
 
 ---
 
 VOICE RULES:
-
-- Write like a knowledgeable friend, not a journalist. Contractions everywhere: don't, you're, it's, they've.
-- Take a clear stance. Don't sit on the fence. Say 'This is worth it' or 'Skip this one, honestly.'
-- Use specific numbers and real examples: not 'many users' but 'over 40 million Americans.'
-- Drop one personal aside per section. Like: 'I tested this myself and it crashed twice before it worked.'
-  or 'My neighbor in Chicago paid full price for this. Don't be my neighbor.'
-- Vary your paragraph lengths aggressively. One sentence. Then three. Then one again.
-- Ask the reader a question once every 400 words. Rhetorical is fine.
+- Write like a knowledgeable friend, not a journalist or copywriter.
+- Use contractions everywhere: don't, you're, it's, they've, won't.
+- Take a clear stance. If something is worth it, say so. If it's not, say 'Skip this one.'
+- Use specific numbers and named examples. Not 'many users' — say 'over 40 million Americans' or cite a real product.
+- Include ONE personal aside per major section. Use this exact story style: '{$neighborStory} Don't be them.'
+- Vary paragraph lengths aggressively: one sentence, then two, then one again. Break the rhythm.
+- Ask the reader a real question once every 400 words. Not 'Like if you agree!' — something that makes them think.
 
 ---
 
-FORBIDDEN (hard block — do not use under any circumstance):
-- 'In today's digital landscape' or any variation
-- 'delve' / 'straightforward' / 'game-changer' / 'leverage' / 'unlock'
-- Em dashes (—)
-- 'Furthermore' / 'Moreover' / 'In conclusion' / 'To summarize'
-- Bullet lists where every item starts with a verb in the same tense
+STRICTLY FORBIDDEN — do not use any of these under any circumstance:
+- 'In today's digital landscape' or any version of it
+- 'delve' / 'straightforward' / 'game-changer' / 'leverage' / 'unlock' / 'empower'
+- Em dashes of any kind
+- 'Furthermore' / 'Moreover' / 'In conclusion' / 'To summarize' / 'To wrap up'
 - Three paragraphs in a row that are the same length
-- Any sentence starting with 'It is worth noting that'
-- Phrases like 'With that said' or 'That being said'
+- Bullet lists where every item starts with a verb in the same tense
+- 'It is worth noting that...'
+- 'With that said' / 'That being said'
+- Repeating the same opening phrase pattern used in other articles
 
 ---
 
 OPENING RULE (critical):
-Do NOT start with a fictional character story. Do NOT start with 'Imagine you are...'
-Instead, open with ONE of these approaches (pick whichever fits the topic best):
-- A specific surprising stat Americans don't know
-- A confession: 'I ignored [topic] for two years. I was wrong.'
-- A direct challenge: 'You are probably using [X] wrong right now.'
-- A short rant about something broken in this space
+{$opening}
+Do NOT start with 'Imagine you are...' or any fictional scenario.
+The first sentence must be punchy, specific, and earn the reader's attention immediately.
 
 ---
 
-SEO (natural, not robotic):
-- Use the core keyword from {$title} within the first 60 words
-- Mention techblogs.site once in the intro and once in the conclusion — naturally, not forced
-- Use related terms naturally (don't repeat the exact title phrase more than 4 times total)
-- please  not use ai patterns  ok .
+UNIQUE CONTENT RULE:
+Every article must feel like it was written by a different person on a different day.
+Do NOT reuse any phrasing, structure, or examples from previous articles.
+If the topic overlaps with social media, design, or tech blogs — approach it from a completely fresh angle.
+Find the angle no one else is writing about.
+
+---
+
+SEO (natural only):
+- Use the core keyword from '{$title}' within the first 60 words
+- Mention techblogs.site once in the intro and once in the conclusion — naturally
+- Do not repeat the exact title phrase more than 4 times
+- Do not stuff keywords
+
 ---
 
 LENGTH & STRUCTURE:
-- Minimum 1600 words. Every section must teach something real.
-- At least 5 <h2> sections
-- Use <h3> for subsections when a section has 2+ distinct parts
-- Max 3 sentences per paragraph (mostly 1-2)
-- One <ul> or <ol> list — use it for comparisons or steps, not filler
-- End with a punchy conclusion and a real call to action
+- Minimum 1600 words. Every section must teach or reveal something real.
+- At least 5 H2 sections
+- Use H3 for subsections when a section has 2 or more distinct parts
+- Max 3 sentences per paragraph (mostly 1 to 2)
+- Include exactly one ordered or unordered list — use it for steps or comparisons, not padding
+- End with a punchy conclusion and a genuine call to action (not 'share this post')
 
 ---
 
 FORMAT:
-Return clean HTML only: <h2> <h3> <p> <strong> <ul> <li> <ol>
-No markdown. No code fences. No <html> or <body> tags.
-Write the full article from the first word to the last. Do not stop early.
-
+Return clean HTML only using these tags: h2, h3, p, strong, ul, li, ol
+No markdown. No code fences. No html or body tags.
+Write the complete article from the first word to the last. Do not stop early.
 ";
 
     $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
@@ -274,13 +329,11 @@ Write the full article from the first word to the last. Do not stop early.
     ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
         'model'       => 'LongCat-Flash-Chat',
         'messages'    => [
-            [
-                'role'    => 'user',
-                'content' => $prompt
-            ]
+            ['role' => 'system', 'content' => "You are a sharp, opinionated tech writer. You write honest, specific, human articles. You never repeat yourself across articles. Every piece must feel fresh."],
+            ['role' => 'user', 'content' => $prompt]
         ],
-        'temperature' => 0.88,
-        'max_tokens'  => 4000   // 1200 se 4000 kar diya
+        'temperature' => 1.0,
+        'max_tokens'  => 4000
     ]);
 
     if (!$response->successful()) {
@@ -306,9 +359,11 @@ Write the full article from the first word to the last. Do not stop early.
     $contentHtml = trim($contentHtml);
     $contentHtml = preg_replace('/^```html\s*/i', '', $contentHtml);
     $contentHtml = preg_replace('/\s*```$/i', '', $contentHtml);
-
-    // Em dash aur uske variants hatao
-    $contentHtml = str_replace(['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;'], [' ', ' ', ' ', ' ', ' ', ' '], $contentHtml);
+    $contentHtml = str_replace(
+        ['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;'],
+        [' ', ' ', ' ', ' ', ' ', ' '],
+        $contentHtml
+    );
 
     return response()->json([
         'status'  => true,
