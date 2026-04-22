@@ -23,55 +23,58 @@
     margin-left: 110px;
 }
 
-.page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
-.page-header h2 { font-size:24px; font-weight:700; color:var(--dark-color); }
-.btn-primary { background-color: var(--primary-color); color:white; padding:10px 18px; border-radius:8px; border:none; }
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .btn-primary:hover { background-color: var(--primary-hover); }
 
 .form-container {
     background: white;
     padding: 30px;
-    border-radius:12px;
+    border-radius: 12px;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
-.form-group { margin-bottom:20px; }
-.form-label { font-weight:500; margin-bottom:5px; display:block; }
-.form-control, .form-select { width:100%; padding:10px 15px; border:1px solid var(--border-color); border-radius:8px; }
-.form-control:focus, .form-select:focus { outline:none; border-color:var(--primary-color); box-shadow:0 0 0 3px rgba(78,115,223,0.1); }
 
-/* Auto Generate Button Styles */
-#generate-content {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    color: white;
-    padding: 10px 20px;
+.form-group { margin-bottom: 20px; }
+.form-label { font-weight: 500; margin-bottom: 5px; display: block; }
+
+.form-control, .form-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+    box-sizing: border-box;
 }
 
-#generate-content:hover {
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+.form-control:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.1);
 }
 
-#generate-content:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
-}
-
-#generate-content i {
-    font-size: 16px;
-}
-
-/* For the title input and button container */
 .title-with-generate {
     display: flex;
     align-items: center;
@@ -91,12 +94,50 @@
     outline: none;
     box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.1);
 }
+
+#generate-ai {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+}
+
+#generate-ai:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+}
+
+#generate-ai:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#word-count {
+    font-size: 13px;
+    color: #888;
+}
+
+.text-danger { color: var(--danger-color); font-size: 13px; margin-top: 4px; display: block; }
+.mt-2 { margin-top: 8px; }
 </style>
 
 <div class="main-content">
     <div class="page-header">
         <h2><i class="fas fa-edit"></i> Edit Blog</h2>
-        <a href="{{ route('admin.blogs') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.blogs') }}" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </div>
 
     <div class="form-container">
@@ -104,89 +145,103 @@
             @csrf
             @method('PUT')
 
-            <!-- Blog Title with Auto Generate Button -->
+            {{-- Blog Title --}}
             <div class="form-group">
                 <label class="form-label" for="blog-title">Blog Title</label>
                 <div class="title-with-generate">
-                    <input type="text" name="name" id="blog-title" value="{{ old('name', $blog->name) }}" required>
-
+                    <input
+                        type="text"
+                        name="name"
+                        id="blog-title"
+                        class="form-control"
+                        value="{{ old('name', $blog->name) }}"
+                        required
+                    >
+                    <button type="button" id="generate-ai">
+                        🤖 Generate (AI)
+                    </button>
                 </div>
                 @error('name')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
- <button type="button" id="generate-ai" class="btn btn-success mt-2">
-                        🤖 Generate Content (AI)
-                    </button>
-            <!-- Category -->
+
+            {{-- Category --}}
             <div class="form-group">
                 <label class="form-label" for="blog-category">Category</label>
-                <select name="category" class="form-control" required>
+                <select name="category" id="blog-category" class="form-control" required>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ old('category', $blog->Category->id ?? '') == $category->id ? 'selected' : '' }}>
+                        <option
+                            value="{{ $category->id }}"
+                            {{ old('category', $blog->Category->id ?? '') == $category->id ? 'selected' : '' }}
+                        >
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
                 @error('category')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Status -->
+            {{-- Status --}}
             <div class="form-group">
                 <label class="form-label" for="blog-status">Status</label>
                 <select name="Status" id="blog-status" class="form-select" required>
-                    <option value="draft" {{ old('Status', $blog->Status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                    <option value="draft"     {{ old('Status', $blog->Status) == 'draft'     ? 'selected' : '' }}>Draft</option>
                     <option value="published" {{ old('Status', $blog->Status) == 'published' ? 'selected' : '' }}>Published</option>
                     <option value="scheduled" {{ old('Status', $blog->Status) == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
                 </select>
                 @error('Status')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Short Description with CKEditor -->
+            {{-- Short Description (CKEditor) --}}
             <div class="form-group">
-                <label class="form-label" for="blog-description">Short Description</label>
-                <textarea name="Description" id="editor" class="form-control" rows="5" required>{!! old('Description', $blog->Description) !!}</textarea>
-                <div class="mt-2"><span id="word-count">Word Count: 0</span></div>
+                <label class="form-label" for="editor">Short Description</label>
+                <textarea name="Description" id="editor" class="form-control" rows="5" required>
+                    {!! old('Description', $blog->Description) !!}
+                </textarea>
+                <div class="mt-2">
+                    <span id="word-count">Word Count: 0</span>
+                </div>
                 @error('Description')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Thumbnail Image -->
+            {{-- Thumbnail Image --}}
             <div class="form-group">
                 <label class="form-label">Thumbnail Image</label>
                 <input type="file" name="Thumbnail_Image" class="form-control" accept="image/*">
                 @if($blog->Thumbnail_Image)
                     <div class="mt-2">
                         <img src="{{ asset($blog->Thumbnail_Image) }}" alt="Thumbnail" style="width:100px; height:auto; border-radius:5px;">
-                        <small class="d-block">Current thumbnail image</small>
+                        <small class="d-block">Current thumbnail</small>
                     </div>
                 @endif
                 @error('Thumbnail_Image')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Banner Image -->
+            {{-- Banner Image --}}
             <div class="form-group">
                 <label class="form-label">Banner Image</label>
                 <input type="file" name="Banner_Image" class="form-control" accept="image/*">
                 @if($blog->Banner_mage)
                     <div class="mt-2">
                         <img src="{{ asset($blog->Banner_mage) }}" alt="Banner" style="width:200px; height:auto; border-radius:5px;">
-                        <small class="d-block">Current banner image</small>
+                        <small class="d-block">Current banner</small>
                     </div>
                 @endif
                 @error('Banner_Image')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Resizeable Image -->
+            {{-- Resizeable Image --}}
             <div class="form-group">
                 <label class="form-label">Resizeable Image</label>
                 <input type="file" name="Resizeable_Image" class="form-control" accept="image/*">
@@ -197,186 +252,109 @@
                     </div>
                 @endif
                 @error('Resizeable_Image')
-                    <div class="text-danger">{{ $message }}</div>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
 
-            <input type="hidden" id="old_description" value="{!! htmlspecialchars($blog->Description) !!}">
-
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Update Blog
+            </button>
         </form>
     </div>
 </div>
 
+{{-- ✅ صرف ایک Script Block --}}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    let editorInstance;
 
-    // Initialize CKEditor
+    let editorInstance = null;
+
+    // ===========================
+    // CKEditor Initialize
+    // ===========================
     ClassicEditor
         .create(document.querySelector('#editor'))
         .then(editor => {
             editorInstance = editor;
 
-            // Word count function
             const wordCountEl = document.getElementById('word-count');
 
-            const updateWordCount = () => {
-                const text = editor.getData().replace(/<[^>]*>/g, '').trim();
-                const words = text.length > 0 ? text.split(/\s+/).length : 0;
-                wordCountEl.textContent = 'Word Count: ' + words;
-            };
+            function updateWordCount() {
+                const text = editor.getData().replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+                const count = text ? text.split(' ').length : 0;
+                wordCountEl.textContent = 'Word Count: ' + count;
+            }
 
             updateWordCount();
             editor.model.document.on('change:data', updateWordCount);
         })
-        .catch(error => { console.error(error); });
+        .catch(error => console.error('CKEditor Error:', error));
 
-    // Auto Generate button
-    const generateBtn = document.getElementById('generate-content');
-    generateBtn.addEventListener('click', function () {
-        const title = document.getElementById('blog-title').value;
-        const oldDescription = document.getElementById('old_description').value;
 
-        if (!title.trim()) {
-            alert('Please enter a title first');
+    // ===========================
+    // AI Generate Button
+    // ===========================
+    const aiBtn = document.getElementById('generate-ai');
+
+    aiBtn.addEventListener('click', function () {
+
+        const title = document.getElementById('blog-title').value.trim();
+
+        if (!title) {
+            alert('پہلے title لکھیں');
             return;
         }
 
-        generateBtn.disabled = true;
-        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+        if (!editorInstance) {
+            alert('Editor ابھی load ہو رہا ہے، تھوڑا انتظار کریں');
+            return;
+        }
 
-        fetch("{{ route('admin.blogs.generate_content') }}", {
+        // Loading state
+        aiBtn.disabled = true;
+        aiBtn.innerHTML = '⏳ Generating...';
+        editorInstance.setData('<p>Content generate ہو رہا ہے... ⏳</p>');
+
+        fetch("{{ route('admin.ai.generate') }}", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            body: JSON.stringify({
-                title: title,
-                old_description: oldDescription
-            })
+            body: JSON.stringify({ title: title })
         })
-        .then(response => response.json())
+        .then(async res => {
+            const text = await res.text();
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Invalid JSON:', text);
+                throw new Error('Server سے invalid response آیا');
+            }
+        })
         .then(data => {
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
-
-            if (data.success) {
+            if (data.content) {
                 editorInstance.setData(data.content);
             } else {
-                alert("Error: " + data.message);
+                editorInstance.setData('<p style="color:red;">Content نہیں ملا ❌</p>');
+            }
+
+            if (data.title) {
+                document.getElementById('blog-title').value = data.title;
             }
         })
-        .catch(error => {
-            console.error(error);
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '<i class="fas fa-robot"></i> Auto Generate';
-            alert("Something went wrong!");
+        .catch(err => {
+            console.error('Error:', err);
+            editorInstance.setData('<p style="color:red;">Error آ گیا: ' + err.message + ' ❌</p>');
+        })
+        .finally(() => {
+            aiBtn.disabled = false;
+            aiBtn.innerHTML = '🤖 Generate (AI)';
         });
+
     });
-});
-</script>
-
-<script>
-let editorInstance = null;
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    // =========================
-    // ✅ CKEditor INIT (ONLY ONE)
-    // =========================
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            editorInstance = editor;
-
-            const wordCountDisplay = document.getElementById('word-count');
-
-            function countWords(text) {
-                text = text.replace(/<[^>]*>/g, '');
-                text = text.replace(/\s+/g, ' ').trim();
-                return text ? text.split(' ').length : 0;
-            }
-
-            editor.model.document.on('change:data', () => {
-                const data = editor.getData();
-                const count = countWords(data);
-                wordCountDisplay.textContent = `Word Count: ${count}`;
-            });
-        })
-        .catch(error => {
-            console.error('Editor Error:', error);
-        });
-
-
-    // =========================
-    // ✅ AI GENERATE BUTTON
-    // =========================
-    const aiBtn = document.getElementById('generate-ai');
-
-    if (aiBtn) {
-        aiBtn.addEventListener('click', function () {
-
-            let title = document.getElementById('blog-title').value.trim();
-
-            if (!title) {
-                alert('Title likho pehle');
-                return;
-            }
-
-            if (!editorInstance) {
-                alert('Editor abhi load ho raha hai, wait karo');
-                return;
-            }
-
-            // Loading state
-            editorInstance.setData('<p>Generating content... ⏳</p>');
-
-       fetch("{{ route('admin.ai.generate') }}", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    },
-    body: JSON.stringify({ title: title })
-})
-.then(async (res) => {
-
-    const text = await res.text(); // 👈 raw response first
-
-    try {
-        return JSON.parse(text); // try convert to JSON
-    } catch (e) {
-        console.error("Invalid JSON Response:", text);
-        throw new Error("Server returned invalid JSON");
-    }
-
-})
-.then(data => {
-
-    console.log('AI Response:', data);
-
-    // ✅ SAFE CONTENT CHECK (improved)
-    if (data.content) {
-        editorInstance.setData(data.content);
-    } else {
-        editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
-    }
-
-    if (data.title) {
-        document.getElementById('blog-title').value = data.title;
-    }
-
-})
-.catch(err => {
-    console.error('Error:', err);
-    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
-});
-
-        });
-    }
 
 });
 </script>
+
 @endsection
