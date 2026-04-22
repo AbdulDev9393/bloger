@@ -8,8 +8,42 @@
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-
-
+   <url>
+        <loc>{{ url('/blogs') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+   <url>
+        <loc>{{ url('/about-us') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+       <url>
+        <loc>{{ url('/contact-us') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+           <url>
+        <loc>{{ url('/privacy-policy') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+               <url>
+        <loc>{{ url('/terms-condition') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+               <url>
+        <loc>{{ url('/cookie-policy') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
     @foreach ($blogs as $blog)
     <url>
         <loc>{{ url('/blog/' . $blog->slug) }}</loc>
