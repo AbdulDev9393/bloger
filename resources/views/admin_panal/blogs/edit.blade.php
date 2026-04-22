@@ -103,19 +103,21 @@
         <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
+
             <!-- Blog Title with Auto Generate Button -->
             <div class="form-group">
                 <label class="form-label" for="blog-title">Blog Title</label>
                 <div class="title-with-generate">
                     <input type="text" name="name" id="blog-title" value="{{ old('name', $blog->name) }}" required>
-                   
+
                 </div>
                 @error('name')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-
+ <button type="button" id="generate-ai" class="btn btn-success mt-2">
+                        🤖 Generate Content (AI)
+                    </button>
             <!-- Category -->
             <div class="form-group">
                 <label class="form-label" for="blog-category">Category</label>
@@ -200,7 +202,7 @@
             </div>
 
             <input type="hidden" id="old_description" value="{!! htmlspecialchars($blog->Description) !!}">
-            
+
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Blog</button>
         </form>
     </div>
@@ -213,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize CKEditor
     ClassicEditor
         .create(document.querySelector('#editor'))
-        .then(editor => { 
+        .then(editor => {
             editorInstance = editor;
 
             // Word count function
@@ -273,6 +275,108 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Something went wrong!");
         });
     });
+});
+</script>
+
+<script>
+let editorInstance = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // =========================
+    // ✅ CKEditor INIT (ONLY ONE)
+    // =========================
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            editorInstance = editor;
+
+            const wordCountDisplay = document.getElementById('word-count');
+
+            function countWords(text) {
+                text = text.replace(/<[^>]*>/g, '');
+                text = text.replace(/\s+/g, ' ').trim();
+                return text ? text.split(' ').length : 0;
+            }
+
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const count = countWords(data);
+                wordCountDisplay.textContent = `Word Count: ${count}`;
+            });
+        })
+        .catch(error => {
+            console.error('Editor Error:', error);
+        });
+
+
+    // =========================
+    // ✅ AI GENERATE BUTTON
+    // =========================
+    const aiBtn = document.getElementById('generate-ai');
+
+    if (aiBtn) {
+        aiBtn.addEventListener('click', function () {
+
+            let title = document.getElementById('blog-title').value.trim();
+
+            if (!title) {
+                alert('Title likho pehle');
+                return;
+            }
+
+            if (!editorInstance) {
+                alert('Editor abhi load ho raha hai, wait karo');
+                return;
+            }
+
+            // Loading state
+            editorInstance.setData('<p>Generating content... ⏳</p>');
+
+       fetch("{{ route('admin.ai.generate') }}", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ title: title })
+})
+.then(async (res) => {
+
+    const text = await res.text(); // 👈 raw response first
+
+    try {
+        return JSON.parse(text); // try convert to JSON
+    } catch (e) {
+        console.error("Invalid JSON Response:", text);
+        throw new Error("Server returned invalid JSON");
+    }
+
+})
+.then(data => {
+
+    console.log('AI Response:', data);
+
+    // ✅ SAFE CONTENT CHECK (improved)
+    if (data.content) {
+        editorInstance.setData(data.content);
+    } else {
+        editorInstance.setData('<p style="color:red;">No content returned ❌</p>');
+    }
+
+    if (data.title) {
+        document.getElementById('blog-title').value = data.title;
+    }
+
+})
+.catch(err => {
+    console.error('Error:', err);
+    editorInstance.setData('<p style="color:red;">Error generating content ❌</p>');
+});
+
+        });
+    }
+
 });
 </script>
 @endsection
