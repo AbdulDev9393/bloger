@@ -17,7 +17,7 @@
     </script>
 @endif
 
-<script src="https://quge5.com/88/tag.min.js" data-zone="232266" async data-cfasync="false"></script>
+<script>(function(s){s.dataset.zone='10908878',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 @php
 $default_schema = [
     "@context" => "https://schema.org",
