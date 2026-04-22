@@ -450,6 +450,7 @@ public function delete($id)
 
     $blog->delete();
 
+     Cache::increment('blog_cache_version');
     return back()->with('success', 'Blog deleted successfully');
 }
 public function blogView($slug)
