@@ -16,7 +16,10 @@
         {!! $breadcrumb_schema_encoded !!}
     </script>
 @endif
-<script>(function(s){s.dataset.zone='10908878',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6175688413021049"
+     crossorigin="anonymous"></script>
+     <meta name="google-adsense-account" content="ca-pub-6175688413021049">
 @php
 $default_schema = [
     "@context" => "https://schema.org",
@@ -43,7 +46,7 @@ $default_schema = [
 ];
 $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 @endphp
-<meta name="monetag" content="eedc2819e3d5c012bfcccc54b267a064">
+
 <script type="application/ld+json">
     {!! $meta_schema ?? $meta_schema_json !!}
 </script>
