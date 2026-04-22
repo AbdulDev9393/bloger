@@ -28,24 +28,44 @@ $default_schema = [
     "image" => "https://techblogs.site/favicon.ico",
     "author" => [
         "@type" => "Person",
-        "name" => "Admin"
+        "name" => "TechBlogs Admin",
+        "url" => "https://techblogs.site/about"
     ],
     "publisher" => [
         "@type" => "Organization",
         "name" => "TechBlogs",
         "logo" => [
             "@type" => "ImageObject",
-            "url" => url()->current()
+            "url" => "https://techblogs.site/logo.png",
+            "width" => 600,
+            "height" => 60
+        ],
+        "url" => "https://techblogs.site",
+        "sameAs" => [
+            "https://www.facebook.com/techblogs",
+            "https://twitter.com/techblogs",
+            "https://www.linkedin.com/company/techblogs"
         ]
     ],
     "description" => "Stay updated with the latest technology trends, tips, gadgets, software reviews, and insightful tech articles on TechBlogs.",
     "mainEntityOfPage" => [
         "@type" => "WebPage",
         "@id" => url()->current()
+    ],
+    "datePublished" => "2023-01-01T00:00:00+00:00",
+    "dateModified" => date("Y-m-d\TH:i:sP"),
+    "inLanguage" => "en-US",
+    "isAccessibleForFree" => true,
+    "copyrightYear" => date("Y"),
+    "copyrightHolder" => [
+        "@type" => "Organization",
+        "name" => "TechBlogs"
     ]
 ];
-$meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+
+$meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 @endphp
+
 
 <script type="application/ld+json">
     {!! $meta_schema ?? $meta_schema_json !!}
