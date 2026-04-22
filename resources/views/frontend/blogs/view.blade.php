@@ -205,6 +205,7 @@ h4{
     top: 10px;
 }
 </style>
+<body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <section class="blog-detail">
