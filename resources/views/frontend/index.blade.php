@@ -789,7 +789,7 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
-  <script src="https://quge5.com/88/tag.min.js" data-zone="232267" async data-cfasync="false"></script>
+
     <!-- HERO - Second Blog -->
     <section class="hero" style="background: linear-gradient(135deg, #ffffff 0%, #fef9e3 100%);">
         <div class="hero-container">
@@ -855,7 +855,6 @@ use Illuminate\Support\Str;
         </div>
     </section>
 </main>
-<script src="https://quge5.com/88/tag.min.js" data-zone="232267" async data-cfasync="false"></script>
 <section class="team-section">
     <div class="container">
 
