@@ -606,7 +606,7 @@ public function blogView($slug)
             ];
         }
     }
-    dd($faq_schema);
+     dd($schema_array);
     return view('frontend.blogs.view', [
         'Blog_info' => $Blog_info,
         'meta_title' => $meta_title,
