@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\BlogSeo;
+use App\Models\Product;
 use App\Models\SocialMedia;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
@@ -54,6 +55,7 @@ private function getIndexPageData()
     $meta_desc  = "TechBlogs.site brings you the latest Tech Products, AI updates, Products updates mobile reviews, gadgets, and digital trends.";
     $meta_keywords="tech blogs, technology insights, latest tech news, AI news, artificial intelligence, AI in healthcare, AI tools 2026, software development, web development, Laravel tutorials, PHP development, programming tips, coding best practices, SEO strategies, website security, tech trends USA, mobile technology news, gadget reviews, developer guides, cloud computing, API integration, machine learning, future of AI, tech tutorials, coding for beginners, freelance development, earn money online tech, startup technology, innovation news";
     $latestBlog = Blog::where('status', 'published')->latest('id')->first();
+        $products = Product::latest()->limit(6)->get();
 
     // Other Blogs
     $secondLatestBlog = Blog::where('status', 'published')->latest('id')->skip(1)->first();
@@ -93,7 +95,8 @@ private function getIndexPageData()
         'techCount',
         'techinfo',
         'techhealth',
-        'blogs'
+        'blogs',
+        'products'
     );
 }
 public function Contectus() {

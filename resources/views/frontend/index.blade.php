@@ -1096,15 +1096,15 @@ use Illuminate\Support\Str;
         <!-- Filter Tabs (Optional) -->
 
         <!-- Products Grid -->
-        <div class="pro-grid" id="proGrid">
-            <!-- Product 1 - Headphones -->
+        @foreach ($products as $product)
+            <div class="pro-grid" id="proGrid">
             <div class="pro-card" data-category="audio">
                 <div class="pro-card-img">
-                    <img src="https://www.techblogs.site/storage/blogs/webp/1776763949_resizeable_69e7442deed1a.webp" alt="Wireless Headphones">
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                 </div>
                 <div class="pro-card-content">
-                    <h3 class="pro-product-name">SoniCore Pro</h3>
-                    <p class="pro-product-desc">Wireless ANC headphones with 40h battery life</p>
+                    <h3 class="pro-product-name">      {{ \Illuminate\Support\Str::limit($product->name, 20) }}</h3>
+                    <p class="pro-product-desc">        {{ Str::limit($product->description, 40) }}</p>
                     <div class="pro-rating">
                         <span class="pro-stars">★★★★★</span>
                     </div>
@@ -1117,10 +1117,8 @@ use Illuminate\Support\Str;
                     </div>
                 </div>
             </div>
-
-
-
         </div>
+        @endforeach
 
         <!-- View All Button -->
         <div class="pro-view-all">
