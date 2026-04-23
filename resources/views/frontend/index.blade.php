@@ -957,7 +957,10 @@ use Illuminate\Support\Str;
     display: flex;
     gap: 12px;
 }
-
+.pro-btn-group a:hover{
+    background: black;
+    color: white;
+}
 .pro-btn-cart {
     flex: 1;
     background: #0f172a;
