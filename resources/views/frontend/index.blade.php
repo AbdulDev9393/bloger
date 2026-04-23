@@ -1110,7 +1110,6 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="pro-price-row">
                         <span class="pro-current-price">$89.99</span>
-                        <span class="pro-old-price">$139.99</span>
                         <span class="pro-discount">Save $50</span>
                     </div>
                     <div class="pro-btn-group">
