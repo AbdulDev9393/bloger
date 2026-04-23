@@ -23,14 +23,17 @@
             max-height: 450px;
         }
 
-        #productImage {
-            width: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            transition: transform 0.3s ease, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
+       .product-image-wrapper {
+    background: linear-gradient(145deg, #ffffff 0%, #f9f9fc 100%);
+    border-radius: 28px;
+    padding: 1rem;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.02);
 
+    height: 450px;   /* 👈 fixed height better */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
         #productImage:hover {
             transform: scale(1.01);
             box-shadow: 0 12px 24px -10px rgba(0,0,0,0.15);
