@@ -1155,18 +1155,11 @@ use Illuminate\Support\Str;
     <div class="pro-container">
         <!-- Header -->
         <div class="pro-header">
-            <span class="pro-badge">Shop The Collection</span>
             <h2 class="pro-title">Featured <span>Tech Products</span></h2>
             <p class="pro-subtitle">Curated gadgets and gear we personally recommend. Quality tested, performance guaranteed.</p>
         </div>
 
         <!-- Filter Tabs (Optional) -->
-        <div class="pro-tabs">
-            <button class="pro-tab-btn active" data-filter="all">All</button>
-            <button class="pro-tab-btn" data-filter="audio">Audio</button>
-            <button class="pro-tab-btn" data-filter="wearables">Wearables</button>
-            <button class="pro-tab-btn" data-filter="accessories">Accessories</button>
-        </div>
 
         <!-- Products Grid -->
         <div class="pro-grid" id="proGrid">
