@@ -76,14 +76,13 @@
                             </span>
                         </td>
 
-
                         <!-- Actions -->
                         <td>
-                            <a href="{{ route('admin.product.eid',$product->id) }}" class="btn btn-sm btn-outline-primary me-1">
+                            <a href="{{ route('admin.product.eid', $product->id) }}" class="btn btn-sm btn-outline-primary me-1">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="{{ route('admin.product.delete',$product->id) }}" class="btn btn-sm btn-outline-danger">
+                            <a href="{{ route('admin.product.delete', $product->id) }}" class="btn btn-sm btn-outline-danger">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>
@@ -99,23 +98,20 @@
                 </table>
             </div>
 
-            <!-- Pagination (Optional) -->
-           <div class="d-flex justify-content-between align-items-center mt-3">
-
-    <small class="text-muted">
-        Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}
-        of {{ $products->total() }} products
-    </small>
-
-    {{ $products->links('pagination::bootstrap-5') }}
-
-</div>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <small class="text-muted">
+                    Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}
+                    of {{ $products->total() }} products
+                </small>
+                {{ $products->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </div>
 
 </div>
 
-<!-- ✅ LARGER Add Product Modal (Spacious & Open) -->
+<!-- Add Product Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -138,12 +134,12 @@
                         <input type="text" name="name" class="form-control form-control-lg" placeholder="e.g., UltraBoost Wireless Headphones" required>
                     </div>
 
-                 <!-- Description with TinyMCE Editor -->
-<div class="mb-4">
-    <label class="form-label fw-semibold fs-5">Description <span class="text-danger">*</span></label>
-<textarea name="description" id="description"></textarea>
-    <div class="form-text mt-2">Write a detailed product description with formatting options</div>
-</div>
+                    <!-- Description with TinyMCE Editor -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold fs-5">Description <span class="text-danger">*</span></label>
+                        <textarea name="description" id="description"></textarea>
+                        <div class="form-text mt-2">Write a detailed product description with formatting options</div>
+                    </div>
 
                     <!-- Price & Discount Row -->
                     <div class="row mb-4">
@@ -193,7 +189,7 @@
 
                     <!-- Status Toggle -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold fs-5">Product Varified</label>
+                        <label class="form-label fw-semibold fs-5">Product Verified</label>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" value="1" checked style="width: 3rem; height: 1.5rem;">
                         </div>
@@ -264,9 +260,8 @@
         }
     }
 </style>
-<!-- Replace the entire scripts section at the bottom of your file with this -->
 
-<!-- TinyMCE Script with your API Key -->
+<!-- TinyMCE Script -->
 <script src="https://cdn.tiny.cloud/1/5cac4ba4977cd08b03558cab6973b9bc604f906527c73898960c0e295a63f728/tinymce/6/tinymce.min.js"></script>
 
 <script>
@@ -280,4 +275,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
 @endsection
