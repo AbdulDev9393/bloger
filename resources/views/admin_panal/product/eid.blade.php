@@ -79,6 +79,28 @@
     </select>
 </div>
                 <!-- Current Image -->
+                <!-- Rating -->
+<div class="mb-3">
+    <label class="form-label">Rating (1 - 5 Stars)</label>
+
+    <select name="rating" class="form-select">
+        <option value="0">No Rating</option>
+        <option value="1" {{ $product->rating == 1 ? 'selected' : '' }}>1 Star</option>
+        <option value="2" {{ $product->rating == 2 ? 'selected' : '' }}>2 Stars</option>
+        <option value="3" {{ $product->rating == 3 ? 'selected' : '' }}>3 Stars</option>
+        <option value="4" {{ $product->rating == 4 ? 'selected' : '' }}>4 Stars</option>
+        <option value="5" {{ $product->rating == 5 ? 'selected' : '' }}>5 Stars</option>
+    </select>
+</div>
+<div class="text-warning">
+    @for($i = 1; $i <= 5; $i++)
+        @if($i <= $product->rating)
+            ★
+        @else
+            ☆
+        @endif
+    @endfor
+</div>
                 <div class="mb-3">
                     <label class="form-label">Current Image</label><br>
 

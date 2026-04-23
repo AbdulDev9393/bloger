@@ -116,7 +116,7 @@ public function store(Request $request)
     $product->final_price = $final_price;
     $product->stock = $request->stock;
     $product->category = $request->category;
-
+      $product->rating = $request->rating;
     // Image update
     if ($request->hasFile('image')) {
         $file = $request->file('image');
