@@ -534,16 +534,19 @@ public function blogView($slug)
         "@type" => "BlogPosting",
 
         "@id" => url()->current(),
-        "mainEntityOfPage" => url()->current(),
-
+        "mainEntityOfPage" => [
+                "@type" => "WebPage",
+                "@id" => url()->current()
+            ],
         "headline" => $meta_title,
         "description" => $meta_desc,
 
-        "image" => [
-            "@type" => "ImageObject",
-            "url" => $image
-        ],
-
+       "image" => [
+    "@type" => "ImageObject",
+    "url" => $image,
+    "width" => 1200,
+    "height" => 630
+],
         "author" => [
             "@type" => "Person",
             "name" => $authorName
@@ -552,10 +555,12 @@ public function blogView($slug)
         "publisher" => [
             "@type" => "Organization",
             "name" => "TechBlogs",
-            "logo" => [
-                "@type" => "ImageObject",
-                "url" => asset('images/logo.png')
-            ]
+           "logo" => [
+    "@type" => "ImageObject",
+    "url" => asset('images/logo.png'),
+    "width" => 600,
+    "height" => 60
+]
         ],
 
         "datePublished" => optional($Blog_info->created_at)->toIso8601String(),
