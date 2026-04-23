@@ -901,16 +901,6 @@ use Illuminate\Support\Str;
     padding: 20px 20px 24px;
 }
 
-.pro-category {
-    font-size: 0.7rem;
-    color: #4e83fa;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    display: block;
-}
-
 .pro-product-name {
     font-size: 1rem;
     font-weight: 600;
@@ -940,10 +930,6 @@ use Illuminate\Support\Str;
     letter-spacing: 2px;
 }
 
-.pro-reviews {
-    font-size: 0.7rem;
-    color: #8a99aa;
-}
 
 /* Price */
 .pro-price-row {
@@ -958,12 +944,6 @@ use Illuminate\Support\Str;
     font-size: 1.3rem;
     font-weight: 700;
     color: #0a0a0a;
-}
-
-.pro-old-price {
-    font-size: 0.85rem;
-    color: #9aa9b9;
-    text-decoration: line-through;
 }
 
 .pro-discount {
@@ -1123,12 +1103,10 @@ use Illuminate\Support\Str;
                     <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🎧&font=awesome" alt="Wireless Headphones">
                 </div>
                 <div class="pro-card-content">
-                    <span class="pro-category">Audio</span>
                     <h3 class="pro-product-name">SoniCore Pro</h3>
                     <p class="pro-product-desc">Wireless ANC headphones with 40h battery life</p>
                     <div class="pro-rating">
                         <span class="pro-stars">★★★★★</span>
-                        <span class="pro-reviews">(142)</span>
                     </div>
                     <div class="pro-price-row">
                         <span class="pro-current-price">$89.99</span>
