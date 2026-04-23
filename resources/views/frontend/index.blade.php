@@ -1092,10 +1092,6 @@ use Illuminate\Support\Str;
         <div class="pro-header">
             <h2 class="pro-title">Top<span>Tech Products</span></h2>
         </div>
-
-        <!-- Filter Tabs (Optional) -->
-
-        <!-- Products Grid -->
         @foreach ($products as $product)
             <div class="pro-grid" id="proGrid">
             <div class="pro-card" data-category="audio">
@@ -1127,8 +1123,6 @@ use Illuminate\Support\Str;
             </div>
         </div>
         @endforeach
-
-        <!-- View All Button -->
         <div class="pro-view-all">
             <a href="#" class="pro-view-link" onclick="alert('Full catalog coming soon'); return false;">
                 View All Products <i class="fas fa-arrow-right"></i>
@@ -1136,7 +1130,6 @@ use Illuminate\Support\Str;
         </div>
     </div>
 </section>
-    <!-- HERO - Second Blog -->
     <section class="hero" style="background: linear-gradient(135deg, #ffffff 0%, #fef9e3 100%);">
         <div class="hero-container">
             <div class="hero-image">
@@ -1150,8 +1143,6 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
-
-    <!-- Latest Blogs Grid -->
     <section class="blogs-section">
         <div class="container">
             <h2 class="section-title">Latest Blogs</h2>
@@ -1178,7 +1169,6 @@ use Illuminate\Support\Str;
             View All Blogs →
         </a>
     </div>
-    <!-- Trending Blogs Grid -->
     <section class="blogs-section" style="background: #f8fafc;">
         <div class="container">
             <h2 class="section-title">Top Trending Blogs</h2>
@@ -1203,8 +1193,6 @@ use Illuminate\Support\Str;
 </main>
 <section class="team-section">
     <div class="container">
-
-        {{-- Section Header --}}
         <div class="team-header">
             <div class="team-badge">
                 <i class="fa-solid fa-users"></i>
@@ -1213,11 +1201,7 @@ use Illuminate\Support\Str;
             <h2 class="team-title">Meet the <span>Team</span> Behind TechBlogs</h2>
             <p class="team-subtitle">Real people. Real expertise. We research, test, and write every article to help you stay ahead in the world of technology.</p>
         </div>
-
-        {{-- Team Grid --}}
         <div class="team-grid">
-
-            {{-- Member 1 --}}
             <div class="team-card">
                 <div class="team-avatar-wrap">
                     <img src="https://ui-avatars.com/api/?name=Abdul+Sial&background=4e83fa&color=fff&size=200" alt="Abdul Sial" class="team-avatar" />
@@ -1252,8 +1236,6 @@ use Illuminate\Support\Str;
                     </a>
                 </div>
             </div>
-
-            {{-- Member 2 - Aap yahan doosra member add karein --}}
             <div class="team-card">
                 <div class="team-avatar-wrap">
                     <img src="https://ui-avatars.com/api/?name=Tech+Writer&background=58c918&color=fff&size=200" alt="Tech Writer" class="team-avatar" />
@@ -1276,10 +1258,7 @@ use Illuminate\Support\Str;
                         <span class="team-stat-label">Specialty</span>
                     </div>
                 </div>
-
             </div>
-
-            {{-- Member 3 --}}
             <div class="team-card">
                 <div class="team-avatar-wrap">
                     <img src="https://ui-avatars.com/api/?name=SEO+Expert&background=f59e0b&color=fff&size=200" alt="SEO Expert" class="team-avatar" />
@@ -1302,13 +1281,8 @@ use Illuminate\Support\Str;
                         <span class="team-stat-label">Specialty</span>
                     </div>
                 </div>
-
             </div>
-
         </div>
-        {{-- End Team Grid --}}
-
-        {{-- Join CTA --}}
         <div class="team-cta">
             <h3>✍️ Want to Write for TechBlogs?</h3>
             <p>We are always looking for passionate tech writers to join our growing team. Share your knowledge with thousands of readers.</p>
@@ -1317,7 +1291,6 @@ use Illuminate\Support\Str;
                 Get In Touch
             </a>
         </div>
-
     </div>
 </section>
 @include('frontend.footer')
