@@ -769,7 +769,7 @@ use Illuminate\Support\Str;
         }
     }
 .pro-section {
-    padding: 10px 20px;
+    padding: 17px 20px;
     background: #ffffff;
     position: relative;
 }
