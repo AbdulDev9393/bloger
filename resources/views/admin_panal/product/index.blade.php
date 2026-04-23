@@ -60,7 +60,7 @@
                         <!-- Description -->
                         <td style="max-width: 250px;">
                             <span class="text-muted small">
-                                {{ Str::limit($product->description, 80) }}
+                               {{ Str::limit(strip_tags($product->description), 80) }}
                             </span>
                         </td>
 
