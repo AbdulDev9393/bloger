@@ -20,6 +20,7 @@
             padding: 1rem;
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.02);
             transition: all 0.2s ease;
+            max-height: 450px;
         }
 
         #productImage {
