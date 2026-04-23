@@ -139,11 +139,12 @@
                     </div>
 
                     <!-- Description -->
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold fs-5">Description</label>
-                        <textarea name="description" class="form-control" rows="4" placeholder="Write a compelling product description..."></textarea>
-                        <div class="form-text mt-2">Briefly describe the features, benefits, and unique selling points of your product.</div>
-                    </div>
+                   <div class="mb-4">
+    <label class="form-label fw-semibold fs-5">Description</label>
+
+    <textarea name="description" id="description" class="form-control" rows="6"></textarea>
+
+</div>
 
                     <!-- Price & Discount Row -->
                     <div class="row mb-4">
@@ -264,5 +265,18 @@
         }
     }
 </style>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
 
+<script>
+tinymce.init({
+    selector: '#description',
+    height: 300,
+    menubar: true,
+    plugins: [
+        'link', 'lists', 'table', 'code', 'wordcount'
+    ],
+    toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link | code',
+    content_style: "body { font-family:Arial,sans-serif; font-size:14px }"
+});
+</script>
 @endsection
