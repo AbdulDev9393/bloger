@@ -333,7 +333,11 @@
         </div>
 
     </div>
-
+<div class="container mt-4">
+    <div class="description-box w-100">
+        {!! $product->description !!}
+    </div>
+</div>
 </div>
 
 <!-- ZOOM MODAL (exactly same structure & ids, no functional change) -->
