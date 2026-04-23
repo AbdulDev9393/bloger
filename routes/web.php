@@ -34,6 +34,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
+Route::get('/product/{slug}',[FrontendController::class,'product'])->name('frontend.product');
 Route::get('/contact-us',[FrontendController::class,'Contectus'])->name('frontend.contect');
 
 Route::get('/blogs',[FrontendController::class,'bogs'])->name('frontend.blogs');

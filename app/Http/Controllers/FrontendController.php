@@ -165,5 +165,8 @@ public function sitemap()
             compact('getBlogs')
         );
   }
-
+  function product($slug){
+     $product=Product::where('slug',$slug)->first();
+     dd($product);
+  }
 }

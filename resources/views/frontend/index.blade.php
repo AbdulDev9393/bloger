@@ -1117,7 +1117,9 @@ use Illuminate\Support\Str;
                     </span>
                     </div>
                     <div class="pro-btn-group">
-                        <button class="pro-btn-cart" > <i class="fas fa-info-circle"></i> View Details</button>
+                        <a href="{{ route('frontend.product',$product->slug ) }}" class="pro-btn-cart">
+                           <i class="fas fa-info-circle"></i> View Details
+                        </a>
                     </div>
                 </div>
             </div>
