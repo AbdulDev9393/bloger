@@ -5,7 +5,7 @@
     <title>{{ $product->name }}</title>
 
     <style>
-     
+
 
         .container {
             max-width: 1280px;
@@ -39,6 +39,7 @@
         .btn-zoom {
             background: #1e293b;
             border: none;
+            color: white;
             padding: 0.5rem 1.2rem;
             font-weight: 500;
             font-size: 0.85rem;
