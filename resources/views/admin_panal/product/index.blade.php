@@ -55,7 +55,7 @@
 
                         <!-- Name -->
                         <td class="fw-semibold">
-                            {{ $product->name }}
+                            {{ \Illuminate\Support\Str::limit($product->name, 50) }}
                         </td>
 
                         <!-- Description -->
