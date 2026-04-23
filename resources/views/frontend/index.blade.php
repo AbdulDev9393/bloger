@@ -1100,7 +1100,7 @@ use Illuminate\Support\Str;
             <!-- Product 1 - Headphones -->
             <div class="pro-card" data-category="audio">
                 <div class="pro-card-img">
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🎧&font=awesome" alt="Wireless Headphones">
+                    <img src="https://www.techblogs.site/storage/blogs/webp/1776763949_resizeable_69e7442deed1a.webp" alt="Wireless Headphones">
                 </div>
                 <div class="pro-card-content">
                     <h3 class="pro-product-name">SoniCore Pro</h3>
