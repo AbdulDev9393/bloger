@@ -305,7 +305,6 @@
                     @endfor
                 </div>
 
-                <!-- DESCRIPTION (exactly same {!! !!} but enriched background) -->
                 <div class="description-box">
                     {!! $product->description !!}
                 </div>
