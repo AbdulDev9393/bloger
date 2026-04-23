@@ -25,9 +25,9 @@
 
             <h2 class="fw-bold">{{ $product->name }}</h2>
 
-            <p class="text-muted">
-                {{!! $product->description !!}}
-            </p>
+           <p class="text-muted">
+    {!! $product->description !!}
+</p>
 
             <h4 class="text-primary">
                 ${{ number_format($product->final_price ?? $product->price, 2) }}
