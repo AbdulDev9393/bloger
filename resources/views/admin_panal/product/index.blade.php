@@ -164,10 +164,9 @@
 
                     <!-- Status Toggle -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold fs-5">Product Status</label>
+                        <label class="form-label fw-semibold fs-5">Product Varified</label>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" value="1" checked style="width: 3rem; height: 1.5rem;">
-                            <label class="form-check-label ms-2">Active (Visible to customers)</label>
                         </div>
                     </div>
 
