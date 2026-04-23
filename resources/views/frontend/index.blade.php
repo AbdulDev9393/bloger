@@ -768,7 +768,369 @@ use Illuminate\Support\Str;
             padding: 36px 20px;
         }
     }
+.pro-section {
+    padding: 100px 20px;
+    background: #ffffff;
+    position: relative;
+}
 
+.pro-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Section Header - Professional */
+.pro-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.pro-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #4e83fa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.pro-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.pro-title span {
+    color: #4e83fa;
+}
+
+.pro-subtitle {
+    font-size: 1rem;
+    color: #5a6874;
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Filter Tabs */
+.pro-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.pro-tab-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.pro-tab-btn:hover {
+    border-color: #4e83fa;
+    color: #4e83fa;
+}
+
+.pro-tab-btn.active {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: white;
+}
+
+/* Product Grid - 4 columns professional */
+.pro-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 50px;
+}
+
+/* Product Card - Clean & Professional */
+.pro-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #edf2f7;
+    position: relative;
+}
+
+.pro-card:hover {
+    transform: translateY(-6px);
+    border-color: #e2e8f0;
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+}
+
+/* Image Container */
+.pro-card-img {
+    position: relative;
+    background: #fafbfc;
+    padding: 24px;
+    text-align: center;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.pro-card-img img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.pro-card:hover .pro-card-img img {
+    transform: scale(1.03);
+}
+
+/* Badge (Sale/New) */
+.pro-sale-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.pro-new-badge {
+    background: #4e83fa;
+}
+
+/* Content */
+.pro-card-content {
+    padding: 20px 20px 24px;
+}
+
+.pro-category {
+    font-size: 0.7rem;
+    color: #4e83fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pro-product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0a0a0a;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.pro-product-desc {
+    font-size: 0.8rem;
+    color: #6c7a8a;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* Rating */
+.pro-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.pro-stars {
+    color: #f5b042;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.pro-reviews {
+    font-size: 0.7rem;
+    color: #8a99aa;
+}
+
+/* Price */
+.pro-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.pro-current-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0a0a0a;
+}
+
+.pro-old-price {
+    font-size: 0.85rem;
+    color: #9aa9b9;
+    text-decoration: line-through;
+}
+
+.pro-discount {
+    font-size: 0.7rem;
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Buttons */
+.pro-btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.pro-btn-cart {
+    flex: 1;
+    background: #0f172a;
+    border: none;
+    padding: 10px 0;
+    border-radius: 30px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: inherit;
+}
+
+.pro-btn-cart:hover {
+    background: #4e83fa;
+}
+
+.pro-btn-wishlist {
+    width: 38px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #8a99aa;
+}
+
+.pro-btn-wishlist:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+/* View All Button */
+.pro-view-all {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pro-view-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background: transparent;
+    border: 2px solid #e2e8f0;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #1e293b;
+    transition: all 0.25s ease;
+}
+
+.pro-view-link:hover {
+    border-color: #4e83fa;
+    color: #4e83fa;
+    gap: 12px;
+}
+
+/* Trust Badges */
+.pro-trust {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #edf2f7;
+}
+
+.pro-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #5a6874;
+    font-size: 0.85rem;
+}
+
+.pro-trust-item i {
+    font-size: 1.2rem;
+    color: #4e83fa;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .pro-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 800px) {
+    .pro-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .pro-trust {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 500px) {
+    .pro-grid {
+        grid-template-columns: 1fr;
+    }
+    .pro-section {
+        padding: 60px 16px;
+    }
+}
+
+/* Animation */
+.pro-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: proFadeUp 0.5s ease forwards;
+}
+
+@keyframes proFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pro-card:nth-child(1) { animation-delay: 0.05s; }
+.pro-card:nth-child(2) { animation-delay: 0.1s; }
+.pro-card:nth-child(3) { animation-delay: 0.15s; }
+.pro-card:nth-child(4) { animation-delay: 0.2s; }
 </style>
 
 <main>
@@ -789,7 +1151,196 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
+<section class="pro-section">
+    <div class="pro-container">
+        <!-- Header -->
+        <div class="pro-header">
+            <span class="pro-badge">Shop The Collection</span>
+            <h2 class="pro-title">Featured <span>Tech Products</span></h2>
+            <p class="pro-subtitle">Curated gadgets and gear we personally recommend. Quality tested, performance guaranteed.</p>
+        </div>
 
+        <!-- Filter Tabs (Optional) -->
+        <div class="pro-tabs">
+            <button class="pro-tab-btn active" data-filter="all">All</button>
+            <button class="pro-tab-btn" data-filter="audio">Audio</button>
+            <button class="pro-tab-btn" data-filter="wearables">Wearables</button>
+            <button class="pro-tab-btn" data-filter="accessories">Accessories</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="pro-grid" id="proGrid">
+            <!-- Product 1 - Headphones -->
+            <div class="pro-card" data-category="audio">
+                <div class="pro-card-img">
+                    <span class="pro-sale-badge">-35%</span>
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🎧&font=awesome" alt="Wireless Headphones">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Audio</span>
+                    <h3 class="pro-product-name">SoniCore Pro</h3>
+                    <p class="pro-product-desc">Wireless ANC headphones with 40h battery life</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★★</span>
+                        <span class="pro-reviews">(142)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$89.99</span>
+                        <span class="pro-old-price">$139.99</span>
+                        <span class="pro-discount">Save $50</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: SoniCore Pro')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 - Smart Watch -->
+            <div class="pro-card" data-category="wearables">
+                <div class="pro-card-img">
+                    <span class="pro-sale-badge pro-new-badge">New</span>
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=⌚&font=awesome" alt="Smart Watch">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Wearables</span>
+                    <h3 class="pro-product-name">Chrono Elite 3</h3>
+                    <p class="pro-product-desc">AMOLED display, heart rate, GPS, 10-day battery</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★☆</span>
+                        <span class="pro-reviews">(89)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$199.00</span>
+                        <span class="pro-old-price">$299.00</span>
+                        <span class="pro-discount">-33%</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Chrono Elite 3')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 - Mechanical Keyboard -->
+            <div class="pro-card" data-category="accessories">
+                <div class="pro-card-img">
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=⌨️&font=awesome" alt="Keyboard">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Peripherals</span>
+                    <h3 class="pro-product-name">MechType K3</h3>
+                    <p class="pro-product-desc">Wireless mechanical, hot-swappable, RGB backlit</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★★</span>
+                        <span class="pro-reviews">(234)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$79.99</span>
+                        <span class="pro-old-price">$119.99</span>
+                        <span class="pro-discount">-33%</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: MechType K3')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 - Portable SSD -->
+            <div class="pro-card" data-category="accessories">
+                <div class="pro-card-img">
+                    <span class="pro-sale-badge">Hot</span>
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=💾&font=awesome" alt="SSD">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Storage</span>
+                    <h3 class="pro-product-name">Viper SSD 1TB</h3>
+                    <p class="pro-product-desc">USB-C 3.2, 2000MB/s read, rugged design</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★★</span>
+                        <span class="pro-reviews">(178)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$94.99</span>
+                        <span class="pro-old-price">$149.99</span>
+                        <span class="pro-discount">-37%</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Viper SSD')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 - Gaming Mouse -->
+            <div class="pro-card" data-category="accessories">
+                <div class="pro-card-img">
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🖱️&font=awesome" alt="Gaming Mouse">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Gaming</span>
+                    <h3 class="pro-product-name">Phantom X1</h3>
+                    <p class="pro-product-desc">Ultra-light 49g, 26K DPI, 8 programmable buttons</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★☆</span>
+                        <span class="pro-reviews">(312)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$49.99</span>
+                        <span class="pro-old-price">$79.99</span>
+                        <span class="pro-discount">-38%</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Phantom X1')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 - USB-C Hub -->
+            <div class="pro-card" data-category="accessories">
+                <div class="pro-card-img">
+                    <span class="pro-sale-badge pro-new-badge">Top Pick</span>
+                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🔌&font=awesome" alt="USB Hub">
+                </div>
+                <div class="pro-card-content">
+                    <span class="pro-category">Docks</span>
+                    <h3 class="pro-product-name">UltraHub 8-in-1</h3>
+                    <p class="pro-product-desc">4K HDMI, 100W PD, Ethernet, SD card slot</p>
+                    <div class="pro-rating">
+                        <span class="pro-stars">★★★★★</span>
+                        <span class="pro-reviews">(98)</span>
+                    </div>
+                    <div class="pro-price-row">
+                        <span class="pro-current-price">$59.99</span>
+                        <span class="pro-old-price">$99.99</span>
+                        <span class="pro-discount">-40%</span>
+                    </div>
+                    <div class="pro-btn-group">
+                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: UltraHub')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View All Button -->
+        <div class="pro-view-all">
+            <a href="#" class="pro-view-link" onclick="alert('Full catalog coming soon'); return false;">
+                View All Products <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="pro-trust">
+            <div class="pro-trust-item"><i class="fas fa-truck-fast"></i> Free Shipping</div>
+            <div class="pro-trust-item"><i class="fas fa-rotate-left"></i> 30-Day Returns</div>
+            <div class="pro-trust-item"><i class="fas fa-shield-heart"></i> 2-Year Warranty</div>
+            <div class="pro-trust-item"><i class="fas fa-lock"></i> Secure Checkout</div>
+        </div>
+    </div>
+</section>
     <!-- HERO - Second Blog -->
     <section class="hero" style="background: linear-gradient(135deg, #ffffff 0%, #fef9e3 100%);">
         <div class="hero-container">
