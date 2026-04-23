@@ -312,7 +312,7 @@
                 <!-- PRICE (exactly uses $product->final_price ?? $product->price) -->
                 <div class="price-wrapper">
                     <span class="final-price">
-                        ${{ number_format($product->final_price ?? $product->price, 2) }}
+                        {{-- ${{ number_format($product->final_price ?? $product->price, 2) }} --}}
                     </span>
                     @if($product->discount > 0)
                         <span class="original-price">
@@ -321,7 +321,6 @@
                     @endif
                 </div>
 
-                <!-- DISCOUNT badge (preserved discount variable) -->
                 @if($product->discount > 0)
                     <div class="mt-2">
                         <span class="discount-badge text-white">
@@ -333,7 +332,7 @@
                 <!-- BUTTONS (unchanged actions, same buttons but styled) -->
                 <div class="action-buttons">
                     <button class="btn btn-primary-custom text-white">
-                         Message 
+                         Message
                     </button>
                 </div>
             </div>
