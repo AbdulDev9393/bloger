@@ -39,32 +39,6 @@
                     </thead>
                     <tbody>
                         <!-- Sample Product Row 1 -->
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <img src="https://www.techblogs.site/storage/blogs/webp/1776763949_resizeable_69e7442deed1a.webp"
-                                     alt="Product"
-                                     style="width: 50px; height: 50px; object-fit: cover;"
-                                     class="rounded-2">
-                            </td>
-                            <td class="fw-semibold">SoniCore Pro</td>
-                            <td style="max-width: 250px;">
-                                <span class="text-muted small">
-                                    Experience studio-grade sound with active noise cancellation and 40 hours of battery life.
-                                </span>
-                            </td>
-                            <td>$139.99</td>
-                            <td><span class="badge bg-danger">36%</span></td>
-                            <td class="fw-bold text-primary">$89.99</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
 
                         <!-- Sample Product Row 2 -->
                         <tr>
@@ -91,30 +65,7 @@
                             </td>
                         </tr>
 
-                        <!-- Sample Product Row 3 -->
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <div class="bg-secondary rounded-2" style="width: 50px; height: 50px;"></div>
-                            </td>
-                            <td class="fw-semibold">GamerX Mechanical Keyboard</td>
-                            <td style="max-width: 250px;">
-                                <span class="text-muted small">
-                                    RGB backlit mechanical keyboard with blue switches and programmable macros.
-                                </span>
-                            </td>
-                            <td>$89.99</td>
-                            <td><span class="badge bg-warning text-dark">10%</span></td>
-                            <td class="fw-bold text-primary">$80.99</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
