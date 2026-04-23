@@ -1086,7 +1086,7 @@ use Illuminate\Support\Str;
                     </div>
                     <div class="pro-price-row">
                         <span class="pro-current-price">
-                            ${{ number_format($product->final_price ?? $product->price, 2) }}
+                            ${{ number_format( $product->price, 2) }}
                         </span>
                        <span class="pro-discount">
                         @if($product->discount > 0)
