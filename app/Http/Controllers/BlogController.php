@@ -593,27 +593,13 @@ public function blogView($slug)
         ]
     ];
 
-    // ✅ FAQ (only if valid format)
-    $faq_schema = null;
-    if ($seo && $seo->faq_data) {
-        $faqData = json_decode($seo->faq_data, true);
 
-        if (is_array($faqData)) {
-            $faq_schema = [
-                "@context" => "https://schema.org",
-                "@type" => "FAQPage",
-                "mainEntity" => $faqData
-            ];
-        }
-    }
-     dd($faq_schema);
     return view('frontend.blogs.view', [
         'Blog_info' => $Blog_info,
         'meta_title' => $meta_title,
         'meta_desc' => $meta_desc,
         'meta_schema' => json_encode($schema_array, JSON_UNESCAPED_SLASHES),
         'breadcrumb_schema_encoded' => json_encode($breadcrumb_schema, JSON_UNESCAPED_SLASHES),
-        'faq_schema_encoded' => $faq_schema ? json_encode($faq_schema, JSON_UNESCAPED_SLASHES) : null,
         'meta_keywords' => $seo->keywords ?? ''
     ]);
 }
