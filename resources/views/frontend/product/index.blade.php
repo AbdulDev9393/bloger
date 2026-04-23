@@ -312,13 +312,10 @@
                 <!-- PRICE (exactly uses $product->final_price ?? $product->price) -->
                 <div class="price-wrapper">
                     <span class="final-price">
-                        ${{ number_format($product->final_price ?? $product->price, 2) }}
-                    </span>
-                    @if($product->discount > 0)
-                        <span class="original-price">
                             ${{ number_format($product->price, 2) }}
-                        </span>
-                    @endif
+
+                    </span>
+                  
                 </div>
 
                 @if($product->discount > 0)
