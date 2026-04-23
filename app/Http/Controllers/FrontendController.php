@@ -84,7 +84,7 @@ private function getIndexPageData()
               ->where('status', 'published')
               ->groupBy('category');
     })->get();
-
+   dd($products);
     return compact(
         'meta_title',
         'meta_desc',
