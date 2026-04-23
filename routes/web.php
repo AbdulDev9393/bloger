@@ -91,6 +91,7 @@ Route::get('/admin/product',[ProductController::class,'index'])->name('admin.pro
 Route::post('/admin/product/store',[ProductController::class,'store'])->name('admin.product.store');
 Route::get('/admin/product/eid/{id}',[ProductController::class,'eid'])->name('admin.product.eid');
 Route::put('/admin/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+Route::get('/admin/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
 
 

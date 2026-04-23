@@ -128,4 +128,11 @@ public function store(Request $request)
 
     return redirect()->route('admin.product')->with('success', 'Product updated successfully!');
 }
+
+ function delete($id){
+    $product = Product::findOrFail($id);
+   $product->delete();
+    return redirect()->route('admin.product')->with('success', 'Product deleted successfully!');
+
+ }
 }
