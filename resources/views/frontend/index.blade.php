@@ -1109,7 +1109,9 @@ use Illuminate\Support\Str;
                         <span class="pro-stars">★★★★★</span>
                     </div>
                     <div class="pro-price-row">
-                        <span class="pro-current-price">$89.99</span>
+                        <span class="pro-current-price">
+                            ${{ number_format($product->final_price ?? $product->price, 2) }}
+                        </span>
                         <span class="pro-discount">Save $50</span>
                     </div>
                     <div class="pro-btn-group">
