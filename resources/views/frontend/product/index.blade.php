@@ -265,6 +265,16 @@
                 transform: translateY(0);
             }
         }
+        .description-box {
+    width: 100%;
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1f2a3e;
+    border-left: 4px solid #3b82f6;
+}
     </style>
 </head>
 
@@ -331,7 +341,11 @@
                 </div>
             </div>
         </div>
-
+<div class="container mt-4">
+    <div class="description-box w-100">
+        {!! $product->description !!}
+    </div>
+</div>
     </div>
 
 </div>
