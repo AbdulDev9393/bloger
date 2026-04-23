@@ -87,6 +87,7 @@ public function store(Request $request)
     $product->is_active = $request->is_active ? 1 : 0;
 
     $product->save();
+   Cache::increment('blog_cache_version');
 
     return back()->with('success', 'Product added successfully!');
 }
@@ -125,6 +126,7 @@ public function store(Request $request)
     }
 
     $product->save();
+   Cache::increment('blog_cache_version');
 
     return redirect()->route('admin.product')->with('success', 'Product updated successfully!');
 }
@@ -132,6 +134,8 @@ public function store(Request $request)
  function delete($id){
     $product = Product::findOrFail($id);
    $product->delete();
+   Cache::increment('blog_cache_version');
+
     return redirect()->route('admin.product')->with('success', 'Product deleted successfully!');
 
  }
