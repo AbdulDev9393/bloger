@@ -79,7 +79,7 @@
 
                         <!-- Actions -->
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary me-1">
+                            <a href="{{ route('admin.product.eid',$product->id) }}" class="btn btn-sm btn-outline-primary me-1">
                                 <i class="fas fa-edit"></i>
                             </a>
 

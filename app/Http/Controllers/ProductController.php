@@ -90,4 +90,8 @@ public function store(Request $request)
 
     return back()->with('success', 'Product added successfully!');
 }
+
+ function eid($id){
+    dd($id);
+ }
 }
