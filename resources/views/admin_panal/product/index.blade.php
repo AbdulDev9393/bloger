@@ -142,7 +142,7 @@
                    <div class="mb-4">
     <label class="form-label fw-semibold fs-5">Description</label>
 
-    <textarea name="description" id="description" class="form-control" rows="6"></textarea>
+   <textarea name="description" id="description"></textarea>
 
 </div>
 
@@ -265,18 +265,15 @@
         }
     }
 </style>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <script>
-tinymce.init({
-    selector: '#description',
-    height: 300,
-    menubar: true,
-    plugins: [
-        'link', 'lists', 'table', 'code', 'wordcount'
-    ],
-    toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link | code',
-    content_style: "body { font-family:Arial,sans-serif; font-size:14px }"
+$('#description').summernote({
+    height: 200
 });
 </script>
 @endsection
