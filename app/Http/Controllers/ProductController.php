@@ -126,6 +126,6 @@ public function store(Request $request)
 
     $product->save();
 
-    return redirect()->route('admin.products')->with('success', 'Product updated successfully!');
+    return redirect()->route('admin.product')->with('success', 'Product updated successfully!');
 }
 }
