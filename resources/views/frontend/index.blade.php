@@ -696,36 +696,7 @@ use Illuminate\Support\Str;
     }
 
     /* Join CTA */
-    .team-cta {
-        text-align: center;
-        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-        border-radius: 24px;
-        padding: 50px 30px;
-        border: 1px dashed #cbd5e1;
-        transition: all 0.3s ease;
-    }
 
-    .team-cta:hover {
-        border-color: #4e83fa;
-        background: linear-gradient(135deg, rgba(78, 131, 250, 0.03), rgba(88, 201, 24, 0.03));
-    }
-
-    .team-cta h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin-bottom: 10px;
-    }
-
-    .team-cta p {
-        color: #64748b;
-        font-size: 0.95rem;
-        margin-bottom: 24px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.6;
-    }
 
     .btn-join {
         display: inline-flex;
@@ -764,9 +735,7 @@ use Illuminate\Support\Str;
         .team-grid {
             grid-template-columns: 1fr;
         }
-        .team-cta {
-            padding: 36px 20px;
-        }
+
     }
 .pro-section {
     padding: 17px 20px;
@@ -1288,14 +1257,7 @@ use Illuminate\Support\Str;
                 </div>
             </div>
         </div>
-        <div class="team-cta">
-            <h3>✍️ Want to Write for TechBlogs?</h3>
-            <p>We are always looking for passionate tech writers to join our growing team. Share your knowledge with thousands of readers.</p>
-            <a href="{{ route('frontend.contect') ?? 'https://www.techblogs.site/contact-us' }}" class="btn-join">
-                <i class="fa-solid fa-paper-plane"></i>
-                Get In Touch
-            </a>
-        </div>
+       
     </div>
 </section>
 @include('frontend.footer')
