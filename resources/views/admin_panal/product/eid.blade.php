@@ -53,12 +53,31 @@
                 </div>
 
                 <!-- Category -->
-                <div class="mb-3">
-                    <label class="form-label">Category</label>
-                    <input type="text" name="category" class="form-control"
-                           value="{{ $product->category }}">
-                </div>
+             <div class="mb-4">
+    <label class="form-label fw-semibold fs-5">Category</label>
 
+    <select name="category" class="form-select form-select-lg">
+
+        <option value="">Select Category</option>
+
+        <option value="electronics" {{ $product->category == 'electronics' ? 'selected' : '' }}>
+            Electronics
+        </option>
+
+        <option value="audio" {{ $product->category == 'audio' ? 'selected' : '' }}>
+            Audio
+        </option>
+
+        <option value="wearables" {{ $product->category == 'wearables' ? 'selected' : '' }}>
+            Wearables
+        </option>
+
+        <option value="accessories" {{ $product->category == 'accessories' ? 'selected' : '' }}>
+            Accessories
+        </option>
+
+    </select>
+</div>
                 <!-- Current Image -->
                 <div class="mb-3">
                     <label class="form-label">Current Image</label><br>
