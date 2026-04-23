@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     function index(){
-       return view('admin_panal.product.index');
+        $products=Product::latest()->paginate(20);
+       return view('admin_panal.product.index',compact('products'));
     }
 public function store(Request $request)
 {

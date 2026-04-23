@@ -38,34 +38,68 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Sample Product Row 1 -->
+                    @forelse($products as $product)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
 
-                        <!-- Sample Product Row 2 -->
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="bg-secondary rounded-2" style="width: 50px; height: 50px;"></div>
-                            </td>
-                            <td class="fw-semibold">UltraWatch Series 5</td>
-                            <td style="max-width: 250px;">
-                                <span class="text-muted small">
-                                    Smartwatch with heart rate monitor, GPS, and 7-day battery life.
-                                </span>
-                            </td>
-                            <td>$249.99</td>
-                            <td><span class="badge bg-success">15%</span></td>
-                            <td class="fw-bold text-primary">$212.49</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        <!-- Image -->
+                        <td>
+                            @if($product->image)
+                                <img src="{{ asset($product->image) }}"
+                                    style="width:50px; height:50px; object-fit:cover;"
+                                    class="rounded">
+                            @else
+                                <div class="bg-secondary rounded-2" style="width:50px; height:50px;"></div>
+                            @endif
+                        </td>
 
+                        <!-- Name -->
+                        <td class="fw-semibold">
+                            {{ $product->name }}
+                        </td>
 
+                        <!-- Description -->
+                        <td style="max-width: 250px;">
+                            <span class="text-muted small">
+                                {{ Str::limit($product->description, 80) }}
+                            </span>
+                        </td>
+
+                        <!-- Price -->
+                        <td>
+                            ${{ number_format($product->price, 2) }}
+                        </td>
+
+                        <!-- Discount -->
+                        <td>
+                            <span class="badge bg-success">
+                                {{ $product->discount ?? 0 }}%
+                            </span>
+                        </td>
+
+                        <!-- Final Price -->
+                        <td class="fw-bold text-primary">
+                            ${{ number_format($product->final_price, 2) }}
+                        </td>
+
+                        <!-- Actions -->
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-primary me-1">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a href="#" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            No products found 😔
+                        </td>
+                    </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
