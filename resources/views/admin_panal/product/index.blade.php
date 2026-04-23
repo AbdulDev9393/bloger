@@ -60,7 +60,7 @@
                         <!-- Description -->
                         <td style="max-width: 250px;">
                             <span class="text-muted small">
-                                {{ Str::limit($product->description, 80) }}
+                                {!! Str::limit(strip_tags($product->description), 80) !!}
                             </span>
                         </td>
 
@@ -99,25 +99,22 @@
                 </table>
             </div>
 
-            <!-- Pagination (Optional) -->
+            <!-- Pagination -->
            <div class="d-flex justify-content-between align-items-center mt-3">
-
-    <small class="text-muted">
-        Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}
-        of {{ $products->total() }} products
-    </small>
-
-    {{ $products->links('pagination::bootstrap-5') }}
-
-</div>
+                <small class="text-muted">
+                    Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}
+                    of {{ $products->total() }} products
+                </small>
+                {{ $products->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     </div>
 
 </div>
 
-<!-- ✅ LARGER Add Product Modal (Spacious & Open) -->
+<!-- ADD PRODUCT MODAL -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content rounded-4 border-0 shadow-lg">
 
             <div class="modal-header bg-primary text-white rounded-top-4 py-3">
@@ -138,13 +135,12 @@
                         <input type="text" name="name" class="form-control form-control-lg" placeholder="e.g., UltraBoost Wireless Headphones" required>
                     </div>
 
-                    <!-- Description -->
-                   <div class="mb-4">
-    <label class="form-label fw-semibold fs-5">Description</label>
-
-   <textarea name="description" id="description"></textarea>
-
-</div>
+                    <!-- Description with Summernote Text Pad -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold fs-5">Description <span class="text-danger">*</span></label>
+                        <textarea name="description" id="summernote-description" class="form-control" required></textarea>
+                        <div class="form-text mt-2">Write a detailed product description with formatting options (bold, italic, lists, links, etc.)</div>
+                    </div>
 
                     <!-- Price & Discount Row -->
                     <div class="row mb-4">
@@ -185,18 +181,19 @@
                         <div class="form-text mt-2">Upload a high-quality image (JPG, PNG, WebP). Max size: 2MB</div>
                     </div>
 
-                    <!-- Additional Images (Optional) -->
+                    <!-- Additional Images -->
                     <div class="mb-4">
                         <label class="form-label fw-semibold fs-5">Additional Images</label>
                         <input type="file" name="additional_images[]" class="form-control form-control-lg" accept="image/*" multiple>
-                        <div class="form-text mt-2">You can select multiple images (Hold Ctrl to select multiple)</div>
+                        <div class="form-text mt-2">You can select multiple images (Hold Ctrl/Cmd to select multiple)</div>
                     </div>
 
                     <!-- Status Toggle -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold fs-5">Product Varified</label>
+                        <label class="form-label fw-semibold fs-5">Product Verified</label>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" name="is_active" value="1" checked style="width: 3rem; height: 1.5rem;">
+                            <label class="form-check-label ms-2">Mark as verified/active</label>
                         </div>
                     </div>
 
@@ -264,16 +261,61 @@
             opacity: 1;
         }
     }
+
+    /* Summernote custom styling */
+    .note-editor {
+        border-radius: 0.5rem !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    .note-editor.note-frame {
+        border-radius: 0.5rem;
+    }
+
+    .note-toolbar {
+        border-top-left-radius: 0.5rem !important;
+        border-top-right-radius: 0.5rem !important;
+        background-color: #f8f9fa !important;
+    }
+
+    .note-editable {
+        min-height: 250px !important;
+        background-color: white;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
 </style>
+
+<!-- Required Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <script>
-$('#description').summernote({
-    height: 200
-});
+    $(document).ready(function() {
+        // Initialize Summernote with full toolbar
+        $('#summernote-description').summernote({
+            height: 300,
+            placeholder: 'Write a detailed description of your product...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'italic', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+                ['height', ['height']]
+            ],
+            callbacks: {
+                onImageUpload: function(files) {
+                    // Handle image upload to server (optional)
+                    console.log('Image uploaded:', files);
+                }
+            }
+        });
+    });
 </script>
+
 @endsection
