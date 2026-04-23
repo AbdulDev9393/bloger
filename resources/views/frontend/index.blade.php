@@ -1112,7 +1112,13 @@ use Illuminate\Support\Str;
                         <span class="pro-current-price">
                             ${{ number_format($product->final_price ?? $product->price, 2) }}
                         </span>
-                        <span class="pro-discount">Save $50</span>
+                       <span class="pro-discount">
+                        @if($product->discount > 0)
+                            Save {{ $product->discount }}%
+                        @else
+                            No Discount
+                        @endif
+                    </span>
                     </div>
                     <div class="pro-btn-group">
                         <button class="pro-btn-cart" > <i class="fas fa-info-circle"></i> View Details</button>
