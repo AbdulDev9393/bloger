@@ -1074,7 +1074,15 @@ use Illuminate\Support\Str;
                     <h3 class="pro-product-name">      {{ \Illuminate\Support\Str::limit($product->name, 20) }}</h3>
                     <p class="pro-product-desc">        {{ Str::limit($product->description, 40) }}</p>
                     <div class="pro-rating">
-                        <span class="pro-stars">★★★★★</span>
+                        <div class="text-warning">
+    @for($i = 1; $i <= 5; $i++)
+        @if($i <= $product->rating)
+            ★
+        @else
+            ☆
+        @endif
+    @endfor
+</div>
                     </div>
                     <div class="pro-price-row">
                         <span class="pro-current-price">
@@ -1257,7 +1265,7 @@ use Illuminate\Support\Str;
                 </div>
             </div>
         </div>
-       
+
     </div>
 </section>
 @include('frontend.footer')
