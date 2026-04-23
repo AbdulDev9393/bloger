@@ -261,19 +261,16 @@
     }
 </style>
 
-<!-- TinyMCE Script -->
-<script src="https://cdn.tiny.cloud/1/5cac4ba4977cd08b03558cab6973b9bc604f906527c73898960c0e295a63f728/tinymce/6/tinymce.min.js"></script>
+<!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/2fn2qok1i074fbk2msagi14crpyw9jr99nnw7grj0swaatwa/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    tinymce.init({
-        selector: '#description',
-        height: 350,
-        plugins: 'lists link table code help wordcount',
-        toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | link | code',
-        menubar: false
-    });
-});
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
 </script>
 
 @endsection
