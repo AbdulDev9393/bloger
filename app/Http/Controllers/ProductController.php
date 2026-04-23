@@ -77,6 +77,7 @@ public function store(Request $request)
     $product->name = $request->name;
     $product->slug = Str::slug($request->name);
     $product->description = $request->description;
+    $product->rating = $request->rating ?? 0;
     $product->price = $request->price;
     $product->discount = $discount;
     $product->final_price = $final_price;

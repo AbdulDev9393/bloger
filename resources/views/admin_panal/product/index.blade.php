@@ -172,7 +172,17 @@
                             <option value="accessories">Accessories</option>
                         </select>
                     </div>
-
+             <div class="mb-4">
+    <label class="form-label fw-semibold fs-5">Rating (1 - 5)</label>
+    <select name="rating" class="form-select form-select-lg">
+        <option value="0">No Rating</option>
+        <option value="1">1 Star</option>
+        <option value="2">2 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5">5 Stars</option>
+    </select>
+</div>
                     <!-- Product Image Upload -->
                     <div class="mb-4">
                         <label class="form-label fw-semibold fs-5">Product Image</label>
