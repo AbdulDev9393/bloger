@@ -1113,8 +1113,7 @@ use Illuminate\Support\Str;
                         <span class="pro-discount">Save $50</span>
                     </div>
                     <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: SoniCore Pro')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" ><i class="far fa-heart"></i></button>
+                        <button class="pro-btn-cart" ><i class="fas fa-shopping-bag"></i> Add to Cart</button>
                     </div>
                 </div>
             </div>
