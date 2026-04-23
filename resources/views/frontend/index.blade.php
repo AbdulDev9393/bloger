@@ -1174,9 +1174,6 @@ use Illuminate\Support\Str;
                 View All Products <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-
-        <!-- Trust Badges -->
-        
     </div>
 </section>
     <!-- HERO - Second Blog -->
