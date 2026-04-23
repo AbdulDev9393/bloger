@@ -88,6 +88,7 @@ Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_upda
 
 
 Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
+Route::get('/admin/product/store',[ProductController::class,'store'])->name('admin.product.store');
 
 
 
