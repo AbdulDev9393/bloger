@@ -275,19 +275,26 @@
     <div class="row g-4 align-items-start">
 
         <!-- IMAGE SECTION (improved visual wrapper, same variables & functions) -->
-        <div class="col-md-6">
-            <div class="product-image-wrapper">
-                <img id="productImage"
-                    src="{{ asset($product->image) }}"
-                    style="width:100%; height:100%; object-fit:contain; border-radius:16px;"
-                    alt="{{ $product->name }}">
-            </div>
-            <div class="mt-3 d-flex justify-content-start">
-                <button class="btn btn-zoom" onclick="openZoom()">
-                    🔍 Zoom Image
-                </button>
-            </div>
-        </div>
+     <div class="col-md-6">
+
+    <div class="product-image-wrapper">
+        <img id="productImage"
+            src="{{ asset($product->image) }}"
+            style="width:100%; height:100%; object-fit:contain; border-radius:16px;"
+            alt="{{ $product->name }}">
+    </div>
+
+    <div class="mt-4 description-box">
+        {!! $product->description !!}
+    </div>
+
+    <div class="mt-3 d-flex justify-content-start">
+        <button class="btn btn-zoom" onclick="openZoom()">
+            🔍 Zoom Image
+        </button>
+    </div>
+
+</div>
 
         <!-- INFO SECTION (redesigned card, keeps all original variables) -->
         <div class="col-md-6">
@@ -305,16 +312,14 @@
                     @endfor
                 </div>
 
-                <div class="description-box">
-                    {!! $product->description !!}
-                </div>
+
 
                 <!-- PRICE (exactly uses $product->final_price ?? $product->price) -->
                 <div class="price-wrapper">
                     <span class="final-price">
                      ${{ number_format($product->price, 2) }}
                     </span>
-                   
+
                 </div>
 
                 @if($product->discount > 0)
