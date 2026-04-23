@@ -768,7 +768,372 @@ use Illuminate\Support\Str;
             padding: 36px 20px;
         }
     }
+    /* ===== PRODUCTS SECTION STYLES (Fully standalone, no conflicts) ===== */
+        .products-showcase {
+            padding: 80px 20px;
+            background: linear-gradient(145deg, #ffffff 0%, #fef9f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
+        .products-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4e83fa, #58c918, #ff7700, #4e83fa);
+            background-size: 300% 100%;
+            animation: productGradientMove 8s ease infinite;
+        }
+
+        @keyframes productGradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .products-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Header */
+        .products-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .products-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(78, 131, 250, 0.12), rgba(88, 201, 24, 0.1));
+            border: 1px solid rgba(78, 131, 250, 0.25);
+            color: #4e83fa;
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        .products-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .products-title span {
+            background: linear-gradient(135deg, #4e83fa, #58c918);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .products-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Product Grid - Modern responsive */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 40px 0 30px;
+        }
+
+        /* Product Card 3D / Glassmorphism */
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(0px);
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(203, 213, 225, 0.4);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 45px -12px rgba(78, 131, 250, 0.25);
+            border-color: rgba(78, 131, 250, 0.5);
+            background: white;
+        }
+
+        /* Badge (hot / new / sale) */
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 2;
+            background: linear-gradient(135deg, #ff5500, #ff7700);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 40px;
+            box-shadow: 0 4px 10px rgba(255, 85, 0, 0.3);
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(2px);
+        }
+
+        .product-badge.hot {
+            background: linear-gradient(135deg, #f97316, #ef4444);
+        }
+
+        .product-badge.new {
+            background: linear-gradient(135deg, #4e83fa, #58c918);
+        }
+
+        /* Image container */
+        .product-img-wrapper {
+            width: 100%;
+            padding: 30px 20px 20px;
+            background: linear-gradient(145deg, #fafcff, #f1f5f9);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 0.9;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        /* content area */
+        .product-info {
+            padding: 20px 20px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #4e83fa;
+            background: rgba(78, 131, 250, 0.1);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            width: fit-content;
+            margin-bottom: 12px;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-description {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .current-price small {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .old-price {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: #fef2e8;
+            color: #ff5500;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            margin-left: 6px;
+        }
+
+        /* Rating stars */
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .rating-count {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        /* Buttons */
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-buy {
+            flex: 1;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border: none;
+            padding: 12px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-buy i {
+            font-size: 0.9rem;
+        }
+
+        .btn-buy:hover {
+            background: linear-gradient(135deg, #4e83fa, #58c918);
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(78, 131, 250, 0.3);
+        }
+
+        .btn-wishlist {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            width: 44px;
+            border-radius: 44px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        .btn-wishlist:hover {
+            background: #fee2e2;
+            color: #ef4444;
+            border-color: #fecaca;
+            transform: translateY(-2px);
+        }
+
+        /* View all button */
+        .products-footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            border: 2px solid #cbd5e1;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: #1e293b;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-view-all:hover {
+            border-color: #4e83fa;
+            background: #f8fafc;
+            gap: 16px;
+            color: #4e83fa;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive touches */
+        @media (max-width: 640px) {
+            .products-showcase {
+                padding: 60px 16px;
+            }
+            .product-grid {
+                gap: 20px;
+            }
+            .current-price {
+                font-size: 1.4rem;
+            }
+            .btn-buy {
+                padding: 10px 0;
+            }
+        }
+
+        /* animation on scroll (subtle) */
+        .product-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpCard 0.5s ease forwards;
+        }
+
+        @keyframes fadeUpCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* delay each card */
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
 </style>
 
 <main>
@@ -789,7 +1154,183 @@ use Illuminate\Support\Str;
             </div>
         </div>
     </section>
+<section class="products-showcase">
+        <div class="products-container">
+            <div class="products-header">
+                <div class="products-badge">
+                    <i class="fas fa-bolt"></i> Limited Deals
+                </div>
+                <h2 class="products-title">
+                    Featured <span>Tech Gear</span> & Gadgets
+                </h2>
+                <p class="products-subtitle">
+                    Curated products we personally test and recommend. Elevate your setup with cutting-edge devices.
+                </p>
+            </div>
 
+            <div class="product-grid">
+                <!-- Product 1 - Wireless Headphones -->
+                <div class="product-card">
+                    <div class="product-badge hot">🔥 Hot Deal</div>
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/1e293b/white?text=🎧+Aura+Max" alt="Wireless Headphones" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-headphones"></i> Audio</span>
+                        <h3 class="product-name">AuraMax Wireless NC</h3>
+                        <p class="product-description">Active noise cancellation, 40h battery, deep bass & spatial audio.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-count">(128 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$89<small>.99</small></span>
+                            <span class="old-price">$149.99</span>
+                            <span class="discount-badge">-40%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('🛒 Added AuraMax Headphones to cart! (Demo)')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Saved to wishlist (demo)')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 - Smart Watch -->
+                <div class="product-card">
+                    <div class="product-badge new">✨ New</div>
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/0f172a/white?text=⌚+Chrono+Pro" alt="Smart Watch">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-clock"></i> Wearables</span>
+                        <h3 class="product-name">Chrono Pro 5</h3>
+                        <p class="product-description">AMOLED display, heart rate, SpO2, 10-day battery life & fitness tracking.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-count">(342 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$129<small>.00</small></span>
+                            <span class="old-price">$199</span>
+                            <span class="discount-badge">-35%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('⌚ Chrono Pro added to cart!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Wishlisted')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 - Mechanical Keyboard -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/334155/white?text=⌨️+KeyCraft+K2" alt="Mechanical Keyboard">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-keyboard"></i> Peripherals</span>
+                        <h3 class="product-name">KeyCraft K2 Wireless</h3>
+                        <p class="product-description">RGB backlight, hot-swappable switches, Bluetooth/2.4GHz, compact 75%.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-count">(89 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$79<small>.99</small></span>
+                            <span class="old-price">$119</span>
+                            <span class="discount-badge">-33%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('⌨️ KeyCraft K2 added!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Saved')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 - Ultra Fast SSD -->
+                <div class="product-card">
+                    <div class="product-badge hot">🔥 Bestseller</div>
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/1e2a3a/white?text=💾+Viper+SSD" alt="Portable SSD">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-database"></i> Storage</span>
+                        <h3 class="product-name">Viper X 1TB SSD</h3>
+                        <p class="product-description">USB 3.2 Gen2, read/write up to 2000MB/s, rugged aluminum design.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-count">(215 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$89<small>.99</small></span>
+                            <span class="old-price">$139</span>
+                            <span class="discount-badge">-35%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('💾 Viper SSD added to cart')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Wishlisted')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 - Gaming Mouse -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/000000/white?text=🖱️+Phantom+Ultra" alt="Gaming Mouse">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-mouse"></i> Gaming</span>
+                        <h3 class="product-name">Phantom Ultra Light</h3>
+                        <p class="product-description">49g, 26K DPI optical sensor, 8 programmable buttons, PTFE feet.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-count">(176 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$49<small>.95</small></span>
+                            <span class="old-price">$79.99</span>
+                            <span class="discount-badge">-38%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('🖱️ Phantom Mouse added')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Wishlist')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 - USB-C Hub Dock -->
+                <div class="product-card">
+                    <div class="product-badge new">⭐ Top Pick</div>
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="https://placehold.co/400x300/2d3748/white?text=🔌+Hub+Pro" alt="USB-C Hub">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><i class="fas fa-plug"></i> Accessories</span>
+                        <h3 class="product-name">ProHub 8-in-1 Dock</h3>
+                        <p class="product-description">4K HDMI, 100W PD, 2x USB 3.0, SD/TF, Ethernet – ultimate expansion.</p>
+                        <div class="product-rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-count">(310 reviews)</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="current-price">$59<small>.99</small></span>
+                            <span class="old-price">$99</span>
+                            <span class="discount-badge">-39%</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-buy" onclick="alert('🔌 USB Hub added to cart!')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                            <button class="btn-wishlist" onclick="alert('❤️ Saved')"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-footer">
+                <a href="#" class="btn-view-all" onclick="alert('Full product catalog coming soon! (demo)'); return false;">
+                    Explore All Products <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
     <!-- HERO - Second Blog -->
     <section class="hero" style="background: linear-gradient(135deg, #ffffff 0%, #fef9e3 100%);">
         <div class="hero-container">
