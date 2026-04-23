@@ -329,11 +329,11 @@
                 <!-- BUTTONS (unchanged actions, same buttons but styled) -->
                 <div class="action-buttons">
                     <button class="btn btn-primary-custom text-white">
-                        🛒 Add to Cart
+                         Add to Cart
                     </button>
 
                     <button class="btn btn-outline-custom">
-                        ⚡ Buy Now
+                         Buy Now
                     </button>
                 </div>
             </div>
