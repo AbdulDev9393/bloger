@@ -891,19 +891,6 @@ use Illuminate\Support\Str;
     transform: scale(1.03);
 }
 
-/* Badge (Sale/New) */
-.pro-sale-badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: #ef4444;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 20px;
-    z-index: 2;
-}
 
 .pro-new-badge {
     background: #4e83fa;
@@ -1133,7 +1120,6 @@ use Illuminate\Support\Str;
             <!-- Product 1 - Headphones -->
             <div class="pro-card" data-category="audio">
                 <div class="pro-card-img">
-                    <span class="pro-sale-badge">-35%</span>
                     <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🎧&font=awesome" alt="Wireless Headphones">
                 </div>
                 <div class="pro-card-content">
