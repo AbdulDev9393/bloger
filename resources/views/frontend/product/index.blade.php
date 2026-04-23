@@ -278,9 +278,9 @@
         <div class="col-md-6">
             <div class="product-image-wrapper">
                 <img id="productImage"
-                     src="{{ asset($product->image) }}"
-                     class="img-fluid rounded shadow"
-                     alt="{{ $product->name }}">
+                    src="{{ asset($product->image) }}"
+                    style="width:100%; height:100%; object-fit:contain; border-radius:16px;"
+                    alt="{{ $product->name }}">
             </div>
             <div class="mt-3 d-flex justify-content-start">
                 <button class="btn btn-zoom" onclick="openZoom()">
