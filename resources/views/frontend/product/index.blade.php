@@ -70,7 +70,7 @@
         }
 
         .product-name {
-            font-size: 1.9rem;
+            font-size: 21px;
             font-weight: 700;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #1e293b 0%, #2d3a4b 100%);
