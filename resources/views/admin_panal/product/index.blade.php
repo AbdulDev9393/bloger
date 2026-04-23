@@ -9,7 +9,7 @@
     <!-- Header with Stats -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold mb-1">📦 Product Inventory</h2>
+            <h2 class="fw-bold mb-1">📦 Product Management</h2>
             <p class="text-muted">Manage, edit, and monitor your product catalog</p>
         </div>
         <button class="btn btn-primary btn-lg shadow-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
