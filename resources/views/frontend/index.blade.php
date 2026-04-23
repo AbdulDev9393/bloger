@@ -1063,29 +1063,6 @@ use Illuminate\Support\Str;
     gap: 12px;
 }
 
-/* Trust Badges */
-.pro-trust {
-    display: flex;
-    justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid #edf2f7;
-}
-
-.pro-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #5a6874;
-    font-size: 0.85rem;
-}
-
-.pro-trust-item i {
-    font-size: 1.2rem;
-    color: #4e83fa;
-}
 
 /* Responsive */
 @media (max-width: 1100px) {
@@ -1099,9 +1076,7 @@ use Illuminate\Support\Str;
     .pro-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .pro-trust {
-        gap: 24px;
-    }
+
 }
 
 @media (max-width: 500px) {
@@ -1189,133 +1164,8 @@ use Illuminate\Support\Str;
                 </div>
             </div>
 
-            <!-- Product 2 - Smart Watch -->
-            <div class="pro-card" data-category="wearables">
-                <div class="pro-card-img">
-                    <span class="pro-sale-badge pro-new-badge">New</span>
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=⌚&font=awesome" alt="Smart Watch">
-                </div>
-                <div class="pro-card-content">
-                    <span class="pro-category">Wearables</span>
-                    <h3 class="pro-product-name">Chrono Elite 3</h3>
-                    <p class="pro-product-desc">AMOLED display, heart rate, GPS, 10-day battery</p>
-                    <div class="pro-rating">
-                        <span class="pro-stars">★★★★☆</span>
-                        <span class="pro-reviews">(89)</span>
-                    </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">$199.00</span>
-                        <span class="pro-old-price">$299.00</span>
-                        <span class="pro-discount">-33%</span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Chrono Elite 3')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Product 3 - Mechanical Keyboard -->
-            <div class="pro-card" data-category="accessories">
-                <div class="pro-card-img">
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=⌨️&font=awesome" alt="Keyboard">
-                </div>
-                <div class="pro-card-content">
-                    <span class="pro-category">Peripherals</span>
-                    <h3 class="pro-product-name">MechType K3</h3>
-                    <p class="pro-product-desc">Wireless mechanical, hot-swappable, RGB backlit</p>
-                    <div class="pro-rating">
-                        <span class="pro-stars">★★★★★</span>
-                        <span class="pro-reviews">(234)</span>
-                    </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">$79.99</span>
-                        <span class="pro-old-price">$119.99</span>
-                        <span class="pro-discount">-33%</span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: MechType K3')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Product 4 - Portable SSD -->
-            <div class="pro-card" data-category="accessories">
-                <div class="pro-card-img">
-                    <span class="pro-sale-badge">Hot</span>
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=💾&font=awesome" alt="SSD">
-                </div>
-                <div class="pro-card-content">
-                    <span class="pro-category">Storage</span>
-                    <h3 class="pro-product-name">Viper SSD 1TB</h3>
-                    <p class="pro-product-desc">USB-C 3.2, 2000MB/s read, rugged design</p>
-                    <div class="pro-rating">
-                        <span class="pro-stars">★★★★★</span>
-                        <span class="pro-reviews">(178)</span>
-                    </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">$94.99</span>
-                        <span class="pro-old-price">$149.99</span>
-                        <span class="pro-discount">-37%</span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Viper SSD')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 5 - Gaming Mouse -->
-            <div class="pro-card" data-category="accessories">
-                <div class="pro-card-img">
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🖱️&font=awesome" alt="Gaming Mouse">
-                </div>
-                <div class="pro-card-content">
-                    <span class="pro-category">Gaming</span>
-                    <h3 class="pro-product-name">Phantom X1</h3>
-                    <p class="pro-product-desc">Ultra-light 49g, 26K DPI, 8 programmable buttons</p>
-                    <div class="pro-rating">
-                        <span class="pro-stars">★★★★☆</span>
-                        <span class="pro-reviews">(312)</span>
-                    </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">$49.99</span>
-                        <span class="pro-old-price">$79.99</span>
-                        <span class="pro-discount">-38%</span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: Phantom X1')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 6 - USB-C Hub -->
-            <div class="pro-card" data-category="accessories">
-                <div class="pro-card-img">
-                    <span class="pro-sale-badge pro-new-badge">Top Pick</span>
-                    <img src="https://placehold.co/400x400/eef2ff/4e83fa?text=🔌&font=awesome" alt="USB Hub">
-                </div>
-                <div class="pro-card-content">
-                    <span class="pro-category">Docks</span>
-                    <h3 class="pro-product-name">UltraHub 8-in-1</h3>
-                    <p class="pro-product-desc">4K HDMI, 100W PD, Ethernet, SD card slot</p>
-                    <div class="pro-rating">
-                        <span class="pro-stars">★★★★★</span>
-                        <span class="pro-reviews">(98)</span>
-                    </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">$59.99</span>
-                        <span class="pro-old-price">$99.99</span>
-                        <span class="pro-discount">-40%</span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <button class="pro-btn-cart" onclick="alert('✓ Added to cart: UltraHub')"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-                        <button class="pro-btn-wishlist" onclick="alert('❤️ Saved to wishlist')"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- View All Button -->
@@ -1326,12 +1176,7 @@ use Illuminate\Support\Str;
         </div>
 
         <!-- Trust Badges -->
-        <div class="pro-trust">
-            <div class="pro-trust-item"><i class="fas fa-truck-fast"></i> Free Shipping</div>
-            <div class="pro-trust-item"><i class="fas fa-rotate-left"></i> 30-Day Returns</div>
-            <div class="pro-trust-item"><i class="fas fa-shield-heart"></i> 2-Year Warranty</div>
-            <div class="pro-trust-item"><i class="fas fa-lock"></i> Secure Checkout</div>
-        </div>
+        
     </div>
 </section>
     <!-- HERO - Second Blog -->
