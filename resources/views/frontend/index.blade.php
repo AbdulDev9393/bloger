@@ -1072,7 +1072,7 @@ use Illuminate\Support\Str;
                 </div>
                 <div class="pro-card-content">
                     <h3 class="pro-product-name">      {{ \Illuminate\Support\Str::limit($product->name, 20) }}</h3>
-                    <p class="pro-product-desc">       {{ Str::limit(strip_tags($product->description), 40) }}</p>
+                    <p class="pro-product-desc">       {{ Str::limit(strip_tags($product->description), 70) }}</p>
                     <div class="pro-rating">
                         <div class="text-warning">
     @for($i = 1; $i <= 5; $i++)
