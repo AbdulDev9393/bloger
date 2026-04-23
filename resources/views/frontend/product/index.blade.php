@@ -5,12 +5,7 @@
     <title>{{ $product->name }}</title>
 
     <style>
-        /* ---------- IMPROVED DESIGN ONLY ---------- */
-        /* Preserving original zoom modal structure but enhancing visuals */
-        body {
-            background: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-        }
+     
 
         .container {
             max-width: 1280px;
