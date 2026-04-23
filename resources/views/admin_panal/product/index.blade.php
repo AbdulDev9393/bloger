@@ -264,23 +264,33 @@
         }
     }
 </style>
-<!-- Replace the scripts at the bottom with: -->
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- Replace the entire scripts section at the bottom of your file with this -->
+
+<!-- TinyMCE Script with your API Key -->
+<script src="https://cdn.tiny.cloud/1/5cac4ba4977cd08b03558cab6973b9bc604f906527c73898960c0e295a63f728/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
-    tinymce.init({
-        selector: '#description',
-        height: 400,
-        menubar: true,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'help', 'wordcount'
-        ],
-        toolbar: 'undo redo | blocks | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    document.addEventListener('DOMContentLoaded', function() {
+        tinymce.init({
+            selector: '#description', // Make sure your textarea has id="description"
+            height: 400,
+            menubar: true,
+            plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | blocks | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+            setup: function(editor) {
+                editor.on('init', function() {
+                    console.log('TinyMCE editor initialized successfully');
+                });
+            }
+        });
     });
 </script>
 @endsection
