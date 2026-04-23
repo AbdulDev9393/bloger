@@ -811,13 +811,6 @@ use Illuminate\Support\Str;
     color: #4e83fa;
 }
 
-.pro-subtitle {
-    font-size: 1rem;
-    color: #5a6874;
-    max-width: 550px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
 
 /* Filter Tabs */
 .pro-tabs {
@@ -1131,7 +1124,6 @@ use Illuminate\Support\Str;
         <!-- Header -->
         <div class="pro-header">
             <h2 class="pro-title">Top<span>Tech Products</span></h2>
-            <p class="pro-subtitle">Curated gadgets and gear we personally recommend. Quality tested, performance guaranteed.</p>
         </div>
 
         <!-- Filter Tabs (Optional) -->
