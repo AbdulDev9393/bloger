@@ -33,7 +33,6 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Discount</th>
-                            <th>Final Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -77,10 +76,6 @@
                             </span>
                         </td>
 
-                        <!-- Final Price -->
-                        <td class="fw-bold text-primary">
-                            ${{ number_format($product->final_price, 2) }}
-                        </td>
 
                         <!-- Actions -->
                         <td>
