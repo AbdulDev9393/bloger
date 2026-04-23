@@ -1155,7 +1155,7 @@ use Illuminate\Support\Str;
     <div class="pro-container">
         <!-- Header -->
         <div class="pro-header">
-            <h2 class="pro-title">Featured <span>Tech Products</span></h2>
+            <h2 class="pro-title">Top<span>Tech Products</span></h2>
             <p class="pro-subtitle">Curated gadgets and gear we personally recommend. Quality tested, performance guaranteed.</p>
         </div>
 
