@@ -90,7 +90,7 @@ Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_upda
 Route::get('/admin/product',[ProductController::class,'index'])->name('admin.product');
 Route::post('/admin/product/store',[ProductController::class,'store'])->name('admin.product.store');
 Route::get('/admin/product/eid/{id}',[ProductController::class,'eid'])->name('admin.product.eid');
-
+Route::put('/admin/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
 
 

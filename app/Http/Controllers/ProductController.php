@@ -92,6 +92,40 @@ public function store(Request $request)
 }
 
  function eid($id){
-    dd($id);
+   $product=Product::find($id);
+   return view('admin_panal.product.eid',compact('product'));
  }
+ public function update(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required',
+    ]);
+
+    $discount = $request->discount ?? 0;
+    $final_price = $request->price - ($request->price * $discount / 100);
+
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+    $product->discount = $discount;
+    $product->final_price = $final_price;
+    $product->stock = $request->stock;
+    $product->category = $request->category;
+
+    // Image update
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $file->move($_SERVER['DOCUMENT_ROOT'].'/storage/products', $filename);
+
+        $product->image = 'storage/products/'.$filename;
+    }
+
+    $product->save();
+
+    return redirect()->route('admin.products')->with('success', 'Product updated successfully!');
+}
 }
