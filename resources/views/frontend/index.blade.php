@@ -1173,7 +1173,7 @@ use Illuminate\Support\Str;
                 <div class="product-card">
                     <div class="product-badge hot">🔥 Hot Deal</div>
                     <div class="product-img-wrapper">
-                        <img class="product-img" src="https://placehold.co/400x300/1e293b/white?text=🎧+Aura+Max" alt="Wireless Headphones" loading="lazy">
+                        <img class="product-img" src="https://www.alibaba.com/product-detail/New-selling-product-sport-drinking-water_1600954614824.html?spm=a2700.7724857.0.0.68b3693fTi2lIy" alt="Wireless Headphones" loading="lazy">
                     </div>
                     <div class="product-info">
                         <span class="product-category"><i class="fas fa-headphones"></i> Audio</span>
