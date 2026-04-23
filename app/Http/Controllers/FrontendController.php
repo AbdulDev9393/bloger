@@ -167,6 +167,7 @@ public function sitemap()
   }
   function product($slug){
      $product=Product::where('slug',$slug)->first();
-     dd($product);
+    return view('frontend.product.index',compact('product'));
+
   }
 }
