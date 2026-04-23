@@ -1113,7 +1113,7 @@ use Illuminate\Support\Str;
                         <span class="pro-discount">Save $50</span>
                     </div>
                     <div class="pro-btn-group">
-                        <button class="pro-btn-cart" ><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="pro-btn-cart" > <i class="fas fa-info-circle"></i> View Details</button>
                     </div>
                 </div>
             </div>
