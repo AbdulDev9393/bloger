@@ -78,7 +78,7 @@
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('admin.products') }}" class="btn btn-secondary me-2">
+                    <a href="{{ route('admin.product') }}" class="btn btn-secondary me-2">
                         Cancel
                     </a>
 
