@@ -1072,7 +1072,7 @@ use Illuminate\Support\Str;
     <!-- HERO - First Blog -->
     <section class="hero">
        <h1 class="hero-main-title">
-                Tech Blogs & <span>Technology Insights</span>
+                Tech Blogs & <span>Tech Product Discount</span>
             </h1>
         <div class="hero-container">
             <div class="hero-content">
