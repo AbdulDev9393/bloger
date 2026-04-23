@@ -50,7 +50,7 @@ function index(){
 private function getIndexPageData()
 {
     // SEO Meta
-    $meta_title = "TechBlogs Info – Latest Tech News, AI, Mobiles & Digital Trends";
+    $meta_title = "TechBlogs Info – Tech Products 40% discount";
     $meta_desc  = "TechBlogs.site brings you the latest technology news, AI updates, mobile reviews, gadgets, and digital trends. Stay updated with the future of technology.";
     $meta_keywords="tech blogs, technology insights, latest tech news, AI news, artificial intelligence, AI in healthcare, AI tools 2026, software development, web development, Laravel tutorials, PHP development, programming tips, coding best practices, SEO strategies, website security, tech trends USA, mobile technology news, gadget reviews, developer guides, cloud computing, API integration, machine learning, future of AI, tech tutorials, coding for beginners, freelance development, earn money online tech, startup technology, innovation news";
     $latestBlog = Blog::where('status', 'published')->latest('id')->first();
