@@ -26,7 +26,7 @@
             <h2 class="fw-bold">{{ $product->name }}</h2>
 
             <p class="text-muted">
-                {{ $product->description }}
+                {{!! $product->description !!}}
             </p>
 
             <h4 class="text-primary">
