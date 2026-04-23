@@ -58,6 +58,7 @@
   <ul class="sidebar-menu">
     <li><a href="{{ route('admin.dashboard') }}" class="{{request()->routeIs('admin.dashboard') ? 'active' : ''}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
     <li><a href="{{route('admin.blogs')}}" class="{{request()->routeIs('admin.blogs') ? 'active' : ''}}"><i class="fas fa-newspaper"></i> Manage Blogs</a></li>
+    <li><a href="{{route('admin.blogs')}}" class="{{request()->routeIs('admin.blogs') ? 'active' : ''}}"><i class="fas fa-box"></i> Manage Product</a></li>
     <li><a href="{{route('admin.developers.index')}}" class="{{request()->routeIs('admin.developers.index') ? 'active' : ''}}"><i class="fas fa-users"></i> Manage Developers</a></li>
     <li><a href="{{route('admin.Categories')}}"  class="{{request()->routeIs('admin.Categories') ? 'active' : ''}}"><i class="fas fa-tags"></i> Categories</a></li>
     <li><a href="{{route('admin.Comments')}}"  class="{{request()->routeIs('admin.Comments') ? 'active' : ''}}"><i class="fas fa-comments"></i> Comments</a></li>
