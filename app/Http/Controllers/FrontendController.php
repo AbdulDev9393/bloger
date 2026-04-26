@@ -165,9 +165,16 @@ public function sitemap()
             compact('getBlogs')
         );
   }
-  function product($slug){
-     $product=Product::where('slug',$slug)->first();
-    return view('frontend.product.index',compact('product'));
+function product($slug)
+{
+    // Use firstOrFail() to automatically handle 404 if product not found
+    $product = Product::where('slug', $slug)->firstOrFail();
 
-  }
+    // Set meta title and description with fallback values
+    $meta_title = $product->name ?? config('app.name') . ' - Product';
+    $meta_desc = Str::limit($product->description ?? '', 140, '...');
+
+    // Fix: You had duplicate 'meta_title' instead of 'meta_desc'
+    return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc'));
+}
 }
