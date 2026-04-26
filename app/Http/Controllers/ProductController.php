@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Models\BlogSeo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Http;
@@ -54,11 +54,12 @@ public function store(Request $request)
         $file = $request->file('image');
 
         $filename = $slug.'-main-'.time().'.webp';
+$manager = new ImageManager(new Driver());
 
-        $img = Image::make($file->getRealPath())
-            ->encode('webp', 80);
+$image = $manager->read($file->getRealPath())
+    ->toWebp(80);
 
-        $img->save($storagePath.'/'.$filename);
+$image->save($storagePath.'/'.$filename);
 
         $imagePath = 'storage/products/'.$filename;
     }
@@ -73,10 +74,12 @@ public function store(Request $request)
 
                 $filename = $slug.'-extra-'.$index.'-'.time().'.webp';
 
-                $img = Image::make($file->getRealPath())
-                    ->encode('webp', 80);
+             $manager = new ImageManager(new Driver());
 
-                $img->save($storagePath.'/'.$filename);
+$image = $manager->read($file->getRealPath())
+    ->toWebp(80);
+
+$image->save($storagePath.'/'.$filename);
 
                 $additionalImages[] = 'storage/products/'.$filename;
             }
