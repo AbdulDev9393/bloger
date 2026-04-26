@@ -177,12 +177,11 @@ function product($slug)
     $meta_title = $product->name ?? config('app.name') . ' - Product';
     $meta_desc = Str::limit(strip_tags($product->description ?? ''), 140, '...');
 
-    // ✅ Generate Product Schema (JSON-LD)
+    // ✅ FIXED: Added $this-> before function call
     $meta_schema = $this->generateProductSchema($product);
 
     return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc', 'meta_schema'));
 }
-
 // Helper function to generate schema (can be placed in helpers.php or model)
 function generateProductSchema($product)
 {
