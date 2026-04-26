@@ -1070,6 +1070,7 @@ use Illuminate\Support\Str;
     @foreach ($products as $product)
 
         <div class="pro-card" data-category="audio">
+
             <div class="pro-card-img">
                 <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
             </div>
@@ -1084,15 +1085,13 @@ use Illuminate\Support\Str;
                 </p>
 
                 <div class="pro-rating">
-                    <div class="text-warning">
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= $product->rating)
-                                ★
-                            @else
-                                ☆
-                            @endif
-                        @endfor
-                    </div>
+                    @for($i = 1; $i <= 5; $i++)
+                        @if($i <= $product->rating)
+                            ★
+                        @else
+                            ☆
+                        @endif
+                    @endfor
                 </div>
 
                 <div class="pro-price-row">
@@ -1115,6 +1114,7 @@ use Illuminate\Support\Str;
                     </a>
                 </div>
             </div>
+
         </div>
 
     @endforeach
