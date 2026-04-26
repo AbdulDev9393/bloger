@@ -1065,46 +1065,61 @@ use Illuminate\Support\Str;
             <h2 class="pro-title">Top<span>Tech Products</span></h2>
         </div>
         @foreach ($products as $product)
-            <div class="pro-grid" id="proGrid">
-            <div class="pro-card" data-category="audio">
-                <div class="pro-card-img">
-                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                </div>
-                <div class="pro-card-content">
-                    <h3 class="pro-product-name">      {{ \Illuminate\Support\Str::limit($product->name, 20) }}</h3>
-                    <p class="pro-product-desc">       {{ Str::limit(strip_tags($product->description), 70) }}</p>
-                    <div class="pro-rating">
-                        <div class="text-warning">
-    @for($i = 1; $i <= 5; $i++)
-        @if($i <= $product->rating)
-            ★
-        @else
-            ☆
-        @endif
-    @endfor
-</div>
+<div class="pro-grid" id="proGrid">
+
+    @foreach ($products as $product)
+
+        <div class="pro-card" data-category="audio">
+            <div class="pro-card-img">
+                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+            </div>
+
+            <div class="pro-card-content">
+                <h3 class="pro-product-name">
+                    {{ \Illuminate\Support\Str::limit($product->name, 20) }}
+                </h3>
+
+                <p class="pro-product-desc">
+                    {{ Str::limit(strip_tags($product->description), 70) }}
+                </p>
+
+                <div class="pro-rating">
+                    <div class="text-warning">
+                        @for($i = 1; $i <= 5; $i++)
+                            @if($i <= $product->rating)
+                                ★
+                            @else
+                                ☆
+                            @endif
+                        @endfor
                     </div>
-                    <div class="pro-price-row">
-                        <span class="pro-current-price">
-                            ${{ number_format( $product->price, 2) }}
-                        </span>
-                       <span class="pro-discount">
+                </div>
+
+                <div class="pro-price-row">
+                    <span class="pro-current-price">
+                        ${{ number_format($product->price, 2) }}
+                    </span>
+
+                    <span class="pro-discount">
                         @if($product->discount > 0)
                             Save {{ $product->discount }}%
                         @else
                             No Discount
                         @endif
                     </span>
-                    </div>
-                    <div class="pro-btn-group">
-                        <a href="{{ route('frontend.product',$product->slug ) }}" class="pro-btn-cart">
-                           <i class="fas fa-info-circle"></i> View Details
-                        </a>
-                    </div>
+                </div>
+
+                <div class="pro-btn-group">
+                    <a href="{{ route('frontend.product',$product->slug) }}" class="pro-btn-cart">
+                        <i class="fas fa-info-circle"></i> View Details
+                    </a>
                 </div>
             </div>
         </div>
-        @endforeach
+
+    @endforeach
+
+</div>
         <div class="pro-view-all">
             <a href="#" class="pro-view-link" onclick="alert('Full catalog coming soon'); return false;">
                 View All Products <i class="fas fa-arrow-right"></i>
