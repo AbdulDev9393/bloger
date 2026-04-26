@@ -172,7 +172,7 @@ function product($slug)
 
     // Set meta title and description with fallback values
     $meta_title = $product->name ?? config('app.name') . ' - Product';
-    $meta_desc = Str::limit($product->description ?? '', 140, '...');
+   $meta_desc = Str::limit(strip_tags($product->description ?? ''), 140, '...');
 
     // Fix: You had duplicate 'meta_title' instead of 'meta_desc'
     return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc'));
