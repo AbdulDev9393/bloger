@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\SocialMedia;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 class FrontendController extends Controller
 {
     //
@@ -165,6 +166,8 @@ public function sitemap()
             compact('getBlogs')
         );
   }
+
+
 function product($slug)
 {
     // Use firstOrFail() to automatically handle 404 if product not found
@@ -172,9 +175,66 @@ function product($slug)
 
     // Set meta title and description with fallback values
     $meta_title = $product->name ?? config('app.name') . ' - Product';
-   $meta_desc = Str::limit(strip_tags($product->description ?? ''), 140, '...');
+    $meta_desc = Str::limit(strip_tags($product->description ?? ''), 140, '...');
 
-    // Fix: You had duplicate 'meta_title' instead of 'meta_desc'
-    return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc'));
+    // ✅ Generate Product Schema (JSON-LD)
+    $meta_schema = generateProductSchema($product);
+
+    return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc', 'meta_schema'));
+}
+
+// Helper function to generate schema (can be placed in helpers.php or model)
+function generateProductSchema($product)
+{
+    $schema = [
+        "@context" => "https://schema.org/",
+        "@type" => "Product",
+        "name" => $product->name,
+        "description" => strip_tags($product->description ?? ''),
+        "sku" => $product->sku ?? $product->id,
+        "mpn" => $product->mpn ?? $product->id,
+        "brand" => [
+            "@type" => "Brand",
+            "name" => $product->brand ?? config('app.name')
+        ],
+        "offers" => [
+            "@type" => "Offer",
+            "url" => url()->current(),
+            "priceCurrency" => "PKR", // Change as per your currency
+            "price" => $product->final_price ?? $product->price,
+            "priceValidUntil" => Carbon::now()->addDays(30)->toISOString(),
+            "availability" => $product->stock > 0
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+            "itemCondition" => "https://schema.org/NewCondition"
+        ]
+    ];
+
+    // Add rating if exists
+    if (!empty($product->rating) && $product->rating > 0) {
+        $schema["aggregateRating"] = [
+            "@type" => "AggregateRating",
+            "ratingValue" => $product->rating,
+            "reviewCount" => $product->review_count ?? 1
+        ];
+    }
+
+    // Add main image
+    if ($product->image) {
+        $schema["image"] = asset($product->image);
+    }
+
+    // Add additional images
+    if (!empty($product->additional_images)) {
+        $additionalImages = json_decode($product->additional_images, true);
+        if (is_array($additionalImages) && count($additionalImages) > 0) {
+            $schema["image"] = array_merge(
+                [$schema["image"] ?? asset($product->image)],
+                array_map(function($img) { return asset($img); }, $additionalImages)
+            );
+        }
+    }
+
+    return json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 }
 }
