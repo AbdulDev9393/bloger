@@ -178,7 +178,7 @@ function product($slug)
     $meta_desc = Str::limit(strip_tags($product->description ?? ''), 140, '...');
 
     // ✅ Generate Product Schema (JSON-LD)
-    $meta_schema = generateProductSchema($product);
+    $meta_schema = $this->generateProductSchema($product);
 
     return view('frontend.product.index', compact('product', 'meta_title', 'meta_desc', 'meta_schema'));
 }
