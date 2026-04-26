@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-
 class ProductController extends Controller
 {
     function index(){
@@ -25,57 +24,66 @@ class ProductController extends Controller
     }
 public function store(Request $request)
 {
-    // ✅ Validation
     $request->validate([
         'name' => 'required|string|max:255',
-        'price' => 'required|numeric|min:0',
-        'discount' => 'nullable|numeric|min:0|max:100',
-        'stock' => 'nullable|integer|min:0',
-        'category' => 'nullable|string|max:255',
+        'price' => 'required|numeric',
+        'discount' => 'nullable|numeric',
+        'stock' => 'nullable|integer',
+        'category' => 'nullable|string',
         'description' => 'nullable|string',
-        'rating' => 'nullable|numeric|min:0|max:5',
+
         'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         'additional_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-        'is_active' => 'nullable|boolean'
     ]);
 
-    // ✅ Calculate Final Price
     $discount = $request->discount ?? 0;
     $final_price = $request->price - ($request->price * $discount / 100);
 
-    // ✅ Storage Path
-    $imagePath = null;
-    $additionalImages = [];
+    $storagePath = $_SERVER['DOCUMENT_ROOT'].'/storage/products';
 
-    // ✅ Single Image with WebP Conversion
-    if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        $webpPath = $this->convertToWebP($request->file('image'), 'products');
-        $imagePath = $webpPath;
+    if (!file_exists($storagePath)) {
+        mkdir($storagePath, 0755, true);
     }
 
-    // ✅ Multiple Images with WebP Conversion
+    $slug = Str::slug($request->name);
+
+    // ✅ MAIN IMAGE (WEBP)
+    $imagePath = null;
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+        $file = $request->file('image');
+
+        $filename = $slug.'-main-'.time().'.webp';
+
+        $img = Image::make($file->getRealPath())
+            ->encode('webp', 80);
+
+        $img->save($storagePath.'/'.$filename);
+
+        $imagePath = 'storage/products/'.$filename;
+    }
+
+    // ✅ ADDITIONAL IMAGES (WEBP)
+    $additionalImages = [];
+
     if ($request->hasFile('additional_images')) {
-        foreach ($request->file('additional_images') as $file) {
+        foreach ($request->file('additional_images') as $index => $file) {
+
             if ($file->isValid()) {
-                $webpPath = $this->convertToWebP($file, 'products');
-                if ($webpPath) {
-                    $additionalImages[] = $webpPath;
-                }
+
+                $filename = $slug.'-extra-'.$index.'-'.time().'.webp';
+
+                $img = Image::make($file->getRealPath())
+                    ->encode('webp', 80);
+
+                $img->save($storagePath.'/'.$filename);
+
+                $additionalImages[] = 'storage/products/'.$filename;
             }
         }
     }
 
-    // ✅ Generate Unique Slug
-    $slug = Str::slug($request->name);
-    $originalSlug = $slug;
-    $counter = 1;
-
-    while (Product::where('slug', $slug)->exists()) {
-        $slug = $originalSlug . '-' . $counter;
-        $counter++;
-    }
-
-    // ✅ Save Data
+    // ✅ SAVE PRODUCT
     $product = new Product();
     $product->name = $request->name;
     $product->slug = $slug;
@@ -87,83 +95,14 @@ public function store(Request $request)
     $product->stock = $request->stock ?? 0;
     $product->category = $request->category;
     $product->image = $imagePath;
-    $product->additional_images = !empty($additionalImages) ? json_encode($additionalImages) : null;
-    $product->is_active = $request->has('is_active') ? 1 : 0;
-
-    // Add SEO fields
-    $product->meta_title = $request->meta_title ?? $request->name;
-    $product->meta_description = $request->meta_description ?? Str::limit(strip_tags($request->description ?? ''), 155);
+    $product->additional_images = json_encode($additionalImages);
+    $product->is_active = $request->is_active ? 1 : 0;
 
     $product->save();
 
-    // Clear cache properly
-    Cache::forget('products_list');
     Cache::increment('blog_cache_version');
 
-    return redirect()->route('products.index')
-        ->with('success', 'Product added successfully!');
-}
-
-/**
- * Convert image to WebP format
- *
- * @param \Illuminate\Http\UploadedFile $image
- * @param string $folder
- * @param int $quality
- * @return string|null
- */
-private function convertToWebP($image, $folder = 'products', $quality = 80)
-{
-    try {
-        // Create directory if not exists
-        $uploadPath = public_path('storage/' . $folder);
-        if (!file_exists($uploadPath)) {
-            mkdir($uploadPath, 0755, true);
-        }
-
-        // Generate unique filename
-        $filename = time() . '_' . Str::random(10) . '.webp';
-        $webpPath = $uploadPath . '/' . $filename;
-
-        // Get image resource based on type
-        $sourceImage = null;
-        $imageType = exif_imagetype($image->getRealPath());
-
-        switch ($imageType) {
-            case IMAGETYPE_JPEG:
-                $sourceImage = imagecreatefromjpeg($image->getRealPath());
-                break;
-            case IMAGETYPE_PNG:
-                $sourceImage = imagecreatefrompng($image->getRealPath());
-                // Preserve transparency for PNG
-                imagepalettetotruecolor($sourceImage);
-                imagealphablending($sourceImage, true);
-                imagesavealpha($sourceImage, true);
-                break;
-            case IMAGETYPE_WEBP:
-                $sourceImage = imagecreatefromwebp($image->getRealPath());
-                break;
-            default:
-                return null;
-        }
-
-        if (!$sourceImage) {
-            return null;
-        }
-
-        // Convert and save as WebP
-        imagewebp($sourceImage, $webpPath, $quality);
-
-        // Free memory
-        imagedestroy($sourceImage);
-
-        // Return public path
-        return 'storage/' . $folder . '/' . $filename;
-
-    } catch (\Exception $e) {
-        \Log::error('WebP Conversion Error: ' . $e->getMessage());
-        return null;
-    }
+    return back()->with('success', 'Product added successfully!');
 }
 
  function eid($id){
