@@ -1064,7 +1064,7 @@ use Illuminate\Support\Str;
         <div class="pro-header">
             <h2 class="pro-title">Top<span>Tech Products</span></h2>
         </div>
-        @foreach ($products as $product)
+
 <div class="pro-grid" id="proGrid">
 
     @foreach ($products as $product)
