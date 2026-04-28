@@ -189,7 +189,8 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-8 col-md-10">
             <div class="search-wrapper d-flex align-items-center position-relative">
-                <div class="flex-grow-1 position-relative">
+                <form action="">
+                  <div class="flex-grow-1 position-relative">
                     <input type="text"
                            id="searchInput"
                            class="form-control search-input w-100"
@@ -198,6 +199,8 @@
                     <button id="clearSearchBtn" class="clear-search" style="display: none;" aria-label="Clear search">✕</button>
                 </div>
                 <button id="searchButton" class="btn search-btn ms-2 text-white">Search</button>
+                </form>
+
             </div>
             <div id="searchFeedback" class="mt-2 text-center"></div>
         </div>
@@ -265,7 +268,7 @@
         @endif
     </div>
 
-   
+
 </div>
 
 @include('frontend.footer')
