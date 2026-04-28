@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller{
    function index(){
+ dd('sdsd');
      return view('frontend.shop.index');
 
    }
