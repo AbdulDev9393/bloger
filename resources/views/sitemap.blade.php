@@ -50,7 +50,14 @@
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-
+    @foreach ($products as $product)
+    <url>
+        <loc>{{ url('/product/' . $product->slug) }}</loc>
+        <lastmod>{{ $blog->updated_at->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    @endforeach
     @foreach ($blogs as $blog)
     <url>
         <loc>{{ url('/blog/' . $blog->slug) }}</loc>
@@ -59,13 +66,6 @@
         <priority>0.9</priority>
     </url>
     @endforeach
-        @foreach ($products as $product)
-    <url>
-        <loc>{{ url('/product/' . $product->slug) }}</loc>
-        <lastmod>{{ $blog->updated_at->toAtomString() }}</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
-    </url>
-    @endforeach
+
 
 </urlset>
