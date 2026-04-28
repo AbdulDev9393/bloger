@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use App\Models\Product;
 
 class ShopController extends Controller{
    function index(){
- 
-     return view('frontend.shop.index');
+        $products = Product::latest()->get();
+
+     return view('frontend.shop.index',compact('products'));
 
    }
 }
