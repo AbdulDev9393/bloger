@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller{
    function index(){
-     return view('frontend.shop.index')
+     return view('frontend.shop.index');
 
    }
 }
