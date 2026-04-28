@@ -53,7 +53,7 @@
     @foreach ($products as $product)
     <url>
         <loc>{{ url('/product/' . $product->slug) }}</loc>
-        <lastmod>{{ $blog->updated_at->toAtomString() }}</lastmod>
+        <lastmod>{{ $products->updated_at->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
