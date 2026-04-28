@@ -85,7 +85,7 @@ Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_upda
 //////////////////////     Products  //////////////////
 
 
-Route::get('/products',[ShopController::class,'index'])->name('frontend.products');
+Route::get('/productss',[ShopController::class,'index'])->name('frontend.products');
 
 
 
