@@ -147,9 +147,10 @@ function Services(){
 public function sitemap()
 {
     $blogs = Blog::latest()->get(['slug', 'updated_at']);
+    $products = Product::latest()->get(['slug', 'updated_at']);
 
     return response()
-        ->view('sitemap', compact('blogs'))
+        ->view('sitemap', compact('blogs','products'))
         ->header('Content-Type', 'application/xml');
 }
 
