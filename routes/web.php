@@ -14,6 +14,7 @@ use  App\Http\Controllers\CategoryController;
 use  App\Http\Controllers\FrontendController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 
 
 
@@ -82,6 +83,10 @@ Route::get('/manage_blogs_seo/{id}',[BlogController::class,'blog_seo'])->name('a
 Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_update'])->name('admin.blogs.update.seo');
 
 //////////////////////     Products  //////////////////
+
+
+Route::get('/products',[ShopController::class,'index'])->name('frontend.products');
+
 
 
 

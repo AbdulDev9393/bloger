@@ -1004,8 +1004,10 @@ $data = SocialMedia::first();
           <a href="https://www.techblogs.site/cookie-policy">
             <i class="fa-solid fa-shield-alt"></i>
                                       <span>Cookie Policy</span>
-          </a>
-
+          <a href="{{ route('frontend.products') }}">
+    <i class="fa-solid fa-boxes-stacked"></i>
+    <span>Products</span>
+</a>
         </div>
       </div>
 
