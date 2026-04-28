@@ -197,7 +197,7 @@
                            class="form-control search-input w-100"
                            placeholder="🔍 Search products by name, description..."
                            autocomplete="off">
-                    <button id="clearSearchBtn" class="clear-search" style="display: none;" aria-label="Clear search">✕</button>
+                    <button type="submit" class="clear-search" style="display: none;" aria-label="Clear search">✕</button>
                 </div>
                 <button id="searchButton" class="btn search-btn ms-2 text-white">Search</button>
 
