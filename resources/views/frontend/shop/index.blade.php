@@ -183,14 +183,7 @@
 
 <!-- MAIN CONTENT with subtle background -->
 <div class="container py-5">
-    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom">
-        <h2 class="mb-0 fw-bold" style="color: #0f172a;">✨ Our Products</h2>
-        <p class="text-muted mb-0 mt-2 mt-sm-0" id="product-count-display">
-            @if(isset($products) && count($products) > 0)
-                {{ count($products) }} {{ Str::plural('item', count($products)) }}
-            @endif
-        </p>
-    </div>
+  
 
     <!-- SEARCH BAR SECTION (client-side live search with smooth filtering) -->
     <div class="row justify-content-center mb-5">
