@@ -7,12 +7,6 @@
     <style>
 
 
-        .container {
-            max-width: 1280px;
-            margin-top: 2rem !important;
-            margin-bottom: 3rem;
-        }
-
         /* Product image container with subtle elegance */
         .product-image-wrapper {
             background: linear-gradient(145deg, #ffffff 0%, #f9f9fc 100%);
