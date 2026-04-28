@@ -1121,7 +1121,7 @@ use Illuminate\Support\Str;
 
 </div>
         <div class="pro-view-all">
-            <a href="#" class="pro-view-link" onclick="alert('Full catalog coming soon'); return false;">
+            <a href="{{ route('frontend.products') }}" class="pro-view-link" onclick="alert('Full catalog coming soon'); return false;">
                 View All Products <i class="fas fa-arrow-right"></i>
             </a>
         </div>
