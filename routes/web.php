@@ -29,7 +29,10 @@ Route::post('/admin/login/post',[AuthController::class,'login_post'])->name('adm
 Route::post('/admin/login/passcode',[AuthController::class,'login_passcode'])->name('admin.login.passcode');
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout')->middleware(AdminAuth::class);
 
+//////////////////////     Products  //////////////////
 
+
+Route::get('/products',[ShopController::class,'index'])->name('frontend.products');
 ////  site frontend pages
 
 
@@ -82,10 +85,7 @@ Route::post('/admin/blogs/generate-content', [BlogController::class, 'generateCo
 Route::get('/manage_blogs_seo/{id}',[BlogController::class,'blog_seo'])->name('admin.blogs.seo');
 Route::put('/manage_blogs_seo/update/{id}',[BlogController::class,'blog_seo_update'])->name('admin.blogs.update.seo');
 
-//////////////////////     Products  //////////////////
 
-
-Route::get('/productss',[ShopController::class,'index'])->name('frontend.products');
 
 
 
