@@ -33,6 +33,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 
 Route::get('/products',[ShopController::class,'index'])->name('frontend.products');
+Route::get('/products/search',[ShopController::class,'search'])->name('frontend.products.search');
 ////  site frontend pages
 
 

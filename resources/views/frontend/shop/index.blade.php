@@ -188,11 +188,12 @@
     <!-- SEARCH BAR SECTION (client-side live search with smooth filtering) -->
     <div class="row justify-content-center mb-5">
         <div class="col-lg-8 col-md-10">
-                <form action="">
+                <form action="{{ route('frontend.products.search') }}" method="GET">
 
             <div class="search-wrapper d-flex align-items-center position-relative">
                   <div class="flex-grow-1 position-relative">
                     <input type="text"
+                     name="q"
                            id="searchInput"
                            class="form-control search-input w-100"
                            placeholder="🔍 Search products by name, description..."

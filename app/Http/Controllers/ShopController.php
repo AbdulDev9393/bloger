@@ -24,4 +24,15 @@ class ShopController extends Controller{
      return view('frontend.shop.index',compact('products'));
 
    }
+   public function search(Request $request)
+{
+    $query = $request->q;
+
+    $products = Product::where('name', 'like', "%{$query}%")
+        ->orWhere('description', 'like', "%{$query}%")
+        ->latest()
+        ->get();
+
+    return view('frontend.shop.index', compact('products'));
+}
 }
