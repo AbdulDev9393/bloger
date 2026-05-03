@@ -456,11 +456,7 @@ PROMPT;
         'content'    => $contentHtml,
     ]);
 }
-return response()->json([
-        'status'  => true,
-        'title'   => $title,
-        'content' => $contentHtml
-    ]);
+
 public function update(Request $request, $id)
 {
     $request->validate([
