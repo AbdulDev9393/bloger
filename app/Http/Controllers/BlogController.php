@@ -190,187 +190,186 @@ public function generateAI(Request $request)
 
     $title = $request->title;
 
-    // ─── PERSONAS ────────────────────────────────────────────────────────────
-    // Expanded pool — more backgrounds, stronger opinions, distinct voices
-    $personas = [
-        [
-            'name'    => 'Jake',
-            'city'    => 'Chicago',
-            'device'  => 'Android (Pixel 8)',
-            'isp'     => 'Comcast',
-            'years'   => 11,
-            'beat'    => 'consumer gadgets and carrier BS',
-            'quirk'   => 'gets visibly annoyed when companies overhype vague specs',
-            'tell'    => 'always references what something costs at Best Buy vs. what it should cost',
-        ],
-        [
-            'name'    => 'Marcus',
-            'city'    => 'Austin',
-            'device'  => 'iPhone 15 Pro',
-            'isp'     => 'AT&T',
-            'years'   => 9,
-            'beat'    => 'performance, benchmarks, and dev tools',
-            'quirk'   => 'obsessed with numbers — if a company won\'t publish specs, he calls it out',
-            'tell'    => 'tests everything himself before writing a word',
-        ],
-        [
-            'name'    => 'Dana',
-            'city'    => 'Seattle',
-            'device'  => 'MacBook Air M3',
-            'isp'     => 'CenturyLink (still furious about it)',
-            'years'   => 13,
-            'beat'    => 'privacy, data brokers, and app permissions',
-            'quirk'   => 'reads every ToS before recommending anything — and has opinions',
-            'tell'    => 'always asks "what are you actually giving up for this feature"',
-        ],
-        [
-            'name'    => 'Priya',
-            'city'    => 'San Jose',
-            'device'  => 'Android (Samsung S24 Ultra)',
-            'isp'     => 'Xfinity',
-            'years'   => 7,
-            'beat'    => 'AI tools, productivity apps, and startup products',
-            'quirk'   => 'has zero patience for products that don\'t respect the user\'s time',
-            'tell'    => 'compares everything to what existed three years ago to show if it\'s actually progress',
-        ],
-        [
-            'name'    => 'Reuben',
-            'city'    => 'Detroit',
-            'device'  => 'Windows laptop and a rooted Android',
-            'isp'     => 'WOW! Internet (it\'s not wow)',
-            'years'   => 15,
-            'beat'    => 'open source, hardware, and anything Big Tech wants you to forget',
-            'quirk'   => 'deeply skeptical of subscription models and cloud lock-in',
-            'tell'    => 'always explains what the free alternative is',
-        ],
-        [
-            'name'    => 'Sofia',
-            'city'    => 'Miami',
-            'device'  => 'iPhone and a cheap Chromebook she recommends to everyone',
-            'isp'     => 'AT&T (hates it)',
-            'years'   => 6,
-            'beat'    => 'consumer apps, UX, and what regular people actually use',
-            'quirk'   => 'writes for non-technical readers — if it needs a tutorial, it\'s failed',
-            'tell'    => 'asks "would my mom understand this?" as the final test for every product',
-        ],
-    ];
+    // Random personas to avoid repetition
+ $personas = [
+    [
+        'name'   => 'Jake',
+        'city'   => 'Chicago',
+        'device' => 'Android (Pixel 8)',
+        'isp'    => 'Comcast',
+        'years'  => 11,
+        'quirk'  => 'gets visibly annoyed when companies overhype vague specs',
+        'beat'   => 'consumer gadgets and carrier pricing',
+        'tell'   => 'always references what something costs at Best Buy vs what it should cost',
+    ],
+    [
+        'name'   => 'Marcus',
+        'city'   => 'Austin',
+        'device' => 'iPhone 15 Pro',
+        'isp'    => 'AT&T',
+        'years'  => 9,
+        'quirk'  => 'obsessed with numbers — if a company won\'t publish real specs, he calls it out by name',
+        'beat'   => 'performance benchmarks and developer tools',
+        'tell'   => 'tests everything himself before writing a single word',
+    ],
+    [
+        'name'   => 'Dana',
+        'city'   => 'Seattle',
+        'device' => 'MacBook Air M3',
+        'isp'    => 'CenturyLink (still furious about it)',
+        'years'  => 13,
+        'quirk'  => 'reads every ToS before recommending anything and has strong opinions about it',
+        'beat'   => 'privacy, data brokers, and app permissions',
+        'tell'   => 'always asks what are you actually giving up for this feature',
+    ],
+    [
+        'name'   => 'Priya',
+        'city'   => 'San Jose',
+        'device' => 'Samsung S24 Ultra',
+        'isp'    => 'Xfinity',
+        'years'  => 7,
+        'quirk'  => 'has zero patience for products that waste the user\'s time',
+        'beat'   => 'AI tools, productivity apps, and startup products',
+        'tell'   => 'compares everything to what existed three years ago to show if it\'s actually progress',
+    ],
+    [
+        'name'   => 'Reuben',
+        'city'   => 'Detroit',
+        'device' => 'Windows laptop and a rooted Android',
+        'isp'    => 'WOW! Internet (it\'s not wow)',
+        'years'  => 15,
+        'quirk'  => 'deeply skeptical of subscription models and anything that locks you into a platform',
+        'beat'   => 'open source, hardware, and what Big Tech wants you to forget',
+        'tell'   => 'always explains what the free alternative is and why companies don\'t mention it',
+    ],
+    [
+        'name'   => 'Sofia',
+        'city'   => 'Miami',
+        'device' => 'iPhone and a Chromebook she recommends to everyone',
+        'isp'    => 'AT&T (hates it)',
+        'years'  => 6,
+        'quirk'  => 'writes for real people — if a product needs a tutorial, it has already failed',
+        'beat'   => 'consumer apps, UX, and what non-technical people actually use',
+        'tell'   => 'asks would my mom understand this as the final test for every recommendation',
+    ],
+];
 
-    // ─── OPENING STYLES ──────────────────────────────────────────────────────
-    $openingStyles = [
-        'stat' => 'Open with a specific, surprising stat that most people don\'t know — make it feel urgent. Cite the source inline (e.g. "according to Pew Research" or "the FCC\'s own data shows"). First sentence must land hard.',
-        'confession' => 'Open with a personal confession: something you ignored, got wrong, or paid for unnecessarily for years. Be specific — the year, the product, the mistake. First sentence must make the reader feel seen.',
-        'challenge' => 'Open with a direct challenge — tell the reader they\'re doing something wrong right now, and be specific about what it is. Don\'t soften it. First sentence must create a moment of "wait, am I?"',
-        'rant' => 'Open with a sharp, focused rant about one specific thing that\'s broken or dishonest about this topic. Name names. Don\'t be vague. First sentence must have momentum.',
-        'counter' => 'Open by demolishing the most common advice on this topic. Tell the reader what everyone says — then immediately say why it\'s wrong or incomplete. First sentence must create friction.',
-        'number' => 'Open with a specific dollar amount, percentage, or count that reframes the whole topic. Don\'t explain it right away — let it breathe for one sentence first. First sentence must be the number itself.',
-    ];
+    // Random opening styles
+   $openingStyles = [
+    'stat'       => 'Open with one specific, surprising stat that most people do not know. Cite the source inline naturally. Make the first sentence land hard — no warm-up.',
+    'confession' => 'Open with a personal confession: something you ignored, paid for unnecessarily, or got wrong for years. Be specific about the year, the product, the mistake. First sentence must make the reader feel seen.',
+    'challenge'  => 'Open with a direct challenge — tell the reader they are doing something wrong right now. Be specific about what it is. Do not soften it. First sentence must create a moment of "wait, am I?"',
+    'rant'       => 'Open with a sharp focused rant about one specific thing that is broken or dishonest about this topic. Name the company or product. First sentence must have momentum and attitude.',
+    'counter'    => 'Open by demolishing the most common advice on this topic. State what everyone says, then immediately explain why it is wrong or dangerously incomplete. First sentence must create friction.',
+    'number'     => 'Open with a specific dollar amount, percentage, or count that reframes the whole topic. Let it breathe for one sentence before explaining it. The number itself is the first sentence.',
+];
 
-    // ─── NEIGHBOR STORY SEEDS ────────────────────────────────────────────────
-    $neighborStories = [
-        'A guy in my building — works in IT, should know better — got burned by this.',
-        'My sister-in-law in Phoenix paid twice what she needed to. Smart woman. Didn\'t matter.',
-        'A colleague of mine in Seattle ignored this exact warning. Cost her three months of headaches.',
-        'Someone I know — runs his own business — wasted $400 on this because the marketing was good.',
-        'A friend of mine who teaches CS at a state school got tripped up by this. Nobody\'s immune.',
-        'My neighbor just went through this. Asked me afterward why nobody writes this stuff clearly.',
-    ];
-
-    // ─── UNIQUE ANGLE NUDGE ──────────────────────────────────────────────────
-    $angleNudges = [
-        'Write about the thing nobody talks about — not the headline feature, but the hidden cost or hidden benefit.',
-        'Find the angle from the skeptic\'s position: assume the reader has been burned before and needs reasons to trust.',
-        'Write this from the perspective of someone who switched back. What did they learn?',
-        'Focus on what changes 12 months after you buy/install/subscribe. Not the out-of-box experience.',
-        'Write about the failure modes — when does this break, who does it fail, and why won\'t the company tell you that.',
-        'Find the angle from the "already owns this" reader — what do they wish they\'d known on day one.',
-    ];
-
-    $persona       = $personas[array_rand($personas)];
-    $openingStyle  = $openingStyles[array_rand($openingStyles)];
-    $neighborStory = $neighborStories[array_rand($neighborStories)];
-    $angleNudge    = $angleNudges[array_rand($angleNudges)];
-
-    // ─── PROMPT ──────────────────────────────────────────────────────────────
-    $prompt = <<<PROMPT
+$neighborStories = [
+    'A guy in my building — works in IT, should know better — got burned by this exact thing.',
+    'My sister-in-law in Phoenix paid twice what she needed to. Smart woman. Did not matter.',
+    'A colleague of mine in Seattle ignored this warning for two years. Cost her three months of headaches.',
+    'Someone I know — runs his own business, not a dummy — wasted $400 on this because the marketing was convincing.',
+    'A friend who teaches computer science at a state school got tripped up by this. Nobody is immune.',
+    'My neighbor went through this last year. Asked me afterward why nobody writes about this clearly.',
+];
+$angleNudges = [
+    'Write about the thing nobody talks about — not the headline feature but the hidden cost or hidden trade-off.',
+    'Write from the skeptic\'s position. Assume the reader has been burned before and needs real reasons to trust.',
+    'Focus on what changes 12 months after you buy or subscribe. Not the out-of-box experience.',
+    'Write about the failure modes — when does this break, who does it fail, and why won\'t the company tell you.',
+    'Write for the reader who already owns this. What do they wish they had known on day one.',
+    'Find the angle from someone who switched back. What did they learn and what does it reveal about the product.',
+];
+$preBriefs = [
+    'What does everyone get wrong about this? What is the real story underneath the marketing?',
+    'What is the single number, fact, or detail that reframes this entire topic?',
+    'What would you say to a close friend over coffee — no jargon, no PR spin, just honesty?',
+    'What is the worst thing about this that reviewers always bury in paragraph 8?',
+];
+$persona       = $personas[array_rand($personas)];
+$opening       = $openingStyles[array_rand($openingStyles)];
+$neighborStory = $neighborStories[array_rand($neighborStories)];
+$angleNudge    = $angleNudges[array_rand($angleNudges)];
+$preBrief      = $preBriefs[array_rand($preBriefs)];
+   $prompt = "
 You are {$persona['name']}, a tech writer at techblogs.site.
-You have covered {$persona['beat']} for {$persona['years']} years.
-You live in {$persona['city']} and use {$persona['device']} daily.
+You cover {$persona['beat']} and have done so for {$persona['years']} years.
+You live in {$persona['city']} and use {$persona['device']} every day.
 Your {$persona['isp']} bill makes you angry every month.
 Your personality: you {$persona['quirk']}.
-Your writing tell: you {$persona['tell']}.
+Your writing habit: you {$persona['tell']}.
 
 Topic: {$title}
 
-━━━ BEFORE YOU WRITE — answer these privately, then write the article ━━━
+---
 
-1. What does everyone get wrong about this topic?
-2. What would you say to a close friend over coffee — no jargon, no PR spin?
-3. What is the one number, fact, or detail that reframes everything?
-4. {$angleNudge}
+BEFORE YOU WRITE, answer this privately, then write the article:
+{$preBrief}
+Also: {$angleNudge}
 
-Write THAT article. Not a summary. Not a FAQ. A real take with a real stance.
+Write THAT article. Not a summary. Not a FAQ. A real take with a clear stance.
 
-━━━ VOICE ━━━
+---
 
-- You are a knowledgeable friend, not a journalist or a content marketer.
+VOICE RULES:
+- Write like a knowledgeable friend, not a journalist or a content marketer.
 - Use contractions throughout: don't, you're, it's, they've, won't, I've.
-- Take a clear stance. If something is worth it, say so. If it isn't, say "skip this one."
-- Use specific numbers and named examples. Not "many users" — write "over 40 million Americans" or cite a real product by name.
-- Vary paragraph length aggressively: one sentence, then three, then one again. Break the rhythm deliberately.
+- Take a clear stance. If something is worth it, say so. If it isn't, say 'skip this one.'
+- Use specific numbers and named examples. Not 'many users' — write 'over 40 million Americans' or name the actual product.
+- Vary paragraph length aggressively: one sentence, then three, then one again. Break the rhythm on purpose.
 - Ask the reader one real question every 400 words — something that makes them stop and think, not a rhetorical tic.
 - Write at least one analogy that makes a technical concept click for a non-technical person.
 
-━━━ THE NEIGHBOR STORY RULE ━━━
+---
 
-Include exactly one story in this format, placed inside a relevant section:
-"{$neighborStory} Don't be them."
-Make the story feel real and specific — add one detail that makes it believable.
+NEIGHBOR STORY RULE:
+Include exactly one story placed inside a relevant section, in this format:
+'{$neighborStory} Don't be them.'
+Add one specific detail that makes it feel real and believable.
 
-━━━ FORBIDDEN — never use any of the following ━━━
+---
 
+STRICTLY FORBIDDEN — never use any of the following under any circumstance:
 Words: delve, straightforward, game-changer, leverage, unlock, empower, seamless, robust, innovative, cutting-edge, holistic, synergy, utilize
-Phrases: "In today's digital landscape", "It is worth noting that", "With that said", "That being said", "In conclusion", "To summarize", "To wrap up", "Furthermore", "Moreover", "In the ever-evolving"
-Punctuation: em dashes of any kind (— or –). Replace with a period or comma.
+Phrases: 'In today's digital landscape', 'It is worth noting that', 'With that said', 'That being said', 'In conclusion', 'To summarize', 'To wrap up', 'Furthermore', 'Moreover', 'In the ever-evolving'
+Openers: Never start any paragraph with Certainly, Absolutely, Of course, Great question, Sure, or any affirmation word
+Punctuation: Em dashes of any kind — or –. Use a comma or a period instead.
 Patterns: Three consecutive paragraphs the same length. Bullet lists where every item starts with the same verb tense.
-AI tells: Never start a paragraph with "Certainly", "Absolutely", "Of course", "Great question", or any affirmation.
 
-━━━ OPENING — critical ━━━
+---
 
-{$openingStyle}
-Do NOT open with "Imagine you are..." or any hypothetical scenario.
+OPENING RULE (critical):
+{$opening}
+Do NOT open with 'Imagine you are...' or any hypothetical scenario.
 Do NOT open with a question.
-The first sentence must earn the reader's attention immediately — specific, punchy, declarative.
+The first sentence must be specific, punchy, and earn the reader's attention immediately.
 
-━━━ FRESHNESS ━━━
+---
 
-Every article must feel like it was written by a different person on a different day.
-Do not reuse phrasing, structure, or examples from other articles.
-If this topic overlaps with something commonly covered — find the angle no one else is writing about.
-
-━━━ SEO — natural only ━━━
-
-- Use the core keyword from "{$title}" within the first 60 words
-- Mention techblogs.site once in the intro and once in the conclusion, naturally — not as a plug
+SEO (natural only):
+- Use the core keyword from '{$title}' within the first 60 words
+- Mention techblogs.site once in the intro and once in the conclusion — naturally, not as a plug
 - Do not repeat the exact title phrase more than 4 times total
 - No keyword stuffing
 
-━━━ LENGTH & STRUCTURE ━━━
+---
 
-- Minimum 1700 words. Every section must teach or reveal something real — no filler.
+LENGTH AND STRUCTURE:
+- Minimum 1700 words. Every section must teach or reveal something real — no filler paragraphs.
 - At least 5 H2 sections
 - Use H3 subsections when a section has 2 or more clearly distinct parts
-- Max 3 sentences per paragraph (aim for 1 to 2 most of the time)
+- Max 3 sentences per paragraph, aim for 1 to 2 most of the time
 - Exactly one ordered or unordered list — use it for a real comparison or a step sequence, not padding
-- End with a punchy conclusion and one specific call to action (not "share this post")
+- End with a punchy conclusion and one specific call to action that is not 'share this post'
 
-━━━ OUTPUT FORMAT ━━━
+---
 
+FORMAT:
 Return clean HTML only using these tags: h2, h3, p, strong, ul, li, ol
-No markdown. No code fences. No <html> or <body> tags. No comments.
-Write the complete article from first word to last. Do not stop early or summarize at the end.
-PROMPT;
+No markdown. No code fences. No html or body tags. No HTML comments.
+Write the complete article from the first word to the last. Do not stop early.
+";
 
-    // ─── API CALL ─────────────────────────────────────────────────────────────
     $activeKey = 'ak_27T0ra3EW4kh8Ba7mt7ty8xD3v984';
 
     $response = Http::timeout(120)->withHeaders([
@@ -379,84 +378,53 @@ PROMPT;
     ])->post('https://api.longcat.chat/openai/v1/chat/completions', [
         'model'       => 'LongCat-Flash-Chat',
         'messages'    => [
-            [
-                'role'    => 'system',
-                'content' => "You are a sharp, opinionated tech writer. You write honest, specific, human articles — not AI-sounding content. You never repeat structure or phrasing across articles. Every piece must feel fresh, take a clear stance, and have a distinctive voice. You never use em dashes. You never use filler phrases. You write like someone who actually uses the products they cover.",
-            ],
-            ['role' => 'user', 'content' => $prompt],
+            ['role' => 'system', 'content' => "You are a sharp, opinionated tech writer. You write honest, specific, human articles. You never repeat yourself across articles. Every piece must feel fresh."],
+            ['role' => 'user', 'content' => $prompt]
         ],
-        'temperature' => 1.1,   // Slightly higher for more personality
-        'max_tokens'  => 4000,
+        'temperature' => 1.0,
+        'max_tokens'  => 4000
     ]);
 
-    // ─── ERROR HANDLING ───────────────────────────────────────────────────────
     if (!$response->successful()) {
         return response()->json([
             'status'  => false,
             'message' => 'API request failed',
-            'code'    => $response->status(),
-            'debug'   => $response->body(),
+            'debug'   => $response->body()
         ], 500);
     }
 
     $data = $response->json();
     $contentHtml = data_get($data, 'choices.0.message.content');
 
-    if (empty(trim($contentHtml ?? ''))) {
+    if (!$contentHtml) {
         return response()->json([
             'status'  => false,
-            'message' => 'Empty content returned from AI',
-            'debug'   => $data,
+            'message' => 'Empty content from AI',
+            'debug'   => $data
         ], 500);
     }
 
-    // ─── CLEANUP ─────────────────────────────────────────────────────────────
+    // Cleanup
     $contentHtml = trim($contentHtml);
-
-    // Strip markdown code fences if model slips up
     $contentHtml = preg_replace('/^```html\s*/i', '', $contentHtml);
-    $contentHtml = preg_replace('/^```\s*/i', '', $contentHtml);
     $contentHtml = preg_replace('/\s*```$/i', '', $contentHtml);
-
-    // Strip doctype / html / body wrappers if model adds them
-    $contentHtml = preg_replace('/<\/?(?:html|body|head)[^>]*>/i', '', $contentHtml);
-    $contentHtml = preg_replace('/<!DOCTYPE[^>]*>/i', '', $contentHtml);
-
-    // Replace all em dashes and en dashes (character, HTML entity, Unicode)
     $contentHtml = str_replace(
-        ['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;', "\xE2\x80\x94", "\xE2\x80\x93"],
-        [', ', ', ', ', ', ', ', ', ', ', ', ', ', ', '],
+        ['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;'],
+        [' ', ' ', ' ', ' ', ' ', ' '],
         $contentHtml
     );
 
-    // Strip common AI filler openers (catches cases where model ignores the rule)
-    $fillerOpeners = [
-        '/^<p>(Certainly|Absolutely|Of course|Great question|Sure)[,!.]?\s*/im',
-        '/^<p>In today\'s digital landscape[^<]*/im',
-    ];
-    foreach ($fillerOpeners as $pattern) {
-        $contentHtml = preg_replace($pattern, '<p>', $contentHtml);
-    }
-
-    // Clean up any double-spaces or stray whitespace
-    $contentHtml = preg_replace('/\s{2,}/', ' ', $contentHtml);
-    $contentHtml = trim($contentHtml);
-
-    // ─── GENERATE SLUG & META ─────────────────────────────────────────────────
-    $slug = Str::slug($title);
-
-    // Rough word count from stripped content
-    $wordCount = str_word_count(strip_tags($contentHtml));
-    $readTime  = max(1, (int) round($wordCount / 230)); // ~230 wpm
-
-    // ─── RESPONSE ─────────────────────────────────────────────────────────────
     return response()->json([
-        'status'     => true,
-        'title'      => $title,
-        'content'    => $contentHtml,
+        'status'  => true,
+        'title'   => $title,
+        'content' => $contentHtml
     ]);
 }
-
+return response()->json([
+        'status'  => true,
+        'title'   => $title,
+        'content' => $contentHtml
+    ]);
 public function update(Request $request, $id)
 {
     $request->validate([
