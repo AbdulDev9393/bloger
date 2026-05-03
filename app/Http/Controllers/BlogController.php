@@ -420,11 +420,7 @@ Write the complete article from the first word to the last. Do not stop early.
         'content' => $contentHtml
     ]);
 }
-return response()->json([
-        'status'  => true,
-        'title'   => $title,
-        'content' => $contentHtml
-    ]);
+
 public function update(Request $request, $id)
 {
     $request->validate([
