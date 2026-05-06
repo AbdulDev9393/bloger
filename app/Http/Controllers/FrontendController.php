@@ -197,17 +197,56 @@ function generateProductSchema($product)
             "@type" => "Brand",
             "name" => $product->brand ?? config('app.name')
         ],
-        "offers" => [
-            "@type" => "Offer",
-            "url" => url()->current(),
-            "priceCurrency" => "PKR", // Change as per your currency
-            "price" => $product->final_price ?? $product->price,
-            "priceValidUntil" => Carbon::now()->addDays(30)->toISOString(),
-            "availability" => $product->stock > 0
-                ? "https://schema.org/InStock"
-                : "https://schema.org/OutOfStock",
-            "itemCondition" => "https://schema.org/NewCondition"
+       "offers" => [
+    "@type" => "Offer",
+    "url" => url()->current(),
+    "priceCurrency" => "PKR",
+    "price" => $product->final_price ?? $product->price,
+    "priceValidUntil" => Carbon::now()->addDays(30)->toISOString(),
+    "availability" => $product->stock > 0
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+    "itemCondition" => "https://schema.org/NewCondition",
+
+    // ✅ ADD THIS
+    "shippingDetails" => [
+        "@type" => "OfferShippingDetails",
+        "shippingRate" => [
+            "@type" => "MonetaryAmount",
+            "value" => "0", // change if paid shipping
+            "currency" => "PKR"
+        ],
+        "shippingDestination" => [
+            "@type" => "DefinedRegion",
+            "addressCountry" => "PK"
+        ],
+        "deliveryTime" => [
+            "@type" => "ShippingDeliveryTime",
+            "handlingTime" => [
+                "@type" => "QuantitativeValue",
+                "minValue" => 1,
+                "maxValue" => 2,
+                "unitCode" => "d"
+            ],
+            "transitTime" => [
+                "@type" => "QuantitativeValue",
+                "minValue" => 2,
+                "maxValue" => 5,
+                "unitCode" => "d"
+            ]
         ]
+    ],
+
+    // ✅ ADD THIS
+    "hasMerchantReturnPolicy" => [
+        "@type" => "MerchantReturnPolicy",
+        "applicableCountry" => "PK",
+        "returnPolicyCategory" => "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays" => 7,
+        "returnMethod" => "https://schema.org/ReturnByMail",
+        "returnFees" => "https://schema.org/FreeReturn"
+    ]
+]
     ];
 
     // Add rating if exists
