@@ -43,33 +43,33 @@ class ShopController extends Controller{
 public function uploadProduct()
 {
     $item=Product::first();
-    dd($item);
+
     $merchantId = "5784319850";
 
     $google = new GoogleMerchantService();
 
     $product = new GoogleProduct();
 
-    $product->setOfferId("TEST-001");
+    $product->setOfferId("Pro".$item->id);
 
-    $product->setTitle("Honda Civic Brake Pad");
+    $product->setTitle($item->name);
 
-    $product->setDescription("High quality brake pad for Honda Civic");
+    $product->setDescription($item->description);
 
-   $product->setImageLink("https://yourdomain.com/test.jpg");
-$product->setLink("https://yourdomain.com/product/test");
+  $product->setImageLink('https://techblogs.site/' . $item->image);
+$product->setLink("https://techblogs.site.com/product/".$item->slug);
 
    $product->setAvailability("in stock");
 
     $product->setCondition("new");
 
-    $product->setBrand("Honda");
+   $product->setBrand("TechBlogs");
 $product->setChannel("online");
 $product->setContentLanguage("en");
 $product->setTargetCountry("US");
     $price = new Price();
 
-    $price->setValue("100");
+    $price->setValue($item->price);
 
     $price->setCurrency("USD");
 
