@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use App\Models\Product;
 use App\Services\GoogleMerchantService;
 use Google\Service\ShoppingContent\Price;
+use App\Models\Product;
+use Google\Service\ShoppingContent\Product as GoogleProduct;
 class ShopController extends Controller{
    function index(){
         $products = Product::latest()->get();
