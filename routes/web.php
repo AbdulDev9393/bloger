@@ -38,6 +38,10 @@ Route::get('/products/search',[ShopController::class,'search'])->name('frontend.
 ////  site frontend pages
 
 Route::get('/test-google', [FrontendController::class, 'testGoogle']);
+Route::get('/upload-product', [ShopController::class, 'uploadProduct']);
+
+
+
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/product/{slug}',[FrontendController::class,'product'])->name('frontend.product');

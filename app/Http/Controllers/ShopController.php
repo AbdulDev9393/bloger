@@ -16,7 +16,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
-
+use App\Services\GoogleMerchantService;
+use Google\Service\ShoppingContent\Price;
 class ShopController extends Controller{
    function index(){
         $products = Product::latest()->get();
@@ -34,5 +35,44 @@ class ShopController extends Controller{
         ->get();
 
     return view('frontend.shop.index', compact('products'));
+}
+
+
+
+public function uploadProduct()
+{
+    $merchantId = "YOUR_MERCHANT_ID";
+
+    $google = new GoogleMerchantService();
+
+    $product = new Product();
+
+    $product->setOfferId("TEST-001");
+
+    $product->setTitle("Honda Civic Brake Pad");
+
+    $product->setDescription("High quality Honda Civic brake pad");
+
+    $product->setLink("https://yourdomain.com/product/test");
+
+    $product->setImageLink("https://yourdomain.com/test.jpg");
+
+    $product->setAvailability("in stock");
+
+    $product->setCondition("new");
+
+    $product->setBrand("Honda");
+
+    $price = new Product();
+
+    $price->setValue("100");
+
+    $price->setCurrency("USD");
+
+    $product->setPrice($price);
+
+    $result = $google->insertProduct($merchantId, $product);
+
+    return response()->json($result);
 }
 }
