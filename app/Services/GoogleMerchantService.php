@@ -23,4 +23,12 @@ class GoogleMerchantService
 
         $this->service = new ShoppingContent($client);
     }
+
+    public function insertProduct($merchantId, $product)
+    {
+        return $this->service->products->insert(
+            $merchantId,
+            $product
+        );
+    }
 }
