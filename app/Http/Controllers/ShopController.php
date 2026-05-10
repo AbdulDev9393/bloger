@@ -42,7 +42,7 @@ class ShopController extends Controller{
 
 public function uploadProduct()
 {
-    $item=Product::find(1);
+    $item=Product::first();
     dd($item);
     $merchantId = "5784319850";
 
