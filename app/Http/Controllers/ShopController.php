@@ -64,6 +64,8 @@ public function uploadProduct()
 
     $product->setBrand("Honda");
 $product->setChannel("online");
+$product->setContentLanguage("en");
+$product->setTargetCountry("US");
     $price = new Price();
 
     $price->setValue("100");
