@@ -52,13 +52,12 @@ public function uploadProduct()
 
     $product->setTitle("Honda Civic Brake Pad");
 
-    $product->setDescription("High quality Honda Civic brake pad");
+    $product->setDescription("High quality brake pad for Honda Civic");
 
-    $product->setLink("https://yourdomain.com/product/test");
+   $product->setImageLink("https://yourdomain.com/test.jpg");
+$product->setLink("https://yourdomain.com/product/test");
 
-    $product->setImageLink("https://yourdomain.com/test.jpg");
-
-    $product->setAvailability("in stock");
+   $product->setAvailability("in stock");
 
     $product->setCondition("new");
 
