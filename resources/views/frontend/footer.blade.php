@@ -1018,7 +1018,7 @@ $data = SocialMedia::first();
           <p>Get the latest tech news and insights delivered directly to your inbox.</p>
 
           <div class="newsletter-input">
-            <form action="{{ route('admin.emails.store') }}" method="POST" id="newsletterForm">
+            <form action="{{ route('admin.emails.store') }}" method="POST" >
               @csrf
               <input
                 type="email"
