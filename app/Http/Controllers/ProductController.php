@@ -134,12 +134,21 @@ $image->save($storagePath.'/'.$filename);
       $product->rating = $request->rating;
     // Image update
     if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time().'_'.$file->getClientOriginalName();
-        $file->move($_SERVER['DOCUMENT_ROOT'].'/storage/products', $filename);
 
-        $product->image = 'storage/products/'.$filename;
-    }
+    $file = $request->file('image');
+
+    $slug = Str::slug($request->name);
+    $filename = $slug.'-'.time().'.webp';
+
+    $manager = new ImageManager(new Driver());
+
+    $image = $manager->read($file->getRealPath())
+        ->toWebp(80);
+
+    $image->save(storage_path('app/public/products/'.$filename));
+
+    $product->image = 'storage/products/'.$filename;
+}
 
     $product->save();
    Cache::increment('blog_cache_version');
