@@ -103,7 +103,7 @@ $meta_schema_json = json_encode($default_schema, JSON_UNESCAPED_SLASHES | JSON_U
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><!-- SweetAlert CSS (optional) -->
-
+<meta name="google-site-verification" content="eSvgdqakw0rDH0D_6506mthI2QHlpDGhgLiLTDfVE54" />
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4FRZ5NP2M7"></script>
 <script>
