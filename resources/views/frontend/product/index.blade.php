@@ -298,8 +298,14 @@
 
 <body>
 @if(session('success'))
-    <div id="session-popup" class="session-popup">
+    <div id="session-popup" class="session-popup success">
         {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div id="session-popup" class="session-popup error">
+        {{ session('error') }}
     </div>
 @endif
 <div class="container mt-5">
