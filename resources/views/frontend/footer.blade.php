@@ -1119,52 +1119,6 @@ $data = SocialMedia::first();
     });
   });
 
-  // Enhanced newsletter form handling
-  const newsletterForm = document.getElementById('newsletterForm');
-  const newsletterMessage = document.getElementById('newsletterMessage');
-  const newsletterSubmit = document.getElementById('newsletterSubmit');
-
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const emailInput = document.getElementById('newsletterEmail');
-      const email = emailInput.value.trim();
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showMessage('Please enter a valid email address.', 'error');
-        return;
-      }
-
-      // Show loading state
-      newsletterSubmit.disabled = true;
-      newsletterSubmit.classList.add('loading');
-      newsletterSubmit.innerHTML = '<span>Subscribing...</span>';
-
-      try {
-        // Simulate API call (replace with actual fetch)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Submit form
-        newsletterForm.submit();
-
-
-        emailInput.value = '';
-
-      } catch (error) {
-
-      } finally {
-        // Reset button state
-        setTimeout(() => {
-          newsletterSubmit.disabled = false;
-          newsletterSubmit.classList.remove('loading');
-          newsletterSubmit.innerHTML = '<span>Subscribe</span><i class="fa-solid fa-paper-plane"></i>';
-        }, 2000);
-      }
-    });
-  }
 
   function showMessage(text, type) {
     newsletterMessage.textContent = text;
