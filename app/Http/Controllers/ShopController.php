@@ -56,7 +56,7 @@ public function uploadProduct()
     $product->setDescription($item->description);
 
   $product->setImageLink('https://techblogs.site/' . $item->image);
-$product->setLink("https://techblogs.site.com/product/".$item->slug);
+ $product->setLink("https://techblogs.site/product/".$item->slug);
 
    $product->setAvailability("in stock");
 
