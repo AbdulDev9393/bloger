@@ -42,7 +42,9 @@ class ShopController extends Controller{
 
 public function uploadProduct()
 {
-   $item = Product::all();
+   $items = Product::all();
+    foreach($items as $item){
+
     $merchantId = "5784319850";
 
     $google = new GoogleMerchantService();
@@ -77,5 +79,7 @@ $product->setTargetCountry("US");
     $result = $google->insertProduct($merchantId, $product);
 
     return response()->json($result);
+    }
+
 }
 }
