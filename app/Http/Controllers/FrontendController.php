@@ -57,7 +57,7 @@ $meta_desc  = "Stay updated with the latest tech news, AI insights, mobile revie
 gadget guides, and top product deals at TechBlogs.site.";
     $meta_keywords="tech blogs, technology insights, latest tech news, AI news, artificial intelligence, AI in healthcare, AI tools 2026, software development, web development, Laravel tutorials, PHP development, programming tips, coding best practices, SEO strategies, website security, tech trends USA, mobile technology news, gadget reviews, developer guides, cloud computing, API integration, machine learning, future of AI, tech tutorials, coding for beginners, freelance development, earn money online tech, startup technology, innovation news";
     $latestBlog = Blog::where('status', 'published')->latest('id')->first();
-        $products = Product::latest()->limit(6)->get();
+        $products = Product::latest()->limit(8)->get();
 
     // Other Blogs
     $secondLatestBlog = Blog::where('status', 'published')->latest('id')->skip(1)->first();
