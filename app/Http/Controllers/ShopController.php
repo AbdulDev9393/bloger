@@ -63,7 +63,7 @@ public function uploadProduct()
     $product->setCondition("new");
 
     $product->setBrand("Honda");
-
+$product->setChannel("online");
     $price = new Price();
 
     $price->setValue("100");
