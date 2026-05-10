@@ -266,7 +266,7 @@
                 <div class="empty-state-icon">📦</div>
                 <h4 class="fw-semibold">No products found</h4>
                 <p class="text-muted">Check back later for new arrivals or explore our collection soon.</p>
-                <a href="{{ route('frontend.products') }}" class="btn btn-outline-primary rounded-pill mt-2">Return Home</a>
+                <a href="{{ route('frontend.products') }}" class="btn btn-outline-primary rounded-pill mt-2">Return Products</a>
             </div>
         @endif
     </div>
