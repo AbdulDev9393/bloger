@@ -37,7 +37,7 @@ Route::get('/products',[ShopController::class,'index'])->name('frontend.products
 Route::get('/products/search',[ShopController::class,'search'])->name('frontend.products.search');
 ////  site frontend pages
 
-
+Route::get('/test-google', [FrontendController::class, 'testGoogle']);
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/product/{slug}',[FrontendController::class,'product'])->name('frontend.product');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Str;
+use App\Services\GoogleMerchantService;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
@@ -169,6 +170,15 @@ public function sitemap()
         );
   }
 
+public function testGoogle()
+{
+    $google = new GoogleMerchantService();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Google Merchant Connected'
+    ]);
+}
 
 function product($slug)
 {
