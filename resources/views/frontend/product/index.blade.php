@@ -259,40 +259,27 @@
                 transform: translateY(0);
             }
         }
-        .description-box {
-    width: 100%;
-    background: #f9fafb;
-    padding: 1.5rem;
-    border-radius: 20px;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #1f2a3e;
-    border-left: 4px solid #3b82f6;
+.session-popup{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 14px 22px;
+    border-radius: 10px;
+    color: #fff;
+    z-index: 999999;
+    font-size: 15px;
+    opacity: 1;
+    transition: all 0.5s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
-    .session-popup{
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #28a745;
-        color: #fff;
-        padding: 14px 22px;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        z-index: 9999;
-        font-size: 15px;
-        animation: fadeIn 0.4s ease;
-    }
 
-    @keyframes fadeIn{
-        from{
-            opacity:0;
-            transform: translateY(-10px);
-        }
-        to{
-            opacity:1;
-            transform: translateY(0);
-        }
-    }
+.session-popup.success{
+    background: #28a745;
+}
+
+.session-popup.error{
+    background: #dc3545;
+}
     </style>
 </head>
 
@@ -400,11 +387,15 @@ function openZoom() {
 function closeZoom() {
     document.getElementById('zoomModal').style.display = 'none';
 }
+
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         let popup = document.getElementById('session-popup');
 
-        if(popup){
-            popup.style.transition = "0.5s";
+        if (popup) {
             popup.style.opacity = "0";
 
             setTimeout(() => {
@@ -412,7 +403,7 @@ function closeZoom() {
             }, 500);
         }
     }, 3000);
+});
 </script>
-
 </body>
 </html>
