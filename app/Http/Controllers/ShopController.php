@@ -46,7 +46,7 @@ public function uploadProduct()
 
     $google = new GoogleMerchantService();
 
-    $product = new Product();
+    $product = new GoogleProduct();
 
     $product->setOfferId("TEST-001");
 
@@ -64,7 +64,7 @@ public function uploadProduct()
 
     $product->setBrand("Honda");
 
-    $price = new Product();
+    $price = new Price();
 
     $price->setValue("100");
 
