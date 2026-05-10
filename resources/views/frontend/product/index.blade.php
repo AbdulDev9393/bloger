@@ -269,11 +269,39 @@
     color: #1f2a3e;
     border-left: 4px solid #3b82f6;
 }
+    .session-popup{
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #28a745;
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        z-index: 9999;
+        font-size: 15px;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn{
+        from{
+            opacity:0;
+            transform: translateY(-10px);
+        }
+        to{
+            opacity:1;
+            transform: translateY(0);
+        }
+    }
     </style>
 </head>
 
 <body>
-
+@if(session('success'))
+    <div id="session-popup" class="session-popup">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="container mt-5">
 
     <div class="row g-4 align-items-start">
@@ -366,6 +394,18 @@ function openZoom() {
 function closeZoom() {
     document.getElementById('zoomModal').style.display = 'none';
 }
+    setTimeout(() => {
+        let popup = document.getElementById('session-popup');
+
+        if(popup){
+            popup.style.transition = "0.5s";
+            popup.style.opacity = "0";
+
+            setTimeout(() => {
+                popup.remove();
+            }, 500);
+        }
+    }, 3000);
 </script>
 
 </body>
