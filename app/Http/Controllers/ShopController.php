@@ -54,9 +54,8 @@ public function uploadProduct()
     $product->setOfferId("Pro".$item->id);
 
     $product->setTitle($item->name);
-
-    $product->setDescription($item->description);
-
+$cleanDescription = strip_tags($item->description);
+    $product->setDescription($cleanDescription);
   $product->setImageLink('https://techblogs.site/' . $item->image);
  $product->setLink("https://techblogs.site/product/".$item->slug);
 
