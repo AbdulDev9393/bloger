@@ -42,6 +42,8 @@ class ShopController extends Controller{
 
 public function uploadProduct()
 {
+    $item=Product::find(1);
+    dd($item);
     $merchantId = "5784319850";
 
     $google = new GoogleMerchantService();
