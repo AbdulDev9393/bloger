@@ -42,7 +42,7 @@ class ShopController extends Controller{
 
 public function uploadProduct()
 {
-    $merchantId = "YOUR_MERCHANT_ID";
+    $merchantId = "5784319850";
 
     $google = new GoogleMerchantService();
 
