@@ -42,8 +42,11 @@ class ShopController extends Controller{
 
 public function uploadProduct()
 {
-   $items = Product::all();
-    foreach($items as $item){
+  $items = Product::all();
+
+$results = [];
+
+foreach($items as $item){
 
     $merchantId = "5784319850";
 
@@ -52,33 +55,33 @@ public function uploadProduct()
     $product = new GoogleProduct();
 
     $product->setOfferId("Pro".$item->id);
-
     $product->setTitle($item->name);
-$cleanDescription = strip_tags($item->description);
-    $product->setDescription($cleanDescription);
-  $product->setImageLink('https://techblogs.site/' . $item->image);
- $product->setLink("https://techblogs.site/product/".$item->slug);
 
-   $product->setAvailability("in stock");
+    // ✔ CLEAN DESCRIPTION
+    $product->setDescription(strip_tags($item->description));
 
+    $product->setImageLink('https://techblogs.site/' . $item->image);
+    $product->setLink("https://techblogs.site/product/".$item->slug);
+
+    $product->setAvailability("in stock");
     $product->setCondition("new");
+    $product->setBrand("TechBlogs");
 
-   $product->setBrand("TechBlogs");
-$product->setChannel("online");
-$product->setContentLanguage("en");
-$product->setTargetCountry("US");
+    $product->setChannel("online");
+    $product->setContentLanguage("en");
+    $product->setTargetCountry("US");
+
     $price = new Price();
-
     $price->setValue($item->price);
-
     $price->setCurrency("USD");
 
     $product->setPrice($price);
 
-    $result = $google->insertProduct($merchantId, $product);
+    $results[] = $google->insertProduct($merchantId, $product);
+}
 
-    return response()->json($result);
-    }
+return response()->json($results);
+
 
 }
 }
