@@ -328,8 +328,10 @@
                 @endif
 
                 <!-- BUTTONS (unchanged actions, same buttons but styled) -->
-                <div class="action-buttons">
-    <a href="https://wa.me/923140699386" target="_blank" class="btn btn-primary-custom text-white text-decoration-none">
+    <div class="action-buttons">
+    <a href="https://wa.me/923140699386?text=Hello%20I%20am%20interested%20in%20this%20product:%20{{ urlencode($product->name) }}"
+       target="_blank"
+       class="btn btn-primary-custom text-white text-decoration-none">
         Message
     </a>
 </div>
