@@ -1120,16 +1120,6 @@ $data = SocialMedia::first();
   });
 
 
-  function showMessage(text, type) {
-    newsletterMessage.textContent = text;
-    newsletterMessage.className = 'newsletter-message ' + type;
-    newsletterMessage.style.display = 'block';
-
-    // Hide message after 5 seconds
-    setTimeout(() => {
-      newsletterMessage.style.display = 'none';
-    }, 5000);
-  }
 
   // Animate social icons on hover
   document.querySelectorAll('.footer-social a').forEach(icon => {
