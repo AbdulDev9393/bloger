@@ -329,10 +329,10 @@
 
                 <!-- BUTTONS (unchanged actions, same buttons but styled) -->
                 <div class="action-buttons">
-                    <button class="btn btn-primary-custom text-white">
-                         Message
-                    </button>
-                </div>
+    <a href="https://wa.me/923140699386" target="_blank" class="btn btn-primary-custom text-white text-decoration-none">
+        Message
+    </a>
+</div>
             </div>
         </div>
 
