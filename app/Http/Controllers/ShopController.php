@@ -56,7 +56,9 @@ foreach($items as $item){
 
     $product->setOfferId("Pro".$item->id);
     $product->setTitle($item->name);
+$imageUrl = rtrim('https://techblogs.site', '/') . '/' . ltrim($item->image, '/');
 
+dd($imageUrl);
     // ✔ CLEAN DESCRIPTION
     $product->setDescription(strip_tags($item->description));
 
